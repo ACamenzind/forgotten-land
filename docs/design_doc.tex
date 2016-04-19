@@ -1,0 +1,90 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{array}
+\usepackage{systeme}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{ dsfont }
+
+\usepackage[utf8]{inputenc}
+  \geometry{
+    left = 2.5cm,
+    right = 2.5cm,
+    includeheadfoot, top = 1.5cm, bottom = 1.5cm,
+    headsep = 1.3cm,
+    footskip = 1.2cm
+  }
+
+  \lhead{Alexander Fischer, Valerio Battaglia, Amedeo Zucchetti,
+        Francesco Sani, Samuele Bischof}
+  \chead{}
+  \rhead{\today}
+  \cfoot{\thepage}
+  \pagestyle{fancy}
+
+\begin{document}
+
+  \begin{center}
+    \LARGE{\textbf{A strategy game}}
+  \end{center}
+
+  \section{Description}
+  \label{sec:Description}
+
+  \begin{itemize}
+    \item   Game type: RTS real time strategy / management
+
+    \item  Library used: libgdx
+
+    \item  View: 2d (not isometric)
+
+    \item  With multiplayer or cpu
+    \item   Could be a competition (e.g. biggest city), enemy could be hidden, not necessarily attackable.
+      Collect resources, build buildings.
+  \end{itemize}
+
+
+
+  % \section{Interface}
+
+
+
+  %TODO: Add mockups pictures
+
+  For the presentation (questions taken from the slides)
+
+  \begin{itemize}
+    \item What do you want to do?\\
+    A 2D strategy game (think age of empires, though it could be more focused on the management side, alternative: like clash of clans). You have to collect resources and build buildings.
+
+    \item What is the UX going to be?\\
+    There's a main menu with options to start a new game, resume game, and settings
+    New game: start instantly (stretch goal: map generation)
+    Resume game: shows a list of previous saves.
+
+    \item Where in your project are the significant Java-related contributions?\\
+    It's entirely in Java.
+
+    \item How will you collaborate?\\
+    We plan to work mostly in an independent way, but for more difficult features we can do pair-programming.
+
+    \item What platform?\\
+    We are targeting the desktop platform, though the library that we use also supports android, but it's less optimal for a strategy game.
+
+    \item What APIs \& libraries?\\
+    We plan to use the libgdx library, which is a very powerful framework dedicated to develop games. It offers a huge amount of classes, which handle graphics, audio, input/output, and much more.
+  \end{itemize}
+
+
+
+
+
+
+
+
+\end{document}
