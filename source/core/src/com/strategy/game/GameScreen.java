@@ -71,32 +71,29 @@ public class GameScreen implements Screen, InputProcessor {
 
         invIsoTransform = new Matrix4(isoTransform);
         invIsoTransform.inv();
+        Assets.load();
 
     }
 
     @Override
     public void show() {
-        this.map = new TmxMapLoader().load("core/assets/isometric_grass_and_water.tmx");
+//        this.map = new TmxMapLoader().load("core/assets/isometric_grass_and_water.tmx");
+        this.map = Assets.map;
         this.renderer = new IsometricTiledMapRenderer(map);
+        this.camera = new OrthographicCamera(StrategyGame.DEFAULT_WIDTH, StrategyGame.DEFAULT_WIDTH);
 
-
-//        TiledMapTileLayer objectsLayer = new MapLayer();
-
-
-//        objectsLayer.getObjects().add(obj);
-//        map.getLayers().add(objectsLayer);
-
-        Iterator<String> it = map.getProperties().getKeys();
-        Iterator<Object> it2 = map.getProperties().getValues();
-
-        while (it.hasNext() && it2.hasNext()) {
-            System.out.println(it.next());
-            System.out.println(it2.next());
-        }
+        // Prints the map properties
+//        Iterator<String> it = map.getProperties().getKeys();
+//        Iterator<Object> it2 = map.getProperties().getValues();
+//
+//        while (it.hasNext() && it2.hasNext()) {
+//            System.out.println(it.next());
+//            System.out.println(it2.next());
+//        }
 
 //        System.out.println(map.getProperties().getKeys());
 //        this.renderer = new OrthogonalTiledMapRenderer(map);
-        this.camera = new OrthographicCamera(1280, 720);
+
     }
 
     @Override
