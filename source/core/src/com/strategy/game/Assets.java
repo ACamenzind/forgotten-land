@@ -12,4 +12,8 @@ public class Assets {
     public static void load() {
         map = new TmxMapLoader().load("core/assets/isometric_grass_and_water.tmx");
     }
+
+    public static void dispose() {
+        map.dispose();
+    }
 }
