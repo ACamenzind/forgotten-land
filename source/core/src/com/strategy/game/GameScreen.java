@@ -21,10 +21,12 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 /**
  * The main game screen, where the gameplay is rendered.
+ *  TODO: Make separate input handler
+    TODO: Maybe create a new class to handle game logic, with Scene2D
  */
 public class GameScreen implements Screen, InputProcessor {
 
-    private final int TILE_SIZE = 64;
+
 
 
     private Stage stage;
@@ -39,27 +41,14 @@ public class GameScreen implements Screen, InputProcessor {
     private Matrix4 isoTransform;
     private Matrix4 invIsoTransform;
 
-//    private OrthogonalTiledMapRenderer renderer;
+
 
     public GameScreen(StrategyGame game) {
         this.game = game;
-        this.stage = new Stage(new ScreenViewport());
-        this.testPlayer = new Image(new Texture("core/assets/badlogic.jpg"));
-//        stage.addActor(testPlayer);
+//        this.stage = new Stage(new ScreenViewport());
+//        this.testPlayer = new Image(new Texture("core/assets/badlogic.jpg"));
         Gdx.input.setInputProcessor(this);
-//        stage.setKeyboardFocus(testPlayer);
-
-        // from http://www.alcove-games.com/advanced-tutorials/isometric-tile-picking/
-        isoTransform = new Matrix4();
-        isoTransform.idt();
-        isoTransform.translate(0.f, 0.25f * TILE_SIZE, 0.0f);
-        isoTransform.scale((float)(Math.sqrt(2.0) / 2.0), (float)(Math.sqrt(2.0) / 4.0), 1.0f);
-        isoTransform.rotate(0.0f, 0.0f, 1.0f, -45.0f);
-
-        invIsoTransform = new Matrix4(isoTransform);
-        invIsoTransform.inv();
         Assets.load();
-
     }
 
     @Override
@@ -67,7 +56,7 @@ public class GameScreen implements Screen, InputProcessor {
 //        this.map = new TmxMapLoader().load("core/assets/isometric_grass_and_water.tmx");
         this.map = Assets.map;
         this.renderer = new IsometricTiledMapRenderer(map);
-        this.camera = new OrthographicCamera(StrategyGame.DEFAULT_WIDTH, StrategyGame.DEFAULT_WIDTH);
+        this.camera = new OrthographicCamera(Utils.DEFAULT_WIDTH, Utils.DEFAULT_HEIGHT);
 
         // Prints the map properties
 //        Iterator<String> it = map.getProperties().getKeys();
@@ -150,10 +139,10 @@ public class GameScreen implements Screen, InputProcessor {
         Vector3 touch = new Vector3(screenX, screenY, 0);
 
         camera.unproject(touch);
-        touch.mul(invIsoTransform);
+        touch.mul(Utils.invIsoTransformMatrix());
 
-        int pickedTileX = (int) (touch.x / TILE_SIZE);
-        int pickedTileY = (int) (touch.y / TILE_SIZE);
+        int pickedTileX = (int) (touch.x / Utils.TILE_SIZE);
+        int pickedTileY = (int) (touch.y / Utils.TILE_SIZE);
         System.out.println(pickedTileX + " : " + pickedTileY);
 
         TiledMapTileLayer baseLayer = (TiledMapTileLayer) map.getLayers().get(0);

@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * The main menu screen
+ * TODO: implement UI using Scene2d.ui
  */
 public class MainMenuScreen implements Screen{
 
@@ -24,7 +25,7 @@ public class MainMenuScreen implements Screen{
         this.camera = new OrthographicCamera();
         this.batch = game.getBatch();
         this.font = game.getFont();
-        camera.setToOrtho(false, StrategyGame.DEFAULT_WIDTH, StrategyGame.DEFAULT_HEIGHT);
+        camera.setToOrtho(false, Utils.DEFAULT_WIDTH, Utils.DEFAULT_HEIGHT);
     }
 
     @Override
@@ -42,12 +43,12 @@ public class MainMenuScreen implements Screen{
 
         batch.begin();
         font.draw(batch, "Welcome to the game!",
-                StrategyGame.DEFAULT_WIDTH/2,
-                StrategyGame.DEFAULT_HEIGHT/2);
+                Utils.DEFAULT_WIDTH/2,
+                Utils.DEFAULT_HEIGHT/2);
 
         font.draw(batch, "Enjoy!",
-                StrategyGame.DEFAULT_WIDTH/2,
-                StrategyGame.DEFAULT_HEIGHT/2+30);
+                Utils.DEFAULT_WIDTH/2,
+                Utils.DEFAULT_HEIGHT/2+30);
         batch.end();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {

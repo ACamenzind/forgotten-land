@@ -17,8 +17,7 @@ public class StrategyGame extends Game {
 	private SpriteBatch batch;
 	Texture img;
 	private BitmapFont font;
-	public static final int DEFAULT_WIDTH = 1280;
-	public static final int DEFAULT_HEIGHT = 720;
+
 	
 	@Override
 	public void create () {
