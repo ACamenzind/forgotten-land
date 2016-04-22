@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 /**
  * Loads the assets.
+ * TODO: maybe add an AssetManager for better performance
  */
 public class Assets {
     public static TiledMap map;

@@ -9,28 +9,15 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.IsometricTiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.UIUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.sun.corba.se.impl.oa.poa.ActiveObjectMap;
 
-import java.util.Iterator;
 
 /**
  * The main game screen, where the gameplay is rendered.
@@ -103,70 +90,13 @@ public class GameScreen implements Screen, InputProcessor {
 
 
 
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            camera.translate(10,0);
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            camera.translate(-10,0);
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            camera.translate(0,10);
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            camera.translate(0,-10);
-        }
-
-
-        if (Gdx.input.isKeyPressed(Input.Keys.C)) {
-            camera.zoom += 0.1;
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.V)) {
-            camera.zoom -= 0.1;
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.K)) {
-            TiledMapTileLayer baseLayer = (TiledMapTileLayer) map.getLayers().get(0);
-            baseLayer.getCell(3,2).setTile(null);
-        }
-
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-//            float mouseX = Gdx.input.getX();
-//            float mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
-//            int tile_height = 32;
-//            int tile_width = 64;
-//            mouseX -= Gdx.graphics.getWidth()/2;
-//            mouseY -= Gdx.graphics.getHeight()/2;
-//
-//            int mouse_grid_x = (int) ((mouseY / tile_height) + (mouseX / tile_width));
-//            int mouse_grid_y = (int) ((-mouseX / tile_width) + (mouseY / tile_height));
-//            TiledMapTileLayer baseLayer = (TiledMapTileLayer) map.getLayers().get(0);
-////            baseLayer.getCell(mouse_grid_x,mouse_grid_y).setTile(null);
-////            System.out.println(baseLayer.getCell(mouse_grid_x,mouse_grid_y));
-        }
-
-
-
-
-
-
-
-
-
-
-
-
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) camera.translate(10,0);
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) camera.translate(-10,0);
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) camera.translate(0,10);
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) camera.translate(0,-10);
 
 
         camera.update();
-//        stage.act(delta);
-
-
-//        stage.draw();
-
         renderer.setView(camera);
         renderer.render();
     }
@@ -176,7 +106,6 @@ public class GameScreen implements Screen, InputProcessor {
         camera.viewportWidth = width;
         camera.viewportHeight = height;
         camera.update();
-
     }
 
     @Override
@@ -216,9 +145,10 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
+        // Makes a cell disappear
         Vector3 touch = new Vector3(screenX, screenY, 0);
-//        System.out.println("Touch!");
-//        touch.set(screenX, screenY, 0);
+
         camera.unproject(touch);
         touch.mul(invIsoTransform);
 
@@ -234,9 +164,6 @@ public class GameScreen implements Screen, InputProcessor {
             System.out.println(cell.toString());
             cell.setTile(null);
         }
-
-
-
         return false;
     }
 
@@ -257,6 +184,10 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public boolean scrolled(int amount) {
+
+        camera.zoom += amount / 10.f;
+        camera.update();
+
         return false;
     }
 
