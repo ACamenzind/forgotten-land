@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
  * Utility class with useful constants and static methods
  */
 public class Utils {
+
     public static Vector2 cartesianToIso(Vector2 coords) {
         return new Vector2(coords.x - coords.y,
                           (coords.x + coords.y) / 2.f);

@@ -9,17 +9,24 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.IsometricTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.UIUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.sun.corba.se.impl.oa.poa.ActiveObjectMap;
 
@@ -28,7 +35,10 @@ import java.util.Iterator;
 /**
  * The main game screen, where the gameplay is rendered.
  */
-public class GameScreen implements Screen {
+public class GameScreen implements Screen, InputProcessor {
+
+    private final int TILE_SIZE = 64;
+
 
     private Stage stage;
     private final StrategyGame game;
@@ -38,6 +48,10 @@ public class GameScreen implements Screen {
     private Image testPlayer;
     private TiledMap map;
     private IsometricTiledMapRenderer renderer;
+
+    private Matrix4 isoTransform;
+    private Matrix4 invIsoTransform;
+
 //    private OrthogonalTiledMapRenderer renderer;
 
     public GameScreen(StrategyGame game) {
@@ -45,9 +59,18 @@ public class GameScreen implements Screen {
         this.stage = new Stage(new ScreenViewport());
         this.testPlayer = new Image(new Texture("core/assets/badlogic.jpg"));
 //        stage.addActor(testPlayer);
-        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setInputProcessor(this);
 //        stage.setKeyboardFocus(testPlayer);
 
+        // from http://www.alcove-games.com/advanced-tutorials/isometric-tile-picking/
+        isoTransform = new Matrix4();
+        isoTransform.idt();
+        isoTransform.translate(0.f, 0.25f * TILE_SIZE, 0.0f);
+        isoTransform.scale((float)(Math.sqrt(2.0) / 2.0), (float)(Math.sqrt(2.0) / 4.0), 1.0f);
+        isoTransform.rotate(0.0f, 0.0f, 1.0f, -45.0f);
+
+        invIsoTransform = new Matrix4(isoTransform);
+        invIsoTransform.inv();
 
     }
 
@@ -56,13 +79,20 @@ public class GameScreen implements Screen {
         this.map = new TmxMapLoader().load("core/assets/isometric_grass_and_water.tmx");
         this.renderer = new IsometricTiledMapRenderer(map);
 
-//        Iterator<String> it = map.getProperties().getKeys();
-//        Iterator<Object> it2 = map.getProperties().getValues();
-//
-//        while (it.hasNext() && it2.hasNext()) {
-//            System.out.println(it.next());
-//            System.out.println(it2.next());
-//        }
+
+//        TiledMapTileLayer objectsLayer = new MapLayer();
+
+
+//        objectsLayer.getObjects().add(obj);
+//        map.getLayers().add(objectsLayer);
+
+        Iterator<String> it = map.getProperties().getKeys();
+        Iterator<Object> it2 = map.getProperties().getValues();
+
+        while (it.hasNext() && it2.hasNext()) {
+            System.out.println(it.next());
+            System.out.println(it2.next());
+        }
 
 //        System.out.println(map.getProperties().getKeys());
 //        this.renderer = new OrthogonalTiledMapRenderer(map);
@@ -73,6 +103,7 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 
 
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
@@ -100,32 +131,42 @@ public class GameScreen implements Screen {
             camera.zoom -= 0.1;
         }
 
+        if (Gdx.input.isKeyPressed(Input.Keys.K)) {
+            TiledMapTileLayer baseLayer = (TiledMapTileLayer) map.getLayers().get(0);
+            baseLayer.getCell(3,2).setTile(null);
+        }
+
+        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+//            float mouseX = Gdx.input.getX();
+//            float mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
+//            int tile_height = 32;
+//            int tile_width = 64;
+//            mouseX -= Gdx.graphics.getWidth()/2;
+//            mouseY -= Gdx.graphics.getHeight()/2;
+//
+//            int mouse_grid_x = (int) ((mouseY / tile_height) + (mouseX / tile_width));
+//            int mouse_grid_y = (int) ((-mouseX / tile_width) + (mouseY / tile_height));
+//            TiledMapTileLayer baseLayer = (TiledMapTileLayer) map.getLayers().get(0);
+////            baseLayer.getCell(mouse_grid_x,mouse_grid_y).setTile(null);
+////            System.out.println(baseLayer.getCell(mouse_grid_x,mouse_grid_y));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         camera.update();
 //        stage.act(delta);
 
-//        float pX = testPlayer.getX();
-//        float pY = testPlayer.getY();
-//
-//        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-//            pY += 10;
-//        }
-//        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-//            pY -= 10;
-//        }
-//        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-//            pX -= 10;
-//        }
-//        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-//            pX += 10;
-//        }
-//
-//
-//        Vector2 pos = new Vector2(pX, pY);
-//        Vector2 pos2 = Utils.isoToCartesian(pos);
-////            Vector2 pos2 = Utils.cartesianToIso(pos);
-//        testPlayer.setPosition(pos2.x, pos2.y);
-//        System.out.println(pos2.toString());
 
 //        stage.draw();
 
@@ -159,6 +200,67 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        Vector3 touch = new Vector3(screenX, screenY, 0);
+//        System.out.println("Touch!");
+//        touch.set(screenX, screenY, 0);
+        camera.unproject(touch);
+        touch.mul(invIsoTransform);
+
+        int pickedTileX = (int) (touch.x / TILE_SIZE);
+        int pickedTileY = (int) (touch.y / TILE_SIZE);
+        System.out.println(pickedTileX + " : " + pickedTileY);
+
+        TiledMapTileLayer baseLayer = (TiledMapTileLayer) map.getLayers().get(0);
+
+        TiledMapTileLayer.Cell cell = baseLayer.getCell(pickedTileX, pickedTileY);
+//        baseLayer.getCell()
+        if (cell != null) {
+            System.out.println(cell.toString());
+            cell.setTile(null);
+        }
+
+
+
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        return false;
     }
 
 }
