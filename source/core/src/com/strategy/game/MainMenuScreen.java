@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
- * Created on 22/04/2016.
+ * The main menu screen
  */
 public class MainMenuScreen implements Screen{
 
