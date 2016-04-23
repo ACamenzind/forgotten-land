@@ -35,11 +35,13 @@ public class GameScreen implements Screen {
     private TiledMap map;
     private IsometricTiledMapRenderer renderer;
     private GameInputProcessor gameInputProcessor;
+    private World world;
 
 
 
     public GameScreen(StrategyGame game) {
         this.game = game;
+        this.world = new World();
 
         Assets.load();
 
