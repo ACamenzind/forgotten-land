@@ -14,7 +14,7 @@ public class GameInputProcessor implements InputProcessor{
 
     private GameScreen screen;
     private OrthographicCamera camera;
-    private final int EDGE_TRESHOLD_WIDTH = 50;
+    private final int EDGE_THRESHOLD_WIDTH = 50;
 
     public GameInputProcessor(GameScreen screen) {
         this.screen = screen;
@@ -36,10 +36,25 @@ public class GameInputProcessor implements InputProcessor{
         float mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
 
         // Moves the camera accordingly if the cursor is near an edge.
-        if ((mouseX > camera.viewportWidth - EDGE_TRESHOLD_WIDTH)&(mouseY > (camera.viewportHeight/4)) & (mouseY < (camera.viewportHeight*3/4))) camera.translate(10,0);
-        if ((mouseX < EDGE_TRESHOLD_WIDTH) & (mouseY > (camera.viewportHeight/4)) & (mouseY < (camera.viewportHeight*3/4))) camera.translate(-10,0);
-        if ((mouseY > camera.viewportHeight - EDGE_TRESHOLD_WIDTH) & (mouseX > (camera.viewportWidth/4)) & (mouseX < (camera.viewportWidth*3/4))) camera.translate(0,10);
-        if ((mouseY < EDGE_TRESHOLD_WIDTH) & (mouseX > (camera.viewportWidth/4)) & (mouseX < (camera.viewportWidth*3/4))) camera.translate(0,-10);
+        if ((mouseX > camera.viewportWidth - EDGE_THRESHOLD_WIDTH) &&
+                (mouseY > (camera.viewportHeight / 4)) &&
+                (mouseY < (camera.viewportHeight* 3/4)))
+            camera.translate(10, 0);
+
+        if ((mouseX < EDGE_THRESHOLD_WIDTH) &&
+                (mouseY > (camera.viewportHeight / 4)) &&
+                (mouseY < (camera.viewportHeight * 3/4)))
+            camera.translate(-10, 0);
+
+        if ((mouseY > camera.viewportHeight - EDGE_THRESHOLD_WIDTH) &&
+                (mouseX > (camera.viewportWidth / 4)) &&
+                (mouseX < (camera.viewportWidth * 3/4)))
+            camera.translate(0, 10);
+
+        if ((mouseY < EDGE_THRESHOLD_WIDTH) &&
+                (mouseX > (camera.viewportWidth / 4)) &&
+                (mouseX < (camera.viewportWidth * 3/4)))
+            camera.translate(0, -10);
 
     }
 
