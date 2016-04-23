@@ -46,7 +46,7 @@ public class MainMenuScreen implements Screen{
                 Utils.DEFAULT_WIDTH/2,
                 Utils.DEFAULT_HEIGHT/2);
 
-        font.draw(batch, "Enjoy!",
+        font.draw(batch, "Press ENTER to start the game.",
                 Utils.DEFAULT_WIDTH/2,
                 Utils.DEFAULT_HEIGHT/2+30);
         batch.end();

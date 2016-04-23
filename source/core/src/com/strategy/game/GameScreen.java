@@ -81,6 +81,7 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gameInputProcessor.pollKeyboard();
+        gameInputProcessor.pollMouse();
 
         camera.update();
         renderer.setView(camera);

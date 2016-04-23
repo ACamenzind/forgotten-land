@@ -14,6 +14,7 @@ public class GameInputProcessor implements InputProcessor{
 
     private GameScreen screen;
     private OrthographicCamera camera;
+    private final int EDGE_TRESHOLD_WIDTH = 50;
 
     public GameInputProcessor(GameScreen screen) {
         this.screen = screen;
@@ -27,6 +28,19 @@ public class GameInputProcessor implements InputProcessor{
         if (Gdx.input.isKeyPressed(Input.Keys.A)) camera.translate(-10,0);
         if (Gdx.input.isKeyPressed(Input.Keys.W)) camera.translate(0,10);
         if (Gdx.input.isKeyPressed(Input.Keys.S)) camera.translate(0,-10);
+    }
+
+    public void pollMouse() {
+        // y-axis starts bottom-left by default
+        float mouseX = Gdx.input.getX();
+        float mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
+
+        // Moves the camera accordingly if the cursor is near an edge.
+        if (mouseX > camera.viewportWidth - EDGE_TRESHOLD_WIDTH) camera.translate(10,0);
+        if (mouseX < EDGE_TRESHOLD_WIDTH) camera.translate(-10,0);
+        if (mouseY > camera.viewportHeight - EDGE_TRESHOLD_WIDTH) camera.translate(0,10);
+        if (mouseY < EDGE_TRESHOLD_WIDTH) camera.translate(0,-10);
+
     }
 
     @Override
