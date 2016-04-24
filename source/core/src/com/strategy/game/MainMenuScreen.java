@@ -24,10 +24,10 @@ public class MainMenuScreen implements Screen{
 
     public MainMenuScreen(final StrategyGame game) {
         this.game = game;
-        this.camera = new OrthographicCamera();
+        this.camera = new OrthographicCamera(Utils.DEFAULT_WIDTH, Utils.DEFAULT_HEIGHT);
         this.batch = game.getBatch();
         this.font = game.getFont();
-        camera.setToOrtho(false, Utils.DEFAULT_WIDTH, Utils.DEFAULT_HEIGHT);
+        camera.setToOrtho(false, 2*Utils.DEFAULT_WIDTH, 2*Utils.DEFAULT_HEIGHT);
     }
 
     @Override
