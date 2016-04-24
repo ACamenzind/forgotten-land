@@ -9,10 +9,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.IsometricTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -42,6 +44,8 @@ public class GameScreen implements Screen {
     public GameScreen(StrategyGame game) {
         this.game = game;
         this.world = new World();
+        this.batch = game.getBatch();
+        this.font = game.getFont();
 
         Assets.load();
 
@@ -88,6 +92,30 @@ public class GameScreen implements Screen {
         camera.update();
         renderer.setView(camera);
         renderer.render();
+
+        MapProperties prop = map.getProperties();
+
+        int mapWidth = prop.get("width", Integer.class);
+        int mapHeight = prop.get("height", Integer.class);
+        int tileWidth = prop.get("tilewidth", Integer.class);
+        int tileHeight = prop.get("tileheight", Integer.class);
+
+
+//        batch.setProjectionMatrix(camera.combined);
+//
+//
+//        batch.begin();
+//
+//        for (int col=0; col < mapWidth; col++) {
+//            for (int row = 0; row < mapHeight; row++) {
+//                Vector3 screen_coords = new Vector3(row*64, col*64, 0);
+//                screen_coords.mul(Utils.isoTransformMatrix());
+//
+//                font.draw(batch, "(" +  row +":"+ col +")", screen_coords.x, screen_coords.y);
+//            }
+//        }
+//        font.draw(batch, "tile", 10, 20);
+//        batch.end();
     }
 
     @Override
@@ -115,5 +143,6 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         Assets.dispose();
+        world.dispose();
     }
 }

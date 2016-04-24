@@ -4,7 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector3;
 
 /**
@@ -88,10 +92,18 @@ public class GameInputProcessor implements InputProcessor{
         TiledMapTileLayer baseLayer = (TiledMapTileLayer) screen.getMap().getLayers().get(0);
 
         TiledMapTileLayer.Cell cell = baseLayer.getCell(pickedTileX, pickedTileY);
+//        StaticTiledMapTile
 
         if (cell != null) {
             System.out.println(cell.toString());
-            cell.setTile(null);
+//            cell.getTile()
+//            cell.setTile(null);
+            Texture texture = new Texture(Gdx.files.internal("core/assets/house1.png"));
+            TextureRegion region = new TextureRegion(texture);
+            StaticTiledMapTile newTile = new StaticTiledMapTile(region);
+            cell.setTile(newTile);
+//;
+
         }
         return true;
     }
