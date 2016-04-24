@@ -90,8 +90,12 @@ public class GameInputProcessor implements InputProcessor{
         int pickedTileY = (int) (touch.y / Utils.TILE_SIZE);
 
         TiledMapTileLayer baseLayer = (TiledMapTileLayer) screen.getMap().getLayers().get(0);
+        TiledMapTileLayer upperLayer = (TiledMapTileLayer) screen.getMap().getLayers().get(1);
 
-        TiledMapTileLayer.Cell cell = baseLayer.getCell(pickedTileX, pickedTileY);
+
+        upperLayer.setCell(pickedTileX, pickedTileY, new TiledMapTileLayer.Cell());
+        TiledMapTileLayer.Cell cell = upperLayer.getCell(pickedTileX, pickedTileY);
+//        screen.getMap().getLayers().add();
 //        StaticTiledMapTile
 
         if (cell != null) {
