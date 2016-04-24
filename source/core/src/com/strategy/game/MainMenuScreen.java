@@ -44,10 +44,12 @@ public class MainMenuScreen implements Screen{
         batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
-        batch.draw(menubk,0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.draw(menubk, 0, 0);
         font.draw(batch, "Welcome to the game!",
                 Utils.DEFAULT_WIDTH/2,
                 Utils.DEFAULT_HEIGHT/2);
+        font.draw(batch, "fps:"+Gdx.graphics.getFramesPerSecond(),
+                20, 30);
 
         font.draw(batch, "Press ENTER to start the game.",
                 Utils.DEFAULT_WIDTH/2,
