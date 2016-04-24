@@ -30,10 +30,10 @@ public class GameInputProcessor implements InputProcessor{
 
     // Used for continuous presses
     public void pollKeyboard() {
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) camera.translate(10,0);
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) camera.translate(-10,0);
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) camera.translate(0,10);
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) camera.translate(0,-10);
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) camera.translate(camera.zoom*10,0);
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) camera.translate(camera.zoom*(-10),0);
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) camera.translate(0,camera.zoom*10);
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) camera.translate(0,camera.zoom*(-10));
     }
 
     public void pollMouse() {
@@ -45,22 +45,22 @@ public class GameInputProcessor implements InputProcessor{
         if ((mouseX > camera.viewportWidth - EDGE_THRESHOLD_WIDTH) &&
                 (mouseY > (camera.viewportHeight / 4)) &&
                 (mouseY < (camera.viewportHeight* 3/4)))
-            camera.translate(10, 0);
+            camera.translate(camera.zoom*10, 0);
 
         if ((mouseX < EDGE_THRESHOLD_WIDTH) &&
                 (mouseY > (camera.viewportHeight / 4)) &&
                 (mouseY < (camera.viewportHeight * 3/4)))
-            camera.translate(-10, 0);
+            camera.translate(camera.zoom*(-10), 0);
 
         if ((mouseY > camera.viewportHeight - EDGE_THRESHOLD_WIDTH) &&
                 (mouseX > (camera.viewportWidth / 4)) &&
                 (mouseX < (camera.viewportWidth * 3/4)))
-            camera.translate(0, 10);
+            camera.translate(0, camera.zoom*10);
 
         if ((mouseY < EDGE_THRESHOLD_WIDTH) &&
                 (mouseX > (camera.viewportWidth / 4)) &&
                 (mouseX < (camera.viewportWidth * 3/4)))
-            camera.translate(0, -10);
+            camera.translate(0, camera.zoom*(-10));
     }
 
     @Override
