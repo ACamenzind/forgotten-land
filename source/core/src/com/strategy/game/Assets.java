@@ -11,7 +11,7 @@ public class Assets {
     public static TiledMap map;
 
     public static void load() {
-        map = new TmxMapLoader().load("core/assets/isometric_grass_and_water.tmx");
+        map = new TmxMapLoader().load("core/assets/big_map.tmx");
     }
 
     public static void dispose() {
