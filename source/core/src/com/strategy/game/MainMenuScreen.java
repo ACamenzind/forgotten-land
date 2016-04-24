@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,6 +20,7 @@ public class MainMenuScreen implements Screen{
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private BitmapFont font;
+    private Texture menubk = new Texture(Gdx.files.internal("core/assets/menu.jpg"));
 
     public MainMenuScreen(final StrategyGame game) {
         this.game = game;
@@ -42,6 +44,7 @@ public class MainMenuScreen implements Screen{
         batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
+        batch.draw(menubk,0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         font.draw(batch, "Welcome to the game!",
                 Utils.DEFAULT_WIDTH/2,
                 Utils.DEFAULT_HEIGHT/2);
