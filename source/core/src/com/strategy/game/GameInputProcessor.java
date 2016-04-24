@@ -11,11 +11,13 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector3;
 
+
 /**
  * Handles the game input
  */
 public class GameInputProcessor implements InputProcessor{
 
+    private TiledMapTileLayer.Cell oldcell;
     private GameScreen screen;
     private OrthographicCamera camera;
     private final int EDGE_THRESHOLD_WIDTH = 50;
@@ -59,7 +61,6 @@ public class GameInputProcessor implements InputProcessor{
                 (mouseX > (camera.viewportWidth / 4)) &&
                 (mouseX < (camera.viewportWidth * 3/4)))
             camera.translate(0, -10);
-
     }
 
     @Override
@@ -91,24 +92,30 @@ public class GameInputProcessor implements InputProcessor{
 
         TiledMapTileLayer baseLayer = (TiledMapTileLayer) screen.getMap().getLayers().get(0);
         TiledMapTileLayer upperLayer = (TiledMapTileLayer) screen.getMap().getLayers().get(1);
+        Texture tex = new Texture(Gdx.files.internal("core/assets/house1.png"));
+        MapEntity building = new MapEntity(tex);
 
 
-        upperLayer.setCell(pickedTileX, pickedTileY, new TiledMapTileLayer.Cell());
-        TiledMapTileLayer.Cell cell = upperLayer.getCell(pickedTileX, pickedTileY);
-//        screen.getMap().getLayers().add();
-//        StaticTiledMapTile
+        building.placeOnLayer(upperLayer, pickedTileX, pickedTileY);
 
-        if (cell != null) {
-            System.out.println(cell.toString());
-//            cell.getTile()
-//            cell.setTile(null);
-            Texture texture = new Texture(Gdx.files.internal("core/assets/house1.png"));
-            TextureRegion region = new TextureRegion(texture);
-            StaticTiledMapTile newTile = new StaticTiledMapTile(region);
-            cell.setTile(newTile);
-//;
 
-        }
+//        upperLayer.setCell(pickedTileX, pickedTileY, new TiledMapTileLayer.Cell());
+////        TiledMapTileLayer.Cell cell = upperLayer.getCell(pickedTileX, pickedTileY);
+//        TiledMapTileLayer.Cell cell = upperLayer.getCell(pickedTileX, pickedTileY);
+////        screen.getMap().getLayers().add();
+////        StaticTiledMapTile
+//
+//        if (cell != null) {
+////            System.out.println(cell.toString());
+////            cell.getTile()
+////            cell.setTile(null);
+//            Texture texture = new Texture(Gdx.files.internal("core/assets/watchtower_lvl2-exp_full_size.png"));
+//            TextureRegion region = new TextureRegion(texture);
+//            StaticTiledMapTile newTile = new StaticTiledMapTile(region);
+//            cell.setTile(newTile);
+////;
+//
+//        }
         return true;
     }
 
