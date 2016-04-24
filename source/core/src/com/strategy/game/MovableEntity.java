@@ -3,15 +3,16 @@ package com.strategy.game;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 /**
- * This class represents a Warrior.
+ * This class represents a person or an animal.
  */
-public class Warrior extends Image {
-    private String warriorClass;
+public class MovableEntity extends Image {
+    private String MovableEntityClass;
     private int maxLife;
     private int life;
 
-    public Warrior(String warriorClass, int life) {
-        this.warriorClass = warriorClass;
+    public MovableEntity(String MovableEntityClass, int life) {
+        this.MovableEntityClass = MovableEntityClass;
+        this.life = life;
         // Should implement a function to remove object.
     }
 
