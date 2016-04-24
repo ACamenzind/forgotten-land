@@ -13,7 +13,6 @@ public class MovableEntity extends Image {
     public MovableEntity(String MovableEntityClass, int life) {
         this.MovableEntityClass = MovableEntityClass;
         this.life = life;
-        // Should implement a function to remove object.
     }
 
     public void reduceLife(int damage) {
@@ -23,6 +22,7 @@ public class MovableEntity extends Image {
         else {
             life -= damage;
         }
+        // Should implement a function to remove object.
     }
 
     public void increaseLife(int increase) {
