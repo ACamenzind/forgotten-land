@@ -36,10 +36,10 @@ public class GameInputProcessor implements InputProcessor{
         float mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
 
         // Moves the camera accordingly if the cursor is near an edge.
-        if (mouseX > camera.viewportWidth - EDGE_TRESHOLD_WIDTH) camera.translate(10,0);
-        if (mouseX < EDGE_TRESHOLD_WIDTH) camera.translate(-10,0);
-        if (mouseY > camera.viewportHeight - EDGE_TRESHOLD_WIDTH) camera.translate(0,10);
-        if (mouseY < EDGE_TRESHOLD_WIDTH) camera.translate(0,-10);
+        if ((mouseX > camera.viewportWidth - EDGE_TRESHOLD_WIDTH)&(mouseY > (camera.viewportHeight/4)) & (mouseY < (camera.viewportHeight*3/4))) camera.translate(10,0);
+        if ((mouseX < EDGE_TRESHOLD_WIDTH) & (mouseY > (camera.viewportHeight/4)) & (mouseY < (camera.viewportHeight*3/4))) camera.translate(-10,0);
+        if ((mouseY > camera.viewportHeight - EDGE_TRESHOLD_WIDTH) & (mouseX > (camera.viewportWidth/4)) & (mouseX < (camera.viewportWidth*3/4))) camera.translate(0,10);
+        if ((mouseY < EDGE_TRESHOLD_WIDTH) & (mouseX > (camera.viewportWidth/4)) & (mouseX < (camera.viewportWidth*3/4))) camera.translate(0,-10);
 
     }
 
