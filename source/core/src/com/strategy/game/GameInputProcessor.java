@@ -30,10 +30,18 @@ public class GameInputProcessor implements InputProcessor{
 
     // Used for continuous presses
     public void pollKeyboard() {
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) camera.translate(camera.zoom*10,0);
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) camera.translate(camera.zoom*(-10),0);
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) camera.translate(0,camera.zoom*10);
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) camera.translate(0,camera.zoom*(-10));
+        if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            camera.translate(camera.zoom*10,0);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            camera.translate(camera.zoom*(-10),0);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            camera.translate(0,camera.zoom*10);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            camera.translate(0,camera.zoom*(-10));
+        }
     }
 
     public void pollMouse() {
