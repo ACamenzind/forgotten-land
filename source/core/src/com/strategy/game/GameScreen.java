@@ -43,7 +43,7 @@ public class GameScreen implements Screen {
 
     public GameScreen(StrategyGame game) {
         this.game = game;
-        this.world = new World();
+        this.world = new World(this);
         this.batch = game.getBatch();
         this.font = game.getFont();
 
