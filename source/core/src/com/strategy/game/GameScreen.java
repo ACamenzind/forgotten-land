@@ -100,6 +100,11 @@ public class GameScreen implements Screen {
         int tileWidth = prop.get("tilewidth", Integer.class);
         int tileHeight = prop.get("tileheight", Integer.class);
 
+        // Draw FPS counter on the top left
+        batch.begin();
+        font.draw(batch, "FPS: "+ Gdx.graphics.getFramesPerSecond(), 0, Gdx.graphics.getHeight());
+        batch.end();
+
 
 //        batch.setProjectionMatrix(camera.combined);
 //
