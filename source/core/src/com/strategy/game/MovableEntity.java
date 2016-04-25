@@ -3,7 +3,7 @@ package com.strategy.game;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 /**
- * This class represents a person or an animal.
+ * This class represents an entity that can move (e.g. characters)
  */
 public class MovableEntity extends Image {
     private String MovableEntityClass;

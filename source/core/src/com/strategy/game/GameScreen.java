@@ -24,7 +24,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 /**
  * The main game screen, where the gameplay is rendered.
  *  TODO: Make another input handler for the UI, and use multiplexing.
-    TODO: Maybe create a new class to handle game logic, with Scene2D
+    TODO: Maybe create a new class to handle game logic and hold the game state, with Scene2D
  */
 public class GameScreen implements Screen {
 
@@ -83,15 +83,17 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        // OpenGL stuff
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        // Handle the input
         gameInputProcessor.pollKeyboard();
         gameInputProcessor.pollMouse();
 
         camera.update();
         renderer.setView(camera);
-        renderer.render();
+        renderer.render(); // Render the tilemap
 
         MapProperties prop = map.getProperties();
 
@@ -125,6 +127,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
+        // Updates the screen when the window is resized
         camera.viewportWidth = width;
         camera.viewportHeight = height;
         camera.update();

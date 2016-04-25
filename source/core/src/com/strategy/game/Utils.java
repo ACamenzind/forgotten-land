@@ -11,6 +11,7 @@ public class Utils {
     public static final int TILE_SIZE = 64;
     public static final int DEFAULT_WIDTH = 1280;
     public static final int DEFAULT_HEIGHT = 720;
+    public static final int BASE_CAMERA_SPEED = 10;
 
 
     public static Matrix4 isoTransformMatrix() {

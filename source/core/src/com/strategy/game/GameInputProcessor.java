@@ -30,17 +30,18 @@ public class GameInputProcessor implements InputProcessor{
 
     // Used for continuous presses
     public void pollKeyboard() {
+        // Moves the camera in the specified direction
         if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            camera.translate(camera.zoom*10,0);
+            camera.translate(camera.zoom*Utils.BASE_CAMERA_SPEED,0);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            camera.translate(camera.zoom*(-10),0);
+            camera.translate(camera.zoom*(-Utils.BASE_CAMERA_SPEED),0);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            camera.translate(0,camera.zoom*10);
+            camera.translate(0,camera.zoom*Utils.BASE_CAMERA_SPEED);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            camera.translate(0,camera.zoom*(-10));
+            camera.translate(0,camera.zoom*(-Utils.BASE_CAMERA_SPEED));
         }
     }
 
@@ -50,25 +51,26 @@ public class GameInputProcessor implements InputProcessor{
         float mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
 
         // Moves the camera accordingly if the cursor is near an edge.
+        // The speed also depends on the current zoom.
         if ((mouseX > camera.viewportWidth - EDGE_THRESHOLD_WIDTH) &&
                 (mouseY > (camera.viewportHeight / 4)) &&
                 (mouseY < (camera.viewportHeight* 3/4)))
-            camera.translate(camera.zoom*10, 0);
+            camera.translate(camera.zoom*Utils.BASE_CAMERA_SPEED, 0);
 
         if ((mouseX < EDGE_THRESHOLD_WIDTH) &&
                 (mouseY > (camera.viewportHeight / 4)) &&
                 (mouseY < (camera.viewportHeight * 3/4)))
-            camera.translate(camera.zoom*(-10), 0);
+            camera.translate(camera.zoom*(-Utils.BASE_CAMERA_SPEED), 0);
 
         if ((mouseY > camera.viewportHeight - EDGE_THRESHOLD_WIDTH) &&
                 (mouseX > (camera.viewportWidth / 4)) &&
                 (mouseX < (camera.viewportWidth * 3/4)))
-            camera.translate(0, camera.zoom*10);
+            camera.translate(0, camera.zoom*Utils.BASE_CAMERA_SPEED);
 
         if ((mouseY < EDGE_THRESHOLD_WIDTH) &&
                 (mouseX > (camera.viewportWidth / 4)) &&
                 (mouseX < (camera.viewportWidth * 3/4)))
-            camera.translate(0, camera.zoom*(-10));
+            camera.translate(0, camera.zoom*(-Utils.BASE_CAMERA_SPEED));
     }
 
     @Override
@@ -103,7 +105,7 @@ public class GameInputProcessor implements InputProcessor{
         Texture tex = new Texture(Gdx.files.internal("core/assets/house1.png"));
         MapEntity building = new MapEntity(tex);
 
-
+        // Places a building on the upper layer
         building.placeOnLayer(upperLayer, pickedTileX, pickedTileY);
 
 
