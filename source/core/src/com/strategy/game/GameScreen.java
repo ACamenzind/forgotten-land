@@ -38,6 +38,7 @@ public class GameScreen implements Screen {
     private IsometricTiledMapRenderer renderer;
     private GameInputProcessor gameInputProcessor;
     private World world;
+    private StaticEntityBuilder builder;
 
 
 
@@ -53,6 +54,7 @@ public class GameScreen implements Screen {
         this.renderer = new IsometricTiledMapRenderer(map);
         this.camera = new OrthographicCamera(Utils.DEFAULT_WIDTH, Utils.DEFAULT_HEIGHT);
         this.gameInputProcessor = new GameInputProcessor(this);
+        this.builder = new StaticEntityBuilder(world);
 
         Gdx.input.setInputProcessor(gameInputProcessor);
     }
@@ -91,9 +93,37 @@ public class GameScreen implements Screen {
         gameInputProcessor.pollKeyboard();
         gameInputProcessor.pollMouse();
 
+
+        // --- TEST ----
+//        int screenX = Gdx.input.getX();
+//        int screenY = Gdx.input.getY();
+//
+//        Vector3 touch = new Vector3(screenX, screenY, 0);
+//
+//        camera.unproject(touch);
+//        touch.mul(Utils.invIsoTransformMatrix());
+//
+//        int pickedTileX = (int) (touch.x / Utils.TILE_SIZE);
+//        int pickedTileY = (int) (touch.y / Utils.TILE_SIZE);
+//
+//        TiledMapTileLayer baseLayer = (TiledMapTileLayer) map.getLayers().get(0);
+//        TiledMapTileLayer upperLayer = (TiledMapTileLayer) map.getLayers().get(1);
+//        Texture tex = new Texture(Gdx.files.internal("core/assets/house1.png"));
+//        MapEntity building = new MapEntity(tex);
+//
+//        // Places a building on the upper layer
+//        building.placeOnLayer(upperLayer, pickedTileX, pickedTileY);
+
+
         camera.update();
         renderer.setView(camera);
         renderer.render(); // Render the tilemap
+
+//        if (Gdx.input.isKeyJustPressed(Input.Keys.J)) building.setSelected(false);
+//
+//        building.resetTiles();
+
+
 
         MapProperties prop = map.getProperties();
 
@@ -106,6 +136,8 @@ public class GameScreen implements Screen {
         batch.begin();
         font.draw(batch, "FPS: "+ Gdx.graphics.getFramesPerSecond(), 0, Gdx.graphics.getHeight());
         batch.end();
+
+
 
 
 //        batch.setProjectionMatrix(camera.combined);
