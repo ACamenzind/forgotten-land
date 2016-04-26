@@ -150,7 +150,7 @@ public class GameInputProcessor implements InputProcessor{
         // TODO: add limits
         float mouseX = Gdx.input.getX();
         float mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
-        if(camera.zoom > 0.1 || amount > 0) {
+        if(camera.zoom > 0.2 || amount > 0) {
             camera.zoom += amount / 10.f;
         }
         // Not working properly
