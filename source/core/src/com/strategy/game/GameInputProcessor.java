@@ -148,8 +148,15 @@ public class GameInputProcessor implements InputProcessor{
     @Override
     public boolean scrolled(int amount) {
         // TODO: add limits
-        camera.zoom += amount / 10.f;
+        float mouseX = Gdx.input.getX();
+        float mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
+        if(camera.zoom > 0.1 || amount > 0) {
+            camera.zoom += amount / 10.f;
+        }
+        // Not working properly
+        //camera.translate(mouseX-1280, mouseY-720);
         camera.update();
+        System.out.println(camera.zoom);
         return true;
     }
 }
