@@ -95,6 +95,8 @@ public class GameScreen implements Screen {
         gameInputProcessor.pollKeyboard();
         gameInputProcessor.pollMouse();
 
+        world.update();
+
 
         // --- TEST ----
 //        int screenX = Gdx.input.getX();
@@ -118,8 +120,8 @@ public class GameScreen implements Screen {
 
 
         camera.update();
-        OrthographicCamera biggerCam = new OrthographicCamera(2*camera.viewportWidth, 2*camera.viewportHeight);
-        biggerCam.position.set(camera.position);
+//        OrthographicCamera biggerCam = new OrthographicCamera(2*camera.viewportWidth, 2*camera.viewportHeight);
+//        biggerCam.position.set(camera.position);
 //        renderer.setView(camera);
 //        renderer.render(); // Render the tilemap
 
