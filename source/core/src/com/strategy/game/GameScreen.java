@@ -19,6 +19,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 
 
 /**
@@ -35,8 +36,8 @@ public class GameScreen implements Screen {
     private BitmapFont font;
     private Image testPlayer;
     private TiledMap map;
-    private IsometricTiledMapRenderer renderer;
-    private BetterRenderer renderer2;
+//    private IsometricTiledMapRenderer renderer;
+    private BetterRenderer renderer;
     private GameInputProcessor gameInputProcessor;
     private World world;
     private StaticEntityBuilder builder;
@@ -52,8 +53,8 @@ public class GameScreen implements Screen {
         Assets.load();
 
         this.map = Assets.map;
-        this.renderer = new IsometricTiledMapRenderer(map);
-        this.renderer2 = new BetterRenderer(map);
+//        this.renderer = new IsometricTiledMapRenderer(map);
+        this.renderer = new BetterRenderer(map);
         this.camera = new OrthographicCamera(Utils.DEFAULT_WIDTH, Utils.DEFAULT_HEIGHT);
         this.gameInputProcessor = new GameInputProcessor(this);
         this.builder = new StaticEntityBuilder(this);
@@ -75,17 +76,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        // Prints the map properties
-//        Iterator<String> it = map.getProperties().getKeys();
-//        Iterator<Object> it2 = map.getProperties().getValues();
-//
-//        while (it.hasNext() && it2.hasNext()) {
-//            System.out.println(it.next());
-//            System.out.println(it2.next());
-//        }
-
-//        System.out.println(map.getProperties().getKeys());
-//        this.renderer = new OrthogonalTiledMapRenderer(map);
 
     }
 
@@ -101,46 +91,14 @@ public class GameScreen implements Screen {
 
         world.update(delta);
 
-
-        // --- TEST ----
-        int screenX = Gdx.input.getX();
-        int screenY = Gdx.input.getY();
-
-        Vector3 touch = new Vector3(screenX, screenY, 0);
-
-        camera.unproject(touch);
-        touch.mul(Utils.invIsoTransformMatrix());
-
-        int pickedTileX = (int) (touch.x / Utils.TILE_SIZE);
-        int pickedTileY = (int) (touch.y / Utils.TILE_SIZE);
-
-        TiledMapTileLayer baseLayer = (TiledMapTileLayer) map.getLayers().get(0);
-        TiledMapTileLayer upperLayer = (TiledMapTileLayer) map.getLayers().get(1);
-        Texture tex = new Texture(Gdx.files.internal("core/assets/house1.png"));
-        MapEntity building = new MapEntity(tex);
-
-//         Places a building on the upper layer
-//        building.placeOnLayer(upperLayer, pickedTileX, pickedTileY);
-        builder.selectEntity(building);
-
-        builder.renderSelection(pickedTileX, pickedTileY);
-
+        builder.renderSelection(camera);
 
         camera.update();
-//        OrthographicCamera biggerCam = new OrthographicCamera(2*camera.viewportWidth, 2*camera.viewportHeight);
-//        biggerCam.position.set(camera.position);
-//        renderer.setView(camera);
-//        renderer.render(); // Render the tilemap
 
-        renderer2.setView(camera);
-        renderer2.render();
+        renderer.setView(camera);
+        renderer.render();
 
         builder.clear();
-//        building.resetTiles();
-
-//        if (Gdx.input.isKeyJustPressed(Input.Keys.J)) building.setSelected(false);
-//
-//        building.resetTiles();
 
 
 

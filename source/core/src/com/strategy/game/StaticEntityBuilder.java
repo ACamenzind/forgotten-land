@@ -1,8 +1,11 @@
 package com.strategy.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 /**
  * Handles the creation and placement of static entities (e.g. buildings)
@@ -19,25 +22,34 @@ public class StaticEntityBuilder {
         this.selectionLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Selection");
     }
 
-    public void selectEntity(MapEntity entity) {
-        this.selectedEntity = entity;
-        selectedEntity.setSelected(true);
+    public void toggleSelectEntity(MapEntity entity) {
+        if (selectedEntity == null)
+            this.selectedEntity = entity;
+        else
+            this.selectedEntity = null;
+//        selectedEntity.setSelected(true);
 
     }
     public void placeSelectedEntity(int x, int y) {
         if (selectedEntity != null) {
             selectedEntity.placeOnLayer(buildingsLayer, x, y);
-            selectedEntity.setSelected(false);
         }
     }
 
-    public void renderSelection(int x, int y) {
+    public void renderSelection(OrthographicCamera camera) {
+        int screenX = Gdx.input.getX();
+        int screenY = Gdx.input.getY();
+
+        Vector3 touch = new Vector3(screenX, screenY, 0);
+        Vector3 pickedTile = Utils.cartesianToIso(touch, camera);
         if (selectedEntity != null) {
-            selectedEntity.placeOnLayer(selectionLayer, x, y);
+            selectedEntity.placeOnLayer(selectionLayer, (int)pickedTile.x, (int)pickedTile.y);
         }
     }
 
     public void clear() {
-        selectedEntity.resetTiles();
+        if (selectedEntity != null) {
+            selectedEntity.resetTiles();
+        }
     }
 }

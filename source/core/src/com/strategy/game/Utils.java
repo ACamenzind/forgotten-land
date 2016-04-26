@@ -1,14 +1,16 @@
 package com.strategy.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 /**
  * Utility class with useful constants and static methods
  */
 public class Utils {
-    public static final int TILE_SIZE = 64;
+    public static final int TILE_SIZE = 128;
     public static final int DEFAULT_WIDTH = 1280;
     public static final int DEFAULT_HEIGHT = 720;
     public static final int BASE_CAMERA_SPEED = 10;
@@ -29,9 +31,10 @@ public class Utils {
         return Utils.isoTransformMatrix().inv();
     }
 
-    public static Vector2 cartesianToIso(Vector2 coords) {
-        return new Vector2(coords.x - coords.y,
-                          (coords.x + coords.y) / 2.f);
+    public static Vector3 cartesianToIso(Vector3 coords, OrthographicCamera camera) {
+        camera.unproject(coords);
+        coords.mul(Utils.invIsoTransformMatrix());
+        return new Vector3(coords.x / TILE_SIZE, coords.y / TILE_SIZE, 0);
     }
 
     public static Vector2 isoToCartesian(Vector2 coords) {

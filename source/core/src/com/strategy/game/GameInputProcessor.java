@@ -5,10 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector3;
 
 
@@ -75,6 +72,13 @@ public class GameInputProcessor implements InputProcessor{
 
     @Override
     public boolean keyDown(int keycode) {
+        switch (keycode) {
+            case Input.Keys.SPACE:
+                //TODO: abstract the next two lines
+                Texture tex = new Texture(Gdx.files.internal("core/assets/house1.png"));
+                MapEntity building = new MapEntity(tex);
+                screen.getBuilder().toggleSelectEntity(building);
+        }
         return false;
     }
 
@@ -91,45 +95,11 @@ public class GameInputProcessor implements InputProcessor{
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-        // TODO: refactor
         Vector3 touch = new Vector3(screenX, screenY, 0);
+        Vector3 pickedTile = Utils.cartesianToIso(touch, camera);
+        //TODO: better to handle coords inside the builder?
+        screen.getBuilder().placeSelectedEntity((int) pickedTile.x, (int)pickedTile.y);
 
-        camera.unproject(touch);
-        touch.mul(Utils.invIsoTransformMatrix());
-
-        int pickedTileX = (int) (touch.x / Utils.TILE_SIZE);
-        int pickedTileY = (int) (touch.y / Utils.TILE_SIZE);
-
-        TiledMapTileLayer baseLayer = (TiledMapTileLayer) screen.getMap().getLayers().get(0);
-        TiledMapTileLayer upperLayer = (TiledMapTileLayer) screen.getMap().getLayers().get(1);
-        Texture tex = new Texture(Gdx.files.internal("core/assets/house1.png"));
-        MapEntity building = new MapEntity(tex);
-
-//        screen.getBuilder().selectEntity(building);
-        screen.getBuilder().placeSelectedEntity(pickedTileX, pickedTileY);
-
-        // Places a building on the upper layer
-//        building.placeOnLayer(upperLayer, pickedTileX, pickedTileY);
-//        building.setSelected(false);
-
-
-//        upperLayer.setCell(pickedTileX, pickedTileY, new TiledMapTileLayer.Cell());
-////        TiledMapTileLayer.Cell cell = upperLayer.getCell(pickedTileX, pickedTileY);
-//        TiledMapTileLayer.Cell cell = upperLayer.getCell(pickedTileX, pickedTileY);
-////        screen.getMap().getLayers().add();
-////        StaticTiledMapTile
-//
-//        if (cell != null) {
-////            System.out.println(cell.toString());
-////            cell.getTile()
-////            cell.setTile(null);
-//            Texture texture = new Texture(Gdx.files.internal("core/assets/watchtower_lvl2-exp_full_size.png"));
-//            TextureRegion region = new TextureRegion(texture);
-//            StaticTiledMapTile newTile = new StaticTiledMapTile(region);
-//            cell.setTile(newTile);
-////;
-//
-//        }
         return true;
     }
 

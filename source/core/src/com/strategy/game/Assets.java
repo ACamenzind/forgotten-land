@@ -11,7 +11,8 @@ public class Assets {
     public static TiledMap map;
 
     public static void load() {
-        map = new TmxMapLoader().load("core/assets/big_map.tmx");
+//        map = new TmxMapLoader().load("core/assets/big_map.tmx");
+        map = new TmxMapLoader().load("core/assets/test128.tmx");
     }
 
     public static void dispose() {
