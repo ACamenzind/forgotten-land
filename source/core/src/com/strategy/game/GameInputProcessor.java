@@ -157,7 +157,6 @@ public class GameInputProcessor implements InputProcessor{
         // Not working properly
         //camera.translate(mouseX-1280, mouseY-720);
         camera.update();
-        System.out.println(camera.zoom);
         return true;
     }
 }
