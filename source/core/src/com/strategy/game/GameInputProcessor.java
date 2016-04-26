@@ -107,6 +107,7 @@ public class GameInputProcessor implements InputProcessor{
 
         // Places a building on the upper layer
         building.placeOnLayer(upperLayer, pickedTileX, pickedTileY);
+//        building.setSelected(false);
 
 
 //        upperLayer.setCell(pickedTileX, pickedTileY, new TiledMapTileLayer.Cell());

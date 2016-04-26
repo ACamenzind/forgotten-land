@@ -36,6 +36,7 @@ public class GameScreen implements Screen {
     private Image testPlayer;
     private TiledMap map;
     private IsometricTiledMapRenderer renderer;
+    private BetterRenderer renderer2;
     private GameInputProcessor gameInputProcessor;
     private World world;
     private StaticEntityBuilder builder;
@@ -52,6 +53,7 @@ public class GameScreen implements Screen {
 
         this.map = Assets.map;
         this.renderer = new IsometricTiledMapRenderer(map);
+        this.renderer2 = new BetterRenderer(map);
         this.camera = new OrthographicCamera(Utils.DEFAULT_WIDTH, Utils.DEFAULT_HEIGHT);
         this.gameInputProcessor = new GameInputProcessor(this);
         this.builder = new StaticEntityBuilder(world);
@@ -110,14 +112,19 @@ public class GameScreen implements Screen {
 //        TiledMapTileLayer upperLayer = (TiledMapTileLayer) map.getLayers().get(1);
 //        Texture tex = new Texture(Gdx.files.internal("core/assets/house1.png"));
 //        MapEntity building = new MapEntity(tex);
-//
-//        // Places a building on the upper layer
+
+        // Places a building on the upper layer
 //        building.placeOnLayer(upperLayer, pickedTileX, pickedTileY);
 
 
         camera.update();
-        renderer.setView(camera);
-        renderer.render(); // Render the tilemap
+        OrthographicCamera biggerCam = new OrthographicCamera(2*camera.viewportWidth, 2*camera.viewportHeight);
+        biggerCam.position.set(camera.position);
+//        renderer.setView(camera);
+//        renderer.render(); // Render the tilemap
+
+        renderer2.setView(camera);
+        renderer2.render();
 
 //        if (Gdx.input.isKeyJustPressed(Input.Keys.J)) building.setSelected(false);
 //

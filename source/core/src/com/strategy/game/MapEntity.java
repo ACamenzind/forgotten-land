@@ -27,6 +27,7 @@ public class MapEntity implements Disposable{
         this.texture = texture;
         this.tiles = new ArrayList<StaticTiledMapTile>();
         this.prevTiles = new ArrayList<StaticTiledMapTile>();
+        this.prevCells = new ArrayList<TiledMapTileLayer.Cell>();
         this.isSelected = true;
         sliceTexture();
     }
@@ -57,11 +58,14 @@ public class MapEntity implements Disposable{
         this.x = x;
         this.y = y;
         prevTiles = new ArrayList<StaticTiledMapTile>(tiles);
+//        prevCells = new ArrayList<TiledMapTileLayer.Cell>(prevCells); // saves previous state
 //        oldLayer.
         for (StaticTiledMapTile tile :
                 tiles) {
             TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
             cell.setTile(tile);
+//            cell.setTile(null);
+
             layer.setCell(x + offset, y + offset, cell);
             offset++;
         }
@@ -74,7 +78,7 @@ public class MapEntity implements Disposable{
             for (StaticTiledMapTile tile :
                     prevTiles) {
                 TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-                cell.setTile(null);
+                cell.setTile(tile);
                 layer.setCell(x + offset, y + offset, cell);
                 offset++;
             }
