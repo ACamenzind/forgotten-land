@@ -99,24 +99,24 @@ public class GameScreen implements Screen {
 
 
         // --- TEST ----
-//        int screenX = Gdx.input.getX();
-//        int screenY = Gdx.input.getY();
-//
-//        Vector3 touch = new Vector3(screenX, screenY, 0);
-//
-//        camera.unproject(touch);
-//        touch.mul(Utils.invIsoTransformMatrix());
-//
-//        int pickedTileX = (int) (touch.x / Utils.TILE_SIZE);
-//        int pickedTileY = (int) (touch.y / Utils.TILE_SIZE);
-//
-//        TiledMapTileLayer baseLayer = (TiledMapTileLayer) map.getLayers().get(0);
-//        TiledMapTileLayer upperLayer = (TiledMapTileLayer) map.getLayers().get(1);
-//        Texture tex = new Texture(Gdx.files.internal("core/assets/house1.png"));
-//        MapEntity building = new MapEntity(tex);
+        int screenX = Gdx.input.getX();
+        int screenY = Gdx.input.getY();
 
-        // Places a building on the upper layer
-//        building.placeOnLayer(upperLayer, pickedTileX, pickedTileY);
+        Vector3 touch = new Vector3(screenX, screenY, 0);
+
+        camera.unproject(touch);
+        touch.mul(Utils.invIsoTransformMatrix());
+
+        int pickedTileX = (int) (touch.x / Utils.TILE_SIZE);
+        int pickedTileY = (int) (touch.y / Utils.TILE_SIZE);
+
+        TiledMapTileLayer baseLayer = (TiledMapTileLayer) map.getLayers().get(0);
+        TiledMapTileLayer upperLayer = (TiledMapTileLayer) map.getLayers().get(1);
+        Texture tex = new Texture(Gdx.files.internal("core/assets/house1.png"));
+        MapEntity building = new MapEntity(tex);
+
+//         Places a building on the upper layer
+        building.placeOnLayer(upperLayer, pickedTileX, pickedTileY);
 
 
         camera.update();
@@ -127,6 +127,8 @@ public class GameScreen implements Screen {
 
         renderer2.setView(camera);
         renderer2.render();
+
+        building.resetTiles();
 
 //        if (Gdx.input.isKeyJustPressed(Input.Keys.J)) building.setSelected(false);
 //

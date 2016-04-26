@@ -18,7 +18,6 @@ public class MapEntity implements Disposable{
     private boolean isSelected;
     private Texture texture;
     private ArrayList<StaticTiledMapTile> tiles;
-    private ArrayList<StaticTiledMapTile> prevTiles;
     private int x,y;
     private TiledMapTileLayer layer;
     private ArrayList<TiledMapTileLayer.Cell> prevCells;
@@ -26,7 +25,6 @@ public class MapEntity implements Disposable{
     public MapEntity(Texture texture) {
         this.texture = texture;
         this.tiles = new ArrayList<StaticTiledMapTile>();
-        this.prevTiles = new ArrayList<StaticTiledMapTile>();
         this.prevCells = new ArrayList<TiledMapTileLayer.Cell>();
         this.isSelected = true;
         sliceTexture();
@@ -57,28 +55,26 @@ public class MapEntity implements Disposable{
         this.layer = layer;
         this.x = x;
         this.y = y;
-        prevTiles = new ArrayList<StaticTiledMapTile>(tiles);
-//        prevCells = new ArrayList<TiledMapTileLayer.Cell>(prevCells); // saves previous state
+//        prevTiles = new ArrayList<StaticTiledMapTile>();
+//        prevCells = new ArrayList<TiledMapTileLayer.Cell>(); // saves previous state
+
+//        for ()
 //        oldLayer.
         for (StaticTiledMapTile tile :
                 tiles) {
+            prevCells.add(layer.getCell(x + offset, y + offset)); // save previous state
             TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
             cell.setTile(tile);
-//            cell.setTile(null);
-
             layer.setCell(x + offset, y + offset, cell);
             offset++;
         }
-//        isSelected = false;
     }
 
     public void resetTiles() {
         if (isSelected) {
             int offset = 0;
-            for (StaticTiledMapTile tile :
-                    prevTiles) {
-                TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-                cell.setTile(tile);
+            for (TiledMapTileLayer.Cell cell :
+                    prevCells) {
                 layer.setCell(x + offset, y + offset, cell);
                 offset++;
             }
