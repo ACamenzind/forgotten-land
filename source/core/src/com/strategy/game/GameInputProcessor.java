@@ -13,8 +13,6 @@ import com.badlogic.gdx.math.Vector3;
  * Handles the game input
  */
 public class GameInputProcessor implements InputProcessor{
-
-    private TiledMapTileLayer.Cell oldcell;
     private GameScreen screen;
     private OrthographicCamera camera;
     private final int EDGE_THRESHOLD_WIDTH = 50;
@@ -22,7 +20,6 @@ public class GameInputProcessor implements InputProcessor{
     public GameInputProcessor(GameScreen screen) {
         this.screen = screen;
         this.camera = screen.getCamera();
-        System.out.println(camera);
     }
 
     // Used for continuous presses
@@ -74,7 +71,7 @@ public class GameInputProcessor implements InputProcessor{
     public boolean keyDown(int keycode) {
         switch (keycode) {
             case Input.Keys.SPACE:
-                //TODO: abstract the next two lines
+                //TODO: abstract a bit
                 Texture tex = new Texture(Gdx.files.internal("core/assets/house1.png"));
                 MapEntity building = new MapEntity(tex);
                 screen.getBuilder().toggleSelectEntity(building);

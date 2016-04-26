@@ -3,8 +3,6 @@ package com.strategy.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.math.Vector;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 /**
@@ -14,7 +12,7 @@ import com.badlogic.gdx.math.Vector3;
 public class StaticEntityBuilder {
     private GameScreen gameScreen;
     private TiledMapTileLayer buildingsLayer; // the buildings layer
-    private TiledMapTileLayer selectionLayer;
+    private TiledMapTileLayer selectionLayer; // contains the selected building
     private MapEntity selectedEntity;
     public StaticEntityBuilder(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
@@ -22,20 +20,33 @@ public class StaticEntityBuilder {
         this.selectionLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Selection");
     }
 
+
+    /**
+     * Toggles the selection
+     * @param entity: the entity to be placed
+     */
     public void toggleSelectEntity(MapEntity entity) {
         if (selectedEntity == null)
             this.selectedEntity = entity;
         else
             this.selectedEntity = null;
-//        selectedEntity.setSelected(true);
-
     }
+
+    /**
+     *  Places the selected building onto the buildings layer.
+     * @param x : tile coordinate
+     * @param y : tile coordinate
+     */
     public void placeSelectedEntity(int x, int y) {
         if (selectedEntity != null) {
             selectedEntity.placeOnLayer(buildingsLayer, x, y);
         }
     }
 
+    /**
+     * Render the building being moved around with respect to the camera.
+     * @param camera scene camera
+     */
     public void renderSelection(OrthographicCamera camera) {
         int screenX = Gdx.input.getX();
         int screenY = Gdx.input.getY();
@@ -47,6 +58,9 @@ public class StaticEntityBuilder {
         }
     }
 
+    /**
+     * Resets the tiles to the previous state. Called after the render() method.
+     */
     public void clear() {
         if (selectedEntity != null) {
             selectedEntity.resetTiles();
