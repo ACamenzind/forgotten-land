@@ -69,6 +69,10 @@ public class GameScreen implements Screen {
         return map;
     }
 
+    public StaticEntityBuilder getBuilder() {
+        return builder;
+    }
+
     @Override
     public void show() {
         // Prints the map properties
@@ -116,7 +120,10 @@ public class GameScreen implements Screen {
         MapEntity building = new MapEntity(tex);
 
 //         Places a building on the upper layer
-        building.placeOnLayer(upperLayer, pickedTileX, pickedTileY);
+//        building.placeOnLayer(upperLayer, pickedTileX, pickedTileY);
+        builder.selectEntity(building);
+
+        builder.renderSelection(pickedTileX, pickedTileY);
 
 
         camera.update();
@@ -128,7 +135,8 @@ public class GameScreen implements Screen {
         renderer2.setView(camera);
         renderer2.render();
 
-        building.resetTiles();
+        builder.clear();
+//        building.resetTiles();
 
 //        if (Gdx.input.isKeyJustPressed(Input.Keys.J)) building.setSelected(false);
 //

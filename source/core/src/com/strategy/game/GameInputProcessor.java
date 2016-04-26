@@ -105,8 +105,11 @@ public class GameInputProcessor implements InputProcessor{
         Texture tex = new Texture(Gdx.files.internal("core/assets/house1.png"));
         MapEntity building = new MapEntity(tex);
 
+//        screen.getBuilder().selectEntity(building);
+        screen.getBuilder().placeSelectedEntity(pickedTileX, pickedTileY);
+
         // Places a building on the upper layer
-        building.placeOnLayer(upperLayer, pickedTileX, pickedTileY);
+//        building.placeOnLayer(upperLayer, pickedTileX, pickedTileY);
 //        building.setSelected(false);
 
 
