@@ -50,16 +50,11 @@ public class MapEntity implements Disposable{
     }
 
     public void placeOnLayer(TiledMapTileLayer layer, int x, int y) {
-//        System.out.println("Placed");
         int offset = 0;
         this.layer = layer;
         this.x = x;
         this.y = y;
-//        prevTiles = new ArrayList<StaticTiledMapTile>();
-//        prevCells = new ArrayList<TiledMapTileLayer.Cell>(); // saves previous state
 
-//        for ()
-//        oldLayer.
         for (StaticTiledMapTile tile :
                 tiles) {
             prevCells.add(layer.getCell(x + offset, y + offset)); // save previous state
@@ -70,6 +65,7 @@ public class MapEntity implements Disposable{
         }
     }
 
+    // Resets to previous state (only used when building is still not placed)
     public void resetTiles() {
         if (isSelected) {
             int offset = 0;

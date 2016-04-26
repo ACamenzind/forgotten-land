@@ -28,7 +28,7 @@ public class World implements Disposable{
         this.map = gameScreen.getMap();
         this.staticEntities = new ArrayList<MapEntity>();
         this.movableEntities = new ArrayList<MovableEntity>();
-        this.builder = new StaticEntityBuilder(this);
+//        this.builder = new StaticEntityBuilder(this);
     }
 
     public void update(float delta) {

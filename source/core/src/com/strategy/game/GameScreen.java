@@ -56,7 +56,7 @@ public class GameScreen implements Screen {
         this.renderer2 = new BetterRenderer(map);
         this.camera = new OrthographicCamera(Utils.DEFAULT_WIDTH, Utils.DEFAULT_HEIGHT);
         this.gameInputProcessor = new GameInputProcessor(this);
-        this.builder = new StaticEntityBuilder(world);
+        this.builder = new StaticEntityBuilder(this);
 
         Gdx.input.setInputProcessor(gameInputProcessor);
     }
