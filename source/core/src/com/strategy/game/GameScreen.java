@@ -95,7 +95,7 @@ public class GameScreen implements Screen {
         gameInputProcessor.pollKeyboard();
         gameInputProcessor.pollMouse();
 
-        world.update();
+        world.update(delta);
 
 
         // --- TEST ----

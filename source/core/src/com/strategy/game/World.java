@@ -31,7 +31,7 @@ public class World implements Disposable{
         this.builder = new StaticEntityBuilder(this);
     }
 
-    public void update() {
+    public void update(float delta) {
 
     }
 
