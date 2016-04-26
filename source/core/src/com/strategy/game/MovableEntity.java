@@ -10,11 +10,14 @@ public class MovableEntity extends Image {
     private int maxLife;
     private int life;
 
-    public MovableEntity(String MovableEntityClass, int life) {
+    // Initialises an entity with a name and the maximum life
+    public MovableEntity(String MovableEntityClass, int maxLife) {
         this.MovableEntityClass = MovableEntityClass;
-        this.life = life;
+        this.maxLife = maxLife;
+        life = maxLife;
     }
 
+    // Method ro reduce life
     public void reduceLife(int damage) {
         if(life - damage < 0) {
             life = 0;
@@ -25,6 +28,7 @@ public class MovableEntity extends Image {
         // Should implement a function to remove object.
     }
 
+    // Method to increase life (e.g. when eating)
     public void increaseLife(int increase) {
         if(life + increase > maxLife) {
             life = maxLife;
@@ -34,6 +38,7 @@ public class MovableEntity extends Image {
         }
     }
 
+    // Getter to know how much life the entity has
     public int getLife() {
         return life;
     }
