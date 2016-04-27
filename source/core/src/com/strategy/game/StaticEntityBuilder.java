@@ -18,6 +18,7 @@ public class StaticEntityBuilder {
         this.gameScreen = gameScreen;
         this.buildingsLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Buildings");
         this.selectionLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Selection");
+        this.selectionLayer.setOpacity(0.5f);
     }
 
 
