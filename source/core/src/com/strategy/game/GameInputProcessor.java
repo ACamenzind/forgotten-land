@@ -71,10 +71,8 @@ public class GameInputProcessor implements InputProcessor{
     public boolean keyDown(int keycode) {
         switch (keycode) {
             case Input.Keys.SPACE:
-                //TODO: abstract a bit
-                Texture tex = new Texture(Gdx.files.internal("core/assets/house1.png"));
-                MapEntity building = new MapEntity(tex);
-                screen.getBuilder().toggleSelectEntity(building);
+                House house = new House();
+                screen.getBuilder().toggleSelectEntity(house);
         }
         return false;
     }

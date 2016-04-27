@@ -1,5 +1,6 @@
 package com.strategy.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -13,17 +14,19 @@ import java.util.ArrayList;
  */
 public class MapEntity implements Disposable{
     private int collisionSize;
-    private Texture texture;
+    protected Texture mainTexture;
+    protected Texture selectionTexture; // the transparent version
     private ArrayList<StaticTiledMapTile> tiles;
     private int x,y;
     private TiledMapTileLayer layer;
     private ArrayList<TiledMapTileLayer.Cell> prevCells;
 
-    public MapEntity(Texture texture) {
-        this.texture = texture;
+    public MapEntity() {
+        this.mainTexture = null;
         this.tiles = new ArrayList<StaticTiledMapTile>();
         this.prevCells = new ArrayList<TiledMapTileLayer.Cell>();
-        sliceTexture();
+        sliceTexture(mainTexture);
+        //TODO: handle secondary texture
     }
 
 
@@ -32,15 +35,17 @@ public class MapEntity implements Disposable{
     }
 
     /**
-     * Splits the entity's texture into vertical slices of width TILE_SIZE
+     * Splits the entity's mainTexture into vertical slices of width TILE_SIZE
      */
-    private void sliceTexture() {
-        TextureRegion tex = new TextureRegion(texture);
-        TextureRegion[][] arr = tex.split(Utils.TILE_SIZE, tex.getRegionHeight());
+    protected void sliceTexture(Texture mainTexture) {
+        if (mainTexture != null) {
+            TextureRegion tex = new TextureRegion(mainTexture);
+            TextureRegion[][] arr = tex.split(Utils.TILE_SIZE, tex.getRegionHeight());
 
-        for (int i = 0; i < tex.getRegionWidth()/Utils.TILE_SIZE; i++) {
-            StaticTiledMapTile tile = new StaticTiledMapTile(arr[0][i]);
-            tiles.add(tile);
+            for (int i = 0; i < tex.getRegionWidth() / Utils.TILE_SIZE; i++) {
+                StaticTiledMapTile tile = new StaticTiledMapTile(arr[0][i]);
+                tiles.add(tile);
+            }
         }
     }
 
@@ -80,6 +85,6 @@ public class MapEntity implements Disposable{
 
     @Override
     public void dispose() {
-        texture.dispose();
+        mainTexture.dispose();
     }
 }
