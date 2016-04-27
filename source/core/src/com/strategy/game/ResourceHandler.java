@@ -4,15 +4,15 @@ package com.strategy.game;
  * Created by francescosani on 27/04/16.
  */
 public class ResourceHandler {
-    private int startingIncrement;
+    private final int startingIncrement;
 
-    private int woodCounter;
-    private int goldCounter;
-    private int foodCounter;
+    public int woodCounter;
+    public int goldCounter;
+    public int foodCounter;
 
-    private int woodIncrementer;
-    private int goldIncrementer;
-    private int foodIncrementer;
+    public int woodIncrementer;
+    public int goldIncrementer;
+    public int foodIncrementer;
 
     public ResourceHandler(int startingIncrement, int woodCounter, int goldCounter, int foodCounter) {
         this.startingIncrement = startingIncrement;
@@ -36,6 +36,23 @@ public class ResourceHandler {
     public void incrementFoodIncrementer(int foodIncrementerIncrements) {
         foodIncrementer =+ foodIncrementerIncrements;
     }
+
+
+    public void incrementWoodCounter(int woodCounterIncrements) {
+        woodCounter =+ woodCounterIncrements;
+    }
+
+    public void incrementGoldCounter(int goldCounterIncrements) {
+        goldCounter =+ goldCounterIncrements;
+    }
+
+    public void incrementFoodCounter (int foodCounterIncrements) {
+        foodCounter =+ foodCounterIncrements;
+    }
+
+
+
+
 
     public void update() {
         woodCounter =+ startingIncrement + woodIncrementer;
