@@ -70,9 +70,12 @@ public class GameInputProcessor implements InputProcessor{
     @Override
     public boolean keyDown(int keycode) {
         switch (keycode) {
-            case Input.Keys.SPACE:
-                House house = new House();
-                screen.getBuilder().toggleSelectEntity(house);
+            case Input.Keys.NUM_1:
+                screen.getBuilder().toggleSelectEntity(new House());
+                break;
+            case Input.Keys.NUM_2:
+                screen.getBuilder().toggleSelectEntity(new Castle());
+                break;
         }
         return false;
     }
