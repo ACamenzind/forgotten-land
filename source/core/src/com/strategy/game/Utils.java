@@ -14,6 +14,7 @@ public class Utils {
     public static final int DEFAULT_WIDTH = 1280;
     public static final int DEFAULT_HEIGHT = 720;
     public static final int BASE_CAMERA_SPEED = 10;
+    public static final int RENDER_OFFSET = 20;
 
 
     public static Matrix4 isoTransformMatrix() {

@@ -16,7 +16,8 @@ import static com.badlogic.gdx.graphics.g2d.Batch.U2;
 import static com.badlogic.gdx.graphics.g2d.Batch.U3;
 
 /**
- * Created by alex on 26/04/16.
+ * A modified IsometricTiledMapRenderer
+ * (the only change is the number of extra tiles to render outside the view of the camera)
  */
 public class BetterRenderer extends IsometricTiledMapRenderer {
 
@@ -93,11 +94,11 @@ public class BetterRenderer extends IsometricTiledMapRenderer {
         bottomRight.set(viewBounds.x + viewBounds.width, viewBounds.y + viewBounds.height);
 
         // transforming screen coordinates to iso coordinates
-        int row1 = (int)(translateScreenToIso(topLeft).y / tileWidth) - 20; // TODO: set a number dinamically
-        int row2 = (int)(translateScreenToIso(bottomRight).y / tileWidth) + 20;
+        int row1 = (int)(translateScreenToIso(topLeft).y / tileWidth) - Utils.RENDER_OFFSET; // TODO: set a number dynamically
+        int row2 = (int)(translateScreenToIso(bottomRight).y / tileWidth) + Utils.RENDER_OFFSET;
 
-        int col1 = (int)(translateScreenToIso(bottomLeft).x / tileWidth) - 20;
-        int col2 = (int)(translateScreenToIso(topRight).x / tileWidth) + 20;
+        int col1 = (int)(translateScreenToIso(bottomLeft).x / tileWidth) - Utils.RENDER_OFFSET;
+        int col2 = (int)(translateScreenToIso(topRight).x / tileWidth) + Utils.RENDER_OFFSET;
 
         for (int row = row2; row >= row1; row--) {
             for (int col = col1; col <= col2; col++) {
