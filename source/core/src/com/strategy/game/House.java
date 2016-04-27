@@ -9,8 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class House extends MapEntity {
     public House() {
         super();
-        //TODO: load from Assets
-        this.mainTexture = new Texture(Gdx.files.internal("core/assets/house1.png"));
+        this.mainTexture = Assets.house1;
         sliceTexture(mainTexture);
     }
 }
