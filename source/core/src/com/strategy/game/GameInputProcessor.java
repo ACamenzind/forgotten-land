@@ -96,8 +96,13 @@ public class GameInputProcessor implements InputProcessor{
         Vector3 touch = new Vector3(screenX, screenY, 0);
         Vector3 pickedTile = Utils.cartesianToIso(touch, camera);
         //TODO: better to handle coords inside the builder?
-        screen.getBuilder().placeSelectedEntity((int) pickedTile.x, (int)pickedTile.y);
-
+        if (screen.getBuilder().getSelectedEntity() != null) {
+            screen.getBuilder().placeSelectedEntity((int) pickedTile.x, (int) pickedTile.y);
+        }
+        else  {
+            // for debugging purposes
+            Utils.printTileInfo(pickedTile, screen);
+        }
         return true;
     }
 
