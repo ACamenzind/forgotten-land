@@ -36,7 +36,7 @@ public class World implements Disposable{
     }
 
     public void update(float delta) {
-        if(updateCounter % 300 >= 1) {
+        if(updateCounter / 300 >= 1) {
             resourceHandler.update();
             updateCounter = 0;
         }
