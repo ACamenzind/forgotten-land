@@ -6,9 +6,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 /**
  * The main menu screen
@@ -20,7 +24,8 @@ public class MainMenuScreen implements Screen{
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private BitmapFont font;
-    private Texture menubk = new Texture(Gdx.files.internal("core/assets/menu.jpg"));
+    private Texture menubk = new Texture(Gdx.files.internal("core/assets/Buttons/menu.png"));
+    private Stage stage;
 
     public MainMenuScreen(final StrategyGame game) {
         this.game = game;
@@ -28,6 +33,8 @@ public class MainMenuScreen implements Screen{
         this.batch = game.getBatch();
         this.font = game.getFont();
         camera.setToOrtho(false, 2*Utils.DEFAULT_WIDTH, 2*Utils.DEFAULT_HEIGHT);
+
+        setupStage();
     }
 
     @Override
@@ -61,6 +68,9 @@ public class MainMenuScreen implements Screen{
             dispose();
             System.out.println("Pressed enter!");
         }
+
+        stage.act(delta);
+        stage.draw();
     }
 
     @Override
@@ -88,5 +98,52 @@ public class MainMenuScreen implements Screen{
     @Override
     public void dispose() {
 
+    }
+
+    private void setupStage() {
+        this.stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+
+        VerticalGroup buttons = new VerticalGroup();
+        stage.addActor(buttons);
+        buttons.setPosition(Gdx.graphics.getWidth() * 0.8f, Gdx.graphics.getHeight() * 0.55f);
+
+        SpriteDrawable newGameSprite = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("core/assets/Buttons/newgame.png"))));
+        ImageButton newGameButton = new ImageButton(newGameSprite);
+        newGameButton.padBottom(Gdx.graphics.getHeight() * 0.05f);
+        newGameButton.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new GameScreen(game));
+                dispose();
+                System.out.println("Pressed enter!");
+                return false;
+            }
+        });
+        buttons.addActor(newGameButton);
+
+        SpriteDrawable loadGameSprite = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("core/assets/Buttons/loadgame.png"))));
+        ImageButton loadGameButton = new ImageButton(loadGameSprite);
+        loadGameButton.padBottom(Gdx.graphics.getHeight() * 0.05f);
+        loadGameButton.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                game.setScreen(new GameScreen(game));
+//                dispose();
+//                System.out.println("Pressed enter!");
+                return false;
+            }
+        });
+        buttons.addActor(loadGameButton);
+
+        SpriteDrawable settingsSprite = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("core/assets/Buttons/settings.png"))));
+        ImageButton settingsButton = new ImageButton(settingsSprite);
+        settingsButton.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                game.setScreen(new GameScreen(game));
+//                dispose();
+//                System.out.println("Pressed enter!");
+                return false;
+            }
+        });
+        buttons.addActor(settingsButton);
     }
 }
