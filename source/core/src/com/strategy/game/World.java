@@ -20,6 +20,8 @@ public class World implements Disposable{
     private ArrayList<MovableEntity> movableEntities;
     private TiledMap map;
     private StaticEntityBuilder builder;
+    private ResourceHandler resourceHandler;
+    private int updateCounter;
 
 
     public World(GameScreen gameScreen) {
@@ -29,9 +31,16 @@ public class World implements Disposable{
         this.staticEntities = new ArrayList<MapEntity>();
         this.movableEntities = new ArrayList<MovableEntity>();
 //        this.builder = new StaticEntityBuilder(this);
+        this.resourceHandler = new ResourceHandler(10, 100, 100, 100, 100);
+        this.updateCounter = 0;
     }
 
     public void update(float delta) {
+        if(updateCounter % 300 >= 1) {
+            resourceHandler.update();
+            updateCounter = 0;
+        }
+        updateCounter++;
 
     }
 

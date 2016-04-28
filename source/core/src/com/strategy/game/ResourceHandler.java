@@ -6,58 +6,106 @@ package com.strategy.game;
 public class ResourceHandler {
     private final int startingIncrement;
 
-    public int woodCounter;
-    public int goldCounter;
-    public int foodCounter;
+    private int woodCounter;
+    private int goldCounter;
+    private int foodCounter;
+    private int stoneCounter;
 
-    public int woodIncrementer;
-    public int goldIncrementer;
-    public int foodIncrementer;
+    private int woodIncrementer;
+    private int goldIncrementer;
+    private int foodIncrementer;
+    private int stoneIncrementer;
 
-    public ResourceHandler(int startingIncrement, int woodCounter, int goldCounter, int foodCounter) {
+    public ResourceHandler(int startingIncrement, int woodCounter, int goldCounter, int foodCounter, int stoneCounter) {
         this.startingIncrement = startingIncrement;
         this.woodCounter = woodCounter;
         this.goldCounter = goldCounter;
         this.foodCounter = foodCounter;
+        this.stoneCounter = stoneCounter;
         this.woodIncrementer = 0;
         this.goldIncrementer = 0;
         this.foodIncrementer = 0;
+        this.stoneIncrementer = 0;
     }
 
 
-    public void incrementWoodIncrementer(int woodIncrementerIncrements) {
-        woodIncrementer =+ woodIncrementerIncrements;
+    public void incrementWoodIncrementer(int woodIncrementerIncrease) {
+        woodIncrementer += woodIncrementerIncrease;
     }
 
-    public void incrementGoldIncrementer(int goldIncrementerIncrements) {
-        goldIncrementer =+ goldIncrementerIncrements;
+    public void incrementGoldIncrementer(int goldIncrementerIncrease) {
+        goldIncrementer += goldIncrementerIncrease;
     }
 
-    public void incrementFoodIncrementer(int foodIncrementerIncrements) {
-        foodIncrementer =+ foodIncrementerIncrements;
+    public void incrementFoodIncrementer(int foodIncrementerIncrease) {
+        foodIncrementer += foodIncrementerIncrease;
     }
 
-
-    public void incrementWoodCounter(int woodCounterIncrements) {
-        woodCounter =+ woodCounterIncrements;
-    }
-
-    public void incrementGoldCounter(int goldCounterIncrements) {
-        goldCounter =+ goldCounterIncrements;
-    }
-
-    public void incrementFoodCounter (int foodCounterIncrements) {
-        foodCounter =+ foodCounterIncrements;
+    public void incrementStoneIncrementer(int stoneIncrementerIncrease) {
+        stoneIncrementer += stoneIncrementerIncrease;
     }
 
 
+    public void incrementWoodCounter(int woodCounterIncrease) {
+        woodCounter += woodCounterIncrease;
+    }
+
+    public void incrementGoldCounter(int goldCounterIncrease) {
+        goldCounter += goldCounterIncrease;
+    }
+
+    public void incrementFoodCounter (int foodCounterIncrease) {
+        foodCounter += foodCounterIncrease;
+    }
+
+    public void incrementStoneCounter (int stoneCounterIncrease) {
+        stoneCounter += stoneCounterIncrease;
+    }
+
+
+    public int getStartingIncrement() {
+        return startingIncrement;
+    }
+
+    public int getWoodCounter() {
+        return woodCounter;
+    }
+
+    public int getGoldCounter() {
+        return goldCounter;
+    }
+
+    public int getFoodCounter() {
+        return foodCounter;
+    }
+
+    public int getStoneCounter() {
+        return stoneCounter;
+    }
+
+    public int getWoodIncrementer() {
+        return woodIncrementer;
+    }
+
+    public int getGoldIncrementer() {
+        return goldIncrementer;
+    }
+
+    public int getFoodIncrementer() {
+        return foodIncrementer;
+    }
+
+    public int getStoneIncrementer() {
+        return stoneIncrementer;
+    }
 
 
 
     public void update() {
-        woodCounter =+ startingIncrement + woodIncrementer;
-        goldCounter =+ startingIncrement + goldCounter;
-        foodCounter =+ startingIncrement + foodIncrementer;
+        woodCounter += startingIncrement + woodIncrementer;
+        goldCounter += startingIncrement + goldCounter;
+        foodCounter += startingIncrement + foodIncrementer;
+        stoneCounter += startingIncrement + stoneIncrementer;
 
     }
 
