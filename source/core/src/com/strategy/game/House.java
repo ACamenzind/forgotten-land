@@ -12,7 +12,7 @@ public class House extends MapEntity {
         super();
         this.mainTexture = Assets.house1;
         this.collisionSize = new Vector2(2,3);
-        this.imgOffset = new Vector2(2,2);
+        this.imgOffset = new Vector2(0,1);
         sliceTexture(mainTexture);
     }
 }

@@ -12,11 +12,11 @@ import java.util.ArrayList;
  * A generic object to put on the map. Inherit from this to create new buildings.
  */
 public class MapEntity implements Disposable{
-    protected Vector2 collisionSize;
+    protected Vector2 collisionSize; // The x and y length of the collision rectangle
     protected Texture mainTexture;
     private ArrayList<ExtendedStaticTiledMapTile> tiles;
     private int x,y;
-    protected Vector2 imgOffset;
+    protected Vector2 imgOffset; //TODO: useless?
     private TiledMapTileLayer layer;
     private ArrayList<TiledMapTileLayer.Cell> prevCells;
 
@@ -87,7 +87,7 @@ public class MapEntity implements Disposable{
         // Draw textures on the diagonal cells
         for (ExtendedStaticTiledMapTile tile :
                 tiles) {
-            prevCells.add(layer.getCell(x + offset - (int)imgOffset.x, y + offset - (int) imgOffset.y)); // save previous state
+            prevCells.add(layer.getCell(x + offset, y + offset)); // save previous state
             TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
             tile.setObstacle(true);
             tile.setObject(this);
