@@ -21,6 +21,9 @@ public class StaticEntityBuilder {
         this.selectionLayer.setOpacity(0.5f);
     }
 
+    public MapEntity getSelectedEntity() {
+        return selectedEntity;
+    }
 
     /**
      * Toggles the selection

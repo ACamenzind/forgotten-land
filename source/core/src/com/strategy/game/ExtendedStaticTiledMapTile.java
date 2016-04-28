@@ -14,7 +14,9 @@ public class ExtendedStaticTiledMapTile extends StaticTiledMapTile {
         super(textureRegion);
     }
 
-    public ExtendedStaticTiledMapTile(StaticTiledMapTile copy) {
+
+
+    public ExtendedStaticTiledMapTile(ExtendedStaticTiledMapTile copy) {
         super(copy);
     }
 

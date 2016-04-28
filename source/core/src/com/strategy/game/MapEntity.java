@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 
 import java.util.ArrayList;
@@ -13,24 +14,32 @@ import java.util.ArrayList;
  * A generic object to put on the map. Inherit from this to create new buildings.
  */
 public class MapEntity implements Disposable{
-    private int collisionSize;
+    protected Vector2 collisionSize;
     protected Texture mainTexture;
-    protected Texture selectionTexture; // the transparent version
-    private ArrayList<StaticTiledMapTile> tiles;
+    private ArrayList<ExtendedStaticTiledMapTile> tiles;
     private int x,y;
+    protected Vector2 imgOffset;
     private TiledMapTileLayer layer;
     private ArrayList<TiledMapTileLayer.Cell> prevCells;
 
     public MapEntity() {
         this.mainTexture = null;
-        this.tiles = new ArrayList<StaticTiledMapTile>();
+        this.tiles = new ArrayList<ExtendedStaticTiledMapTile>();
         this.prevCells = new ArrayList<TiledMapTileLayer.Cell>();
+        this.collisionSize = new Vector2(0,0);
+        this.imgOffset = new Vector2(0,0);
         sliceTexture(mainTexture);
-        //TODO: handle secondary texture
     }
 
+    public Vector2 getCoords() {
+        return new Vector2(x,y);
+    }
 
-    public ArrayList<StaticTiledMapTile> getTiles() {
+    public Vector2 getCollisionSize() {
+        return collisionSize;
+    }
+
+    public ArrayList<ExtendedStaticTiledMapTile> getTiles() {
         return tiles;
     }
 
@@ -43,7 +52,7 @@ public class MapEntity implements Disposable{
             TextureRegion[][] arr = tex.split(Utils.TILE_SIZE, tex.getRegionHeight());
 
             for (int i = 0; i < tex.getRegionWidth() / Utils.TILE_SIZE; i++) {
-                StaticTiledMapTile tile = new StaticTiledMapTile(arr[0][i]);
+                ExtendedStaticTiledMapTile tile = new ExtendedStaticTiledMapTile(arr[0][i]);
                 tiles.add(tile);
             }
         }
@@ -61,10 +70,31 @@ public class MapEntity implements Disposable{
         this.x = x;
         this.y = y;
 
-        for (StaticTiledMapTile tile :
+
+//        for (int i = x; i < x + collisionSize.x; i++) {
+//            for (int j = y; j < y + collisionSize.y; j++) {
+//                TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
+//                TextureRegion tex = new TextureRegion(Assets.test);
+//                ExtendedStaticTiledMapTile tile = new ExtendedStaticTiledMapTile(tex);
+////                    System.out.println(tile.getObject().toString());
+//                tile.setObject(this);
+//                tile.setObstacle(true);
+//
+//                cell.setTile(tile);
+//                layer.setCell(i, j, cell);
+////                System.out.println(cell.toString());
+//
+//            }
+//        }
+
+
+
+        for (ExtendedStaticTiledMapTile tile :
                 tiles) {
-            prevCells.add(layer.getCell(x + offset, y + offset)); // save previous state
+            prevCells.add(layer.getCell(x + offset - (int)imgOffset.x, y + offset - (int) imgOffset.y)); // save previous state
             TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
+            tile.setObstacle(true);
+            tile.setObject(this);
             cell.setTile(tile);
             layer.setCell(x + offset, y + offset, cell);
             offset++;
@@ -82,6 +112,8 @@ public class MapEntity implements Disposable{
             offset++;
         }
     }
+
+
 
     @Override
     public void dispose() {
