@@ -11,14 +11,14 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
  */
 public class Assets {
     public static TiledMap map;
-    public static Texture house1, castle, test;
+    public static Texture house1, castle, emptyTile;
 
     public static void load() {
 //        map = new TmxMapLoader().load("core/assets/big_map.tmx");
         map = new TmxMapLoader().load("core/assets/test128.tmx");
         house1 = new Texture(Gdx.files.internal("core/assets/house1.png"));
         castle = new Texture(Gdx.files.internal("core/assets/castle.png"));
-        test = new Texture(Gdx.files.internal("core/assets/badlogic.jpg"));
+        emptyTile = new Texture(Gdx.files.internal("core/assets/badlogic.png"));
     }
 
     public static void dispose() {

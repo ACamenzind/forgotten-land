@@ -43,7 +43,19 @@ public class StaticEntityBuilder {
      */
     public void placeSelectedEntity(int x, int y) {
         if (selectedEntity != null) {
-            selectedEntity.placeOnLayer(buildingsLayer, x, y);
+            boolean isSpaceFree = true;
+
+            // Check if cells are occupied
+            for (int i = x; i < x + selectedEntity.getCollisionSize().x; i++) {
+                for (int j = y; j < y + selectedEntity.getCollisionSize().y; j++) {
+                    TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
+                    if (cell != null) {
+                        isSpaceFree = false;
+                        break;
+                    }
+                }
+            }
+            if (isSpaceFree) selectedEntity.placeOnLayer(buildingsLayer, x, y);
         }
     }
 

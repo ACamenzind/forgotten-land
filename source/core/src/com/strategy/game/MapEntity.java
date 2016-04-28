@@ -1,10 +1,8 @@
 package com.strategy.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -70,25 +68,23 @@ public class MapEntity implements Disposable{
         this.x = x;
         this.y = y;
 
+        //TODO: refactor a bit
 
-//        for (int i = x; i < x + collisionSize.x; i++) {
-//            for (int j = y; j < y + collisionSize.y; j++) {
-//                TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-//                TextureRegion tex = new TextureRegion(Assets.test);
-//                ExtendedStaticTiledMapTile tile = new ExtendedStaticTiledMapTile(tex);
-////                    System.out.println(tile.getObject().toString());
-//                tile.setObject(this);
-//                tile.setObstacle(true);
-//
-//                cell.setTile(tile);
-//                layer.setCell(i, j, cell);
-////                System.out.println(cell.toString());
-//
-//            }
-//        }
+        // Occupy cells
+        for (int i = x; i < x + collisionSize.x; i++) {
+            for (int j = y; j < y + collisionSize.y; j++) {
+                TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
+                TextureRegion tex = new TextureRegion(Assets.emptyTile);
+                ExtendedStaticTiledMapTile tile = new ExtendedStaticTiledMapTile(tex);
+                tile.setObject(this);
+                tile.setObstacle(true);
+                cell.setTile(tile);
+                layer.setCell(i, j, cell);
+            }
+        }
 
 
-
+        // Draw textures on the diagonal cells
         for (ExtendedStaticTiledMapTile tile :
                 tiles) {
             prevCells.add(layer.getCell(x + offset - (int)imgOffset.x, y + offset - (int) imgOffset.y)); // save previous state

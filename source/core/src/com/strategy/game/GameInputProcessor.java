@@ -96,9 +96,11 @@ public class GameInputProcessor implements InputProcessor{
         Vector3 touch = new Vector3(screenX, screenY, 0);
         Vector3 pickedTile = Utils.cartesianToIso(touch, camera);
         //TODO: better to handle coords inside the builder?
-        if (screen.getBuilder().getSelectedEntity() != null)
-            screen.getBuilder().placeSelectedEntity((int) pickedTile.x, (int)pickedTile.y);
+        if (screen.getBuilder().getSelectedEntity() != null) {
+            screen.getBuilder().placeSelectedEntity((int) pickedTile.x, (int) pickedTile.y);
+        }
         else  {
+            // for debugging purposes
             TiledMapTileLayer.Cell cell = ((TiledMapTileLayer) (screen.getMap().getLayers().get(1)))
                     .getCell((int) pickedTile.x, (int) pickedTile.y);
             if (cell != null) {
@@ -108,12 +110,7 @@ public class GameInputProcessor implements InputProcessor{
             else {
                 System.out.println("Empty");
             }
-
-
         }
-
-
-
         return true;
     }
 
