@@ -10,12 +10,12 @@
  </tileset>
  <layer name="Terrain" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt0bEJACAQBMFPvga1/0btQDCRAyeYfGG7qhoAAAAAAAAAAAC4tgIa8COVH1n8yOJHFj+y+JHFj/fmwQjoAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAICfbIEhxIg=
+   eJztw8EJAAAMA6H7ZP+VC51DwVVTVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/AWtAw1E=
   </data>
  </layer>
  <layer name="Buildings" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+   eJzt0aENACEABEG64Om/UTTyBWHFTHL+kh0DAAAAAAAAALhtvT7AQY8WPVr0aNGjRY8WPVr0aNGjRY8WPVr0uO/7sfnoIwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA1QZvcQJM
   </data>
  </layer>
  <layer name="Selection" width="100" height="100">
