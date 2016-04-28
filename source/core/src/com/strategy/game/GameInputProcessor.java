@@ -99,18 +99,10 @@ public class GameInputProcessor implements InputProcessor{
         if (screen.getBuilder().getSelectedEntity() != null) {
             screen.getBuilder().placeSelectedEntity((int) pickedTile.x, (int) pickedTile.y);
         }
-//        else  {
-//            // for debugging purposes
-//            TiledMapTileLayer.Cell cell = ((TiledMapTileLayer) (screen.getMap().getLayers().get(1)))
-//                    .getCell((int) pickedTile.x, (int) pickedTile.y);
-//            if (cell != null) {
-//                ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
-//                System.out.println(tile.getObject().toString());
-//            }
-//            else {
-//                System.out.println("Empty");
-//            }
-//        }
+        else  {
+            // for debugging purposes
+            Utils.printTileInfo(pickedTile, screen);
+        }
         return true;
     }
 

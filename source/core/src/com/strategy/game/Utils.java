@@ -2,6 +2,7 @@ package com.strategy.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -38,6 +39,20 @@ public class Utils {
         return new Vector3(coords.x / TILE_SIZE, coords.y / TILE_SIZE, 0);
     }
 
+    public static void printTileInfo(Vector3 pickedTile, GameScreen screen) {
+        TiledMapTileLayer.Cell cell = ((TiledMapTileLayer) (screen.getMap().getLayers().get(1)))
+                .getCell((int) pickedTile.x, (int) pickedTile.y);
+        if (cell != null) {
+            ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
+            System.out.println(tile.getObject().toString());
+        }
+        else {
+            System.out.println("Empty");
+        }
+    }
+
+
+    // doesn't work
     public static Vector2 isoToCartesian(Vector2 coords) {
         coords.y = -coords.y;
         return new Vector2((2 * coords.y + coords.x) / 2.f,
