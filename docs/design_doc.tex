@@ -33,64 +33,82 @@
     \LARGE{\textbf{A strategy game}}
   \end{center}
 
-  \section{Description}
-  \label{sec:Description}
+\section*{Resources}
+\begin{itemize}
+    \item Food: when it runs out, people start to die.
+    \item Minerals: used to build buildings.
+    \item Wood: used to build buildings.
+    \item People: each person is assigned to a specific building.
+    \item Gold: produced by workers(?), used to buy resources (i.e. "trade")
+\end{itemize}
 
-  \begin{itemize}
-    \item   Game type: RTS real time strategy / management
-
-    \item  Library used: libgdx
-
-    \item  View: 2d (not isometric)
-
-    \item  With multiplayer or cpu
-    \item   Could be a competition (e.g. biggest city), enemy could be hidden, not necessarily attackable.
-      Collect resources, build buildings.
-  \end{itemize}
-
-
-
-  % \section{Interface}
+\section*{Buildings}
+\begin{itemize}
+    \item Cost (in resources)
+    \item Life
+    \item Workers
+    \item Production (some resource)
+\end{itemize}
 
 
-
-  %TODO: Add mockups pictures
-
-  For the presentation (questions taken from the slides)
-
-  \begin{itemize}
-    \item What do you want to do?\\
-    A 2D strategy game (think age of empires, though it could be more focused on the management side, alternative: like clash of clans). You have to collect resources and build buildings.
-
-    \item What is the UX going to be?\\
-    There's a main menu with options to start a new game, resume game, and settings, and the game screen.
-    New game: start instantly (stretch goal: map generation)
-    Resume game: shows a list of previous saves.\\
-    Game screen: list of resources with amounts, minimap, list of possible buildings to build, and so on...
-    The scene is 2D from above (like the pokemon games, not isometric), you can move the view with the keyboard and select stuff with the mouse.
-
-    \item Where in your project are the significant Java-related contributions?\\
-    It's entirely in Java.
-
-    \item How will you collaborate?\\
-    We plan to work mostly in an independent way, but for more difficult features we can do pair-programming.
-
-    \item What platform?\\
-    We are targeting the desktop platform, though the library that we use also supports android, but it's less optimal for a strategy game.
-
-    \item What APIs \& libraries?\\
-    We plan to use the libgdx library, which is a very powerful framework dedicated to develop games. It offers a huge amount of classes, which handle graphics, audio, input/output, and much more.
-  \end{itemize}
-
-
-  -- Title\\
-  -- Description: 2d strategy game, real time (think of age of empires), we have to decide whether focusing only on the management side or also add combat. Focused on defending the base. Collect resources and build building.\\
-  -- Mockups: main menu and game screen (say that the view is from above)\\
-  -- Stretch goals: map editor / generator, enemy AI\\
-  -- Controls, mouse to select, keys to move\\
-  -- Libgdx library: powerful framework to make games in Java.\\
-  -- Platform: we're developing it for the desktop (better for strategy game)\\
-  -- Collaboration: mostly independently, though for difficult features we'll do pair programming\\
+  % \section{Description}
+  % \label{sec:Description}
+  %
+  % \begin{itemize}
+  %   \item   Game type: RTS real time strategy / management
+  %
+  %   \item  Library used: libgdx
+  %
+  %   \item  View: 2d (not isometric)
+  %
+  %   \item  With multiplayer or cpu
+  %   \item   Could be a competition (e.g. biggest city), enemy could be hidden, not necessarily attackable.
+  %     Collect resources, build buildings.
+  % \end{itemize}
+  %
+  %
+  %
+  % % \section{Interface}
+  %
+  %
+  %
+  % %TODO: Add mockups pictures
+  %
+  % For the presentation (questions taken from the slides)
+  %
+  % \begin{itemize}
+  %   \item What do you want to do?\\
+  %   A 2D strategy game (think age of empires, though it could be more focused on the management side, alternative: like clash of clans). You have to collect resources and build buildings.
+  %
+  %   \item What is the UX going to be?\\
+  %   There's a main menu with options to start a new game, resume game, and settings, and the game screen.
+  %   New game: start instantly (stretch goal: map generation)
+  %   Resume game: shows a list of previous saves.\\
+  %   Game screen: list of resources with amounts, minimap, list of possible buildings to build, and so on...
+  %   The scene is 2D from above (like the pokemon games, not isometric), you can move the view with the keyboard and select stuff with the mouse.
+  %
+  %   \item Where in your project are the significant Java-related contributions?\\
+  %   It's entirely in Java.
+  %
+  %   \item How will you collaborate?\\
+  %   We plan to work mostly in an independent way, but for more difficult features we can do pair-programming.
+  %
+  %   \item What platform?\\
+  %   We are targeting the desktop platform, though the library that we use also supports android, but it's less optimal for a strategy game.
+  %
+  %   \item What APIs \& libraries?\\
+  %   We plan to use the libgdx library, which is a very powerful framework dedicated to develop games. It offers a huge amount of classes, which handle graphics, audio, input/output, and much more.
+  % \end{itemize}
+  %
+  %
+  % -- Title\\
+  % -- Description: 2d strategy game, real time (think of age of empires), we have to decide whether focusing only on the management side or also add combat. Focused on defending the base. Collect resources and build building.\\
+  % -- Mockups: main menu and game screen (say that the view is from above)\\
+  % -- Stretch goals: map editor / generator, enemy AI\\
+  % -- Controls, mouse to select, keys to move\\
+  % -- Libgdx library: powerful framework to make games in Java.\\
+  % -- Platform: we're developing it for the desktop (better for strategy game)\\
+  % -- Collaboration: mostly independently, though for difficult features we'll do pair programming\\
 
 
 
