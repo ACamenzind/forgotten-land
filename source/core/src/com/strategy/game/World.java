@@ -22,6 +22,7 @@ public class World implements Disposable{
     private StaticEntityBuilder builder;
     private ResourceHandler resourceHandler;
     private int updateCounter;
+    private PopulationHandler populationHandler;
 
 
     public World(GameScreen gameScreen) {
@@ -33,6 +34,7 @@ public class World implements Disposable{
 //        this.builder = new StaticEntityBuilder(this);
         this.resourceHandler = new ResourceHandler(10, 100, 100, 100, 100);
         this.updateCounter = 0;
+        this.populationHandler = new PopulationHandler(5, 200, 20)
     }
 
     public void update(float delta) {
