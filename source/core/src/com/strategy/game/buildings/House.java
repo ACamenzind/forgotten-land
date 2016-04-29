@@ -1,6 +1,7 @@
-package com.strategy.game;
+package com.strategy.game.buildings;
 
 import com.badlogic.gdx.math.Vector2;
+import com.strategy.game.Assets;
 
 /**
  * A type of MapEntity

@@ -1,4 +1,4 @@
-package com.strategy.game;
+package com.strategy.game.screens;
 
 import com.badlogic.gdx.Screen;
 

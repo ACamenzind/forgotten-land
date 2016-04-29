@@ -1,9 +1,11 @@
-package com.strategy.game;
+package com.strategy.game.world;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Disposable;
+import com.strategy.game.buildings.MapEntity;
+import com.strategy.game.buildings.StaticEntityBuilder;
+import com.strategy.game.screens.GameScreen;
 //import com.sun.javafx.scene.control.skin.VirtualFlow;
 
 import java.util.ArrayList;

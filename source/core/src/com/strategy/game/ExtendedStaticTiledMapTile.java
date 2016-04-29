@@ -2,6 +2,7 @@ package com.strategy.game;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import com.strategy.game.buildings.MapEntity;
 
 /**
  * Created by alex on 26/04/16.

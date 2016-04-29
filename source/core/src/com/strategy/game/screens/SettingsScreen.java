@@ -1,15 +1,14 @@
-package com.strategy.game;
+package com.strategy.game.screens;
 
 import com.badlogic.gdx.Screen;
 
 /**
- * Screen that appears when selecting "new game" in the main menu
- * Shows options before starting a game (i.e. map generator).
+ * A screen that contains various settings for the game. Can be reached from the main menu.
  * TODO: implement
  */
-public class NewGameScreen implements Screen{
+public class SettingsScreen implements Screen {
 
-    public NewGameScreen(StrategyGame game) {
+    public SettingsScreen() {
     }
 
     @Override

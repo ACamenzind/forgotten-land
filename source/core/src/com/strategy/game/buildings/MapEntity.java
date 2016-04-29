@@ -1,10 +1,13 @@
-package com.strategy.game;
+package com.strategy.game.buildings;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
+import com.strategy.game.Assets;
+import com.strategy.game.ExtendedStaticTiledMapTile;
+import com.strategy.game.Utils;
 
 import java.util.ArrayList;
 

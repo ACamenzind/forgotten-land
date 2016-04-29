@@ -1,4 +1,4 @@
-package com.strategy.game;
+package com.strategy.game.world;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 

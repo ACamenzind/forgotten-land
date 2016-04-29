@@ -1,4 +1,4 @@
-package com.strategy.game;
+package com.strategy.game.world;
 
 /**
  * Created by francescosani on 28/04/16.

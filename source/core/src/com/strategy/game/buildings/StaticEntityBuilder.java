@@ -1,9 +1,11 @@
-package com.strategy.game;
+package com.strategy.game.buildings;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
+import com.strategy.game.Utils;
+import com.strategy.game.screens.GameScreen;
 
 /**
  * Handles the creation and placement of static entities (e.g. buildings)

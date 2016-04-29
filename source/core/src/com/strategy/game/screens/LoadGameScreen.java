@@ -1,14 +1,15 @@
-package com.strategy.game;
+package com.strategy.game.screens;
 
 import com.badlogic.gdx.Screen;
 
 /**
- * A screen that contains various settings for the game. Can be reached from the main menu.
+ * The screen that appears when selecting the Load Game option.
+ * Shows a list of previous saves
  * TODO: implement
  */
-public class SettingsScreen implements Screen {
+public class LoadGameScreen implements Screen {
 
-    public SettingsScreen() {
+    public LoadGameScreen() {
     }
 
     @Override

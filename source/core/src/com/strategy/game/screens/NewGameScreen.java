@@ -1,15 +1,16 @@
-package com.strategy.game;
+package com.strategy.game.screens;
 
 import com.badlogic.gdx.Screen;
+import com.strategy.game.StrategyGame;
 
 /**
- * The screen that appears when selecting the Load Game option.
- * Shows a list of previous saves
+ * Screen that appears when selecting "new game" in the main menu
+ * Shows options before starting a game (i.e. map generator).
  * TODO: implement
  */
-public class LoadGameScreen implements Screen {
+public class NewGameScreen implements Screen{
 
-    public LoadGameScreen() {
+    public NewGameScreen(StrategyGame game) {
     }
 
     @Override
