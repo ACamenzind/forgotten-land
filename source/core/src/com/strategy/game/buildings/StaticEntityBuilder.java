@@ -1,9 +1,11 @@
 package com.strategy.game.buildings;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
+import com.strategy.game.Assets;
 import com.strategy.game.Utils;
 import com.strategy.game.screens.GameScreen;
 
@@ -57,7 +59,15 @@ public class StaticEntityBuilder {
                     }
                 }
             }
-            if (isSpaceFree) selectedEntity.placeOnLayer(buildingsLayer, x, y);
+            Sound sound = Assets.hit;
+            if (isSpaceFree) {
+                long id = sound.play(0.5f);
+                sound.setPitch(id, 0.75f);
+                selectedEntity.placeOnLayer(buildingsLayer, x, y);
+            } else {
+                long id = sound.play(0.5f);
+                sound.setPitch(id, 5f);
+            }
         }
     }
 
