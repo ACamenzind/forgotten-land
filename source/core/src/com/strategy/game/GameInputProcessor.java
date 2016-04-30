@@ -108,7 +108,8 @@ public class GameInputProcessor implements InputProcessor{
         if (screen.getBuilder().getSelectedEntity() != null) {
             screen.getBuilder().placeSelectedEntity((int) pickedTile.x, (int) pickedTile.y);
         }
-        else  {
+        else if (screen.getBuilder().getSelectedEntity() == null)  {
+            //TODO: get tile info and show window
             // for debugging purposes
             Utils.printTileInfo(pickedTile, screen);
         }

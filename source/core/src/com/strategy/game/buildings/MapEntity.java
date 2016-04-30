@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class MapEntity implements Disposable{
     protected Vector2 collisionSize; // The x and y length of the collision rectangle
     protected Texture mainTexture;
+    private boolean isClicked;
     private ArrayList<ExtendedStaticTiledMapTile> tiles;
     private int x,y;
     protected Vector2 imgOffset; //TODO: useless?
@@ -29,7 +30,17 @@ public class MapEntity implements Disposable{
         this.prevCells = new ArrayList<TiledMapTileLayer.Cell>();
         this.collisionSize = new Vector2(0,0);
         this.imgOffset = new Vector2(0,0);
+        this.isClicked = false;
         sliceTexture(mainTexture);
+    }
+
+    public boolean isClicked() {
+        return isClicked;
+    }
+
+    public void setClicked(boolean clicked) {
+        isClicked = clicked;
+        //TODO: make pop-up window appear with details about the building.
     }
 
     public Vector2 getCoords() {
