@@ -5,15 +5,15 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.strategy.game.StrategyGame;
 import com.strategy.game.Utils;
 
@@ -57,6 +57,7 @@ public class MainMenuScreen implements Screen{
     private BitmapFont font;
     private Texture menubk = new Texture(Gdx.files.internal("core/assets/MainMenuScreenTextures/menu.png"));
     private Stage stage;
+    private Stage backStage;
 
     public MainMenuScreen(final StrategyGame game) {
         this.game = game;
@@ -82,7 +83,7 @@ public class MainMenuScreen implements Screen{
         batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
-        batch.draw(menubk, 0, 0);
+//        batch.draw(menubk, 0, 0);
         font.draw(batch, "Welcome to the game!",
                 Utils.DEFAULT_WIDTH/2,
                 Utils.DEFAULT_HEIGHT/2);
@@ -102,16 +103,21 @@ public class MainMenuScreen implements Screen{
 
         //stage.setDebugAll(true); // For debug purpose
 
+        backStage.act(delta);
         stage.act(delta);
+        backStage.getViewport().apply();
+        backStage.draw();
+        stage.getViewport().apply();
         stage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
+        backStage.getViewport().update(width, height, true);
         stage.getViewport().update(width, height, true);
-        camera.viewportWidth = width;
-        camera.viewportHeight = height;
-        camera.update();
+//        camera.viewportWidth = width;
+//        camera.viewportHeight = height;
+//        camera.update();
     }
 
     @Override
@@ -135,11 +141,18 @@ public class MainMenuScreen implements Screen{
     }
 
     private void setupStage() {
-        this.stage = new Stage(new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        this.backStage = new Stage(new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        Group group = new Group();
+
         Gdx.input.setInputProcessor(stage);
         Image background = new Image(menubk);
+
+//        group.addActor(background);
+//        backStage.addActor(background);
+
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        stage.addActor(background);
+        backStage.addActor(background);
 
         Table buttons = new Table();
 //        buttons.setSize(Gdx.graphics.getWidth() * 0.25f, Gdx.graphics.getHeight() * 0.5f);
