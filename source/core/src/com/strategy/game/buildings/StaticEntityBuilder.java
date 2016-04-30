@@ -63,6 +63,16 @@ public class StaticEntityBuilder {
             if (isSpaceFree) {
                 long id = sound.play(0.5f);
                 sound.setPitch(id, 0.75f);
+//                selectedEntity = new Ma;
+                try {
+                    // Makes a new instance of the proper subclass
+                    // TODO: check if this creates other problems.
+                    selectedEntity = selectedEntity.getClass().newInstance();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
                 selectedEntity.placeOnLayer(buildingsLayer, x, y);
             } else {
                 long id = sound.play(0.5f);
