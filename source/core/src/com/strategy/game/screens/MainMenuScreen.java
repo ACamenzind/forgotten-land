@@ -5,15 +5,16 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.strategy.game.Assets;
 import com.strategy.game.StrategyGame;
 import com.strategy.game.Utils;
 
@@ -57,6 +58,7 @@ public class MainMenuScreen implements Screen{
     private BitmapFont font;
     private Texture menubk = new Texture(Gdx.files.internal("core/assets/MainMenuScreenTextures/menu.png"));
     private Stage stage;
+    private Stage backStage;
 
     public MainMenuScreen(final StrategyGame game) {
         this.game = game;
@@ -82,7 +84,7 @@ public class MainMenuScreen implements Screen{
         batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
-        batch.draw(menubk, 0, 0);
+//        batch.draw(menubk, 0, 0);
         font.draw(batch, "Welcome to the game!",
                 Utils.DEFAULT_WIDTH/2,
                 Utils.DEFAULT_HEIGHT/2);
@@ -100,18 +102,23 @@ public class MainMenuScreen implements Screen{
             System.out.println("Pressed enter!");
         }
 
-        //stage.setDebugAll(true); // For debug purpose
+//        stage.setDebugAll(true); // For debug purpose
 
+        backStage.act(delta);
         stage.act(delta);
+        backStage.getViewport().apply();
+        backStage.draw();
+        stage.getViewport().apply();
         stage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
+        backStage.getViewport().update(width, height, true);
         stage.getViewport().update(width, height, true);
-        camera.viewportWidth = width;
-        camera.viewportHeight = height;
-        camera.update();
+//        camera.viewportWidth = width;
+//        camera.viewportHeight = height;
+//        camera.update();
     }
 
     @Override
@@ -135,16 +142,23 @@ public class MainMenuScreen implements Screen{
     }
 
     private void setupStage() {
-        this.stage = new Stage(new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        this.backStage = new Stage(new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        Group group = new Group();
+
         Gdx.input.setInputProcessor(stage);
         Image background = new Image(menubk);
+
+//        group.addActor(background);
+//        backStage.addActor(background);
+
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        stage.addActor(background);
+        backStage.addActor(background);
 
         Table buttons = new Table();
-//        buttons.setSize(Gdx.graphics.getWidth() * 0.25f, Gdx.graphics.getHeight() * 0.5f);
         stage.addActor(buttons);
-        buttons.setPosition(Gdx.graphics.getWidth() * 0.8f, Gdx.graphics.getHeight() * 0.3f);
+        buttons.setSize(Gdx.graphics.getWidth() * 0.25f, Gdx.graphics.getHeight() * 0.5f);
+        buttons.setPosition(Gdx.graphics.getWidth() * 0.7f, Gdx.graphics.getHeight() * 0.05f);
 
         // NEW GAME BUTTON
         MenuButton newGameButton = new MenuButton("core/assets/MainMenuScreenTextures/newgame.png", true);
@@ -156,8 +170,9 @@ public class MainMenuScreen implements Screen{
                 return false;
             }
         });
-        buttons.add(newGameButton);
-        buttons.row();
+        buttons.addActor(newGameButton);
+        Assets.setSizeRelative(newGameButton, 1f, 0.33f);
+        Assets.setPositionRelative(newGameButton, 0f, 0.8f, false, true);
 
         //LOAD GAME BUTTON
         MenuButton loadGameButton = new MenuButton("core/assets/MainMenuScreenTextures/loadgame.png", true);
@@ -169,8 +184,9 @@ public class MainMenuScreen implements Screen{
                 return false;
             }
         });
-        buttons.add(loadGameButton);
-        buttons.row();
+        buttons.addActor(loadGameButton);
+        Assets.setSizeRelative(loadGameButton, 1f, 0.33f);
+        Assets.setPositionRelative(loadGameButton, 0f, 0.5f, false, true);
 
         // SETTINGS BUTTON
         MenuButton settingsButton = new MenuButton("core/assets/MainMenuScreenTextures/settings.png", false);
@@ -182,101 +198,9 @@ public class MainMenuScreen implements Screen{
                 return false;
             }
         });
-        buttons.add(settingsButton);
-
-        //setupTest2();
+        buttons.addActor(settingsButton);
+        Assets.setSizeRelative(settingsButton, 1f, 0.33f);
+        Assets.setPositionRelative(settingsButton, 0f, 0.2f, false, true);
     }
 
-    private void setupTest2() {
-        Table building = new Table();
-        stage.addActor(building);
-        building.setSize(Gdx.graphics.getWidth() * 0.15f, Gdx.graphics.getWidth() * 0.15f);
-        building.setPosition(0, 0);
-
-        BitmapFont font = new BitmapFont();
-        Color color = new Color(0, 0, 0, 1);
-        Label.LabelStyle style = new Label.LabelStyle(font, color);
-
-        Image buildingImage = new Image(new Texture("core/assets/house1.png"));
-
-        Table buildingStatus = new Table();
-        Label buildingName = new Label("House", style);
-        Label buildingLife = new Label("Life: 100/100", style);
-        Label buildingWorkers = new Label("Workers: 4/5", style);
-
-        buildingStatus.add(buildingName).left();
-        buildingStatus.row();
-        buildingStatus.add(buildingLife).left();
-        buildingStatus.row();
-        buildingStatus.add(buildingWorkers).left();
-
-        Table firstRow = new Table();
-
-        Cell buildingImageCell = firstRow.add(buildingImage);
-        buildingImageCell.maxWidth(building.getWidth() / 2f);
-        buildingImageCell.maxHeight(building.getHeight() / 2f);
-
-        Cell buildingStatusCell = firstRow.add(buildingStatus);
-        buildingStatusCell.maxHeight(firstRow.getHeight() / 2f);
-        buildingStatusCell.left();
-
-        Table buildingResources = new Table();
-
-        Label resources = new Label("Resources:", style);
-        Label resFood = new Label("Food", style);
-        Label resGold = new Label("Gold", style);
-        Label resWood = new Label("Wood", style);
-        Label resRock = new Label("Rock", style);
-        Label resPeople = new Label("People", style);
-
-        Label cost = new Label("Cost:", style);
-        Label costFood = new Label("0", style);
-        Label costGold = new Label("0", style);
-        Label costWood = new Label("50", style);
-        Label costRock = new Label("50", style);
-        Label costPeople = new Label("0", style);
-
-        Label profit = new Label("Profit:", style);
-        Label proFood = new Label("0", style);
-        Label proGold = new Label("0", style);
-        Label proWood = new Label("0", style);
-        Label proRock = new Label("0", style);
-        Label proPeople = new Label("10", style);
-
-        buildingResources.add(resources);
-        buildingResources.add(resFood);
-        buildingResources.add(resGold);
-        buildingResources.add(resWood);
-        buildingResources.add(resRock);
-        buildingResources.add(resPeople);
-
-        buildingResources.row();
-
-        buildingResources.add(cost);
-        buildingResources.add(costFood);
-        buildingResources.add(costGold);
-        buildingResources.add(costWood);
-        buildingResources.add(costRock);
-        buildingResources.add(costPeople);
-
-        buildingResources.row();
-
-        buildingResources.add(profit);
-        buildingResources.add(proFood);
-        buildingResources.add(proGold);
-        buildingResources.add(proWood);
-        buildingResources.add(proRock);
-        buildingResources.add(proPeople);
-
-        Cell firstRowCell = building.add(firstRow);
-        firstRowCell.expandX();
-        firstRowCell.left();
-
-        building.row();
-
-        building.add(buildingResources);
-
-        building.top();
-        building.left();
-    }
 }

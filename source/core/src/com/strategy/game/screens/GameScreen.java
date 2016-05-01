@@ -2,14 +2,19 @@ package com.strategy.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.strategy.game.*;
 import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.world.World;
@@ -35,6 +40,13 @@ public class GameScreen implements Screen {
     private World world;
     private StaticEntityBuilder builder;
 
+    private final BuildingInfo buildingInfo;
+
+    private Vector2 touchDownCoords;
+    private Vector2 touchUpCoords;
+
+    private ShapeRenderer shapeRenderer;
+    private boolean isSelecting;
 
 
     public GameScreen(StrategyGame game) {
@@ -42,7 +54,7 @@ public class GameScreen implements Screen {
         this.world = new World(this);
         this.batch = game.getBatch();
         this.font = game.getFont();
-
+        this.shapeRenderer = new ShapeRenderer();
         Assets.load();
 
         this.map = Assets.map;
@@ -51,8 +63,45 @@ public class GameScreen implements Screen {
         this.camera = new OrthographicCamera(Utils.DEFAULT_WIDTH, Utils.DEFAULT_HEIGHT);
         this.gameInputProcessor = new GameInputProcessor(this);
         this.builder = new StaticEntityBuilder(this);
+        this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        this.buildingInfo = new BuildingInfo(stage);
+
+        // Looping background sound
+        Sound sound = Assets.bgSound;
+        long id = sound.play(0.3f);
+        sound.setLooping(id, true);
 
         Gdx.input.setInputProcessor(gameInputProcessor);
+
+        this.isSelecting = false;
+    }
+
+    public boolean isSelecting() {
+        return isSelecting;
+    }
+
+    public void setSelecting(boolean selecting) {
+        isSelecting = selecting;
+    }
+
+    public void setTouchDownCoords(Vector2 touchDownCoords) {
+        this.touchDownCoords = touchDownCoords;
+    }
+
+    public Vector2 getTouchDownCoords() {
+        return touchDownCoords;
+    }
+
+    public void setTouchUpCoords(Vector2 touchUpCoords) {
+        this.touchUpCoords = touchUpCoords;
+    }
+
+    public Vector2 getTouchUpCoords() {
+        return touchUpCoords;
+    }
+
+    public World getWorld() {
+        return world;
     }
 
     public OrthographicCamera getCamera() {
@@ -94,6 +143,19 @@ public class GameScreen implements Screen {
         builder.clear();
 
 
+        // Draw selection box
+        if (isSelecting) {
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+            float x = touchDownCoords.x;
+            float y = Gdx.graphics.getHeight() - touchDownCoords.y;
+            float dx = Gdx.input.getX() - x;
+            float dy = (Gdx.graphics.getHeight() - Gdx.input.getY()) - y;
+            Rectangle rect = new Rectangle(x, y, dx, dy);
+            shapeRenderer.rect(rect.x, rect.y, rect.width, rect.height);
+            shapeRenderer.end();
+        }
+
+
 
         MapProperties prop = map.getProperties();
 
@@ -106,6 +168,11 @@ public class GameScreen implements Screen {
         batch.begin();
         font.draw(batch, "FPS: "+ Gdx.graphics.getFramesPerSecond(), 0, Gdx.graphics.getHeight());
         batch.end();
+
+        // Draw stage
+        stage.act(delta);
+        stage.getViewport().apply();
+        stage.draw();
 
 
 

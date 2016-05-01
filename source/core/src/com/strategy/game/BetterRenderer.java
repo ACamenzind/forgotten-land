@@ -1,7 +1,10 @@
 package com.strategy.game;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
@@ -108,6 +111,8 @@ public class BetterRenderer extends IsometricTiledMapRenderer {
                 final TiledMapTileLayer.Cell cell = layer.getCell(col, row);
                 if (cell == null) continue;
                 final TiledMapTile tile = cell.getTile();
+//                if (cell.getTile() instanceof ExtendedStaticTiledMapTile)
+//                    System.out.println("is extended!");
 
                 if (tile != null) {
                     final boolean flipX = cell.getFlipHorizontally();
@@ -213,7 +218,52 @@ public class BetterRenderer extends IsometricTiledMapRenderer {
                             }
                         }
                     }
+
+
+
+                    //TODO: try to look at this again, maybe
+//                    if (cell.getTile() instanceof ExtendedStaticTiledMapTile) {
+//                        ExtendedStaticTiledMapTile objTile = (ExtendedStaticTiledMapTile) cell.getTile();
+//                        if (objTile.getObject().isClicked()) {
+//                            TextureRegion tr = objTile.getTextureRegion();
+////                            System.out.println(tr.toString());
+////                            objTile.getObject().setClicked(false);
+////                            System.out.println("clicked!");
+////                            Sprite sp = new Sprite(region.getTexture());
+////                            sp.setColor(Color.RED);
+//////                            sp.set
+////
+//////                            float xasd = (col * halfTileWidth / 128) + (row * halfTileWidth / 128);
+//////                            float yasd = (row * halfTileHeight / 128) - (col * halfTileHeight / 128);
+////                            Vector3 coords = new Vector3(col * 128, row * 128, 0);
+////                            coords.mul(Utils.isoTransformMatrix());
+//
+////                            sp.setPosition(coords.x, coords.y);
+////                            sp.setPosition(xasd, yasd);
+////                            sp.draw(batch); //NOTHING WORKS!!
+////                            batch.setColor(1, 1, 1, 1);
+//                            batch.setBlendFunction(GL20.GL_ONE, GL20.GL_FUNC_ADD);
+//                            batch.setColor(1,1,1,0.5f);
+//                            batch.draw(region.getTexture(), vertices, 0, NUM_VERTICES);
+//
+////                            batch.draw(region.getTexture(), vertices, 0, NUM_VERTICES);
+//                            System.out.println("Hello");
+////                            batch.
+////                            System.out.println("Drawn!");
+//
+//                        }
+//                    }
+//                    batch.setColor(1,1,1,1);
                     batch.draw(region.getTexture(), vertices, 0, NUM_VERTICES);
+
+
+
+
+
+
+
+
+
                 }
             }
         }

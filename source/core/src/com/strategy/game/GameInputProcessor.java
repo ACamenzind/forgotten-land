@@ -3,7 +3,13 @@ package com.strategy.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.buildings.*;
 import com.strategy.game.screens.GameScreen;
@@ -16,6 +22,7 @@ public class GameInputProcessor implements InputProcessor{
     private GameScreen screen;
     private OrthographicCamera camera;
     private final int EDGE_THRESHOLD_WIDTH = 50;
+    private Vector2 touchDownCoords;
 
     public GameInputProcessor(GameScreen screen) {
         this.screen = screen;
@@ -77,13 +84,10 @@ public class GameInputProcessor implements InputProcessor{
                 screen.getBuilder().toggleSelectEntity(new Castle());
                 break;
             case Input.Keys.NUM_3:
-                screen.getBuilder().toggleSelectEntity(new LeftWall());
+                screen.getBuilder().toggleSelectEntity(new Wall());
                 break;
-            case Input.Keys.NUM_4:
-                screen.getBuilder().toggleSelectEntity(new MiddleWall());
-                break;
-            case Input.Keys.NUM_5:
-                screen.getBuilder().toggleSelectEntity(new RightWall());
+            case Input.Keys.R:
+                screen.getBuilder().rotate();
                 break;
         }
         return false;
@@ -103,25 +107,64 @@ public class GameInputProcessor implements InputProcessor{
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
         Vector3 touch = new Vector3(screenX, screenY, 0);
+
+        // Set coords used for selection box
+        screen.setTouchDownCoords(new Vector2(screenX, screenY));
+        screen.setSelecting(true);
+
+
         Vector3 pickedTile = Utils.cartesianToIso(touch, camera);
         //TODO: better to handle coords inside the builder?
         if (screen.getBuilder().getSelectedEntity() != null) {
             screen.getBuilder().placeSelectedEntity((int) pickedTile.x, (int) pickedTile.y);
         }
-        else  {
+        else if (screen.getBuilder().getSelectedEntity() == null)  {
+            //TODO: get tile info and show window
             // for debugging purposes
-            Utils.printTileInfo(pickedTile, screen);
+//            TiledMapTileLayer.Cell cell = ((TiledMapTileLayer) (screen.getMap().getLayers().get(1)))
+//                    .getCell((int) pickedTile.x, (int) pickedTile.y);
+//            if (cell != null) {
+//                ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
+//                MapEntity selected = tile.getObject();
+//                selected.setClicked(true);
+//                System.out.println("set clicked!");
+//
+//
+//
+//                MapObject obj = new RectangleMapObject(selected.getCoords().x * Utils.TILE_SIZE,
+//                        selected.getCoords().y * Utils.TILE_SIZE ,
+//                        selected.getCollisionSize().x * Utils.TILE_SIZE,
+//                        selected.getCollisionSize().y * Utils.TILE_SIZE);
+//                obj.setVisible(true);
+//
+//
+//                MapLayer objLayer = screen.getMap().getLayers().get(3);
+//
+//                obj.setColor(new Color(Color.RED));
+////                obj.setName("HELLO WORLD ------------------------------------");
+//                obj.setOpacity(1.f);
+////                objLayer.getObjects().add(obj);
+//
+//            }
+//            else {
+//                System.out.println("Empty");
+//            }
+
+//            Utils.printTileInfo(pickedTile, screen);
         }
         return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+//        screen.setTouchUpCoords(new Vector2(screenX, screenY));
+        screen.setSelecting(false);
         return false;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+
         return false;
     }
 

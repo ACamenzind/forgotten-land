@@ -1,11 +1,15 @@
 package com.strategy.game.buildings;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
+import com.strategy.game.Assets;
 import com.strategy.game.Utils;
 import com.strategy.game.screens.GameScreen;
+import com.strategy.game.world.World;
 
 /**
  * Handles the creation and placement of static entities (e.g. buildings)
@@ -16,8 +20,10 @@ public class StaticEntityBuilder {
     private TiledMapTileLayer buildingsLayer; // the buildings layer
     private TiledMapTileLayer selectionLayer; // contains the selected building
     private MapEntity selectedEntity;
+    private World world;
     public StaticEntityBuilder(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
+        this.world = gameScreen.getWorld();
         this.buildingsLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Buildings");
         this.selectionLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Selection");
         this.selectionLayer.setOpacity(0.5f);
@@ -57,8 +63,42 @@ public class StaticEntityBuilder {
                     }
                 }
             }
-            if (isSpaceFree) selectedEntity.placeOnLayer(buildingsLayer, x, y);
+            Sound sound = Assets.hit;
+            if (isSpaceFree) {
+                long id = sound.play(0.5f);
+                sound.setPitch(id, 0.75f);
+//                selectedEntity = new Ma;
+                try {
+                    // Makes a new instance of the proper subclass
+                    // TODO: check if this creates other problems.
+                    Texture currentTex = selectedEntity.getMainTexture();
+                    selectedEntity = selectedEntity.getClass().newInstance();
+                    selectedEntity.setMainTexture(currentTex);
+
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                selectedEntity.placeOnLayer(buildingsLayer, x, y);
+
+                if (this.getSelectedEntity() instanceof House) //TODO: abstract a bit
+                    world.getResourceHandler().incrementWoodCounter(-100);
+                else if (this.getSelectedEntity() instanceof Castle)
+                    world.getResourceHandler().incrementStoneCounter(-100);
+
+                //remove resources
+
+            } else {
+                long id = sound.play(0.5f);
+                sound.setPitch(id, 5f);
+            }
         }
+    }
+
+    public void rotate() {
+        selectedEntity.changeTexture();
+//        System.out.println(selectedEntity.getTiles().toString());
     }
 
     /**

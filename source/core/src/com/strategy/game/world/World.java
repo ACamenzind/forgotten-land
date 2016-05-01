@@ -1,6 +1,8 @@
 package com.strategy.game.world;
 
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Disposable;
 import com.strategy.game.buildings.MapEntity;
@@ -25,6 +27,7 @@ public class World implements Disposable{
     private ResourceHandler resourceHandler;
     private int updateCounter;
     private PopulationHandler populationHandler;
+    private int tick;
 
 
     public World(GameScreen gameScreen) {
@@ -34,17 +37,66 @@ public class World implements Disposable{
         this.staticEntities = new ArrayList<MapEntity>();
         this.movableEntities = new ArrayList<MovableEntity>();
 //        this.builder = new StaticEntityBuilder(this);
-        this.resourceHandler = new ResourceHandler(10, 100, 100, 100, 100);
+        this.resourceHandler = new ResourceHandler(0, 100, 100, 100, 100);
         this.updateCounter = 0;
         this.populationHandler = new PopulationHandler(5, 200, 20);
+        this.tick = 0;
+    }
+
+    public ArrayList<MapEntity> getStaticEntities() {
+        return staticEntities;
+    }
+
+    public StaticEntityBuilder getBuilder() {
+        return builder;
+    }
+
+    public ResourceHandler getResourceHandler() {
+        return resourceHandler;
+    }
+
+    public PopulationHandler getPopulationHandler() {
+        return populationHandler;
     }
 
     public void update(float delta) {
         if(updateCounter / 300 >= 1) {
             resourceHandler.update();
             updateCounter = 0;
+            tick++;
+
+            System.out.println("--- Resources at turn " + tick + " ---");
+            System.out.println("Food: " + resourceHandler.getFoodCounter());
+            System.out.println("Gold: " + resourceHandler.getGoldCounter());
+            System.out.println("Stone: " + resourceHandler.getStoneCounter());
+            System.out.println("Wood: " + resourceHandler.getWoodCounter());
+            System.out.println("People: " + populationHandler.getPopulationCounter());
+            System.out.println("-----------------");
+            //TODO: make that you have to press something to go to next turn?
+
+//            int treeCount = 0;
+            TiledMapTileLayer buildingsLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Buildings");
+
+            // Increment wood per tick for each tree in the world
+            // TODO: make it so it only increments it if there is an appropriate building in range
+            // TODO: do the same for other resources
+            int treeCount = 0;
+            for (int i = 0; i < buildingsLayer.getWidth(); i++) {
+                for (int j = 0; j < buildingsLayer.getHeight(); j++) {
+                    TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i,j);
+                    if (cell != null) {
+                        String type = cell.getTile().getProperties().get("type", String.class);
+                        if (type != null && type.equals("wood")) {
+                            treeCount++;
+                        }
+                    }
+                }
+            }
+            System.out.println("num of trees: " + treeCount);
+            resourceHandler.incrementWoodCounter(treeCount);
         }
         updateCounter++;
+
 
     }
 
