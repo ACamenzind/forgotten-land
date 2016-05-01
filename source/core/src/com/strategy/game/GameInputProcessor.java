@@ -3,7 +3,12 @@ package com.strategy.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.buildings.*;
 import com.strategy.game.screens.GameScreen;
@@ -111,7 +116,36 @@ public class GameInputProcessor implements InputProcessor{
         else if (screen.getBuilder().getSelectedEntity() == null)  {
             //TODO: get tile info and show window
             // for debugging purposes
-            Utils.printTileInfo(pickedTile, screen);
+//            TiledMapTileLayer.Cell cell = ((TiledMapTileLayer) (screen.getMap().getLayers().get(1)))
+//                    .getCell((int) pickedTile.x, (int) pickedTile.y);
+//            if (cell != null) {
+//                ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
+//                MapEntity selected = tile.getObject();
+//                selected.setClicked(true);
+//                System.out.println("set clicked!");
+//
+//
+//
+//                MapObject obj = new RectangleMapObject(selected.getCoords().x * Utils.TILE_SIZE,
+//                        selected.getCoords().y * Utils.TILE_SIZE ,
+//                        selected.getCollisionSize().x * Utils.TILE_SIZE,
+//                        selected.getCollisionSize().y * Utils.TILE_SIZE);
+//                obj.setVisible(true);
+//
+//
+//                MapLayer objLayer = screen.getMap().getLayers().get(3);
+//
+//                obj.setColor(new Color(Color.RED));
+////                obj.setName("HELLO WORLD ------------------------------------");
+//                obj.setOpacity(1.f);
+////                objLayer.getObjects().add(obj);
+//
+//            }
+//            else {
+//                System.out.println("Empty");
+//            }
+
+//            Utils.printTileInfo(pickedTile, screen);
         }
         return true;
     }

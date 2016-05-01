@@ -1,6 +1,7 @@
 package com.strategy.game;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.strategy.game.buildings.MapEntity;
 
@@ -10,15 +11,20 @@ import com.strategy.game.buildings.MapEntity;
 public class ExtendedStaticTiledMapTile extends StaticTiledMapTile {
     private MapEntity object;
     private boolean isObstacle;
+    private TextureRegion textureRegion;
+    private int id;
 
     public ExtendedStaticTiledMapTile(TextureRegion textureRegion) {
         super(textureRegion);
     }
 
-
-
-    public ExtendedStaticTiledMapTile(ExtendedStaticTiledMapTile copy) {
+    public ExtendedStaticTiledMapTile(StaticTiledMapTile copy) {
         super(copy);
+        if (copy.getProperties() != null) {
+            getProperties().putAll(copy.getProperties());
+        }
+        this.textureRegion = copy.getTextureRegion();
+        this.id = copy.getId();
     }
 
     public MapEntity getObject() {
