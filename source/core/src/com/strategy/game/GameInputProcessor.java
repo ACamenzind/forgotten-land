@@ -9,8 +9,10 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.strategy.game.buildings.*;
 import com.strategy.game.screens.GameScreen;
 
@@ -119,6 +121,27 @@ public class GameInputProcessor implements InputProcessor{
             screen.getBuilder().placeSelectedEntity((int) pickedTile.x, (int) pickedTile.y);
         }
         else if (screen.getBuilder().getSelectedEntity() == null)  {
+            MoveToAction action = new MoveToAction();
+//            screenY = Gdx.graphics.getHeight() - screenY;
+//            camera.unproject(touch);
+//            Vector3 pos = new Vector3(screenX, screenY, 0);
+            touch.mul(Utils.isoTransformMatrix());
+            Vector3 unitCoords = new Vector3(screen.getTestUnit().getX(), screen.getTestUnit().getY(), 0);
+//            unitCoords.mul(Utils.isoTransformMatrix());
+            float dx = touch.x - unitCoords.x;
+            float dy = touch.y - unitCoords.y;
+            Vector3 delta = new Vector3(dx, dy, 0);
+            action.setPosition(touch.x, touch.y);
+            action.setInterpolation(Interpolation.pow2);
+
+            action.setDuration(delta.len()/500.f);
+
+            float width = screen.getTestUnit().getWidth();
+
+            if (dx > 0 && width > 0) screen.getTestUnit().setWidth(-screen.getTestUnit().getWidth());
+            if (dx < 0 && width < 0) screen.getTestUnit().setWidth(-screen.getTestUnit().getWidth());
+//            action.set
+            screen.getTestUnit().addAction(action);
             //TODO: get tile info and show window
             // for debugging purposes
 //            TiledMapTileLayer.Cell cell = ((TiledMapTileLayer) (screen.getMap().getLayers().get(1)))

@@ -14,8 +14,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.strategy.game.*;
 import com.strategy.game.buildings.StaticEntityBuilder;
+import com.strategy.game.world.MovableEntity;
 import com.strategy.game.world.World;
 
 
@@ -26,7 +29,7 @@ import com.strategy.game.world.World;
  */
 public class GameScreen implements Screen {
 
-    private Stage stage;
+    private Stage unitsStage;
     private final StrategyGame game;
     private OrthographicCamera camera;
     private SpriteBatch batch;
@@ -45,6 +48,7 @@ public class GameScreen implements Screen {
     private ShapeRenderer shapeRenderer;
     private boolean isSelecting;
 
+    private MovableEntity testUnit;
 
     public GameScreen(StrategyGame game) {
         this.game = game;
@@ -69,6 +73,11 @@ public class GameScreen implements Screen {
         Gdx.input.setInputProcessor(gameInputProcessor);
 
         this.isSelecting = false;
+
+        this.unitsStage = new Stage();
+        this.testUnit = new MovableEntity("test", 100, this);
+        unitsStage.addActor(testUnit);
+//        unitsStage.setViewport(new ScreenViewport());
     }
 
     public boolean isSelecting() {
@@ -97,6 +106,10 @@ public class GameScreen implements Screen {
 
     public World getWorld() {
         return world;
+    }
+
+    public MovableEntity getTestUnit() {
+        return testUnit;
     }
 
     public OrthographicCamera getCamera() {
@@ -137,6 +150,12 @@ public class GameScreen implements Screen {
 
         builder.clear();
 
+        Viewport vp = new ScreenViewport();
+        vp.setCamera(camera);
+        unitsStage.setViewport(vp);
+        unitsStage.act(delta);
+        unitsStage.draw();
+
 
         // Draw selection box
         if (isSelecting) {
@@ -149,6 +168,8 @@ public class GameScreen implements Screen {
             shapeRenderer.rect(rect.x, rect.y, rect.width, rect.height);
             shapeRenderer.end();
         }
+
+
 
 
 
@@ -190,6 +211,7 @@ public class GameScreen implements Screen {
         camera.viewportWidth = width;
         camera.viewportHeight = height;
         camera.update();
+        unitsStage.getViewport().update(width, height);
     }
 
     @Override

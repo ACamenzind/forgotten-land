@@ -12,7 +12,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
  */
 public class Assets {
     public static TiledMap map;
-    public static Texture house1, castle, leftwall, middlewall, rightwall, emptyTile;
+    public static Texture house1, castle, leftwall, middlewall, rightwall, emptyTile, dino;
     public static Sound bgSound, hit;
 
     public static void load() {
@@ -25,6 +25,7 @@ public class Assets {
         middlewall = new Texture(Gdx.files.internal("core/assets/Wall/Wall_M.png"));
         rightwall = new Texture(Gdx.files.internal("core/assets/Wall/Wall_R.png"));
         emptyTile = new Texture(Gdx.files.internal("core/assets/badlogic.png"));
+        dino = new Texture(Gdx.files.internal("core/assets/t_rex_01_by_richtaur-d4ie9jj.png"));
 
         // http://opengameart.org/content/outdoor-ambiance CC3.0
         bgSound = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/Outdoor_ambiance.mp3"));
