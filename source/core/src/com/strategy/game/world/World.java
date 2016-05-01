@@ -25,6 +25,7 @@ public class World implements Disposable{
     private ResourceHandler resourceHandler;
     private int updateCounter;
     private PopulationHandler populationHandler;
+    private int tick;
 
 
     public World(GameScreen gameScreen) {
@@ -37,14 +38,25 @@ public class World implements Disposable{
         this.resourceHandler = new ResourceHandler(10, 100, 100, 100, 100);
         this.updateCounter = 0;
         this.populationHandler = new PopulationHandler(5, 200, 20);
+        this.tick = 0;
     }
 
     public void update(float delta) {
         if(updateCounter / 300 >= 1) {
             resourceHandler.update();
             updateCounter = 0;
+            tick++;
+
+            System.out.println("--- Resources at turn " + tick + " ---");
+            System.out.println("Food: " + resourceHandler.getFoodCounter());
+            System.out.println("Gold: " + resourceHandler.getGoldCounter());
+            System.out.println("Stone: " + resourceHandler.getStoneCounter());
+            System.out.println("Wood: " + resourceHandler.getWoodCounter());
+            System.out.println("-----------------");
+            //TODO: make that you have to press something to go to next turn?
         }
         updateCounter++;
+
 
     }
 
