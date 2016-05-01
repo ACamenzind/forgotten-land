@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.strategy.game.*;
 import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.world.World;
@@ -39,6 +40,8 @@ public class GameScreen implements Screen {
     private World world;
     private StaticEntityBuilder builder;
 
+    private final BuildingInfo buildingInfo;
+
     private Vector2 touchDownCoords;
     private Vector2 touchUpCoords;
 
@@ -60,6 +63,8 @@ public class GameScreen implements Screen {
         this.camera = new OrthographicCamera(Utils.DEFAULT_WIDTH, Utils.DEFAULT_HEIGHT);
         this.gameInputProcessor = new GameInputProcessor(this);
         this.builder = new StaticEntityBuilder(this);
+        this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        this.buildingInfo = new BuildingInfo(stage);
 
         // Looping background sound
         Sound sound = Assets.bgSound;
@@ -163,6 +168,11 @@ public class GameScreen implements Screen {
         batch.begin();
         font.draw(batch, "FPS: "+ Gdx.graphics.getFramesPerSecond(), 0, Gdx.graphics.getHeight());
         batch.end();
+
+        // Draw stage
+        stage.act(delta);
+        stage.getViewport().apply();
+        stage.draw();
 
 
 
