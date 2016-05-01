@@ -23,6 +23,8 @@ public class MapEntity implements Disposable{
     protected Vector2 imgOffset; //TODO: useless?
     private TiledMapTileLayer layer;
     private ArrayList<TiledMapTileLayer.Cell> prevCells;
+    protected ArrayList<Texture> textures;
+    private int counter;
 
     public MapEntity() {
         this.mainTexture = null;
@@ -31,7 +33,9 @@ public class MapEntity implements Disposable{
         this.collisionSize = new Vector2(0,0);
         this.imgOffset = new Vector2(0,0);
         this.isClicked = false;
-        sliceTexture(mainTexture);
+        this.counter = 0;
+        this.textures = new ArrayList<Texture>();
+//        sliceTexture(mainTexture);
     }
 
     public boolean isClicked() {
@@ -47,6 +51,24 @@ public class MapEntity implements Disposable{
         return new Vector2(x,y);
     }
 
+    public Texture getMainTexture() {
+        return mainTexture;
+    }
+
+    public void setMainTexture(Texture mainTexture) {
+        this.mainTexture = mainTexture;
+        sliceTexture(mainTexture);
+    }
+
+    public void changeTexture() {
+        if (textures.size() > 0) {
+            counter = (counter + 1) % textures.size();
+//            mainTexture = null;
+            mainTexture = textures.get(counter);
+            sliceTexture(mainTexture);
+        }
+    }
+
     public Vector2 getCollisionSize() {
         return collisionSize;
     }
@@ -59,6 +81,8 @@ public class MapEntity implements Disposable{
      * Splits the entity's mainTexture into vertical slices of width TILE_SIZE
      */
     protected void sliceTexture(Texture mainTexture) {
+        tiles = new ArrayList<ExtendedStaticTiledMapTile>(); // Reset tiles
+        this.mainTexture = mainTexture;
         if (mainTexture != null) {
             TextureRegion tex = new TextureRegion(mainTexture);
             TextureRegion[][] arr = tex.split(Utils.TILE_SIZE, tex.getRegionHeight());
@@ -109,6 +133,7 @@ public class MapEntity implements Disposable{
             layer.setCell(x + offset, y + offset, cell);
             offset++;
         }
+//        System.out.println("placed!");
     }
 
     /**

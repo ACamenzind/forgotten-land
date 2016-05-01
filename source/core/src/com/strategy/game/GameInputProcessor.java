@@ -82,13 +82,10 @@ public class GameInputProcessor implements InputProcessor{
                 screen.getBuilder().toggleSelectEntity(new Castle());
                 break;
             case Input.Keys.NUM_3:
-                screen.getBuilder().toggleSelectEntity(new LeftWall());
+                screen.getBuilder().toggleSelectEntity(new Wall());
                 break;
-            case Input.Keys.NUM_4:
-                screen.getBuilder().toggleSelectEntity(new MiddleWall());
-                break;
-            case Input.Keys.NUM_5:
-                screen.getBuilder().toggleSelectEntity(new RightWall());
+            case Input.Keys.R:
+                screen.getBuilder().rotate();
                 break;
         }
         return false;

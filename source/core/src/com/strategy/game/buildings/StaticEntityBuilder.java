@@ -3,6 +3,7 @@ package com.strategy.game.buildings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.Assets;
@@ -67,7 +68,10 @@ public class StaticEntityBuilder {
                 try {
                     // Makes a new instance of the proper subclass
                     // TODO: check if this creates other problems.
+                    Texture currentTex = selectedEntity.getMainTexture();
                     selectedEntity = selectedEntity.getClass().newInstance();
+                    selectedEntity.setMainTexture(currentTex);
+
                 } catch (InstantiationException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
@@ -79,6 +83,11 @@ public class StaticEntityBuilder {
                 sound.setPitch(id, 5f);
             }
         }
+    }
+
+    public void rotate() {
+        selectedEntity.changeTexture();
+//        System.out.println(selectedEntity.getTiles().toString());
     }
 
     /**
