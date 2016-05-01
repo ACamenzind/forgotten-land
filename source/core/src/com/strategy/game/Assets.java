@@ -20,7 +20,7 @@ public class Assets {
 //        map = new TmxMapLoader().load("core/assets/big_map.tmx");
         //TODO: add credit for CC3.0 sprites
         map = new TmxMapLoader().load("core/assets/test128.tmx");
-        house1 = new Texture(Gdx.files.internal("core/assets/grid.png"));
+        house1 = new Texture(Gdx.files.internal("core/assets/house1.png"));
         castle = new Texture(Gdx.files.internal("core/assets/castle.png"));
         leftwall = new Texture(Gdx.files.internal("core/assets/Wall/Wall_L.png"));
         middlewall = new Texture(Gdx.files.internal("core/assets/Wall/Wall_M.png"));
