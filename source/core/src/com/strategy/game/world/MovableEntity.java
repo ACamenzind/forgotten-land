@@ -42,4 +42,9 @@ public class MovableEntity extends Image {
     public int getLife() {
         return life;
     }
+
+    @Override
+    public void act(float delta) {
+
+    }
 }
