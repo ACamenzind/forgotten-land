@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.Assets;
 import com.strategy.game.Utils;
 import com.strategy.game.screens.GameScreen;
+import com.strategy.game.world.World;
 
 /**
  * Handles the creation and placement of static entities (e.g. buildings)
@@ -19,8 +20,10 @@ public class StaticEntityBuilder {
     private TiledMapTileLayer buildingsLayer; // the buildings layer
     private TiledMapTileLayer selectionLayer; // contains the selected building
     private MapEntity selectedEntity;
+    private World world;
     public StaticEntityBuilder(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
+        this.world = gameScreen.getWorld();
         this.buildingsLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Buildings");
         this.selectionLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Selection");
         this.selectionLayer.setOpacity(0.5f);
@@ -78,6 +81,14 @@ public class StaticEntityBuilder {
                     e.printStackTrace();
                 }
                 selectedEntity.placeOnLayer(buildingsLayer, x, y);
+
+                if (this.getSelectedEntity() instanceof House) //TODO: abstract a bit
+                    world.getResourceHandler().incrementWoodCounter(-100);
+                else if (this.getSelectedEntity() instanceof Castle)
+                    world.getResourceHandler().incrementStoneCounter(-100);
+
+                //remove resources
+
             } else {
                 long id = sound.play(0.5f);
                 sound.setPitch(id, 5f);

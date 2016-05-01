@@ -41,6 +41,22 @@ public class World implements Disposable{
         this.tick = 0;
     }
 
+    public ArrayList<MapEntity> getStaticEntities() {
+        return staticEntities;
+    }
+
+    public StaticEntityBuilder getBuilder() {
+        return builder;
+    }
+
+    public ResourceHandler getResourceHandler() {
+        return resourceHandler;
+    }
+
+    public PopulationHandler getPopulationHandler() {
+        return populationHandler;
+    }
+
     public void update(float delta) {
         if(updateCounter / 300 >= 1) {
             resourceHandler.update();

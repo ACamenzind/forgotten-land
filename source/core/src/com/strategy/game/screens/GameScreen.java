@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.tiled.AtlasTmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -60,6 +59,10 @@ public class GameScreen implements Screen {
         sound.setLooping(id, true);
 
         Gdx.input.setInputProcessor(gameInputProcessor);
+    }
+
+    public World getWorld() {
+        return world;
     }
 
     public OrthographicCamera getCamera() {
