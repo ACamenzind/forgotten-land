@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.buildings.*;
 import com.strategy.game.screens.GameScreen;
@@ -21,6 +22,7 @@ public class GameInputProcessor implements InputProcessor{
     private GameScreen screen;
     private OrthographicCamera camera;
     private final int EDGE_THRESHOLD_WIDTH = 50;
+    private Vector2 touchDownCoords;
 
     public GameInputProcessor(GameScreen screen) {
         this.screen = screen;
@@ -105,6 +107,12 @@ public class GameInputProcessor implements InputProcessor{
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
         Vector3 touch = new Vector3(screenX, screenY, 0);
+
+        // Set coords used for selection box
+        screen.setTouchDownCoords(new Vector2(screenX, screenY));
+        screen.setSelecting(true);
+
+
         Vector3 pickedTile = Utils.cartesianToIso(touch, camera);
         //TODO: better to handle coords inside the builder?
         if (screen.getBuilder().getSelectedEntity() != null) {
@@ -149,11 +157,14 @@ public class GameInputProcessor implements InputProcessor{
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+//        screen.setTouchUpCoords(new Vector2(screenX, screenY));
+        screen.setSelecting(false);
         return false;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+
         return false;
     }
 

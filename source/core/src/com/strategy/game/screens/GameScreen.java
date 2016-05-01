@@ -7,8 +7,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.strategy.game.*;
@@ -36,6 +39,11 @@ public class GameScreen implements Screen {
     private World world;
     private StaticEntityBuilder builder;
 
+    private Vector2 touchDownCoords;
+    private Vector2 touchUpCoords;
+
+    private ShapeRenderer shapeRenderer;
+    private boolean isSelecting;
 
 
     public GameScreen(StrategyGame game) {
@@ -43,7 +51,7 @@ public class GameScreen implements Screen {
         this.world = new World(this);
         this.batch = game.getBatch();
         this.font = game.getFont();
-
+        this.shapeRenderer = new ShapeRenderer();
         Assets.load();
 
         this.map = Assets.map;
@@ -59,6 +67,32 @@ public class GameScreen implements Screen {
         sound.setLooping(id, true);
 
         Gdx.input.setInputProcessor(gameInputProcessor);
+
+        this.isSelecting = false;
+    }
+
+    public boolean isSelecting() {
+        return isSelecting;
+    }
+
+    public void setSelecting(boolean selecting) {
+        isSelecting = selecting;
+    }
+
+    public void setTouchDownCoords(Vector2 touchDownCoords) {
+        this.touchDownCoords = touchDownCoords;
+    }
+
+    public Vector2 getTouchDownCoords() {
+        return touchDownCoords;
+    }
+
+    public void setTouchUpCoords(Vector2 touchUpCoords) {
+        this.touchUpCoords = touchUpCoords;
+    }
+
+    public Vector2 getTouchUpCoords() {
+        return touchUpCoords;
     }
 
     public World getWorld() {
@@ -102,6 +136,19 @@ public class GameScreen implements Screen {
         renderer.render();
 
         builder.clear();
+
+
+        // Draw selection box
+        if (isSelecting) {
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+            float x = touchDownCoords.x;
+            float y = Gdx.graphics.getHeight() - touchDownCoords.y;
+            float dx = Gdx.input.getX() - x;
+            float dy = (Gdx.graphics.getHeight() - Gdx.input.getY()) - y;
+            Rectangle rect = new Rectangle(x, y, dx, dy);
+            shapeRenderer.rect(rect.x, rect.y, rect.width, rect.height);
+            shapeRenderer.end();
+        }
 
 
 
