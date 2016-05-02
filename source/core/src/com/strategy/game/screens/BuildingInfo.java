@@ -58,7 +58,7 @@ public class BuildingInfo {
         this.stage = stage;
 
         // FONT
-        BitmapFont font = Assets.fontGenerator("core/assets/fonts/times_new_roman.ttf", 18, Color.BLACK);
+        BitmapFont font = Assets.fontGenerator("core/assets/fonts/times_new_roman.ttf", 12, Color.BLACK);
         Label.LabelStyle style = new Label.LabelStyle(font, font.getColor());
 
 
@@ -100,19 +100,19 @@ public class BuildingInfo {
         resources = new Label("Resources:", style);
 //        rowTop.addActor(resources);
 
-        resFood = new Label("Food", style);
+        resFood = new Label("F", style);
         rowTop.addActor(resFood);
 
-        resGold = new Label("Gold", style);
+        resGold = new Label("G", style);
         rowTop.addActor(resGold);
 
-        resWood = new Label("Wood", style);
+        resWood = new Label("W", style);
         rowTop.addActor(resWood);;
 
-        resRock = new Label("Rock", style);
+        resRock = new Label("R", style);
         rowTop.addActor(resRock);
 
-        resPeople = new Label("People", style);
+        resPeople = new Label("P", style);
         rowTop.addActor(resPeople);
 
         // ROW 2

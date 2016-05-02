@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.strategy.game.Assets;
+import com.strategy.game.GameButton;
 import com.strategy.game.StrategyGame;
 import com.strategy.game.Utils;
 
@@ -23,35 +24,6 @@ import com.strategy.game.Utils;
  * TODO: implement UI using Scene2d.ui
  */
 public class MainMenuScreen implements Screen{
-
-    public class MenuButton extends ImageButton {
-
-        public MenuButton(String texturePath, boolean paddingBottom) {
-            super(new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal(texturePath)))));
-
-            this.addListener(new InputListener() {
-                public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                    // TODO: change the five following lines with the commented one (that for some reason doesn't work).
-                    // The image "core/assets/cursor_hand2.png" has to have width and height powers of 2 (e.g. 16x16px)
-                    Pixmap cursorHandPixmap = new Pixmap(Gdx.files.internal("core/assets/cursor_hand2.png"));
-                    Cursor cursorHand = Gdx.graphics.newCursor(cursorHandPixmap, 0, 0);
-                    Gdx.graphics.setCursor(cursorHand);
-                    cursorHand.dispose();
-//                Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
-                }
-            });
-            this.addListener(new InputListener() {
-                public void exit (InputEvent event, float x, float y, int pointer, Actor toActor) {
-                    Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
-                }
-            });
-
-            if (paddingBottom)
-                this.padBottom(Gdx.graphics.getHeight() * 0.025f);
-        }
-
-    }
-
     private final StrategyGame game;
     private OrthographicCamera camera;
     private SpriteBatch batch;
@@ -102,12 +74,11 @@ public class MainMenuScreen implements Screen{
             System.out.println("Pressed enter!");
         }
 
-//        stage.setDebugAll(true); // For debug purpose
-
         backStage.act(delta);
         stage.act(delta);
         backStage.getViewport().apply();
         backStage.draw();
+//        stage.setDebugAll(true); // For debug purpose
         stage.getViewport().apply();
         stage.draw();
     }
@@ -161,7 +132,7 @@ public class MainMenuScreen implements Screen{
         buttons.setPosition(Gdx.graphics.getWidth() * 0.7f, Gdx.graphics.getHeight() * 0.05f);
 
         // NEW GAME BUTTON
-        MenuButton newGameButton = new MenuButton("core/assets/MainMenuScreenTextures/newgame.png", true);
+        GameButton newGameButton = new GameButton("core/assets/MainMenuScreenTextures/newgame.png");
         newGameButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
@@ -173,9 +144,10 @@ public class MainMenuScreen implements Screen{
         buttons.addActor(newGameButton);
         Assets.setSizeRelative(newGameButton, 1f, 0.33f);
         Assets.setPositionRelative(newGameButton, 0f, 0.8f, false, true);
+        newGameButton.padBottom(Gdx.graphics.getHeight() * 0.025f);
 
         //LOAD GAME BUTTON
-        MenuButton loadGameButton = new MenuButton("core/assets/MainMenuScreenTextures/loadgame.png", true);
+        GameButton loadGameButton = new GameButton("core/assets/MainMenuScreenTextures/loadgame.png");
         loadGameButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 //                Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
@@ -187,9 +159,10 @@ public class MainMenuScreen implements Screen{
         buttons.addActor(loadGameButton);
         Assets.setSizeRelative(loadGameButton, 1f, 0.33f);
         Assets.setPositionRelative(loadGameButton, 0f, 0.5f, false, true);
+        loadGameButton.padBottom(Gdx.graphics.getHeight() * 0.025f);
 
         // SETTINGS BUTTON
-        MenuButton settingsButton = new MenuButton("core/assets/MainMenuScreenTextures/settings.png", false);
+        GameButton settingsButton = new GameButton("core/assets/MainMenuScreenTextures/settings.png");
         settingsButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 //                Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
