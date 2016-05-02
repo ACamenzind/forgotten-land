@@ -71,7 +71,7 @@ public class BuildingInfo {
 
 
         // BUILDING IMAGE
-        buildingImage = new Image(new Texture("core/assets/house1.png"));
+        buildingImage = new Image();//new Image(new Texture("core/assets/house1.png"));
         buildingData.addActor(buildingImage);
         Assets.setSizeRelative(buildingImage, 0.4f, 0.4f);
         Assets.setPositionRelative(buildingImage, 0.05f, 0.55f);
