@@ -2,7 +2,10 @@ package com.strategy.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -86,5 +89,22 @@ public class Assets {
             final Actor parent = actor.getParent();
             actor.setSize(parent.getWidth() * width, parent.getHeight() * height);
         }
+    }
+
+    /**
+     * Generates a font, using FreeTypeFont, keeping better resolutions.
+     * @param fontPath: The path of the .ttf font file.
+     * @param size: The size of the font.
+     * @param color: The color of the font.
+     * @return The BitmapFont generated with FreeFontType.
+     */
+    public static BitmapFont fontGenerator(final String fontPath, final int size, final Color color) {
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal(fontPath));
+        FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        fontParameter.size = size;
+        fontParameter.color = color;
+        BitmapFont font = fontGenerator.generateFont(fontParameter);
+        fontGenerator.dispose();
+        return font;
     }
 }

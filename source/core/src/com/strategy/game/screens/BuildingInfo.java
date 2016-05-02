@@ -15,7 +15,7 @@ import com.strategy.game.Assets;
 import com.strategy.game.buildings.MapEntity;
 
 /**
- * Class displying building info in the bottom-left corner of the screen.
+ * Class displaying building info in the bottom-left corner of the screen.
  *
  * Created by Amedeo on 01/05/16.
  */
@@ -51,181 +51,233 @@ public class BuildingInfo {
     private static final float COLUMN_PEOPLE = MARGIN + 5f / 6f;
 
     public BuildingInfo(Stage stage) {
+        this(stage, null);
+    }
+
+    public BuildingInfo(Stage stage, MapEntity building) {
         this.stage = stage;
 
         // FONT
-        BitmapFont font = new BitmapFont();
-        font.getData().setScale(0.65f);
-        Color color = new Color(0, 0, 0, 1);
-        Label.LabelStyle style = new Label.LabelStyle(font, color);
+        BitmapFont font = Assets.fontGenerator("core/assets/fonts/times_new_roman.ttf", 18, Color.BLACK);
+        Label.LabelStyle style = new Label.LabelStyle(font, font.getColor());
 
 
         // BUILDING DATA
         buildingData = new Table();
         this.stage.addActor(buildingData);
-        buildingData.setSize(Gdx.graphics.getWidth() * 0.15f, Gdx.graphics.getWidth() * 0.15f);
-        buildingData.setPosition(0, 0);
 
         SpriteDrawable buildingBg = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("core/assets/test.jpg"))));
         buildingData.setBackground(buildingBg);
 
 
         // BUILDING IMAGE
-        buildingImage = new Image();//new Image(new Texture("core/assets/house1.png"));
+        buildingImage = new Image();
         buildingData.addActor(buildingImage);
-        Assets.setSizeRelative(buildingImage, 0.4f, 0.4f);
-        Assets.setPositionRelative(buildingImage, 0.05f, 0.55f);
 
 
         // BUILDING DATA
         buildingStatus = new Group();
         buildingData.addActor(buildingStatus);
-        Assets.setSizeRelative(buildingStatus, 0.5f, 0.5f);
-        Assets.setPositionRelative(buildingStatus, 0.5f, 0.5f);
 
         buildingName = new Label("", style);
         buildingStatus.addActor(buildingName);
-        Assets.setPositionRelative(buildingName, 0.1f, 0.75f, false, true);
 
         buildingLife = new Label("Life:", style);
         buildingStatus.addActor(buildingLife);
-        Assets.setPositionRelative(buildingLife, 0.1f, 0.5f, false, true);
 
         buildingWorkers = new Label("Workers:", style);
         buildingStatus.addActor(buildingWorkers);
-        Assets.setPositionRelative(buildingWorkers, 0.1f, 0.25f, false, true);
 
 
         // BUILDING RESOURCES
         buildingResources = new Group();
         buildingData.addActor(buildingResources);
-        Assets.setPositionRelative(buildingResources, 0f, 0f);
-        Assets.setSizeRelative(buildingResources, 1f, 0.5f);
 
         // ROW 1
         rowTop = new Group();
         buildingResources.addActor(rowTop);
-        Assets.setPositionRelative(rowTop, 0f, 2f / 3f);
-        Assets.setSizeRelative(rowTop, 1f, 1f / 3f);
 
         resources = new Label("Resources:", style);
 //        rowTop.addActor(resources);
-//        setPositionRelative(resources, COLUMN_TITLES, 0.5f, false, true);
 
         resFood = new Label("Food", style);
         rowTop.addActor(resFood);
-        Assets.setPositionRelative(resFood, COLUMN_FOOD, 0.5f, true, true);
 
         resGold = new Label("Gold", style);
         rowTop.addActor(resGold);
-        Assets.setPositionRelative(resGold, COLUMN_GOLD, 0.5f, true, true);
 
         resWood = new Label("Wood", style);
-        rowTop.addActor(resWood);
-        Assets.setPositionRelative(resWood, COLUMN_WOOD, 0.5f, true, true);
+        rowTop.addActor(resWood);;
 
         resRock = new Label("Rock", style);
         rowTop.addActor(resRock);
-        Assets.setPositionRelative(resRock, COLUMN_ROCK, 0.5f, true, true);
 
         resPeople = new Label("People", style);
         rowTop.addActor(resPeople);
-        Assets.setPositionRelative(resPeople, COLUMN_PEOPLE, 0.5f, true, true);
 
         // ROW 2
         rowMiddle = new Group();
         buildingResources.addActor(rowMiddle);
-        Assets.setPositionRelative(rowMiddle, 0f, 1f / 3f);
-        Assets.setSizeRelative(rowMiddle, 1f, 1f / 3f);
 
         cost = new Label("Cost:", style);
         rowMiddle.addActor(cost);
-        Assets.setPositionRelative(cost, COLUMN_TITLES, 0.5f, false, true);
 
         costFood = new Label("", style);
         rowMiddle.addActor(costFood);
-        Assets.setPositionRelative(costFood, COLUMN_FOOD, 0.5f, true, true);
 
         costGold = new Label("", style);
         rowMiddle.addActor(costGold);
-        Assets.setPositionRelative(costGold, COLUMN_GOLD, 0.5f, true, true);
 
         costWood = new Label("", style);
         rowMiddle.addActor(costWood);
-        Assets.setPositionRelative(costWood, COLUMN_WOOD, 0.5f, true, true);
 
         costRock = new Label("", style);
         rowMiddle.addActor(costRock);
-        Assets.setPositionRelative(costRock, COLUMN_ROCK, 0.5f, true, true);
 
         costPeople = new Label("", style);
         rowMiddle.addActor(costPeople);
-        Assets.setPositionRelative(costPeople, COLUMN_PEOPLE, 0.5f, true, true);
 
         // ROW BOTTOM
         rowBottom = new Group();
         buildingResources.addActor(rowBottom);
-        Assets.setPositionRelative(rowBottom, 0f, 0f);
-        Assets.setSizeRelative(rowBottom, 1f, 1f / 3f);
 
         profit = new Label("Profit:", style);
         rowBottom.addActor(profit);
-        Assets.setPositionRelative(profit, COLUMN_TITLES, 0.5f, false, true);
 
         proFood = new Label("", style);
         rowBottom.addActor(proFood);
-        Assets.setPositionRelative(proFood, COLUMN_FOOD, 0.5f, true, true);
 
         proGold = new Label("", style);
         rowBottom.addActor(proGold);
-        Assets.setPositionRelative(proGold, COLUMN_GOLD, 0.5f, true, true);
 
         proWood = new Label("", style);
         rowBottom.addActor(proWood);
-        Assets.setPositionRelative(proWood, COLUMN_WOOD, 0.5f, true, true);
 
         proRock = new Label("", style);
         rowBottom.addActor(proRock);
-        Assets.setPositionRelative(proRock, COLUMN_ROCK, 0.5f, true, true);
 
         proPeople = new Label("", style);
         rowBottom.addActor(proPeople);
-        Assets.setPositionRelative(proPeople, COLUMN_PEOPLE, 0.5f, true, true);
 
-        //TODO: move in MapEntity setClicked(boolean clicked);
-        setBuilding(null);
+        updatePosition();
+        setBuilding(building);
     }
 
+
+    /**
+     * Sets the building for the class and all Labels with the newBuilding values.
+     * @param newBuilding: the newBuilding from which values are taken. If null, "empty" values are used instead.
+     */
     public void setBuilding(MapEntity newBuilding) {
         building = newBuilding;
 
-        //TODO: change demo values with building values
+        if (building != null) {
+            //TODO: change demo values with building values
+            buildingImage.setDrawable(new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("core/assets/house1.png")))));
 
-        buildingImage.setDrawable(new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("core/assets/house1.png")))));
+            costFood.setText("0");
+            costGold.setText("0");
+            costWood.setText("50");
+            costRock.setText("50");
+            costPeople.setText("0");
+        }
+        else {
+            buildingImage.setDrawable(null);
 
-        buildingName.setText("House");
-        buildingLife.setText("Life: " + "50 / 50");
-        buildingWorkers.setText(("Workers: " + "4 / 5"));
+            costFood.setText("-");
+            costGold.setText("-");
+            costWood.setText("-");
+            costRock.setText("-");
+            costPeople.setText("-");
+        }
 
-        costFood.setText("0");
-        costGold.setText("0");
-        costWood.setText("50");
-        costRock.setText("50");
-        costPeople.setText("0");
-
-        proFood.setText("0");
-        proGold.setText("0");
-        proWood.setText("0");
-        proRock.setText("0");
-        proPeople.setText("10");
+        updateBuildingData();
     }
 
-    public void update() {
-        setBuilding(this.building);
+    /**
+     * Updates the life, workers and profit counters of the building. If building is null, "empty" values are used.
+     */
+    public void updateBuildingData() {
+
+        if (building != null) {
+            //TODO: change demo values with building values
+            buildingName.setText("House");
+            buildingLife.setText("Life: " + "50 / 50");
+            buildingWorkers.setText(("Workers: " + "4 / 5"));
+
+            proFood.setText("0");
+            proGold.setText("0");
+            proWood.setText("0");
+            proRock.setText("0");
+            proPeople.setText("10");
+        }
+        else {
+            buildingName.setText("-");
+            buildingLife.setText("Life: - / -");
+            buildingWorkers.setText(("Workers: - / -"));
+
+            proFood.setText("-");
+            proGold.setText("-");
+            proWood.setText("-");
+            proRock.setText("-");
+            proPeople.setText("-");
+        }
     }
 
-    public void changeBuildingWorkers(int n) {
-        //TODO: implement
-//        building.changeWorkers(n);
+    /**
+     * Updates the position of all Actors in BuildingInfo. Also called in constructor to first place the Actors.
+     */
+    public void updatePosition() {
+        // BUILDING DATA
+        buildingData.setSize(Gdx.graphics.getWidth() * 0.15f, Gdx.graphics.getWidth() * 0.15f);
+        buildingData.setPosition(0, 0);
+
+
+        // BUILDING IMAGE
+        Assets.setSizeRelative(buildingImage, 0.4f, 0.4f);
+        Assets.setPositionRelative(buildingImage, 0.05f, 0.55f);
+
+
+        // BUILDING DATA
+        Assets.setSizeRelative(buildingStatus, 0.5f, 0.5f);
+        Assets.setPositionRelative(buildingStatus, 0.5f, 0.5f);
+        Assets.setPositionRelative(buildingName, 0.1f, 0.75f, false, true);
+        Assets.setPositionRelative(buildingLife, 0.1f, 0.5f, false, true);
+        Assets.setPositionRelative(buildingWorkers, 0.1f, 0.25f, false, true);
+
+
+        // BUILDING RESOURCES
+        Assets.setPositionRelative(buildingResources, 0f, 0f);
+        Assets.setSizeRelative(buildingResources, 1f, 0.5f);
+
+        // ROW 1
+        Assets.setPositionRelative(rowTop, 0f, 2f / 3f);
+        Assets.setSizeRelative(rowTop, 1f, 1f / 3f);
+//        Assets.setPositionRelative(resources, COLUMN_TITLES, 0.5f, false, true);
+        Assets.setPositionRelative(resFood, COLUMN_FOOD, 0.5f, true, true);
+        Assets.setPositionRelative(resGold, COLUMN_GOLD, 0.5f, true, true);
+        Assets.setPositionRelative(resWood, COLUMN_WOOD, 0.5f, true, true);
+        Assets.setPositionRelative(resRock, COLUMN_ROCK, 0.5f, true, true);
+        Assets.setPositionRelative(resPeople, COLUMN_PEOPLE, 0.5f, true, true);
+
+        // ROW 2
+        Assets.setPositionRelative(rowMiddle, 0f, 1f / 3f);
+        Assets.setSizeRelative(rowMiddle, 1f, 1f / 3f);
+        Assets.setPositionRelative(cost, COLUMN_TITLES, 0.5f, false, true);
+        Assets.setPositionRelative(costFood, COLUMN_FOOD, 0.5f, true, true);
+        Assets.setPositionRelative(costGold, COLUMN_GOLD, 0.5f, true, true);
+        Assets.setPositionRelative(costWood, COLUMN_WOOD, 0.5f, true, true);
+        Assets.setPositionRelative(costRock, COLUMN_ROCK, 0.5f, true, true);
+        Assets.setPositionRelative(costPeople, COLUMN_PEOPLE, 0.5f, true, true);
+
+        // ROW BOTTOM
+        Assets.setPositionRelative(rowBottom, 0f, 0f);
+        Assets.setSizeRelative(rowBottom, 1f, 1f / 3f);
+        Assets.setPositionRelative(profit, COLUMN_TITLES, 0.5f, false, true);
+        Assets.setPositionRelative(proFood, COLUMN_FOOD, 0.5f, true, true);
+        Assets.setPositionRelative(proGold, COLUMN_GOLD, 0.5f, true, true);
+        Assets.setPositionRelative(proWood, COLUMN_WOOD, 0.5f, true, true);
+        Assets.setPositionRelative(proRock, COLUMN_ROCK, 0.5f, true, true);
+        Assets.setPositionRelative(proPeople, COLUMN_PEOPLE, 0.5f, true, true);
     }
 }
