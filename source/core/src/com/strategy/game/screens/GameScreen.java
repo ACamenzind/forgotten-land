@@ -200,6 +200,8 @@ public class GameScreen implements Screen {
         camera.viewportWidth = width;
         camera.viewportHeight = height;
         camera.update();
+
+        stage.getViewport().update(width, height);
     }
 
     @Override
