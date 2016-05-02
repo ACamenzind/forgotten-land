@@ -21,12 +21,18 @@ public class StaticEntityBuilder {
     private TiledMapTileLayer selectionLayer; // contains the selected building
     private MapEntity selectedEntity;
     private World world;
+    private TiledMapTileLayer gridLayer;
+
+
     public StaticEntityBuilder(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
         this.world = gameScreen.getWorld();
         this.buildingsLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Buildings");
         this.selectionLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Selection");
         this.selectionLayer.setOpacity(0.5f);
+        this.gridLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Grid");
+        this.gridLayer.setVisible(false);
+        this.gridLayer.setOpacity(0.2f);
     }
 
     public MapEntity getSelectedEntity() {
@@ -38,10 +44,14 @@ public class StaticEntityBuilder {
      * @param entity: the entity to be placed
      */
     public void toggleSelectEntity(MapEntity entity) {
-        if (selectedEntity == null)
+        if (selectedEntity == null) {
             this.selectedEntity = entity;
-        else
+            this.gridLayer.setVisible(true);
+        }
+        else {
             this.selectedEntity = null;
+            this.gridLayer.setVisible(false);
+        }
     }
 
     /**

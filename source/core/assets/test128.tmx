@@ -442,6 +442,11 @@
    <image width="128" height="64" source="resources/weed06.png"/>
   </tile>
  </tileset>
+ <tileset firstgid="105" name="grid" tilewidth="128" tileheight="128" tilecount="1" columns="0">
+  <tile id="0">
+   <image width="128" height="128" source="grid.png"/>
+  </tile>
+ </tileset>
  <layer name="Terrain" width="100" height="100">
   <data encoding="base64" compression="zlib">
    eJztw8EJAAAMA6H7ZP+VC51DwVVTVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/AWtAw1E=
@@ -450,6 +455,11 @@
  <layer name="Buildings" width="100" height="100">
   <data encoding="base64" compression="zlib">
    eJzt10FOwzAQBdC5BbDLKViw8gXaqFfo/Q8BUbE6sdICUpIaeE+ynMRdWPNjO40AAAAAAAAAALb28ugJMCOPvsijL/Loizz6Io++yKMv8uiLPPoij77Ioy/y2N7zD9rTg+YIAAAAAK3ToycAv8gprJk9fFXnMfXy2Feu/XhjjG3ld35srod0f4zlnFjXKfU5g7Fp03hJY2yv1v7tox3isiZqy+Psa6r54bNN1zmTOl7XjDN+O0Nca18zma5LenZsfiOP9bTvd4lrzWse+fkYt9cL6zg1fXuOL50jr599SU0m22nzKDHPpN27ahbnvSf6R7VnwBCXGpe41LjEfC9rc/Hdta5730ml6e/9h7c+1tPmMd3nb95bOZS4ZiWP7dVvrKX9qJ4tZa/J/ENLe9c55u/+rb3tnJr/iutpaznEPJN8XX/bZlbHWFebTT1X8jpgX0t7TwnnRg+si75996wHAAAAAAAAAAAAAAAAuOcdFV46iA==
+  </data>
+ </layer>
+ <layer name="Grid" width="100" height="100" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAMBKGr+/0LDJZDwVVTVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/AZcEBoE=
   </data>
  </layer>
  <layer name="Selection" width="100" height="100">
