@@ -14,7 +14,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.strategy.game.*;
 import com.strategy.game.buildings.StaticEntityBuilder;
@@ -42,7 +41,6 @@ public class GameScreen implements Screen {
     private World world;
     private StaticEntityBuilder builder;
 
-    private final BuildingInfo buildingInfo;
     private DisplaySidebar sidebar;
 
     private Vector2 touchDownCoords;
@@ -67,8 +65,7 @@ public class GameScreen implements Screen {
         this.gameInputProcessor = new GameInputProcessor(this);
         this.builder = new StaticEntityBuilder(this);
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        this.buildingInfo = null;//new BuildingInfo(stage);
-        this.sidebar = null;//new DisplaySidebar(stage);
+        this.sidebar = new DisplaySidebar(stage);
 
         // Looping background sound
         Sound sound = Assets.bgSound;
@@ -174,8 +171,9 @@ public class GameScreen implements Screen {
         batch.end();
 
         // Draw stage
-        //stage.setDebugAll(true); // For debug purpose
         stage.act(delta);
+        sidebar.updatePosition();
+//        stage.setDebugAll(true); // For debug purpose
         stage.getViewport().apply();
         stage.draw();
 
@@ -228,5 +226,6 @@ public class GameScreen implements Screen {
     public void dispose() {
         Assets.dispose();
         world.dispose();
+        stage.dispose();
     }
 }

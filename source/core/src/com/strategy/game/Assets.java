@@ -5,10 +5,14 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import sun.tools.jconsole.Tab;
 
 /**
  * Loads the assets.
@@ -37,6 +41,16 @@ public class Assets {
 
     public static void dispose() {
         map.dispose();
+    }
+
+    /**
+     * Sets the background of a Table. It avoids to write each time SpriteDrawable, Sprite, and Texture.
+     * @param table: The Table to set the background image.
+     * @param backgroundPath: The path to the background image.
+     */
+    public static void setBackground(final Table table, String backgroundPath) {
+        SpriteDrawable buildingBg = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal(backgroundPath))));
+        table.setBackground(buildingBg);
     }
 
     /**

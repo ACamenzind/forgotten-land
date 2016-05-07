@@ -13,18 +13,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.strategy.game.Assets;
 import com.strategy.game.buildings.MapEntity;
+import com.strategy.game.screens.sidebar.Display;
 
 /**
  * Class displaying building info in the bottom-left corner of the screen.
  *
  * Created by Amedeo on 01/05/16.
  */
-public class BuildingInfo {
+public class DisplayBuildingInfo extends Table implements Display {
     private Stage stage;
 
     private MapEntity building;
-
-    private final Table buildingData;
 
     private Image buildingImage;
 
@@ -50,34 +49,28 @@ public class BuildingInfo {
     private static final float COLUMN_ROCK = MARGIN + 4f / 6f;
     private static final float COLUMN_PEOPLE = MARGIN + 5f / 6f;
 
-    public BuildingInfo(Stage stage) {
+    public DisplayBuildingInfo(Stage stage) {
         this(stage, null);
     }
 
-    public BuildingInfo(Stage stage, MapEntity building) {
+    public DisplayBuildingInfo(Stage stage, MapEntity building) {
         this.stage = stage;
 
         // FONT
         BitmapFont font = Assets.fontGenerator("core/assets/fonts/times_new_roman.ttf", 12, Color.BLACK);
         Label.LabelStyle style = new Label.LabelStyle(font, font.getColor());
 
-
-        // BUILDING DATA
-        buildingData = new Table();
-        this.stage.addActor(buildingData);
-
-        SpriteDrawable buildingBg = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("core/assets/test.jpg"))));
-        buildingData.setBackground(buildingBg);
+        Assets.setBackground(this, "core/assets/GameScreenTextures/sidebar_bottom.png");
 
 
         // BUILDING IMAGE
         buildingImage = new Image();
-        buildingData.addActor(buildingImage);
+        addActor(buildingImage);
 
 
         // BUILDING DATA
         buildingStatus = new Group();
-        buildingData.addActor(buildingStatus);
+        addActor(buildingStatus);
 
         buildingName = new Label("", style);
         buildingStatus.addActor(buildingName);
@@ -91,7 +84,7 @@ public class BuildingInfo {
 
         // BUILDING RESOURCES
         buildingResources = new Group();
-        buildingData.addActor(buildingResources);
+        addActor(buildingResources);
 
         // ROW 1
         rowTop = new Group();
@@ -225,14 +218,9 @@ public class BuildingInfo {
     }
 
     /**
-     * Updates the position of all Actors in BuildingInfo. Also called in constructor to first place the Actors.
+     * Updates the position of all Actors in DisplayBuildingInfo. Also called in constructor to first place the Actors.
      */
     public void updatePosition() {
-        // BUILDING DATA
-        buildingData.setSize(Gdx.graphics.getWidth() * 0.15f, Gdx.graphics.getWidth() * 0.15f);
-        buildingData.setPosition(0, 0);
-
-
         // BUILDING IMAGE
         Assets.setSizeRelative(buildingImage, 0.4f, 0.4f);
         Assets.setPositionRelative(buildingImage, 0.05f, 0.55f);

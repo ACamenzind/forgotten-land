@@ -135,16 +135,15 @@ public class MainMenuScreen implements Screen{
         GameButton newGameButton = new GameButton("core/assets/MainMenuScreenTextures/newgame.png");
         newGameButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
                 game.setScreen(new GameScreen(game));
                 dispose();
+                Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
                 return false;
             }
         });
         buttons.addActor(newGameButton);
-        Assets.setSizeRelative(newGameButton, 1f, 0.33f);
+        Assets.setSizeRelative(newGameButton, 1f, 0.25f);
         Assets.setPositionRelative(newGameButton, 0f, 0.8f, false, true);
-        newGameButton.padBottom(Gdx.graphics.getHeight() * 0.025f);
 
         //LOAD GAME BUTTON
         GameButton loadGameButton = new GameButton("core/assets/MainMenuScreenTextures/loadgame.png");
@@ -157,9 +156,8 @@ public class MainMenuScreen implements Screen{
             }
         });
         buttons.addActor(loadGameButton);
-        Assets.setSizeRelative(loadGameButton, 1f, 0.33f);
+        Assets.setSizeRelative(loadGameButton, 1f, 0.25f);
         Assets.setPositionRelative(loadGameButton, 0f, 0.5f, false, true);
-        loadGameButton.padBottom(Gdx.graphics.getHeight() * 0.025f);
 
         // SETTINGS BUTTON
         GameButton settingsButton = new GameButton("core/assets/MainMenuScreenTextures/settings.png");
@@ -172,7 +170,7 @@ public class MainMenuScreen implements Screen{
             }
         });
         buttons.addActor(settingsButton);
-        Assets.setSizeRelative(settingsButton, 1f, 0.33f);
+        Assets.setSizeRelative(settingsButton, 1f, 0.25f);
         Assets.setPositionRelative(settingsButton, 0f, 0.2f, false, true);
     }
 

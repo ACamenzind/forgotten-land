@@ -8,14 +8,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.strategy.game.screens.GameScreen;
 
 /**
  * Created by Amedeo on 02/05/16.
  */
-public class GameButton extends ImageButton {
+public class GameButton extends Button {
 
     public GameButton(String texturePath) {
         super(new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal(texturePath)))));
