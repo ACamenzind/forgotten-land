@@ -1,4 +1,4 @@
-package com.strategy.game.screens;
+package com.strategy.game.screens.sidebar;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.strategy.game.Assets;
 import com.strategy.game.buildings.MapEntity;
-import com.strategy.game.screens.sidebar.Display;
 
 /**
  * Class displaying building info in the bottom-left corner of the screen.
@@ -22,6 +21,8 @@ import com.strategy.game.screens.sidebar.Display;
  */
 public class DisplayBuildingInfo extends Table implements Display {
     private Stage stage;
+
+    private static final Label.LabelStyle style = Assets.makeLabelStyle(12, Color.BLACK);
 
     private MapEntity building;
 
@@ -55,11 +56,6 @@ public class DisplayBuildingInfo extends Table implements Display {
 
     public DisplayBuildingInfo(Stage stage, MapEntity building) {
         this.stage = stage;
-
-        // FONT
-        BitmapFont font = Assets.fontGenerator("core/assets/fonts/times_new_roman.ttf", 12, Color.BLACK);
-        Label.LabelStyle style = new Label.LabelStyle(font, font.getColor());
-
         Assets.setBackground(this, "core/assets/GameScreenTextures/sidebar_bottom.png");
 
 
@@ -220,6 +216,7 @@ public class DisplayBuildingInfo extends Table implements Display {
     /**
      * Updates the position of all Actors in DisplayBuildingInfo. Also called in constructor to first place the Actors.
      */
+    @Override
     public void updatePosition() {
         // BUILDING IMAGE
         Assets.setSizeRelative(buildingImage, 0.4f, 0.4f);

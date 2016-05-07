@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import sun.tools.jconsole.Tab;
@@ -22,6 +23,7 @@ public class Assets {
     public static TiledMap map;
     public static Texture house1, castle, leftwall, middlewall, rightwall, emptyTile;
     public static Sound bgSound, hit;
+    private static final String DEFAULT_FONT_PATH = "core/assets/fonts/times_new_roman.ttf";
 
     public static void load() {
 //        map = new TmxMapLoader().load("core/assets/big_map.tmx");
@@ -49,8 +51,10 @@ public class Assets {
      * @param backgroundPath: The path to the background image.
      */
     public static void setBackground(final Table table, String backgroundPath) {
-        SpriteDrawable buildingBg = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal(backgroundPath))));
-        table.setBackground(buildingBg);
+        if (table != null) {
+            SpriteDrawable buildingBg = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal(backgroundPath))));
+            table.setBackground(buildingBg);
+        }
     }
 
     /**
@@ -62,7 +66,7 @@ public class Assets {
      *         actor in the middle of its parent.
      */
     public static void setPositionRelative(final Actor actor, float x, float y) {
-        if (actor.hasParent()) {
+        if (actor != null && actor.hasParent()) {
             final Actor parent = actor.getParent();
             actor.setPosition(parent.getWidth() * x, parent.getHeight() * y);
         }
@@ -80,7 +84,7 @@ public class Assets {
      * @param centerY: If true, the actor will be positioned on its y-center and not the bottom-left corner.
      */
     public static void setPositionRelative(final Actor actor, float x, float y, boolean centerX, boolean centerY) {
-        if (actor.hasParent()) {
+        if (actor != null && actor.hasParent()) {
             final Actor parent = actor.getParent();
             float offsetX = 0;
             if (centerX) offsetX = actor.getWidth() / 2;
@@ -99,7 +103,7 @@ public class Assets {
      *             half the height of its parent.
      */
     public static void setSizeRelative(final Actor actor, float width, float height) {
-        if (actor.hasParent()) {
+        if (actor != null && actor.hasParent()) {
             final Actor parent = actor.getParent();
             actor.setSize(parent.getWidth() * width, parent.getHeight() * height);
         }
@@ -108,17 +112,52 @@ public class Assets {
     /**
      * Generates a font, using FreeTypeFont, keeping better resolutions.
      * @param fontPath: The path of the .ttf font file.
-     * @param size: The size of the font.
-     * @param color: The color of the font.
+     * @param fontSize: The size of the font.
+     * @param fontColor: The color of the font.
      * @return The BitmapFont generated with FreeFontType.
      */
-    public static BitmapFont fontGenerator(final String fontPath, final int size, final Color color) {
+    public static BitmapFont makeFont(final String fontPath, int fontSize, final Color fontColor) {
         FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal(fontPath));
         FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        fontParameter.size = size;
-        fontParameter.color = color;
+        fontParameter.size = fontSize;
+        fontParameter.color = fontColor;
         BitmapFont font = fontGenerator.generateFont(fontParameter);
         fontGenerator.dispose();
         return font;
+    }
+
+    public static BitmapFont makeFont(int fontSize, final Color fontColor) {
+        return makeFont(DEFAULT_FONT_PATH, fontSize, fontColor);
+    }
+
+    /**
+     * Generates a LabelStyle, using parameters for font.
+     * @param fontPath: The path of the .ttf font file.
+     * @param fontSize: The size of the font.
+     * @param fontColor: The color of the font.
+     * @return The LabelStyle with the given font.
+     */
+    public static Label.LabelStyle makeLabelStyle(final String fontPath, int fontSize, final Color fontColor) {
+        return new Label.LabelStyle(makeFont(fontPath, fontSize, fontColor), fontColor);
+    }
+
+    public static Label.LabelStyle makeLabelStyle(int fontSize, final Color fontColor) {
+        return makeLabelStyle(DEFAULT_FONT_PATH, fontSize, fontColor);
+    }
+
+    /**
+     * Generates a Label, using parameters for font.
+     * @param text: The text written in the Label.
+     * @param fontPath: The path of the .ttf font file.
+     * @param fontSize: The size of the font.
+     * @param fontColor: The color of the font.
+     * @return The Label, with given text and font.
+     */
+    public static Label makeLabel(final String text, final String fontPath, int fontSize, final Color fontColor) {
+        return new Label(text, makeLabelStyle(fontPath, fontSize, fontColor));
+    }
+
+    public static Label makeLabel(final String text, int fontSize, final Color fontColor) {
+        return makeLabel(text, DEFAULT_FONT_PATH, fontSize, fontColor);
     }
 }
