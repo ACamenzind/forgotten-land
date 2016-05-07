@@ -1,6 +1,8 @@
 package com.strategy.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
@@ -37,6 +39,7 @@ public class GameScreen implements Screen {
     private TiledMap map;
 //    private IsometricTiledMapRenderer renderer;
     private BetterRenderer renderer;
+    private InputMultiplexer gameInputMultiplexer;
     private GameInputProcessor gameInputProcessor;
     private World world;
     private StaticEntityBuilder builder;
@@ -62,6 +65,7 @@ public class GameScreen implements Screen {
 //        this.renderer = new IsometricTiledMapRenderer(map);
         this.renderer = new BetterRenderer(map);
         this.camera = new OrthographicCamera(Utils.DEFAULT_WIDTH, Utils.DEFAULT_HEIGHT);
+        this.gameInputMultiplexer = new InputMultiplexer();
         this.gameInputProcessor = new GameInputProcessor(this);
         this.builder = new StaticEntityBuilder(this);
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
@@ -72,7 +76,10 @@ public class GameScreen implements Screen {
         long id = sound.play(0.3f);
         sound.setLooping(id, true);
 
-        Gdx.input.setInputProcessor(gameInputProcessor);
+        gameInputMultiplexer.addProcessor(gameInputProcessor);
+        gameInputMultiplexer.addProcessor(stage);
+        Gdx.input.setInputProcessor(gameInputMultiplexer);
+//        Gdx.input.setInputProcessor(stage);
 
         this.isSelecting = false;
     }
@@ -173,7 +180,7 @@ public class GameScreen implements Screen {
         // Draw stage
         stage.act(delta);
         sidebar.updatePosition();
-//        stage.setDebugAll(true); // For debug purpose
+        stage.setDebugAll(true); // For debug purpose
         stage.getViewport().apply();
         stage.draw();
 

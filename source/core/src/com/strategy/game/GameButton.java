@@ -23,7 +23,7 @@ public class GameButton extends Button {
             public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 // TODO: change the five following lines with the commented one (that for some reason doesn't work).
                 // The image "core/assets/cursor_hand2.png" has to have width and height powers of 2 (e.g. 16x16px)
-                Pixmap cursorHandPixmap = new Pixmap(Gdx.files.internal("core/assets/cursor_hand2.png"));
+                Pixmap cursorHandPixmap = new Pixmap(Gdx.files.internal("core/assets/cursor_hand3.png"));
                 Cursor cursorHand = Gdx.graphics.newCursor(cursorHandPixmap, 0, 0);
                 Gdx.graphics.setCursor(cursorHand);
                 cursorHand.dispose();
