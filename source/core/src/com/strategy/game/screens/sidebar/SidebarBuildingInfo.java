@@ -3,7 +3,6 @@ package com.strategy.game.screens.sidebar;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -19,7 +18,7 @@ import com.strategy.game.buildings.MapEntity;
  *
  * Created by Amedeo on 01/05/16.
  */
-public class DisplayBuildingInfo extends Table implements Display {
+public class SidebarBuildingInfo extends Table implements Display {
     private Stage stage;
 
     private static final Label.LabelStyle style = Assets.makeLabelStyle(12, Color.BLACK);
@@ -50,11 +49,11 @@ public class DisplayBuildingInfo extends Table implements Display {
     private static final float COLUMN_ROCK = MARGIN + 4f / 6f;
     private static final float COLUMN_PEOPLE = MARGIN + 5f / 6f;
 
-    public DisplayBuildingInfo(Stage stage) {
+    public SidebarBuildingInfo(Stage stage) {
         this(stage, null);
     }
 
-    public DisplayBuildingInfo(Stage stage, MapEntity building) {
+    public SidebarBuildingInfo(Stage stage, MapEntity building) {
         this.stage = stage;
         Assets.setBackground(this, "core/assets/GameScreenTextures/sidebar_bottom.png");
 
@@ -214,7 +213,7 @@ public class DisplayBuildingInfo extends Table implements Display {
     }
 
     /**
-     * Updates the position of all Actors in DisplayBuildingInfo. Also called in constructor to first place the Actors.
+     * Updates the position of all Actors in SidebarBuildingInfo. Also called in constructor to first place the Actors.
      */
     @Override
     public void updatePosition() {

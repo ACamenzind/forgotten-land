@@ -2,7 +2,6 @@ package com.strategy.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
@@ -19,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.strategy.game.*;
 import com.strategy.game.buildings.StaticEntityBuilder;
-import com.strategy.game.screens.sidebar.DisplaySidebar;
+import com.strategy.game.screens.sidebar.Sidebar;
 import com.strategy.game.world.World;
 
 
@@ -44,7 +43,7 @@ public class GameScreen implements Screen {
     private World world;
     private StaticEntityBuilder builder;
 
-    private DisplaySidebar sidebar;
+    private Sidebar sidebar;
 
     private Vector2 touchDownCoords;
     private Vector2 touchUpCoords;
@@ -69,7 +68,7 @@ public class GameScreen implements Screen {
         this.gameInputProcessor = new GameInputProcessor(this);
         this.builder = new StaticEntityBuilder(this);
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        this.sidebar = new DisplaySidebar(stage);
+        this.sidebar = new Sidebar(stage);
 
         // Looping background sound
         Sound sound = Assets.bgSound;

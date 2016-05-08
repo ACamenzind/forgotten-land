@@ -10,7 +10,7 @@ import com.strategy.game.GameButton;
 /**
  * Created by Amedeo on 07/05/16.
  */
-public class DisplaySidebarMainMenu extends Table implements Display {
+public class SidebarGameMenu extends Table implements Display {
 
     private Stage stage;
 
@@ -25,7 +25,7 @@ public class DisplaySidebarMainMenu extends Table implements Display {
     private static final float BUTTON_HEIGHT = 0.04f;
     private static final float BUTTON_WIDTH = 1f - MARGIN * 2f;
 
-    public DisplaySidebarMainMenu(Stage stage) {
+    public SidebarGameMenu(Stage stage) {
         this.stage = stage;
 
         Assets.setBackground(this, "core/assets/GameScreenTextures/sidebar_build.png");

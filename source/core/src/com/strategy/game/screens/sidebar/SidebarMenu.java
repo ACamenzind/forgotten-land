@@ -1,8 +1,5 @@
 package com.strategy.game.screens.sidebar;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Cursor;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -13,7 +10,7 @@ import com.strategy.game.GameButton;
 /**
  * Created by Amedeo on 02/05/16.
  */
-public class DisplaySidebarMenu extends Table implements Display {
+public class SidebarMenu extends Table implements Display {
     private Stage stage;
     private GameButton gameInfoButton;
     private GameButton buildingsButton;
@@ -25,14 +22,14 @@ public class DisplaySidebarMenu extends Table implements Display {
     private static final float BUTTON_HEIGHT = 1f;//0.75f;
 
 
-    public DisplaySidebarMenu(Stage stage) {
+    public SidebarMenu(Stage stage) {
         this.stage = stage;
 
         gameInfoButton = new GameButton("core/assets/GameScreenTextures/sidebar_menu_info.png");
         gameInfoButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (hasParent()) {
-                    DisplaySidebar sidebar = (DisplaySidebar) getParent();
+                    Sidebar sidebar = (Sidebar) getParent();
                     sidebar.setDisplayInfo();
                 }
                 return true;
@@ -44,7 +41,7 @@ public class DisplaySidebarMenu extends Table implements Display {
         buildingsButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (hasParent()) {
-                    DisplaySidebar sidebar = (DisplaySidebar) getParent();
+                    Sidebar sidebar = (Sidebar) getParent();
                     sidebar.setDisplayBuildings();
                 }
                 return false;
@@ -56,7 +53,7 @@ public class DisplaySidebarMenu extends Table implements Display {
         mainMenuButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (hasParent()) {
-                    DisplaySidebar sidebar = (DisplaySidebar) getParent();
+                    Sidebar sidebar = (Sidebar) getParent();
                     sidebar.setDisplayMainMenu();
                 }
                 return false;

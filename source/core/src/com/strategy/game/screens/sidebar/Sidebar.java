@@ -8,7 +8,7 @@ import com.strategy.game.Assets;
 /**
  * Created by Amedeo on 02/05/16.
  */
-public class DisplaySidebar extends Table implements Display {
+public class Sidebar extends Table implements Display {
     Stage stage;
 
     private Actor displayTop;
@@ -18,19 +18,19 @@ public class DisplaySidebar extends Table implements Display {
     private static final float DISPLAY_TOP_HEIGHT = 0.05f;
 
 
-    public DisplaySidebar(final Stage stage) {
+    public Sidebar(final Stage stage) {
         this.stage = stage;
         this.stage.addActor(this);
 
         Assets.setBackground(this, "core/assets/GameScreenTextures/sidebar.png");
 
-        displayTop = new DisplaySidebarMenu(stage);
+        displayTop = new SidebarMenu(stage);
         addActor(displayTop);
 
-        displayMiddle = new DisplaySidebarBuildings((stage));
+        displayMiddle = new SidebarBuild((stage));
         addActor(displayMiddle);
 
-        displayBottom = new DisplayBuildingInfo(stage);
+        displayBottom = new SidebarBuildingInfo(stage);
         addActor(displayBottom);
 
         updatePosition();
@@ -38,21 +38,21 @@ public class DisplaySidebar extends Table implements Display {
 
     public void setDisplayInfo() {
         displayMiddle.remove();
-        displayMiddle = new DisplaySidebarInfo(stage);
+        displayMiddle = new SidebarGameInfo(stage);
         addActor(displayMiddle);
         updatePosition();
     }
 
     public void setDisplayBuildings() {
         displayMiddle.remove();
-        displayMiddle = new DisplaySidebarBuildings(stage);
+        displayMiddle = new SidebarBuild(stage);
         addActor(displayMiddle);
         updatePosition();
     }
 
     public void setDisplayMainMenu() {
         displayMiddle.remove();
-        displayMiddle = new DisplaySidebarMainMenu(stage);
+        displayMiddle = new SidebarGameMenu(stage);
         addActor(displayMiddle);
         updatePosition();
     }
