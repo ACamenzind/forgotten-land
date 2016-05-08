@@ -27,12 +27,33 @@ public class DisplaySidebar extends Table implements Display {
         displayTop = new DisplaySidebarMenu(stage);
         addActor(displayTop);
 
-        displayMiddle = new DisplayBuildings((stage));
+        displayMiddle = new DisplaySidebarBuildings((stage));
         addActor(displayMiddle);
 
         displayBottom = new DisplayBuildingInfo(stage);
         addActor(displayBottom);
 
+        updatePosition();
+    }
+
+    public void setDisplayInfo() {
+        displayMiddle.remove();
+        displayMiddle = new DisplaySidebarInfo(stage);
+        addActor(displayMiddle);
+        updatePosition();
+    }
+
+    public void setDisplayBuildings() {
+        displayMiddle.remove();
+        displayMiddle = new DisplaySidebarBuildings(stage);
+        addActor(displayMiddle);
+        updatePosition();
+    }
+
+    public void setDisplayMainMenu() {
+        displayMiddle.remove();
+        displayMiddle = new DisplaySidebarMainMenu(stage);
+        addActor(displayMiddle);
         updatePosition();
     }
 

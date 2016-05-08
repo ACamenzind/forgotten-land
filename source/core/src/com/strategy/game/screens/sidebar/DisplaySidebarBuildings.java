@@ -12,7 +12,7 @@ import java.awt.*;
 /**
  * Created by Amedeo on 07/05/16.
  */
-public class DisplayBuildings extends Table implements Display {
+public class DisplaySidebarBuildings extends Table implements Display {
 
     Stage stage;
 
@@ -30,7 +30,7 @@ public class DisplayBuildings extends Table implements Display {
 
 
 
-    public DisplayBuildings(Stage stage) {
+    public DisplaySidebarBuildings(Stage stage) {
         this.stage = stage;
 
         Assets.setBackground(this, "core/assets/GameScreenTextures/sidebar_build.png");

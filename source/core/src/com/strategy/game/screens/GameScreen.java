@@ -76,8 +76,8 @@ public class GameScreen implements Screen {
         long id = sound.play(0.3f);
         sound.setLooping(id, true);
 
-        gameInputMultiplexer.addProcessor(gameInputProcessor);
         gameInputMultiplexer.addProcessor(stage);
+        gameInputMultiplexer.addProcessor(gameInputProcessor);
         Gdx.input.setInputProcessor(gameInputMultiplexer);
 //        Gdx.input.setInputProcessor(stage);
 

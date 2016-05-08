@@ -1,5 +1,10 @@
 package com.strategy.game.screens.sidebar;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Cursor;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
@@ -24,12 +29,39 @@ public class DisplaySidebarMenu extends Table implements Display {
         this.stage = stage;
 
         gameInfoButton = new GameButton("core/assets/GameScreenTextures/sidebar_menu_info.png");
+        gameInfoButton.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                if (hasParent()) {
+                    DisplaySidebar sidebar = (DisplaySidebar) getParent();
+                    sidebar.setDisplayInfo();
+                }
+                return true;
+            }
+        });
         addActor(gameInfoButton);
 
         buildingsButton = new GameButton("core/assets/GameScreenTextures/sidebar_menu_build.png");
+        buildingsButton.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                if (hasParent()) {
+                    DisplaySidebar sidebar = (DisplaySidebar) getParent();
+                    sidebar.setDisplayBuildings();
+                }
+                return false;
+            }
+        });
         addActor(buildingsButton);
 
         mainMenuButton = new GameButton("core/assets/GameScreenTextures/sidebar_menu_menu.png");
+        mainMenuButton.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                if (hasParent()) {
+                    DisplaySidebar sidebar = (DisplaySidebar) getParent();
+                    sidebar.setDisplayMainMenu();
+                }
+                return false;
+            }
+        });
         addActor(mainMenuButton);
 
         updatePosition();
