@@ -79,7 +79,6 @@ public class GameScreen implements Screen {
         gameInputMultiplexer.addProcessor(stage);
         gameInputMultiplexer.addProcessor(gameInputProcessor);
         Gdx.input.setInputProcessor(gameInputMultiplexer);
-//        Gdx.input.setInputProcessor(stage);
 
         this.isSelecting = false;
     }
@@ -180,7 +179,7 @@ public class GameScreen implements Screen {
         // Draw stage
         stage.act(delta);
         sidebar.updatePosition();
-        stage.setDebugAll(true); // For debug purpose
+//        stage.setDebugAll(true); // For debug purpose
         stage.getViewport().apply();
         stage.draw();
 
