@@ -68,7 +68,7 @@ public class GameScreen implements Screen {
         this.gameInputProcessor = new GameInputProcessor(this);
         this.builder = new StaticEntityBuilder(this);
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        this.sidebar = new Sidebar(stage);
+        this.sidebar = new Sidebar(stage, this);
 
         // Looping background sound
         Sound sound = Assets.bgSound;
@@ -178,7 +178,7 @@ public class GameScreen implements Screen {
         // Draw stage
         stage.act(delta);
         sidebar.updatePosition();
-//        stage.setDebugAll(true); // For debug purpose
+        stage.setDebugAll(true); // For debug purpose
         stage.getViewport().apply();
         stage.draw();
 

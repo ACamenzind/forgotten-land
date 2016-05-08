@@ -12,8 +12,6 @@ import com.strategy.game.GameButton;
  */
 public class SidebarGameMenu extends Table implements Display {
 
-    private Stage stage;
-
     private static final Label menu = Assets.makeLabel("Menu", 20, Color.BLACK);
 
     private static final GameButton loadGame = new GameButton("core/assets/GameScreenTextures/sidebar_main_load_game.png");
@@ -22,11 +20,10 @@ public class SidebarGameMenu extends Table implements Display {
     private static final GameButton quitGame = new GameButton("core/assets/GameScreenTextures/sidebar_main_quit_game.png");
 
     private static final float MARGIN = 0.1f;
-    private static final float BUTTON_HEIGHT = 0.04f;
+    private static final float BUTTON_HEIGHT = 0.05f;
     private static final float BUTTON_WIDTH = 1f - MARGIN * 2f;
 
-    public SidebarGameMenu(Stage stage) {
-        this.stage = stage;
+    public SidebarGameMenu() {
 
         Assets.setBackground(this, "core/assets/GameScreenTextures/sidebar_build.png");
 
@@ -41,7 +38,8 @@ public class SidebarGameMenu extends Table implements Display {
 
     @Override
     public void updatePosition() {
-        Assets.setPositionRelative(menu, 0.5f, 1f - BUTTON_HEIGHT * 2, true, true);
+//        Assets.setPositionRelative(menu, 0.5f, 1f - BUTTON_HEIGHT * 2, true, true);
+        Assets.setPositionRelative(menu, 0.5f, 0.9f, true, true);
 
         Assets.setSizeRelative(loadGame, BUTTON_WIDTH, BUTTON_HEIGHT);
         Assets.setPositionRelative(loadGame, 0.5f, 1f - BUTTON_HEIGHT * 4, true, true);

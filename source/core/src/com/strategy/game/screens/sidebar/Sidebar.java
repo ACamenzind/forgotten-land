@@ -4,12 +4,14 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
+import com.strategy.game.screens.GameScreen;
 
 /**
  * Created by Amedeo on 02/05/16.
  */
 public class Sidebar extends Table implements Display {
     Stage stage;
+    GameScreen screen;
 
     private Actor displayTop;
     private Actor displayMiddle;
@@ -17,45 +19,75 @@ public class Sidebar extends Table implements Display {
 
     private static final float DISPLAY_TOP_HEIGHT = 0.05f;
 
+    public enum DisplayType { GAME_INFO, BUILD, BUILD_RESOURCES_COLLECTORS, GAME_MENU }
 
-    public Sidebar(final Stage stage) {
+
+    public Sidebar(final Stage stage, final GameScreen screen) {
         this.stage = stage;
         this.stage.addActor(this);
+        this.screen = screen;
 
         Assets.setBackground(this, "core/assets/GameScreenTextures/sidebar.png");
 
-        displayTop = new SidebarMenu(stage);
+        displayTop = new SidebarMenu();
         addActor(displayTop);
 
-        displayMiddle = new SidebarBuild((stage));
+        displayMiddle = new SidebarBuild();
         addActor(displayMiddle);
 
-        displayBottom = new SidebarBuildingInfo(stage);
+        displayBottom = new SidebarBuildingInfo();
         addActor(displayBottom);
 
         updatePosition();
     }
 
-    public void setDisplayInfo() {
+    public void setDisplayMiddle(DisplayType display) {
         displayMiddle.remove();
-        displayMiddle = new SidebarGameInfo(stage);
+
+        if (display == DisplayType.GAME_INFO) {
+            displayMiddle = new SidebarGameInfo();
+        }
+        else if (display == DisplayType.BUILD) {
+            displayMiddle = new SidebarBuild();
+        }
+        else if (display == DisplayType.BUILD_RESOURCES_COLLECTORS) {
+            displayMiddle = new SidebarBuildResourcesCollectors();
+        }
+        else if (display == DisplayType.GAME_MENU) {
+            displayMiddle = new SidebarGameMenu();
+        }
+
         addActor(displayMiddle);
         updatePosition();
     }
 
-    public void setDisplayBuildings() {
-        displayMiddle.remove();
-        displayMiddle = new SidebarBuild(stage);
-        addActor(displayMiddle);
-        updatePosition();
-    }
-
-    public void setDisplayMainMenu() {
-        displayMiddle.remove();
-        displayMiddle = new SidebarGameMenu(stage);
-        addActor(displayMiddle);
-        updatePosition();
-    }
+//    public void setDisplayInfo() {
+//        displayMiddle.remove();
+//        displayMiddle = new SidebarGameInfo();
+//        addActor(displayMiddle);
+//        updatePosition();
+//    }
+//
+//    public void setDisplayBuildings() {
+//        displayMiddle.remove();
+//        displayMiddle = new SidebarBuild();
+//        addActor(displayMiddle);
+//        updatePosition();
+//    }
+//
+//    public void setDisplayMainMenu() {
+//        displayMiddle.remove();
+//        displayMiddle = new SidebarGameMenu();
+//        addActor(displayMiddle);
+//        updatePosition();
+//    }
+//
+//    public void setDisplayBuildResourcesCollectors() {
+//        displayMiddle.remove();
+//        displayMiddle = new SidebarBuildResourcesCollectors();
+//        addActor(displayMiddle);
+//        updatePosition();
+//    }
 
     @Override
     public void updatePosition() {

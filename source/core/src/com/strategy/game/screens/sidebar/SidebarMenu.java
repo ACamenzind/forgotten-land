@@ -11,7 +11,6 @@ import com.strategy.game.GameButton;
  * Created by Amedeo on 02/05/16.
  */
 public class SidebarMenu extends Table implements Display {
-    private Stage stage;
     private GameButton gameInfoButton;
     private GameButton buildingsButton;
     private GameButton mainMenuButton;
@@ -22,15 +21,14 @@ public class SidebarMenu extends Table implements Display {
     private static final float BUTTON_HEIGHT = 1f;//0.75f;
 
 
-    public SidebarMenu(Stage stage) {
-        this.stage = stage;
+    public SidebarMenu() {
 
         gameInfoButton = new GameButton("core/assets/GameScreenTextures/sidebar_menu_info.png");
         gameInfoButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (hasParent()) {
                     Sidebar sidebar = (Sidebar) getParent();
-                    sidebar.setDisplayInfo();
+                    sidebar.setDisplayMiddle(Sidebar.DisplayType.GAME_INFO);
                 }
                 return true;
             }
@@ -42,7 +40,7 @@ public class SidebarMenu extends Table implements Display {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (hasParent()) {
                     Sidebar sidebar = (Sidebar) getParent();
-                    sidebar.setDisplayBuildings();
+                    sidebar.setDisplayMiddle(Sidebar.DisplayType.BUILD);
                 }
                 return false;
             }
@@ -54,7 +52,7 @@ public class SidebarMenu extends Table implements Display {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (hasParent()) {
                     Sidebar sidebar = (Sidebar) getParent();
-                    sidebar.setDisplayMainMenu();
+                    sidebar.setDisplayMiddle(Sidebar.DisplayType.GAME_MENU);
                 }
                 return false;
             }
