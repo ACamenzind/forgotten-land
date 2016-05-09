@@ -54,6 +54,25 @@ public class StaticEntityBuilder {
         }
     }
 
+    public void addSelectEntity(MapEntity entity) {
+        this.selectedEntity = entity;
+        this.gridLayer.setVisible(true);
+    }
+
+    public void removeSellectEntity() {
+        this.selectedEntity = null;
+        this.gridLayer.setVisible(false);
+    }
+
+    public boolean hasSelectedEntity() {
+        if (this.selectedEntity == null) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
     /**
      *  Places the selected building onto the buildings layer.
      * @param x : tile coordinate

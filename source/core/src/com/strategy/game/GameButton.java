@@ -1,6 +1,7 @@
 package com.strategy.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,6 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.strategy.game.buildings.Castle;
+import com.strategy.game.buildings.MapEntity;
+import com.strategy.game.screens.sidebar.Sidebar;
 
 /**
  * Created by Amedeo on 02/05/16.
@@ -37,4 +41,20 @@ public class GameButton extends Button {
         });
     }
 
+    public void addBuildingListener(final MapEntity building) {
+        addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                if (hasParent()) {
+                    Sidebar sidebar = (Sidebar) getParent().getParent();
+                    if (sidebar.getScreen().getBuilder().hasSelectedEntity()) {
+                        sidebar.getScreen().getBuilder().removeSellectEntity();
+                    }
+                    else {
+                        sidebar.getScreen().getBuilder().addSelectEntity(building);
+                    }
+                }
+                return true;
+            }
+        });
+    }
 }

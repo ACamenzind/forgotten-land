@@ -48,6 +48,16 @@ public class SidebarBuild extends Table implements Display {
         });
 
         addActor(support);
+        support.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                if (hasParent()) {
+                    Sidebar sidebar = (Sidebar) getParent();
+                    sidebar.setDisplayMiddle(Sidebar.DisplayType.BUILD_SUPPORT);
+                }
+                return true;
+            }
+        });
+
         addActor(decorations);
         addActor(other);
 

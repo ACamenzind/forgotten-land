@@ -1,5 +1,6 @@
 package com.strategy.game.screens.sidebar;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -19,7 +20,7 @@ public class Sidebar extends Table implements Display {
 
     private static final float DISPLAY_TOP_HEIGHT = 0.05f;
 
-    public enum DisplayType { GAME_INFO, BUILD, BUILD_RESOURCES_COLLECTORS, GAME_MENU }
+    public enum DisplayType { GAME_INFO, BUILD, BUILD_RESOURCES_COLLECTORS, BUILD_SUPPORT, GAME_MENU }
 
 
     public Sidebar(final Stage stage, final GameScreen screen) {
@@ -53,6 +54,9 @@ public class Sidebar extends Table implements Display {
         else if (display == DisplayType.BUILD_RESOURCES_COLLECTORS) {
             displayMiddle = new SidebarBuildResourcesCollectors();
         }
+        else if (display == DisplayType.BUILD_SUPPORT) {
+            displayMiddle = new SidebarBuildingSupport();
+        }
         else if (display == DisplayType.GAME_MENU) {
             displayMiddle = new SidebarGameMenu();
         }
@@ -61,33 +65,9 @@ public class Sidebar extends Table implements Display {
         updatePosition();
     }
 
-//    public void setDisplayInfo() {
-//        displayMiddle.remove();
-//        displayMiddle = new SidebarGameInfo();
-//        addActor(displayMiddle);
-//        updatePosition();
-//    }
-//
-//    public void setDisplayBuildings() {
-//        displayMiddle.remove();
-//        displayMiddle = new SidebarBuild();
-//        addActor(displayMiddle);
-//        updatePosition();
-//    }
-//
-//    public void setDisplayMainMenu() {
-//        displayMiddle.remove();
-//        displayMiddle = new SidebarGameMenu();
-//        addActor(displayMiddle);
-//        updatePosition();
-//    }
-//
-//    public void setDisplayBuildResourcesCollectors() {
-//        displayMiddle.remove();
-//        displayMiddle = new SidebarBuildResourcesCollectors();
-//        addActor(displayMiddle);
-//        updatePosition();
-//    }
+    public GameScreen getScreen() {
+        return screen;
+    }
 
     @Override
     public void updatePosition() {
