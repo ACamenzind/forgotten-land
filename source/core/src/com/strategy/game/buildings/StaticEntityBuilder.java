@@ -44,34 +44,15 @@ public class StaticEntityBuilder {
      * @param entity: the entity to be placed
      */
     public void toggleSelectEntity(MapEntity entity) {
-        if (selectedEntity == null) {
-            this.selectedEntity = entity;
-            this.gridLayer.setVisible(true);
-
-        }
-        else {
-            this.selectedEntity = null;
-            this.gridLayer.setVisible(false);
+        if (entity != null) {
+            selectedEntity = entity;
+            gridLayer.setVisible(true);
         }
     }
 
-    public void addSelectEntity(MapEntity entity) {
-        this.selectedEntity = entity;
-        this.gridLayer.setVisible(true);
-    }
-
-    public void removeSellectEntity() {
-        this.selectedEntity = null;
-        this.gridLayer.setVisible(false);
-    }
-
-    public boolean hasSelectedEntity() {
-        if (this.selectedEntity == null) {
-            return false;
-        }
-        else {
-            return true;
-        }
+    public void untoggleSelectEntity() {
+        selectedEntity = null;
+        gridLayer.setVisible(false);
     }
 
     /**

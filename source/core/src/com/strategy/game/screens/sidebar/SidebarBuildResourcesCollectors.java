@@ -19,7 +19,7 @@ public class SidebarBuildResourcesCollectors extends SidebarBuildingSelection {
         addActor(title);
 
         buttons[0][0] = house;
-        house.addBuildingListener(new House());
+        house.addListenerBuilding(new House());
         addActor(house);
 
         updatePosition();

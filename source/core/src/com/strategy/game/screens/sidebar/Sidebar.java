@@ -1,6 +1,5 @@
 package com.strategy.game.screens.sidebar;
 
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -43,7 +42,10 @@ public class Sidebar extends Table implements Display {
     }
 
     public void setDisplayMiddle(DisplayType display) {
-        displayMiddle.remove();
+        if (displayMiddle != null) {
+            displayMiddle.remove();
+        }
+        screen.getBuilder().untoggleSelectEntity();
 
         if (display == DisplayType.GAME_INFO) {
             displayMiddle = new SidebarGameInfo();
