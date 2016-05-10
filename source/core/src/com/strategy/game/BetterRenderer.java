@@ -97,7 +97,7 @@ public class BetterRenderer extends IsometricTiledMapRenderer {
         bottomRight.set(viewBounds.x + viewBounds.width, viewBounds.y + viewBounds.height);
 
         // transforming screen coordinates to iso coordinates
-        int row1 = (int)(translateScreenToIso(topLeft).y / tileWidth) - Utils.RENDER_OFFSET; // TODO: set a number dynamically
+        int row1 = (int)(translateScreenToIso(topLeft).y / tileWidth) - Utils.RENDER_OFFSET;
         int row2 = (int)(translateScreenToIso(bottomRight).y / tileWidth) + Utils.RENDER_OFFSET;
 
         int col1 = (int)(translateScreenToIso(bottomLeft).x / tileWidth) - Utils.RENDER_OFFSET;
