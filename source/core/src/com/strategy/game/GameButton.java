@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.strategy.game.buildings.Castle;
 import com.strategy.game.buildings.MapEntity;
+import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.screens.sidebar.Sidebar;
 
 /**
@@ -46,11 +47,13 @@ public class GameButton extends Button {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if (hasParent()) {
                     Sidebar sidebar = (Sidebar) getParent().getParent();
-                    if (sidebar.getScreen().getBuilder().hasSelectedEntity()) {
-                        sidebar.getScreen().getBuilder().removeSellectEntity();
+                    StaticEntityBuilder builder = sidebar.getScreen().getBuilder();
+                    if (builder.hasSelectedEntity() &&
+                        builder.getSelectedEntity().getClass().equals(building.getClass())) {
+                        builder.removeSellectEntity();
                     }
                     else {
-                        sidebar.getScreen().getBuilder().addSelectEntity(building);
+                        builder.addSelectEntity(building);
                     }
                 }
                 return true;
