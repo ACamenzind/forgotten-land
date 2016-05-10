@@ -95,7 +95,8 @@ public class MapEntity implements Disposable{
 
             for (int y = 0; y < collisionSize.y; y++) {
                 for (int x = 0; x < collisionSize.x; x++) {
-                    float cY = (collisionSize.x - 1 + (y - x)) * Utils.TILE_SIZE/2;
+//                    float cY = (collisionSize.x - 1 + (y - x)) * Utils.TILE_SIZE/2;
+                    float cY = ((tex.getRegionHeight() / Utils.TILE_SIZE/2) - (collisionSize.x - 1 + (y - x))) * Utils.TILE_SIZE/2;
                     float cX = (x + y)* Utils.TILE_SIZE/2;
                     TextureRegion current = new TextureRegion(tex, (int)cX, (int)cY, Utils.TILE_SIZE, (int) (tex.getRegionHeight() - cY));
                     ExtendedStaticTiledMapTile tile = new ExtendedStaticTiledMapTile(current);
