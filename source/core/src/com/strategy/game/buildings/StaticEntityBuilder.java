@@ -47,6 +47,7 @@ public class StaticEntityBuilder {
         if (selectedEntity == null) {
             this.selectedEntity = entity;
             this.gridLayer.setVisible(true);
+
         }
         else {
             this.selectedEntity = null;
@@ -110,11 +111,13 @@ public class StaticEntityBuilder {
                     e.printStackTrace();
                 }
                 selectedEntity.placeOnLayer(buildingsLayer, x, y);
+                this.world.getStaticEntities().add(selectedEntity);
 
                 if (this.getSelectedEntity() instanceof House) //TODO: abstract a bit
                     world.getResourceHandler().incrementWoodCounter(-100);
                 else if (this.getSelectedEntity() instanceof Castle)
                     world.getResourceHandler().incrementStoneCounter(-100);
+
 
                 //remove resources
 
