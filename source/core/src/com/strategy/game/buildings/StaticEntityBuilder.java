@@ -48,6 +48,10 @@ public class StaticEntityBuilder {
             selectedEntity = entity;
             gridLayer.setVisible(true);
         }
+        else {
+            selectedEntity = null;
+            gridLayer.setVisible(false);
+        }
     }
 
     public void untoggleSelectEntity() {
@@ -110,7 +114,9 @@ public class StaticEntityBuilder {
     }
 
     public void rotate() {
-        selectedEntity.changeTexture();
+        if (selectedEntity != null) {
+            selectedEntity.changeTexture();
+        }
 //        System.out.println(selectedEntity.getTiles().toString());
     }
 

@@ -11,7 +11,10 @@ import com.strategy.game.GameButton;
 public class SidebarBuildingSelection extends Table implements Display {
 
     protected Label title;
-    protected GameButton[][] buttons = new GameButton[BUTTONS_PER_COLUMN][BUTTONS_PER_ROW];
+    protected GameButton[][] buttons;
+    protected GameButton rotate;
+    protected GameButton cancel;
+    protected GameButton back;
 
     private static final int BUTTONS_PER_COLUMN = 6;
     private static final int BUTTONS_PER_ROW = 3;
@@ -22,7 +25,19 @@ public class SidebarBuildingSelection extends Table implements Display {
 
     public SidebarBuildingSelection() {
         Assets.setBackground(this, "core/assets/GameScreenTextures/sidebar_build.png");
+        buttons = new GameButton[BUTTONS_PER_COLUMN][BUTTONS_PER_ROW];
 
+        rotate = new GameButton("core/assets/GameScreenTextures/sidebar_build_rotate.png");
+        rotate.addListenerBuildingRotate();
+        addActor(rotate);
+
+        cancel = new GameButton("core/assets/GameScreenTextures/sidebar_build_cancel.png");
+        cancel.addListenerBuilding(null);
+        addActor(cancel);
+
+        back = new GameButton("core/assets/GameScreenTextures/sidebar_build_back.png");
+        back.addListenerLink(Sidebar.DisplayType.BUILD);
+        addActor(back);
     }
 
 
@@ -42,5 +57,14 @@ public class SidebarBuildingSelection extends Table implements Display {
                 }
             }
         }
+
+        Assets.setSizeRelative(rotate, BUTTON_WIDTH, BUTTON_HEIGHT);
+        Assets.setPositionRelative(rotate, MARGIN, 0.1f, false, true);
+
+        Assets.setSizeRelative(cancel, BUTTON_WIDTH, BUTTON_HEIGHT);
+        Assets.setPositionRelative(cancel, MARGIN * 2 + BUTTON_WIDTH, 0.1f, false, true);
+
+        Assets.setSizeRelative(back, BUTTON_WIDTH, BUTTON_HEIGHT);
+        Assets.setPositionRelative(back, MARGIN * 3 + BUTTON_WIDTH * 2, 0.1f, false, true);
     }
 }

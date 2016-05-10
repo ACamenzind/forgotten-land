@@ -86,6 +86,9 @@ public class GameInputProcessor implements InputProcessor{
             case Input.Keys.NUM_3:
                 screen.getBuilder().toggleSelectEntity(new Wall());
                 break;
+            case Input.Keys.ESCAPE:
+                screen.getBuilder().untoggleSelectEntity();
+                break;
             case Input.Keys.R:
                 screen.getBuilder().rotate();
                 break;

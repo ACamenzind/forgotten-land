@@ -63,4 +63,17 @@ public class GameButton extends Button {
             }
         });
     }
+
+    public void addListenerBuildingRotate() {
+        addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                if (hasParent() && getParent().hasParent()) {
+                    Sidebar sidebar = (Sidebar) getParent().getParent();
+                    StaticEntityBuilder builder = sidebar.getScreen().getBuilder();
+                    builder.rotate();
+                }
+                return true;
+            }
+        });
+    }
 }
