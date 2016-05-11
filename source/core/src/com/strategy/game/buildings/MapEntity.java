@@ -34,13 +34,12 @@ public class MapEntity implements Disposable{
         this.mainTexture = null;
         this.tiles = new ArrayList<ExtendedStaticTiledMapTile>();
         this.prevCells = new ArrayList<TiledMapTileLayer.Cell>();
-        this.collisionSize = new Vector2(3,3);
+        this.collisionSize = new Vector2(0,0);
         this.imgOffset = new Vector2(0,0);
         this.isClicked = false;
         this.counter = 0;
         this.textures = new ArrayList<Texture>();
-        this.tiles2 = new ExtendedStaticTiledMapTile[(int)collisionSize.x][(int)collisionSize.y];
-        this.prevCells2 = new TiledMapTileLayer.Cell[(int)collisionSize.x][(int)collisionSize.y];
+
 //        sliceTexture(mainTexture);
     }
 
@@ -87,6 +86,9 @@ public class MapEntity implements Disposable{
      * Splits the entity's mainTexture into vertical slices of width TILE_SIZE
      */
     protected void sliceTexture(Texture mainTexture) {
+        this.tiles2 = new ExtendedStaticTiledMapTile[(int)collisionSize.x][(int)collisionSize.y];
+        this.prevCells2 = new TiledMapTileLayer.Cell[(int)collisionSize.x][(int)collisionSize.y];
+
         tiles = new ArrayList<ExtendedStaticTiledMapTile>(); // Reset tiles
         this.mainTexture = mainTexture;
         if (mainTexture != null) {
