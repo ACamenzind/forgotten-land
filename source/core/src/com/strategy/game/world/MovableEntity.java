@@ -2,10 +2,12 @@ package com.strategy.game.world;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
+import java.io.Serializable;
+
 /**
  * This class represents an entity that can move (e.g. characters)
  */
-public class MovableEntity extends Image {
+public class MovableEntity extends Image implements Serializable{
     private String MovableEntityClass;
     private int maxLife;
     private int life;

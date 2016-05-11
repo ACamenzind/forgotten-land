@@ -1,9 +1,11 @@
 package com.strategy.game.world;
 
+import java.io.Serializable;
+
 /**
  * Created by francescosani on 28/04/16.
  */
-public class PopulationHandler {
+public class PopulationHandler implements Serializable{
 
     private int populationCounter;
     private int maxPopulationAllowed;

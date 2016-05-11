@@ -9,12 +9,13 @@ import com.strategy.game.Assets;
 import com.strategy.game.ExtendedStaticTiledMapTile;
 import com.strategy.game.Utils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * A generic object to put on the map. Inherit from this to create new buildings.
  */
-public class MapEntity implements Disposable{
+public class MapEntity implements Disposable, Serializable{
     protected Vector2 collisionSize; // The x and y length of the collision rectangle
     protected Texture mainTexture;
     private boolean isClicked;

@@ -13,6 +13,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.buildings.*;
 import com.strategy.game.screens.GameScreen;
+import com.strategy.game.world.World;
+
+import java.io.Serializable;
 
 
 /**
@@ -88,6 +91,13 @@ public class GameInputProcessor implements InputProcessor{
                 break;
             case Input.Keys.R:
                 screen.getBuilder().rotate();
+                break;
+            case Input.Keys.S:
+                World.saveGame(screen.getWorld());
+                break;
+            case Input.Keys.L:
+                World temporaryWorld = World.loadSavedGame();
+                screen.setLoadedWorld(temporaryWorld);
                 break;
         }
         return false;

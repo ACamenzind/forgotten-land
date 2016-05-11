@@ -15,11 +15,14 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.strategy.game.*;
 import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.screens.sidebar.Sidebar;
 import com.strategy.game.world.World;
+
+import java.io.*;
 
 
 /**
@@ -27,7 +30,7 @@ import com.strategy.game.world.World;
  *  TODO: Make another input handler for the UI, and use multiplexing.
     TODO: Maybe create a new class to handle game logic and hold the game state, with Scene2D
  */
-public class GameScreen implements Screen {
+public class GameScreen implements Screen, Serializable {
 
     private Stage stage;
     private final StrategyGame game;
@@ -120,6 +123,17 @@ public class GameScreen implements Screen {
 
     public StaticEntityBuilder getBuilder() {
         return builder;
+    }
+
+
+    public void setLoadedWorld(World world) {
+        this.world.setStaticEntities(world.getStaticEntities());
+        this.world.setMovableEntities(world.getMovableEntities());
+        this.world.setBuilder(world.getBuilder());
+        this.world.setResourceHandler(world.getResourceHandler());
+        this.world.setUpdateCounter(world.getUpdateCounter());
+        this.world.setPopulationHandler(world.getPopulationHandler());
+        this.world.setTick(world.getTick());
     }
 
     @Override

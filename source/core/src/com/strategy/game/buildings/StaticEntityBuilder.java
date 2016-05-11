@@ -11,11 +11,13 @@ import com.strategy.game.Utils;
 import com.strategy.game.screens.GameScreen;
 import com.strategy.game.world.World;
 
+import java.io.Serializable;
+
 /**
  * Handles the creation and placement of static entities (e.g. buildings)
  *
  */
-public class StaticEntityBuilder {
+public class StaticEntityBuilder implements Serializable{
     private GameScreen gameScreen;
     private TiledMapTileLayer buildingsLayer; // the buildings layer
     private TiledMapTileLayer selectionLayer; // contains the selected building

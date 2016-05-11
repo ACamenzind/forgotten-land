@@ -4,11 +4,13 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.utils.Disposable;
 import com.strategy.game.buildings.MapEntity;
 import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.screens.GameScreen;
 //import com.sun.javafx.scene.control.skin.VirtualFlow;
+import java.io.*;
 
 import java.util.ArrayList;
 
@@ -16,18 +18,20 @@ import java.util.ArrayList;
  * Contains the world simulation.
  * TODO: implement
  */
-public class World implements Disposable{
+public class World implements Disposable, Serializable {
 
-    private Stage gameStage;
-    private GameScreen gameScreen;
+    private transient Stage gameStage;
+    private transient GameScreen gameScreen;
     private ArrayList<MapEntity> staticEntities;
     private ArrayList<MovableEntity> movableEntities;
-    private TiledMap map;
+    private transient TiledMap map;
     private StaticEntityBuilder builder;
     private ResourceHandler resourceHandler;
     private int updateCounter;
     private PopulationHandler populationHandler;
     private int tick;
+
+    private static String filePath = "saveGame.ter";
 
 
     public World(GameScreen gameScreen) {
@@ -47,6 +51,10 @@ public class World implements Disposable{
         return staticEntities;
     }
 
+    public ArrayList<MovableEntity> getMovableEntities() {
+        return movableEntities;
+    }
+
     public StaticEntityBuilder getBuilder() {
         return builder;
     }
@@ -55,9 +63,47 @@ public class World implements Disposable{
         return resourceHandler;
     }
 
+    public int getUpdateCounter() {
+        return updateCounter;
+    }
+
     public PopulationHandler getPopulationHandler() {
         return populationHandler;
     }
+
+    public int getTick() {
+        return tick;
+    }
+
+
+    public void setStaticEntities(ArrayList<MapEntity> staticEntities) {
+        this.staticEntities = staticEntities;
+    }
+
+    public void setMovableEntities(ArrayList<MovableEntity> movableEntities) {
+        this.movableEntities = movableEntities;
+    }
+
+    public void setBuilder(StaticEntityBuilder builder) {
+        this.builder = builder;
+    }
+
+    public void setResourceHandler(ResourceHandler resourceHandler) {
+        this.resourceHandler = resourceHandler;
+    }
+
+    public void setUpdateCounter(int updateCounter) {
+        this.updateCounter = updateCounter;
+    }
+
+    public void setPopulationHandler(PopulationHandler populationHandler) {
+        this.populationHandler = populationHandler;
+    }
+
+    public void setTick(int tick) {
+        this.tick = tick;
+    }
+
 
     public void update(float delta) {
         if(updateCounter / 300 >= 1) {
@@ -104,5 +150,42 @@ public class World implements Disposable{
     @Override
     public void dispose() {
         gameStage.dispose();
+    }
+
+
+    public static void saveGame(World gameToBeSaved) {
+        try {
+            File fileInWhichToSaveIn = new File(filePath);
+            FileOutputStream fos = new FileOutputStream(fileInWhichToSaveIn);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(gameToBeSaved);
+            oos.flush();
+            oos.close();
+            fos.close();
+        }
+        catch (FileNotFoundException fnfe) {
+            fnfe.printStackTrace();
+        }
+        catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+
+    public static World loadSavedGame() {
+        try {
+            File fileToLoad = new File(filePath);
+            FileInputStream fis = new FileInputStream(fileToLoad);
+            ObjectInputStream ois  = new ObjectInputStream(fis);
+            World gs = (World) ois.readObject();
+            ois.close();
+            fis.close();
+
+            return gs;
+
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            return loadSavedGame();
+        }
     }
 }

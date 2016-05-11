@@ -1,9 +1,11 @@
 package com.strategy.game.world;
 
+import java.io.Serializable;
+
 /**
  * Created by francescosani on 27/04/16.
  */
-public class ResourceHandler {
+public class ResourceHandler implements Serializable{
     private final int startingIncrement;
 
     private int woodCounter;
