@@ -26,6 +26,10 @@ public class MapEntity implements Disposable{
     protected ArrayList<Texture> textures;
     private int counter;
 
+    private ExtendedStaticTiledMapTile[][] tiles2;
+    private TiledMapTileLayer.Cell[][] prevCells2;
+
+
     public MapEntity() {
         this.mainTexture = null;
         this.tiles = new ArrayList<ExtendedStaticTiledMapTile>();
@@ -35,6 +39,7 @@ public class MapEntity implements Disposable{
         this.isClicked = false;
         this.counter = 0;
         this.textures = new ArrayList<Texture>();
+
 //        sliceTexture(mainTexture);
     }
 
@@ -81,16 +86,31 @@ public class MapEntity implements Disposable{
      * Splits the entity's mainTexture into vertical slices of width TILE_SIZE
      */
     protected void sliceTexture(Texture mainTexture) {
+        this.tiles2 = new ExtendedStaticTiledMapTile[(int)collisionSize.x][(int)collisionSize.y];
+        this.prevCells2 = new TiledMapTileLayer.Cell[(int)collisionSize.x][(int)collisionSize.y];
+
         tiles = new ArrayList<ExtendedStaticTiledMapTile>(); // Reset tiles
         this.mainTexture = mainTexture;
         if (mainTexture != null) {
             TextureRegion tex = new TextureRegion(mainTexture);
             TextureRegion[][] arr = tex.split(Utils.TILE_SIZE, tex.getRegionHeight());
 
-            for (int i = 0; i < tex.getRegionWidth() / Utils.TILE_SIZE; i++) {
-                ExtendedStaticTiledMapTile tile = new ExtendedStaticTiledMapTile(arr[0][i]);
-                tiles.add(tile);
+            int TILE_HEIGHT = 64;
+            for (int y = 0; y < collisionSize.y; y++) {
+                for (int x = 0; x < collisionSize.x; x++) {
+                    float cY = (collisionSize.x - 1 + (y - x)) * (TILE_HEIGHT/2);
+                    float cX = (x + y) * Utils.TILE_SIZE/2;
+                    TextureRegion current = new TextureRegion(tex, (int)cX, 0, Utils.TILE_SIZE, tex.getRegionHeight() - (int)cY);
+                    ExtendedStaticTiledMapTile tile = new ExtendedStaticTiledMapTile(current);
+                    tiles2[x][y] = tile;
+                }
             }
+
+
+//            for (int i = 0; i < tex.getRegionWidth() / Utils.TILE_SIZE; i++) {
+//                ExtendedStaticTiledMapTile tile = new ExtendedStaticTiledMapTile(arr[0][i]);
+//                tiles.add(tile);
+//            }
         }
     }
 
@@ -108,31 +128,43 @@ public class MapEntity implements Disposable{
 
         //TODO: refactor a bit
 
-        // Occupy cells
-        for (int i = x; i < x + collisionSize.x; i++) {
-            for (int j = y; j < y + collisionSize.y; j++) {
+//        // Occupy cells
+//        for (int i = x; i < x + collisionSize.x; i++) {
+//            for (int j = y; j < y + collisionSize.y; j++) {
+//                TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
+//                TextureRegion tex = new TextureRegion(Assets.emptyTile);
+//                ExtendedStaticTiledMapTile tile = new ExtendedStaticTiledMapTile(tex);
+//                tile.setObject(this);
+//                tile.setObstacle(true);
+//                cell.setTile(tile);
+//                layer.setCell(i, j, cell);
+//            }
+//        }
+
+
+        for (int y1 = 0; y1 < collisionSize.y; y1++) {
+            for (int x1 = 0; x1 < collisionSize.x; x1++) {
+                prevCells2[x1][y1] = layer.getCell(x + x1, y + y1);
+//                System.out.println(tiles2.toString());
                 TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-                TextureRegion tex = new TextureRegion(Assets.emptyTile);
-                ExtendedStaticTiledMapTile tile = new ExtendedStaticTiledMapTile(tex);
-                tile.setObject(this);
-                tile.setObstacle(true);
-                cell.setTile(tile);
-                layer.setCell(i, j, cell);
+                tiles2[x1][y1].setObstacle(true);
+                tiles2[x1][y1].setObject(this);
+                cell.setTile(tiles2[x1][y1]);
+                layer.setCell(x + x1, y + y1, cell);
             }
         }
 
-
         // Draw textures on the diagonal cells
-        for (ExtendedStaticTiledMapTile tile :
-                tiles) {
-            prevCells.add(layer.getCell(x + offset, y + offset)); // save previous state
-            TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-            tile.setObstacle(true);
-            tile.setObject(this);
-            cell.setTile(tile);
-            layer.setCell(x + offset, y + offset, cell);
-            offset++;
-        }
+//        for (ExtendedStaticTiledMapTile tile :
+//                tiles) {
+//            prevCells.add(layer.getCell(x + offset, y + offset)); // save previous state
+//            TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
+//            tile.setObstacle(true);
+//            tile.setObject(this);
+//            cell.setTile(tile);
+//            layer.setCell(x + offset, y + offset, cell);
+//            offset++;
+//        }
 //        System.out.println("placed!");
     }
 
@@ -141,11 +173,23 @@ public class MapEntity implements Disposable{
      */
     public void resetTiles() {
         int offset = 0;
-        for (TiledMapTileLayer.Cell cell :
-                prevCells) {
-            layer.setCell(x + offset, y + offset, cell);
-            offset++;
+
+        for (int y1 = 0; y1 < collisionSize.y; y1++) {
+            for (int x1 = 0; x1 < collisionSize.x; x1++) {
+//                prevCells2[x1][y1] = layer.getCell(x + x1, y + y1);
+////                System.out.println(tiles2.toString());
+//                TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
+//                tiles2[x1][y1].setObstacle(true);
+//                tiles2[x1][y1].setObject(this);
+//                cell.setTile(tiles2[x1][y1]);
+                layer.setCell(x + x1, y + y1, prevCells2[x1][y1]);
+            }
         }
+//        for (TiledMapTileLayer.Cell cell :
+//                prevCells) {
+//            layer.setCell(x + offset, y + offset, cell);
+//            offset++;
+//        }
     }
 
 
