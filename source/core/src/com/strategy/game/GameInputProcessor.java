@@ -207,12 +207,12 @@ public class GameInputProcessor implements InputProcessor{
         // Attenuates the amount of scrolling
         final float FACTOR = 7.5f;
 
-        if(camera.zoom > 0.2 || amount > 0) {
+        if(camera.zoom > 0.4 || amount > 0) {
             camera.zoom += amount / FACTOR;
         }
 
         // When zooming-in, the camera zooms towards the mouse
-        if (amount < 0)
+        if (amount < 0 && camera.zoom > 0.4)
             camera.translate((mouseX - centerX) / FACTOR, (mouseY - centerY) / FACTOR);
 
 
