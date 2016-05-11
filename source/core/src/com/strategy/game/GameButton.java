@@ -1,7 +1,6 @@
 package com.strategy.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,8 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.strategy.game.buildings.Castle;
-import com.strategy.game.buildings.MapEntity;
 import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.screens.sidebar.Sidebar;
 
@@ -42,19 +39,38 @@ public class GameButton extends Button {
         });
     }
 
-    public void addBuildingListener(final MapEntity building) {
+    public void addListenerLink(final Sidebar.DisplayType display) {
+        addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                if (hasParent() && getParent().hasParent()) {
+                    Sidebar sidebar = (Sidebar) getParent().getParent();
+                    sidebar.setDisplayMiddle(display);
+                }
+                return true;
+            }
+        });
+    }
+
+    public void addListenerBuilding(final Building building) {
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (hasParent()) {
+                if (hasParent() && getParent().hasParent()) {
                     Sidebar sidebar = (Sidebar) getParent().getParent();
                     StaticEntityBuilder builder = sidebar.getScreen().getBuilder();
-                    if (builder.hasSelectedEntity() &&
-                        builder.getSelectedEntity().getClass().equals(building.getClass())) {
-                        builder.removeSellectEntity();
-                    }
-                    else {
-                        builder.addSelectEntity(building);
-                    }
+                    builder.toggleSelectEntity(building);
+                }
+                return true;
+            }
+        });
+    }
+
+    public void addListenerBuildingRotate() {
+        addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                if (hasParent() && getParent().hasParent()) {
+                    Sidebar sidebar = (Sidebar) getParent().getParent();
+                    StaticEntityBuilder builder = sidebar.getScreen().getBuilder();
+                    builder.rotate();
                 }
                 return true;
             }

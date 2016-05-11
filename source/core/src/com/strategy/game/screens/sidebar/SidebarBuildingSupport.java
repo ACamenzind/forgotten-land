@@ -21,11 +21,11 @@ public class SidebarBuildingSupport extends SidebarBuildingSelection {
         addActor(title);
 
         buttons[0][0] = castle;
-        castle.addBuildingListener(new Castle());
+        castle.addListenerBuilding(new Castle());
         addActor(castle);
 
         buttons[1][0] = wall;
-        wall.addBuildingListener(new Wall());
+        wall.addListenerBuilding(new Wall());
         addActor(wall);
 
         updatePosition();

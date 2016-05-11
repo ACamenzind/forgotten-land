@@ -11,6 +11,7 @@ import com.strategy.game.buildings.House;
 public class SidebarBuildResourcesCollectors extends SidebarBuildingSelection {
 
     private static final GameButton house = new GameButton("core/assets/house1.png");
+    private static final GameButton house2 = new GameButton("core/assets/house1.png");
 
     public SidebarBuildResourcesCollectors() {
         super();
@@ -19,8 +20,12 @@ public class SidebarBuildResourcesCollectors extends SidebarBuildingSelection {
         addActor(title);
 
         buttons[0][0] = house;
-        house.addBuildingListener(new House());
+        house.addListenerBuilding(new House());
         addActor(house);
+
+//        buttons[5][2] = house2;
+//        house2.addListenerBuilding(new House());
+//        addActor(house2);
 
         updatePosition();
     }

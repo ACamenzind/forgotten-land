@@ -44,34 +44,19 @@ public class StaticEntityBuilder {
      * @param entity: the entity to be placed
      */
     public void toggleSelectEntity(MapEntity entity) {
-        if (selectedEntity == null) {
-            this.selectedEntity = entity;
-            this.gridLayer.setVisible(true);
-
+        if (entity != null) {
+            selectedEntity = entity;
+            gridLayer.setVisible(true);
         }
         else {
-            this.selectedEntity = null;
-            this.gridLayer.setVisible(false);
+            selectedEntity = null;
+            gridLayer.setVisible(false);
         }
     }
 
-    public void addSelectEntity(MapEntity entity) {
-        this.selectedEntity = entity;
-        this.gridLayer.setVisible(true);
-    }
-
-    public void removeSellectEntity() {
-        this.selectedEntity = null;
-        this.gridLayer.setVisible(false);
-    }
-
-    public boolean hasSelectedEntity() {
-        if (this.selectedEntity == null) {
-            return false;
-        }
-        else {
-            return true;
-        }
+    public void untoggleSelectEntity() {
+        selectedEntity = null;
+        gridLayer.setVisible(false);
     }
 
     /**
@@ -129,7 +114,9 @@ public class StaticEntityBuilder {
     }
 
     public void rotate() {
-        selectedEntity.changeTexture();
+        if (selectedEntity != null) {
+            selectedEntity.changeTexture();
+        }
 //        System.out.println(selectedEntity.getTiles().toString());
     }
 
