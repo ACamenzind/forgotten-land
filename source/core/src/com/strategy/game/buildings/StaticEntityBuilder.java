@@ -82,7 +82,7 @@ public class StaticEntityBuilder {
             if (isSpaceFree) {
                 long id = sound.play(0.5f);
                 sound.setPitch(id, 0.75f);
-//                selectedEntity = new Ma;
+
                 try {
                     // Makes a new instance of the proper subclass
                     // TODO: check if this creates other problems.
