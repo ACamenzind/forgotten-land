@@ -46,6 +46,8 @@ public class GameScreen implements Screen {
 
     private Sidebar sidebar;
 
+
+
     private Vector2 touchDownCoords;
     private Vector2 touchUpCoords;
 
@@ -81,6 +83,8 @@ public class GameScreen implements Screen {
         Gdx.input.setInputProcessor(gameInputMultiplexer);
 
         this.isSelecting = false;
+
+
     }
 
     public boolean isSelecting() {
@@ -149,27 +153,30 @@ public class GameScreen implements Screen {
 
         builder.clear();
 
+        // Draw selection box, bugged when resizing the screen
+        // Doesn't really do anything at the moment
+//        if (isSelecting) {
+//            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+//            float x = touchDownCoords.x;
+//            float y = Gdx.graphics.getHeight() - touchDownCoords.y;
+//            float dx = Gdx.input.getX() - x;
+//            float dy = (Gdx.graphics.getHeight() - Gdx.input.getY()) - y;
+//            Rectangle rect = new Rectangle(x, y, dx, dy);
+//            shapeRenderer.rect(rect.x, rect.y, rect.width, rect.height);
+//            shapeRenderer.end();
+//        }
 
-        // Draw selection box
-        if (isSelecting) {
-            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-            float x = touchDownCoords.x;
-            float y = Gdx.graphics.getHeight() - touchDownCoords.y;
-            float dx = Gdx.input.getX() - x;
-            float dy = (Gdx.graphics.getHeight() - Gdx.input.getY()) - y;
-            Rectangle rect = new Rectangle(x, y, dx, dy);
-            shapeRenderer.rect(rect.x, rect.y, rect.width, rect.height);
-            shapeRenderer.end();
-        }
+
+//        System.out.println(deltaMouse.toString());
 
 
 
-        MapProperties prop = map.getProperties();
-
-        int mapWidth = prop.get("width", Integer.class);
-        int mapHeight = prop.get("height", Integer.class);
-        int tileWidth = prop.get("tilewidth", Integer.class);
-        int tileHeight = prop.get("tileheight", Integer.class);
+//        MapProperties prop = map.getProperties();
+//
+//        int mapWidth = prop.get("width", Integer.class);
+//        int mapHeight = prop.get("height", Integer.class);
+//        int tileWidth = prop.get("tilewidth", Integer.class);
+//        int tileHeight = prop.get("tileheight", Integer.class);
 
         // Draw FPS counter on the top left
         batch.begin();

@@ -23,13 +23,17 @@ public class GameInputProcessor implements InputProcessor{
     private OrthographicCamera camera;
     private final int EDGE_THRESHOLD_WIDTH = 50;
     private Vector2 touchDownCoords;
+    private boolean isPressingMouse;
+    private Vector2 prevMouseCoords;
 
     public GameInputProcessor(GameScreen screen) {
         this.screen = screen;
         this.camera = screen.getCamera();
+        this.isPressingMouse = false;
+        this.prevMouseCoords = new Vector2(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
     }
 
-    // Used for continuous presses
+    // Used to handle continuous presses
     public void pollKeyboard() {
         // Moves the camera in the specified direction
         if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
@@ -72,6 +76,17 @@ public class GameInputProcessor implements InputProcessor{
                 (mouseX > (camera.viewportWidth / 4)) &&
                 (mouseX < (camera.viewportWidth * 3/4)))
             camera.translate(0, camera.zoom*(-Utils.BASE_CAMERA_SPEED));
+
+
+        // Move the camera when clicking and dragging.
+        // TODO: make it so that you have to press it for a certain amount of time to start dragging
+        Vector2 currentMouseCoords = new Vector2(Gdx.input.getX(), Gdx.input.getY());
+        Vector2 deltaMouse = new Vector2(currentMouseCoords.x - prevMouseCoords.x, currentMouseCoords.y - prevMouseCoords.y);
+
+        if (isPressingMouse) {
+            camera.translate(-deltaMouse.x * camera.zoom, deltaMouse.y * camera.zoom);
+        }
+        prevMouseCoords = new Vector2(currentMouseCoords);
     }
 
     @Override
@@ -114,6 +129,7 @@ public class GameInputProcessor implements InputProcessor{
         // Set coords used for selection box
         screen.setTouchDownCoords(new Vector2(screenX, screenY));
         screen.setSelecting(true);
+        isPressingMouse = true;
 
 
         Vector3 pickedTile = Utils.cartesianToIso(touch, camera);
@@ -161,7 +177,8 @@ public class GameInputProcessor implements InputProcessor{
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 //        screen.setTouchUpCoords(new Vector2(screenX, screenY));
-        screen.setSelecting(false);
+//        screen.setSelecting(false);
+        isPressingMouse = false;
         return false;
     }
 
@@ -179,9 +196,10 @@ public class GameInputProcessor implements InputProcessor{
 
     @Override
     public boolean scrolled(int amount) {
-        // TODO: add limits
         float mouseX = Gdx.input.getX();
         float mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
+
+        // The center coordinates of the screen
         float centerX = Gdx.graphics.getWidth() / 2;
         float centerY = Gdx.graphics.getHeight() / 2;
 
