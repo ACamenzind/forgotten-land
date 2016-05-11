@@ -34,13 +34,12 @@ public class MapEntity implements Disposable{
         this.mainTexture = null;
         this.tiles = new ArrayList<ExtendedStaticTiledMapTile>();
         this.prevCells = new ArrayList<TiledMapTileLayer.Cell>();
-        this.collisionSize = new Vector2(3,3);
+        this.collisionSize = new Vector2(0,0);
         this.imgOffset = new Vector2(0,0);
         this.isClicked = false;
         this.counter = 0;
         this.textures = new ArrayList<Texture>();
-        this.tiles2 = new ExtendedStaticTiledMapTile[(int)collisionSize.x][(int)collisionSize.y];
-        this.prevCells2 = new TiledMapTileLayer.Cell[(int)collisionSize.x][(int)collisionSize.y];
+
 //        sliceTexture(mainTexture);
     }
 
@@ -87,17 +86,21 @@ public class MapEntity implements Disposable{
      * Splits the entity's mainTexture into vertical slices of width TILE_SIZE
      */
     protected void sliceTexture(Texture mainTexture) {
+        this.tiles2 = new ExtendedStaticTiledMapTile[(int)collisionSize.x][(int)collisionSize.y];
+        this.prevCells2 = new TiledMapTileLayer.Cell[(int)collisionSize.x][(int)collisionSize.y];
+
         tiles = new ArrayList<ExtendedStaticTiledMapTile>(); // Reset tiles
         this.mainTexture = mainTexture;
         if (mainTexture != null) {
             TextureRegion tex = new TextureRegion(mainTexture);
             TextureRegion[][] arr = tex.split(Utils.TILE_SIZE, tex.getRegionHeight());
 
+            int TILE_HEIGHT = 64;
             for (int y = 0; y < collisionSize.y; y++) {
                 for (int x = 0; x < collisionSize.x; x++) {
-                    float cY = (collisionSize.x - 1 + (y - x)) * Utils.TILE_SIZE/2;
-                    float cX = (x + y)* Utils.TILE_SIZE/2;
-                    TextureRegion current = new TextureRegion(tex, (int)cX, tex.getRegionHeight() - (int)cY, Utils.TILE_SIZE, (int) cY);
+                    float cY = (collisionSize.x - 1 + (y - x)) * (TILE_HEIGHT/2);
+                    float cX = (x + y) * Utils.TILE_SIZE/2;
+                    TextureRegion current = new TextureRegion(tex, (int)cX, 0, Utils.TILE_SIZE, tex.getRegionHeight() - (int)cY);
                     ExtendedStaticTiledMapTile tile = new ExtendedStaticTiledMapTile(current);
                     tiles2[x][y] = tile;
                 }
