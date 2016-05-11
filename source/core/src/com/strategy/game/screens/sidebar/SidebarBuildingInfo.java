@@ -54,7 +54,7 @@ public class SidebarBuildingInfo extends Table implements Display {
 
     public SidebarBuildingInfo(MapEntity building) {
 
-        Assets.setBackground(this, "core/assets/GameScreenTextures/sidebar_bottom.png");
+        Assets.setBackground(this, "core/assets/textures/gameScreen/sidebar_bottom.png");
 
 
         // BUILDING IMAGE

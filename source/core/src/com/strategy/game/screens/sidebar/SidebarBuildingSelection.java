@@ -24,18 +24,18 @@ public class SidebarBuildingSelection extends Table implements Display {
     private static final float TITLE_POSITION_Y = 0.9f;
 
     public SidebarBuildingSelection() {
-        Assets.setBackground(this, "core/assets/GameScreenTextures/sidebar_build.png");
+        Assets.setBackground(this, "core/assets/textures/gameScreen/sidebar_build.png");
         buttons = new GameButton[BUTTONS_PER_COLUMN][BUTTONS_PER_ROW];
 
-        rotate = new GameButton("core/assets/GameScreenTextures/sidebar_build_rotate.png");
+        rotate = new GameButton("core/assets/textures/gameScreen/sidebar_build_rotate.png");
         rotate.addListenerBuildingRotate();
         addActor(rotate);
 
-        cancel = new GameButton("core/assets/GameScreenTextures/sidebar_build_cancel.png");
+        cancel = new GameButton("core/assets/textures/gameScreen/sidebar_build_cancel.png");
         cancel.addListenerBuilding(null);
         addActor(cancel);
 
-        back = new GameButton("core/assets/GameScreenTextures/sidebar_build_back.png");
+        back = new GameButton("core/assets/textures/gameScreen/sidebar_build_back.png");
         back.addListenerLink(Sidebar.DisplayType.BUILD);
         addActor(back);
     }

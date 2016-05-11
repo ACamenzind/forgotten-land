@@ -10,8 +10,8 @@ import com.strategy.game.buildings.House;
  */
 public class SidebarBuildResourcesCollectors extends SidebarBuildingSelection {
 
-    private static final GameButton house = new GameButton("core/assets/house1.png");
-    private static final GameButton house2 = new GameButton("core/assets/house1.png");
+    private static final GameButton house = new GameButton(Assets.house1);
+    private static final GameButton house2 = new GameButton(Assets.house1);
 
     public SidebarBuildResourcesCollectors() {
         super();

@@ -27,7 +27,7 @@ public class Sidebar extends Table implements Display {
         this.stage.addActor(this);
         this.screen = screen;
 
-        Assets.setBackground(this, "core/assets/GameScreenTextures/sidebar.png");
+        Assets.setBackground(this, "core/assets/textures/gameScreen/sidebar.png");
 
         displayTop = new SidebarMenu();
         addActor(displayTop);

@@ -12,10 +12,10 @@ import com.strategy.game.GameButton;
  */
 public class SidebarGameMenu extends SidebarOptionsSelection {
 
-    private static final GameButton loadGame = new GameButton("core/assets/GameScreenTextures/sidebar_main_load_game.png");
-    private static final GameButton newGame = new GameButton("core/assets/GameScreenTextures/sidebar_main_new_game.png");
-    private static final GameButton saveGame = new GameButton("core/assets/GameScreenTextures/sidebar_main_save_game.png");
-    private static final GameButton quitGame = new GameButton("core/assets/GameScreenTextures/sidebar_main_quit_game.png");
+    private static final GameButton loadGame = new GameButton("core/assets/textures/gameScreen/sidebar_main_load_game.png");
+    private static final GameButton newGame = new GameButton("core/assets/textures/gameScreen/sidebar_main_new_game.png");
+    private static final GameButton saveGame = new GameButton("core/assets/textures/gameScreen/sidebar_main_save_game.png");
+    private static final GameButton quitGame = new GameButton("core/assets/textures/gameScreen/sidebar_main_quit_game.png");
 
     public SidebarGameMenu() {
 

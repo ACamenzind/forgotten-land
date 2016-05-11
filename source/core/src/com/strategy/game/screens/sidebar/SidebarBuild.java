@@ -16,10 +16,10 @@ import java.awt.*;
  */
 public class SidebarBuild extends SidebarOptionsSelection {
 
-    private static final GameButton resourcesCollectors = new GameButton("core/assets/GameScreenTextures/sidebar_build_resources.png");
-    private static final GameButton support = new GameButton("core/assets/GameScreenTextures/sidebar_build_support.png");
-    private static final GameButton decorations = new GameButton("core/assets/GameScreenTextures/sidebar_build_decorations.png");
-    private static final GameButton other = new GameButton("core/assets/GameScreenTextures/sidebar_build_other.png");
+    private static final GameButton resourcesCollectors = new GameButton("core/assets/textures/gameScreen/sidebar_build_resources.png");
+    private static final GameButton support = new GameButton("core/assets/textures/gameScreen/sidebar_build_support.png");
+    private static final GameButton decorations = new GameButton("core/assets/textures/gameScreen/sidebar_build_decorations.png");
+    private static final GameButton other = new GameButton("core/assets/textures/gameScreen/sidebar_build_other.png");
 
 
     public SidebarBuild() {

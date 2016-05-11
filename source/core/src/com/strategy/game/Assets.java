@@ -19,21 +19,22 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
  * TODO: maybe add an AssetManager for better performance
  */
 public class Assets {
+
     public static TiledMap map;
     public static Texture house1, castle, leftwall, middlewall, rightwall, emptyTile;
     public static Sound bgSound, hit;
     private static final String DEFAULT_FONT_PATH = "core/assets/fonts/times_new_roman.ttf";
 
     public static void load() {
-//        map = new TmxMapLoader().load("core/assets/big_map.tmx");
+//        map = new TmxMapLoader().load("core/assets/maps/big_map.tmx");
         //TODO: add credit for CC3.0 sprites
-        map = new TmxMapLoader().load("core/assets/test128.tmx");
-        house1 = new Texture(Gdx.files.internal("core/assets/house1.png"));
-        castle = new Texture(Gdx.files.internal("core/assets/castle.png"));
-        leftwall = new Texture(Gdx.files.internal("core/assets/Wall/Wall_L.png"));
-        middlewall = new Texture(Gdx.files.internal("core/assets/Wall/Wall_M.png"));
-        rightwall = new Texture(Gdx.files.internal("core/assets/Wall/Wall_R.png"));
-        emptyTile = new Texture(Gdx.files.internal("core/assets/badlogic.png"));
+        map = new TmxMapLoader().load("core/assets/maps/default.tmx");
+        house1 = new Texture(Gdx.files.internal("core/assets/textures/buildings/house1.png"));
+        castle = new Texture(Gdx.files.internal("core/assets/textures/buildings/castle.png"));
+        leftwall = new Texture(Gdx.files.internal("core/assets/textures/buildings/wall/Wall_L.png"));
+        middlewall = new Texture(Gdx.files.internal("core/assets/textures/buildings/wall/Wall_M.png"));
+        rightwall = new Texture(Gdx.files.internal("core/assets/textures/buildings/wall/Wall_R.png"));
+        emptyTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/empty.png"));
 
         // http://opengameart.org/content/outdoor-ambiance CC3.0
         bgSound = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/Outdoor_ambiance.mp3"));

@@ -11,8 +11,8 @@ import com.strategy.game.buildings.Wall;
  */
 public class SidebarBuildingSupport extends SidebarBuildingSelection {
 
-    private static final GameButton castle = new GameButton("core/assets/castle.png");
-    private static final GameButton wall = new GameButton("core/assets/Wall/Wall_L.png");
+    private static final GameButton castle = new GameButton(Assets.castle);//new GameButton("core/assets/castle.png");
+    private static final GameButton wall = new GameButton(Assets.leftwall);//new GameButton("core/assets/Wall/Wall_L.png");
 
     public SidebarBuildingSupport() {
         super();

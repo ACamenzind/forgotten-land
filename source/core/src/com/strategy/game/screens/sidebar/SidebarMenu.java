@@ -2,7 +2,6 @@ package com.strategy.game.screens.sidebar;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
@@ -23,7 +22,7 @@ public class SidebarMenu extends Table implements Display {
 
     public SidebarMenu() {
 
-        gameInfoButton = new GameButton("core/assets/GameScreenTextures/sidebar_menu_info.png");
+        gameInfoButton = new GameButton("core/assets/textures/gameScreen/sidebar_menu_info.png");
         gameInfoButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (hasParent()) {
@@ -35,7 +34,7 @@ public class SidebarMenu extends Table implements Display {
         });
         addActor(gameInfoButton);
 
-        buildingsButton = new GameButton("core/assets/GameScreenTextures/sidebar_menu_build.png");
+        buildingsButton = new GameButton("core/assets/textures/gameScreen/sidebar_menu_build.png");
         buildingsButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (hasParent()) {
@@ -47,7 +46,7 @@ public class SidebarMenu extends Table implements Display {
         });
         addActor(buildingsButton);
 
-        mainMenuButton = new GameButton("core/assets/GameScreenTextures/sidebar_menu_menu.png");
+        mainMenuButton = new GameButton("core/assets/textures/gameScreen/sidebar_menu_menu.png");
         mainMenuButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (hasParent()) {

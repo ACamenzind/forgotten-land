@@ -23,7 +23,7 @@ public class SidebarOptionsSelection extends Table implements Display {
     private static final float TITLE_POSITION_Y = 0.9f;
 
     public SidebarOptionsSelection() {
-        Assets.setBackground(this, "core/assets/GameScreenTextures/sidebar_build.png");
+        Assets.setBackground(this, "core/assets/textures/gameScreen/sidebar_build.png");
 
     }
 
