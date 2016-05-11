@@ -31,7 +31,7 @@ public class World implements Disposable, Serializable {
     private PopulationHandler populationHandler;
     private int tick;
 
-    private static String filePath = "saveGame.ter";
+    private static String filePath = "saveGame.ser";
 
 
     public World(GameScreen gameScreen) {
