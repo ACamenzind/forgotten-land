@@ -83,7 +83,8 @@ public class GameInputProcessor implements InputProcessor{
         Vector2 currentMouseCoords = new Vector2(Gdx.input.getX(), Gdx.input.getY());
         Vector2 deltaMouse = new Vector2(currentMouseCoords.x - prevMouseCoords.x, currentMouseCoords.y - prevMouseCoords.y);
 
-        if (isPressingMouse) {
+        // Only works when not placing a building
+        if (isPressingMouse && screen.getBuilder().getSelectedEntity() == null) {
             camera.translate(-deltaMouse.x * camera.zoom, deltaMouse.y * camera.zoom);
         }
         prevMouseCoords = new Vector2(currentMouseCoords);
