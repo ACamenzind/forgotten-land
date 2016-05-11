@@ -182,11 +182,21 @@ public class GameInputProcessor implements InputProcessor{
         // TODO: add limits
         float mouseX = Gdx.input.getX();
         float mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
+        float centerX = Gdx.graphics.getWidth() / 2;
+        float centerY = Gdx.graphics.getHeight() / 2;
+
+        // Attenuates the amount of scrolling
+        final float FACTOR = 7.5f;
+
         if(camera.zoom > 0.2 || amount > 0) {
-            camera.zoom += amount / 10.f;
+            camera.zoom += amount / FACTOR;
         }
-        // Not working properly
-        //camera.translate(mouseX-1280, mouseY-720);
+
+        // When zooming-in, the camera zooms towards the mouse
+        if (amount < 0)
+            camera.translate((mouseX - centerX) / FACTOR, (mouseY - centerY) / FACTOR);
+
+
         camera.update();
         return true;
     }
