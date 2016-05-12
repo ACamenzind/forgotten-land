@@ -4,13 +4,13 @@ package com.strategy.game;
  * Created by batta on 28/04/16.
  */
 public class ResourceContainer {
-    final int wood;
-    final int food;
-    final int rock;
-    final int gold;
-    final int people;
+    public int wood;
+    public int food;
+    public int rock;
+    public int gold;
+    public int people;
 
-    public ResourceContainer(final int wood, final int food, final int rock, final int gold, final int people) {
+    public ResourceContainer(int wood, int food, int rock, int gold, int people) {
         this.wood = wood;
         this.food = food;
         this.rock = rock;

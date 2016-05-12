@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.strategy.game.buildings.Building;
 import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.screens.sidebar.Sidebar;
 

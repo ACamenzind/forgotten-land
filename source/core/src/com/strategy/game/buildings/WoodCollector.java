@@ -1,4 +1,6 @@
-package com.strategy.game;
+package com.strategy.game.buildings;
+
+import com.strategy.game.ResourceContainer;
 
 /**
  * Created by batta on 28/04/16.

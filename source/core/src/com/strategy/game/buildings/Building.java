@@ -1,5 +1,6 @@
-package com.strategy.game;
+package com.strategy.game.buildings;
 
+import com.strategy.game.ResourceContainer;
 import com.strategy.game.buildings.MapEntity;
 
 /**
