@@ -78,6 +78,19 @@ public class StaticEntityBuilder {
                     }
                 }
             }
+
+            // Check if
+            for (int i = x; i < x + selectedEntity.getInfluenceRadius(); i++) {
+                for (int j = y; j < y + selectedEntity.getInfluenceRadius(); j++) {
+                    TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
+                    if (cell != null) {
+                        isSpaceFree = false;
+                        break;
+                    }
+                }
+            }
+
+
             Sound sound = Assets.hit;
             if (isSpaceFree) {
                 long id = sound.play(0.5f);

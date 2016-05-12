@@ -46,6 +46,10 @@ public class MapEntity implements Disposable{
         //TODO: make pop-up window appear with details about the building.
     }
 
+    public int getInfluenceRadius() {
+        return influenceRadius;
+    }
+
     public Vector2 getCoords() {
         return new Vector2(clickX, clickY);
     }
