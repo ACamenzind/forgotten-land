@@ -76,7 +76,7 @@ public class World implements Disposable{
             System.out.println("--- Resources at turn " + tick + " ---");
             System.out.println("Food: " + resourceHandler.getFoodCounter());
             System.out.println("Gold: " + resourceHandler.getGoldCounter());
-            System.out.println("Stone: " + resourceHandler.getStoneCounter());
+            System.out.println("Rock: " + resourceHandler.getRockCounter());
             System.out.println("Wood: " + resourceHandler.getWoodCounter());
             System.out.println("People: " + populationHandler.getPopulationCounter());
             System.out.println("-----------------");

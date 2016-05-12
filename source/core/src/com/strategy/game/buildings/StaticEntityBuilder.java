@@ -101,7 +101,7 @@ public class StaticEntityBuilder {
                 if (this.getSelectedEntity() instanceof House) //TODO: abstract a bit
                     world.getResourceHandler().incrementWoodCounter(-100);
                 else if (this.getSelectedEntity() instanceof Castle)
-                    world.getResourceHandler().incrementStoneCounter(-100);
+                    world.getResourceHandler().incrementRockCounter(-100);
 
 
                 //remove resources
