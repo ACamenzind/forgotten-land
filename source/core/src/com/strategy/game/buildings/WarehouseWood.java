@@ -1,5 +1,7 @@
 package com.strategy.game.buildings;
 
+import com.badlogic.gdx.math.Vector2;
+import com.strategy.game.Assets;
 import com.strategy.game.ResourceContainer;
 
 /**
@@ -16,8 +18,58 @@ public class WarehouseWood extends Building {
     private static final int INFLUENCE_RADIUS = 5;
     private int life = MAX_LIFE;
     private int workers = 0;
+    // TODO: add max wood storable
 
     public WarehouseWood() {
         super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS);
+    }
+
+
+    public static String getNAME() {
+        return NAME;
+    }
+
+    public static ResourceContainer getCOST() {
+        return COST;
+    }
+
+    public static ResourceContainer getPRODUCTION() {
+        return PRODUCTION;
+    }
+
+    public static ResourceContainer getMAINTENANCE() {
+        return MAINTENANCE;
+    }
+
+    public static ResourceContainer getResourceStored() {
+        return RESOURCE_STORED;
+    }
+
+    public static int getMaxLife() {
+        return MAX_LIFE;
+    }
+
+    public static int getMaxWorkers() {
+        return MAX_WORKERS;
+    }
+
+    public static int getInfluenceRadius() {
+        return INFLUENCE_RADIUS;
+    }
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    public int getWorkers() {
+        return workers;
+    }
+
+    public void setWorkers(int workers) {
+        this.workers = workers;
     }
 }

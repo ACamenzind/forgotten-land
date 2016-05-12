@@ -11,12 +11,16 @@ public class House extends Building {
     //TODO: maybe put buildings properties into a single object.
     private static final String NAME = "House";
     private static final ResourceContainer COST = new ResourceContainer(100, 100, 100, 100, 5);
-    private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 0, 0, 0, 1);
+    private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 0, 0, 0, 0);
     private static final ResourceContainer MAINTENANCE = new ResourceContainer(1, 1, 1, 1, 0);
-
+    private static final ResourceContainer RESOURCE_STORED = new ResourceContainer(0, 0, 0, 0, 0);
     private static final int MAX_LIFE = 10;
     private static final int MAX_WORKERS = 5;
     private static final int INFLUENCE_RADIUS = 10;
+    private int life = MAX_LIFE;
+    private int workers = 0;
+    //TODO: add max popolation storable
+
     public House() {
         super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS);
         this.mainTexture = Assets.house1;
