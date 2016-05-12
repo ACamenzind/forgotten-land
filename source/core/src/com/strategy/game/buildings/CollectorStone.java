@@ -13,6 +13,8 @@ public class CollectorStone extends Building {
     private static final int MAX_LIFE = 10;
     private static final int MAX_WORKERS = 5;
     private static final int INFLUENCE_RADIUS = 5;
+    private int life = MAX_LIFE;
+    private int workers = 0;
 
     public CollectorStone() {
         super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS);
