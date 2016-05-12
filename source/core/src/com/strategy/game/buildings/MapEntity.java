@@ -22,6 +22,7 @@ public class MapEntity implements Disposable{
     private TiledMapTileLayer layer;
     protected ArrayList<Texture> textures;
     private int counter;
+    protected int influenceRadius;
 
     private ExtendedStaticTiledMapTile[][] tiles;
     private TiledMapTileLayer.Cell[][] prevCells;
