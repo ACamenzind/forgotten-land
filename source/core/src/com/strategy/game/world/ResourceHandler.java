@@ -9,23 +9,23 @@ public class ResourceHandler {
     private int woodCounter;
     private int goldCounter;
     private int foodCounter;
-    private int stoneCounter;
+    private int rockCounter;
 
     private int woodIncrementer;
     private int goldIncrementer;
     private int foodIncrementer;
-    private int stoneIncrementer;
+    private int rockIncrementer;
 
-    public ResourceHandler(int startingIncrement, int woodCounter, int goldCounter, int foodCounter, int stoneCounter) {
+    public ResourceHandler(int startingIncrement, int woodCounter, int goldCounter, int foodCounter, int rockCounter) {
         this.startingIncrement = startingIncrement;
         this.woodCounter = woodCounter;
         this.goldCounter = goldCounter;
         this.foodCounter = foodCounter;
-        this.stoneCounter = stoneCounter;
+        this.rockCounter = rockCounter;
         this.woodIncrementer = 0;
         this.goldIncrementer = 0;
         this.foodIncrementer = 0;
-        this.stoneIncrementer = 0;
+        this.rockIncrementer = 0;
     }
 
 
@@ -41,8 +41,8 @@ public class ResourceHandler {
         foodIncrementer += foodIncrementerIncrease;
     }
 
-    public void incrementStoneIncrementer(int stoneIncrementerIncrease) {
-        stoneIncrementer += stoneIncrementerIncrease;
+    public void incrementRockIncrementer(int rockIncrementerIncrease) {
+        rockIncrementer += rockIncrementerIncrease;
     }
 
 
@@ -58,8 +58,8 @@ public class ResourceHandler {
         foodCounter += foodCounterIncrease;
     }
 
-    public void incrementStoneCounter (int stoneCounterIncrease) {
-        stoneCounter += stoneCounterIncrease;
+    public void incrementRockCounter (int rockCounterIncrease) {
+        rockCounter += rockCounterIncrease;
     }
 
 
@@ -79,8 +79,8 @@ public class ResourceHandler {
         return foodCounter;
     }
 
-    public int getStoneCounter() {
-        return stoneCounter;
+    public int getRockCounter() {
+        return rockCounter;
     }
 
     public int getWoodIncrementer() {
@@ -95,8 +95,8 @@ public class ResourceHandler {
         return foodIncrementer;
     }
 
-    public int getStoneIncrementer() {
-        return stoneIncrementer;
+    public int getRockIncrementer() {
+        return rockIncrementer;
     }
 
 
@@ -105,7 +105,7 @@ public class ResourceHandler {
         woodCounter += startingIncrement + woodIncrementer;
         goldCounter += startingIncrement + goldCounter;
         foodCounter += startingIncrement + foodIncrementer;
-        stoneCounter += startingIncrement + stoneIncrementer;
+        rockCounter += startingIncrement + rockIncrementer;
 
     }
 
