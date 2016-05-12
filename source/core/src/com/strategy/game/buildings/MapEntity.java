@@ -85,7 +85,7 @@ public class MapEntity implements Disposable{
         if (mainTexture != null) {
             TextureRegion tex = new TextureRegion(mainTexture);
 
-            int TILE_HEIGHT = 64;
+            int TILE_HEIGHT = Utils.TILE_SIZE/2;
             for (int y = 0; y < collisionSize.y; y++) {
                 for (int x = 0; x < collisionSize.x; x++) {
                     float cY = (collisionSize.x - 1 + (y - x)) * (TILE_HEIGHT/2);

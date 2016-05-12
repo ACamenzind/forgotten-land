@@ -211,9 +211,8 @@ public class GameInputProcessor implements InputProcessor{
             camera.zoom += amount / FACTOR;
         }
 
-        // When zooming-in, the camera zooms towards the mouse
-        if (amount < 0 && camera.zoom > 0.4)
-            camera.translate((mouseX - centerX) / FACTOR, (mouseY - centerY) / FACTOR);
+        if (camera.zoom > 0.4)
+            camera.translate(- amount * (mouseX - centerX) / FACTOR, - amount * (mouseY - centerY) / FACTOR);
 
 
         camera.update();
