@@ -3,7 +3,7 @@ package com.strategy.game;
 import com.strategy.game.buildings.MapEntity;
 
 /**
- * Created by batta on 28/04/16.
+ * A building with its resources. Inherit from this to create new ones.
  */
 public class Building extends MapEntity {
     private final String name;
@@ -11,16 +11,26 @@ public class Building extends MapEntity {
     private final int maxLife;
     private final int maxWorkers;
     private final ResourceContainer productions;
+    private final ResourceContainer maintenanceCosts;
     private int life;
     private int workers;
+    private int influenceRadius;
 
-    public Building(final String name, final ResourceContainer costs, final ResourceContainer productions, final int maxLife, final int maxWorkers) {
+    public Building(final String name,
+                    final ResourceContainer costs,
+                    final ResourceContainer productions,
+                    final ResourceContainer maintenanceCosts,
+                    final int maxLife,
+                    final int maxWorkers,
+                    final int influenceRadius) {
         this.name = name;
         this.costs = costs;
         this.productions = productions;
+        this.maintenanceCosts = maintenanceCosts;
         this.maxLife = maxLife;
         this.life = maxLife;
         this.maxWorkers = maxWorkers;
+        this.influenceRadius = influenceRadius;
     }
 
     /**

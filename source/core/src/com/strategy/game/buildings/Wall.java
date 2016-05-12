@@ -14,11 +14,14 @@ public class Wall extends Building {
     private static final String NAME = "Wall";
     private static final ResourceContainer COST = new ResourceContainer(0, 0, 0, 0, 0);
     private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 0, 0, 0, 0);
+    private static final ResourceContainer MAINTENANCE = new ResourceContainer(0, 1, 1, 1, 0);
+
     private static final int MAX_LIFE = 10;
     private static final int MAX_WORKERS = 0;
+    private static final int INFLUENCE_RADIUS = 10;
 
     public Wall() {
-        super(NAME, COST, PRODUCTION, MAX_LIFE, MAX_WORKERS);
+        super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS);
         this.textures.add(Assets.leftwall);
         this.textures.add(Assets.rightwall);
         this.textures.add(Assets.middlewall);

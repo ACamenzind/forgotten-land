@@ -59,6 +59,14 @@ public class World implements Disposable{
         return populationHandler;
     }
 
+    /**
+     * Searches the map file for tiles that are of type resource, and adds them to the resource list
+     * to keep track of them.
+     */
+    private void readResources() {
+
+    }
+
     public void update(float delta) {
         if(updateCounter / 300 >= 1) {
             resourceHandler.update();
