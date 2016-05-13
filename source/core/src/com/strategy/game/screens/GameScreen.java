@@ -85,10 +85,13 @@ public class GameScreen implements Screen {
 
         this.isSelecting = false;
 
-        builder.toggleSelectEntity(new House());
-        builder.placeSelectedEntity(25, 25, true);
-        builder.untoggleSelectEntity();
 
+        // Starting building
+        // TODO: remove magic numbers (make it random?)
+        builder.toggleSelectEntity(new House());
+        builder.placeSelectedEntity(25, 20, true);
+        builder.untoggleSelectEntity();
+        camera.translate(25*128, 0);
 
     }
 
