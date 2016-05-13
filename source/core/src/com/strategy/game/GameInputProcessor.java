@@ -136,7 +136,7 @@ public class GameInputProcessor implements InputProcessor{
         Vector3 pickedTile = Utils.cartesianToIso(touch, camera);
         //TODO: better to handle coords inside the builder?
         if (screen.getBuilder().getSelectedEntity() != null) {
-            screen.getBuilder().placeSelectedEntity((int) pickedTile.x, (int) pickedTile.y);
+            screen.getBuilder().placeSelectedEntity((int) pickedTile.x, (int) pickedTile.y, false);
         }
         else if (screen.getBuilder().getSelectedEntity() == null)  {
             //TODO: get tile info and show window
@@ -208,7 +208,7 @@ public class GameInputProcessor implements InputProcessor{
         final float FACTOR = 7.5f;
 
         final float MAX_ZOOM = 0.4f;
-        final float MIN_ZOOM = 1.4f;
+        final float MIN_ZOOM = 100f;
 
         if(camera.zoom + amount / FACTOR > MAX_ZOOM && camera.zoom + amount / FACTOR < MIN_ZOOM) {
             camera.zoom += amount / FACTOR;
