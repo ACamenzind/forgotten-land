@@ -52,10 +52,10 @@ public class WarehouseRock extends Building {
     public static int getMaxWorkers() {
         return MAX_WORKERS;
     }
-
-    public static int getInfluenceRadius() {
-        return INFLUENCE_RADIUS;
-    }
+//
+//    public static int getInfluenceRadius() {
+//        return INFLUENCE_RADIUS;
+//    }
 
     public int getLife() {
         return life;

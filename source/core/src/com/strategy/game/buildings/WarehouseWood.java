@@ -53,10 +53,6 @@ public class WarehouseWood extends Building {
         return MAX_WORKERS;
     }
 
-    public static int getInfluenceRadius() {
-        return INFLUENCE_RADIUS;
-    }
-
     public int getLife() {
         return life;
     }
