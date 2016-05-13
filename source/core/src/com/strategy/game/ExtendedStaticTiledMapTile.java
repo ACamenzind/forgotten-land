@@ -28,6 +28,10 @@ public class ExtendedStaticTiledMapTile extends StaticTiledMapTile {
         }
         this.textureRegion = copy.getTextureRegion();
         this.id = copy.getId();
+        if (copy instanceof ExtendedStaticTiledMapTile) {
+            this.object = ((ExtendedStaticTiledMapTile) copy).getObject();
+//            this.isObstacle
+        }
     }
 
     public int getBuildingsNearby() {

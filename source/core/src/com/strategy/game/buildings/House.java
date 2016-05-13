@@ -16,7 +16,7 @@ public class House extends Building {
 
     private static final int MAX_LIFE = 10;
     private static final int MAX_WORKERS = 5;
-    private static final int INFLUENCE_RADIUS = 10;
+    private static final int INFLUENCE_RADIUS = 5;
     public House() {
         super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS);
         this.mainTexture = Assets.house1;

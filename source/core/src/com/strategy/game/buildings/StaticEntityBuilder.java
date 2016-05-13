@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.Assets;
@@ -70,13 +71,21 @@ public class StaticEntityBuilder {
             boolean isSpaceFree = true;
             boolean isInInfluenceRadius = false;
 
+            // collision when:
+            // - tile has obstacle property
+            // - tile has object
+
+
             // Check if cells are occupied
             for (int i = x; i < x + selectedEntity.getCollisionSize().x; i++) {
                 for (int j = y; j < y + selectedEntity.getCollisionSize().y; j++) {
-                    TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
-                    if (cell != null && cell.getTile() instanceof ExtendedStaticTiledMapTile) {
-                        ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
-                        if (tile != null && tile.getObject() != null) {
+                    TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i,j);
+                    boolean condition = cell != null && cell.getTile() != null;
+                    if (condition) {
+                        TiledMapTile tile = cell.getTile();
+                        boolean hasObject = tile instanceof ExtendedStaticTiledMapTile && ((ExtendedStaticTiledMapTile) tile).getObject() != null;
+                        boolean hasProperty = tile.getProperties().get("obstacle", Boolean.class) != null;
+                        if (hasObject || hasProperty) {
                             isSpaceFree = false;
                             break;
                         }
@@ -93,7 +102,6 @@ public class StaticEntityBuilder {
                         if (cell.getTile() instanceof ExtendedStaticTiledMapTile) {
                             ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
                             if (tile != null && tile.getBuildingsNearby() > 0) {
-                                System.out.println(tile.getBuildingsNearby());
                                 isInInfluenceRadius = true;
                                 break;
                             }
@@ -104,7 +112,7 @@ public class StaticEntityBuilder {
 
             if (forced) isInInfluenceRadius = true;
 
-
+//            isInInfluenceRadius = true;
             Sound sound = Assets.hit;
 
             if (isSpaceFree && isInInfluenceRadius) {

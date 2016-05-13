@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 import com.strategy.game.Assets;
@@ -88,9 +89,9 @@ public class MapEntity implements Disposable{
     protected void sliceTexture(Texture mainTexture) {
         this.tiles = new ExtendedStaticTiledMapTile[(int)collisionSize.x][(int)collisionSize.y];
         this.prevCells = new TiledMapTileLayer.Cell[(int)collisionSize.x][(int)collisionSize.y];
-        // TODO: 13/05/2016 Set dynamically 
+        // TODO: 13/05/2016 Set dynamically
         this.prevCellsInfluence = new TiledMapTileLayer.Cell[1000][1000]; 
-        System.out.println(influenceRadius);
+//        System.out.println(influenceRadius);
 
 
         this.mainTexture = mainTexture;
@@ -126,7 +127,6 @@ public class MapEntity implements Disposable{
         for (int y = 0; y < collisionSize.y; y++) {
             for (int x = 0; x < collisionSize.x; x++) {
                 TiledMapTileLayer.Cell cell = layer.getCell(clickX + x, clickY + y);
-//                System.out.println(influenceRadius);
                 prevCells[x][y] = cell;
                 if (cell == null)
                     cell = new TiledMapTileLayer.Cell();
@@ -140,35 +140,37 @@ public class MapEntity implements Disposable{
         // Set influence radius
         int startY = clickY - influenceRadius;
         int startX = clickX - influenceRadius;
+        int endY = clickY + influenceRadius + (int) collisionSize.y;
+        int endX = clickX + influenceRadius + (int) collisionSize.x;
 
         // TODO: 12/05/2016 Add also for upper limits
         if (startX < 0) startX = 0;
         if (startY < 0) startY = 0;
 
-        for (int y = startY; y < clickY + influenceRadius; y++) {
-            for (int x = startX; x < clickX + influenceRadius; x++) {
+        for (int y = startY; y < endY; y++) {
+            for (int x = startX; x < endX; x++) {
                 TiledMapTileLayer.Cell cell = layer.getCell(x, y);
-//                System.out.println(x);
-//                System.out.println(y);
                 prevCellsInfluence[x][y] = cell;
 
-                TiledMapTile tile;
                 if (cell == null) {
                     cell = new TiledMapTileLayer.Cell();
                 }
 
+
                 TextureRegion texture;
                 if (layer.getName().equals("Selection")) {
                     texture = new TextureRegion(Assets.redTile);
+                } else if (cell.getTile() != null) {
+                    texture = cell.getTile().getTextureRegion();
                 } else {
                     texture = new TextureRegion(Assets.emptyTile);
                 }
 
-                if (cell.getTile() instanceof ExtendedStaticTiledMapTile) {
-                    tile = cell.getTile();
-                }
-                else {
-                    tile = new ExtendedStaticTiledMapTile(texture);
+                TiledMapTile tile;
+                tile = cell.getTile();
+                if (!(tile instanceof ExtendedStaticTiledMapTile)) {
+                    if (tile == null) tile = new ExtendedStaticTiledMapTile(texture);
+                    else    tile = new ExtendedStaticTiledMapTile((StaticTiledMapTile) tile);
                 }
 
                 ((ExtendedStaticTiledMapTile) tile).incBuildingsNearby();
@@ -188,13 +190,15 @@ public class MapEntity implements Disposable{
         // Set influence radius
         int startY = clickY - influenceRadius;
         int startX = clickX - influenceRadius;
+        int endY = clickY + influenceRadius + (int) collisionSize.y;
+        int endX = clickX + influenceRadius + (int) collisionSize.x;
 
         // TODO: 12/05/2016 Add also for upper limits
         if (startX < 0) startX = 0;
         if (startY < 0) startY = 0;
 
-        for (int y = startY; y < clickY + influenceRadius; y++) {
-            for (int x = startX; x < clickX + influenceRadius; x++) {
+        for (int y = startY; y < endY; y++) {
+            for (int x = startX; x < endX; x++) {
                 layer.setCell(x, y, prevCellsInfluence[x][y]);
             }
         }
@@ -204,11 +208,7 @@ public class MapEntity implements Disposable{
                 layer.setCell(clickX + x, clickY + y, prevCells[x][y]);
             }
         }
-
-
     }
-
-
 
     @Override
     public void dispose() {
