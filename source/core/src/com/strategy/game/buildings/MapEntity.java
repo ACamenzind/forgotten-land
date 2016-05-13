@@ -2,9 +2,12 @@ package com.strategy.game.buildings;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
+import com.strategy.game.Assets;
 import com.strategy.game.ExtendedStaticTiledMapTile;
 import com.strategy.game.Utils;
 
@@ -26,6 +29,7 @@ public class MapEntity implements Disposable{
 
     private ExtendedStaticTiledMapTile[][] tiles;
     private TiledMapTileLayer.Cell[][] prevCells;
+    private TiledMapTileLayer.Cell[][] prevCellsInfluence;
 
 
     public MapEntity() {
@@ -44,6 +48,10 @@ public class MapEntity implements Disposable{
     public void setClicked(boolean clicked) {
         isClicked = clicked;
         //TODO: make pop-up window appear with details about the building.
+    }
+
+    public int getInfluenceRadius() {
+        return influenceRadius;
     }
 
     public Vector2 getCoords() {
@@ -81,6 +89,8 @@ public class MapEntity implements Disposable{
     protected void sliceTexture(Texture mainTexture) {
         this.tiles = new ExtendedStaticTiledMapTile[(int)collisionSize.x][(int)collisionSize.y];
         this.prevCells = new TiledMapTileLayer.Cell[(int)collisionSize.x][(int)collisionSize.y];
+        // TODO: 13/05/2016 Set dynamically
+        this.prevCellsInfluence = new TiledMapTileLayer.Cell[1000][1000];
 
         this.mainTexture = mainTexture;
         if (mainTexture != null) {
@@ -110,14 +120,60 @@ public class MapEntity implements Disposable{
         this.clickX = clickX;
         this.clickY = clickY;
 
+        // Set collision on cells
         for (int y = 0; y < collisionSize.y; y++) {
             for (int x = 0; x < collisionSize.x; x++) {
-                prevCells[x][y] = layer.getCell(clickX + x, clickY + y);
-                TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
+                TiledMapTileLayer.Cell cell = layer.getCell(clickX + x, clickY + y);
+                prevCells[x][y] = cell;
+                if (cell == null)
+                    cell = new TiledMapTileLayer.Cell();
                 tiles[x][y].setObstacle(true);
                 tiles[x][y].setObject(this);
                 cell.setTile(tiles[x][y]);
                 layer.setCell(clickX + x, clickY + y, cell);
+            }
+        }
+
+        // Set influence radius
+        int startY = clickY - influenceRadius;
+        int startX = clickX - influenceRadius;
+        int endY = clickY + influenceRadius + (int) collisionSize.y;
+        int endX = clickX + influenceRadius + (int) collisionSize.x;
+
+        // TODO: 12/05/2016 Add also for upper limits
+        if (startX < 0) startX = 0;
+        if (startY < 0) startY = 0;
+
+        // Creates the influence area
+        for (int y = startY; y < endY; y++) {
+            for (int x = startX; x < endX; x++) {
+                TiledMapTileLayer.Cell cell = layer.getCell(x, y);
+                prevCellsInfluence[x][y] = cell;
+
+                if (cell == null) {
+                    cell = new TiledMapTileLayer.Cell();
+                }
+
+                // TODO: maybe put the area drawing on another layer
+                TextureRegion texture;
+                if (layer.getName().equals("Selection")) {
+                    texture = new TextureRegion(Assets.redTile);
+                } else if (cell.getTile() != null) {
+                    texture = cell.getTile().getTextureRegion();
+                } else {
+                    texture = new TextureRegion(Assets.emptyTile);
+                }
+
+                TiledMapTile tile;
+                tile = cell.getTile();
+                if (!(tile instanceof ExtendedStaticTiledMapTile)) {
+                    if (tile == null) tile = new ExtendedStaticTiledMapTile(texture);
+                    else    tile = new ExtendedStaticTiledMapTile((StaticTiledMapTile) tile);
+                }
+
+                ((ExtendedStaticTiledMapTile) tile).incBuildingsNearby();
+                cell.setTile(tile);
+                layer.setCell(x, y, cell);
             }
         }
     }
@@ -126,14 +182,29 @@ public class MapEntity implements Disposable{
      * Resets the tiles to their previous state
      */
     public void resetTiles() {
+
+        // Set influence radius
+        int startY = clickY - influenceRadius;
+        int startX = clickX - influenceRadius;
+        int endY = clickY + influenceRadius + (int) collisionSize.y;
+        int endX = clickX + influenceRadius + (int) collisionSize.x;
+
+        // TODO: 12/05/2016 Add also for upper limits
+        if (startX < 0) startX = 0;
+        if (startY < 0) startY = 0;
+
+        for (int y = startY; y < endY; y++) {
+            for (int x = startX; x < endX; x++) {
+                layer.setCell(x, y, prevCellsInfluence[x][y]);
+            }
+        }
+
         for (int y = 0; y < collisionSize.y; y++) {
             for (int x = 0; x < collisionSize.x; x++) {
                 layer.setCell(clickX + x, clickY + y, prevCells[x][y]);
             }
         }
     }
-
-
 
     @Override
     public void dispose() {

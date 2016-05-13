@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.strategy.game.*;
+import com.strategy.game.buildings.House;
 import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.screens.sidebar.Sidebar;
 import com.strategy.game.world.World;
@@ -84,6 +85,13 @@ public class GameScreen implements Screen {
 
         this.isSelecting = false;
 
+
+        // Starting building
+        // TODO: remove magic numbers (make it random?)
+        builder.toggleSelectEntity(new House());
+        builder.placeSelectedEntity(25, 20, true);
+        builder.untoggleSelectEntity();
+        camera.translate(25*128, 0);
 
     }
 

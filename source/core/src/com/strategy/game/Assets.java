@@ -21,7 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 public class Assets {
 
     public static TiledMap map;
-    public static Texture house1, castle, leftwall, middlewall, rightwall, emptyTile;
+    public static Texture house1, castle, leftwall, middlewall, rightwall, emptyTile, redTile;
     public static Sound bgSound, hit;
     private static final String DEFAULT_FONT_PATH = "core/assets/fonts/times_new_roman.ttf";
 
@@ -35,6 +35,7 @@ public class Assets {
         middlewall = new Texture(Gdx.files.internal("core/assets/textures/buildings/wall/Wall_M.png"));
         rightwall = new Texture(Gdx.files.internal("core/assets/textures/buildings/wall/Wall_R.png"));
         emptyTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/empty.png"));
+        redTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/red.png"));
 
         // http://opengameart.org/content/outdoor-ambiance CC3.0
         bgSound = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/Outdoor_ambiance.mp3"));

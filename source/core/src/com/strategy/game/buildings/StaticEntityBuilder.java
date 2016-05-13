@@ -4,9 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.Assets;
+import com.strategy.game.ExtendedStaticTiledMapTile;
 import com.strategy.game.Utils;
 import com.strategy.game.screens.GameScreen;
 import com.strategy.game.world.World;
@@ -64,22 +66,56 @@ public class StaticEntityBuilder {
      * @param x : tile coordinate
      * @param y : tile coordinate
      */
-    public void placeSelectedEntity(int x, int y) {
+    public void placeSelectedEntity(int x, int y, boolean forced) {
         if (selectedEntity != null) {
             boolean isSpaceFree = true;
+            boolean isInInfluenceRadius = false;
+
+            // collision when:
+            // - tile has obstacle property
+            // - tile has object
+
 
             // Check if cells are occupied
             for (int i = x; i < x + selectedEntity.getCollisionSize().x; i++) {
                 for (int j = y; j < y + selectedEntity.getCollisionSize().y; j++) {
-                    TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
-                    if (cell != null) {
-                        isSpaceFree = false;
-                        break;
+                    TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i,j);
+                    boolean condition = cell != null && cell.getTile() != null;
+                    if (condition) {
+                        TiledMapTile tile = cell.getTile();
+                        boolean hasObject = tile instanceof ExtendedStaticTiledMapTile && ((ExtendedStaticTiledMapTile) tile).getObject() != null;
+                        boolean hasProperty = tile.getProperties().get("obstacle", Boolean.class) != null;
+                        if (hasObject || hasProperty) {
+                            isSpaceFree = false;
+                            break;
+                        }
                     }
                 }
             }
+
+            int influenceRadius = selectedEntity.getInfluenceRadius();
+            // Check whether it's in the area of influence of another building
+            for (int i = x - (int)selectedEntity.getCollisionSize().x; i < x + (int)selectedEntity.getCollisionSize().x; i++) {
+                for (int j = y - (int)selectedEntity.getCollisionSize().y; j < y + (int)selectedEntity.getCollisionSize().y; j++) {
+                    TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
+                    if (cell != null) {
+                        if (cell.getTile() instanceof ExtendedStaticTiledMapTile) {
+                            ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
+                            if (tile != null && tile.getBuildingsNearby() > 0) {
+                                isInInfluenceRadius = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (forced) isInInfluenceRadius = true;
+
+//            isInInfluenceRadius = true;
             Sound sound = Assets.hit;
-            if (isSpaceFree) {
+
+            if (isSpaceFree && isInInfluenceRadius) {
                 long id = sound.play(0.5f);
                 sound.setPitch(id, 0.75f);
 

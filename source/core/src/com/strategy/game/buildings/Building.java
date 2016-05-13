@@ -15,7 +15,6 @@ public class Building extends MapEntity {
     private final ResourceContainer maintenanceCosts;
     private int life;
     private int workers;
-//    private int influenceRadius;
 
     public Building(final String name,
                     final ResourceContainer costs,
