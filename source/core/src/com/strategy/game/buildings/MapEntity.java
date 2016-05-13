@@ -90,9 +90,7 @@ public class MapEntity implements Disposable{
         this.tiles = new ExtendedStaticTiledMapTile[(int)collisionSize.x][(int)collisionSize.y];
         this.prevCells = new TiledMapTileLayer.Cell[(int)collisionSize.x][(int)collisionSize.y];
         // TODO: 13/05/2016 Set dynamically
-        this.prevCellsInfluence = new TiledMapTileLayer.Cell[1000][1000]; 
-//        System.out.println(influenceRadius);
-
+        this.prevCellsInfluence = new TiledMapTileLayer.Cell[1000][1000];
 
         this.mainTexture = mainTexture;
         if (mainTexture != null) {
@@ -122,7 +120,6 @@ public class MapEntity implements Disposable{
         this.clickX = clickX;
         this.clickY = clickY;
 
-
         // Set collision on cells
         for (int y = 0; y < collisionSize.y; y++) {
             for (int x = 0; x < collisionSize.x; x++) {
@@ -147,6 +144,7 @@ public class MapEntity implements Disposable{
         if (startX < 0) startX = 0;
         if (startY < 0) startY = 0;
 
+        // Creates the influence area
         for (int y = startY; y < endY; y++) {
             for (int x = startX; x < endX; x++) {
                 TiledMapTileLayer.Cell cell = layer.getCell(x, y);
@@ -156,7 +154,7 @@ public class MapEntity implements Disposable{
                     cell = new TiledMapTileLayer.Cell();
                 }
 
-
+                // TODO: maybe put the area drawing on another layer
                 TextureRegion texture;
                 if (layer.getName().equals("Selection")) {
                     texture = new TextureRegion(Assets.redTile);
@@ -178,8 +176,6 @@ public class MapEntity implements Disposable{
                 layer.setCell(x, y, cell);
             }
         }
-
-
     }
 
     /**
