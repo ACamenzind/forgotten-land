@@ -109,6 +109,8 @@ public class MapEntity implements Disposable{
         }
     }
 
+
+
     /**
      * Places the Entity onto the given layer at the specified coordinates
      * @param layer the layer onto which to put the entity
@@ -154,10 +156,11 @@ public class MapEntity implements Disposable{
                     cell = new TiledMapTileLayer.Cell();
                 }
 
-                // TODO: maybe put the area drawing on another layer
                 TextureRegion texture;
-                if (layer.getName().equals("Selection")) {
-                    texture = new TextureRegion(Assets.redTile);
+                //TODO: remove the first condition (temporarily left there)
+                if (layer.getName().equals("Selection") && cell.getTile() != null) {
+//                    texture = new TextureRegion(Assets.redTile);
+                    texture = cell.getTile().getTextureRegion();
                 } else if (cell.getTile() != null) {
                     texture = cell.getTile().getTextureRegion();
                 } else {

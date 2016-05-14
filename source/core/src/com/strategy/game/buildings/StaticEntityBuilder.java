@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
@@ -21,6 +22,7 @@ public class StaticEntityBuilder {
     private GameScreen gameScreen;
     private TiledMapTileLayer buildingsLayer; // the buildings layer
     private TiledMapTileLayer selectionLayer; // contains the selected building
+    private TiledMapTileLayer influenceLayer;
     private MapEntity selectedEntity;
     private World world;
     private TiledMapTileLayer gridLayer;
@@ -31,7 +33,9 @@ public class StaticEntityBuilder {
         this.world = gameScreen.getWorld();
         this.buildingsLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Buildings");
         this.selectionLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Selection");
+        this.influenceLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Influence");
         this.selectionLayer.setOpacity(0.5f);
+        this.influenceLayer.setOpacity(0.2f);
         this.gridLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Grid");
         this.gridLayer.setVisible(false);
         this.gridLayer.setOpacity(0.2f);
@@ -49,16 +53,44 @@ public class StaticEntityBuilder {
         if (entity != null) {
             selectedEntity = entity;
             gridLayer.setVisible(true);
+            influenceLayer.setVisible(true);
         }
         else {
             selectedEntity = null;
             gridLayer.setVisible(false);
+            influenceLayer.setVisible(false);
         }
     }
 
     public void untoggleSelectEntity() {
         selectedEntity = null;
         gridLayer.setVisible(false);
+        influenceLayer.setVisible(false);
+    }
+
+
+    /**
+     * Draws the influence area of all placed buildings.
+     * (Checks whether each tile has any buildings nearby and if so, highlights the tile)
+     */
+    private void drawInfluence() {
+        for (int i = 0; i < influenceLayer.getWidth(); i++) {
+            for (int j = 0; j < influenceLayer.getHeight(); j++) {
+                TiledMapTileLayer.Cell influenceCell = new TiledMapTileLayer.Cell();
+                TiledMapTileLayer.Cell buildingsCell = buildingsLayer.getCell(i,j);
+                boolean condition = buildingsCell != null && buildingsCell.getTile() != null;
+                if (condition) {
+                    TiledMapTile buildingTile = buildingsCell.getTile();
+                    if (buildingTile instanceof ExtendedStaticTiledMapTile) {
+                        if (((ExtendedStaticTiledMapTile) buildingTile).getBuildingsNearby() > 0) {
+                            ExtendedStaticTiledMapTile influenceTile = new ExtendedStaticTiledMapTile(new TextureRegion(Assets.redTile));
+                            influenceCell.setTile(influenceTile);
+                            influenceLayer.setCell(i, j, influenceCell);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -98,7 +130,9 @@ public class StaticEntityBuilder {
             int startY = y - (int)selectedEntity.getCollisionSize().y;
             int endX = x + (int)selectedEntity.getCollisionSize().x;
             int endY = y + (int)selectedEntity.getCollisionSize().y;
+
             // Check whether it's in the area of influence of another building
+            // TODO: 14/05/2016 Add exceptions for specific buildings (e.g. walls)
             for (int i = startX; i < endX; i++) {
                 for (int j = startY; j < endY; j++) {
                     TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
@@ -170,9 +204,13 @@ public class StaticEntityBuilder {
         int screenX = Gdx.input.getX();
         int screenY = Gdx.input.getY();
 
+
+
+
         Vector3 touch = new Vector3(screenX, screenY, 0);
         Vector3 pickedTile = Utils.cartesianToIso(touch, camera);
         if (selectedEntity != null) {
+            drawInfluence(); // Refresh the influence area view
             selectedEntity.placeOnLayer(selectionLayer, (int)pickedTile.x, (int)pickedTile.y);
         }
     }
