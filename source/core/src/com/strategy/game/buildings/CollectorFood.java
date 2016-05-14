@@ -1,5 +1,6 @@
 package com.strategy.game.buildings;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.strategy.game.Assets;
 import com.strategy.game.ResourceContainer;
@@ -15,51 +16,12 @@ public class CollectorFood extends Building {
     private static final int MAX_LIFE = 10;
     private static final int MAX_WORKERS = 5;
     private static final int INFLUENCE_RADIUS = 5;
+    private static final Texture TEXTURE = Assets.house1;
+    private static final Vector2 COLLISION = new Vector2(2,2);
     private int life = MAX_LIFE;
     private int workers = 0;
 
     public CollectorFood() {
-        super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS);
-    }
-
-
-    public static String getNAME() {
-        return NAME;
-    }
-
-    public static ResourceContainer getCOST() {
-        return COST;
-    }
-
-    public static ResourceContainer getPRODUCTION() {
-        return PRODUCTION;
-    }
-
-    public static ResourceContainer getMAINTENANCE() {
-        return MAINTENANCE;
-    }
-
-    public static int getMaxLife() {
-        return MAX_LIFE;
-    }
-
-    public static int getMaxWorkers() {
-        return MAX_WORKERS;
-    }
-
-    public int getLife() {
-        return life;
-    }
-
-    public void setLife(int life) {
-        this.life = life;
-    }
-
-    public int getWorkers() {
-        return workers;
-    }
-
-    public void setWorkers(int workers) {
-        this.workers = workers;
+        super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION);
     }
 }

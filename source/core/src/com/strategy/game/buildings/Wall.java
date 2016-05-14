@@ -1,5 +1,6 @@
 package com.strategy.game.buildings;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.strategy.game.Assets;
 import com.strategy.game.ResourceContainer;
@@ -18,13 +19,14 @@ public class Wall extends Building {
     private static final int MAX_WORKERS = 0;
     private static final int INFLUENCE_RADIUS = 1;
 
+    private static final Texture TEXTURE = Assets.leftwall;
+    private static final Vector2 COLLISION = new Vector2(1,1);
+
     public Wall() {
-        super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS);
+        super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION);
         this.textures.add(Assets.leftwall);
         this.textures.add(Assets.rightwall);
         this.textures.add(Assets.middlewall);
-        this.mainTexture = textures.get(0);
-        this.collisionSize = new Vector2(1,1);
-        sliceTexture(mainTexture);
+//        sliceTexture(mainTexture);
     }
 }

@@ -16,7 +16,7 @@ import com.strategy.game.world.World;
 
 /**
  * Handles the creation and placement of static entities (e.g. buildings)
- * // TODO: 14/05/2016 Add deletion 
+ * // TODO: 14/05/2016 Add deletion
  */
 public class StaticEntityBuilder {
     private GameScreen gameScreen;

@@ -1,5 +1,7 @@
 package com.strategy.game.buildings;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.strategy.game.ResourceContainer;
 import com.strategy.game.buildings.MapEntity;
 
@@ -22,7 +24,9 @@ public abstract class Building extends MapEntity {
                     final ResourceContainer maintenanceCosts,
                     final int maxLife,
                     final int maxWorkers,
-                    final int influenceRadius) {
+                    final int influenceRadius,
+                    final Texture mainTexture,
+                    final Vector2 collisionSize) {
         this.name = name;
         this.costs = costs;
         this.productions = productions;
@@ -31,6 +35,45 @@ public abstract class Building extends MapEntity {
         this.life = maxLife;
         this.maxWorkers = maxWorkers;
         this.influenceRadius = influenceRadius;
+        this.mainTexture = mainTexture;
+        this.collisionSize = collisionSize;
+        sliceTexture(mainTexture);
+    }
+
+    public ResourceContainer getCosts() {
+        return costs;
+    }
+
+    public int getMaxLife() {
+        return maxLife;
+    }
+
+    public int getMaxWorkers() {
+        return maxWorkers;
+    }
+
+    public ResourceContainer getProductions() {
+        return productions;
+    }
+
+    public ResourceContainer getMaintenanceCosts() {
+        return maintenanceCosts;
+    }
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    public int getWorkers() {
+        return workers;
+    }
+
+    public void setWorkers(int workers) {
+        this.workers = workers;
     }
 
     /**
