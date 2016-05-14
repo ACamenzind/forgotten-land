@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * A generic object to put on the map.
  */
-public class MapEntity implements Disposable{
+public abstract class MapEntity implements Disposable{
     protected Vector2 collisionSize;
     protected Texture mainTexture;
     private boolean isClicked;
@@ -185,8 +185,6 @@ public class MapEntity implements Disposable{
      * Resets the tiles to their previous state
      */
     public void resetTiles() {
-
-        // Set influence radius
         int startY = clickY - influenceRadius;
         int startX = clickX - influenceRadius;
         int endY = clickY + influenceRadius + (int) collisionSize.y;

@@ -6,7 +6,7 @@ import com.strategy.game.buildings.MapEntity;
 /**
  * A building with its resources. Inherit from this to create new ones.
  */
-public class Building extends MapEntity {
+public abstract class Building extends MapEntity {
     private final String name;
     private final ResourceContainer costs;
     private final int maxLife;
