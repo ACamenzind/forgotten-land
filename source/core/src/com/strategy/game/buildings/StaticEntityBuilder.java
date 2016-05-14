@@ -75,7 +75,6 @@ public class StaticEntityBuilder {
             // - tile has obstacle property
             // - tile has object
 
-
             // Check if cells are occupied
             for (int i = x; i < x + selectedEntity.getCollisionSize().x; i++) {
                 for (int j = y; j < y + selectedEntity.getCollisionSize().y; j++) {
@@ -83,7 +82,8 @@ public class StaticEntityBuilder {
                     boolean condition = cell != null && cell.getTile() != null;
                     if (condition) {
                         TiledMapTile tile = cell.getTile();
-                        boolean hasObject = tile instanceof ExtendedStaticTiledMapTile && ((ExtendedStaticTiledMapTile) tile).getObject() != null;
+                        boolean hasObject = tile instanceof ExtendedStaticTiledMapTile
+                                && ((ExtendedStaticTiledMapTile) tile).getObject() != null;
                         boolean hasProperty = tile.getProperties().get("obstacle", Boolean.class) != null;
                         if (hasObject || hasProperty) {
                             isSpaceFree = false;
@@ -93,26 +93,32 @@ public class StaticEntityBuilder {
                 }
             }
 
-            int influenceRadius = selectedEntity.getInfluenceRadius();
+//            int influenceRadius = selectedEntity.getInfluenceRadius();
+            int startX = x - (int)selectedEntity.getCollisionSize().x;
+            int startY = y - (int)selectedEntity.getCollisionSize().y;
+            int endX = x + (int)selectedEntity.getCollisionSize().x;
+            int endY = y + (int)selectedEntity.getCollisionSize().y;
             // Check whether it's in the area of influence of another building
-            for (int i = x - (int)selectedEntity.getCollisionSize().x; i < x + (int)selectedEntity.getCollisionSize().x; i++) {
-                for (int j = y - (int)selectedEntity.getCollisionSize().y; j < y + (int)selectedEntity.getCollisionSize().y; j++) {
+            for (int i = startX; i < endX; i++) {
+                for (int j = startY; j < endY; j++) {
                     TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
-                    if (cell != null) {
-                        if (cell.getTile() instanceof ExtendedStaticTiledMapTile) {
-                            ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
-                            if (tile != null && tile.getBuildingsNearby() > 0) {
-                                isInInfluenceRadius = true;
-                                break;
-                            }
+                    boolean isExtended = cell != null
+                            && cell.getTile() instanceof ExtendedStaticTiledMapTile;
+                    if (isExtended) {
+                        boolean hasBuildingsNearby =
+                                ((ExtendedStaticTiledMapTile) cell.getTile()).getBuildingsNearby() > 0;
+                        if (hasBuildingsNearby) {
+                            isInInfluenceRadius = true;
+                            break;
                         }
                     }
                 }
             }
 
+            // Used for placing buildings at the start
+            //TODO: do it in a different way possibly?
             if (forced) isInInfluenceRadius = true;
 
-//            isInInfluenceRadius = true;
             Sound sound = Assets.hit;
 
             if (isSpaceFree && isInInfluenceRadius) {
