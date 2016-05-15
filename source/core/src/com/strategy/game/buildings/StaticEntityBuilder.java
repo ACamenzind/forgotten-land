@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.Assets;
 import com.strategy.game.ExtendedStaticTiledMapTile;
@@ -93,14 +95,6 @@ public class StaticEntityBuilder {
         }
     }
 
-//    public void destroy(int x, int y) {
-//        TiledMapTileLayer.Cell buildingsCell = buildingsLayer.getCell(x, y);
-//        if (buildingsCell != null) {
-//            TiledMapTile tile = buildingsCell.getTile();
-//            System.out.println(tile.toString());
-//        }
-//    }
-
     /**
      * Returns the entity which has been clicked, if it's there.
      * @param x tile coordinate
@@ -116,6 +110,10 @@ public class StaticEntityBuilder {
             }
         }
         return null;
+    }
+
+    public void destroy(Building building) {
+
     }
 
 
@@ -201,6 +199,7 @@ public class StaticEntityBuilder {
 
                 // Places the selected entity on the buildings layer, and add it to the list
                 selectedEntity.placeOnLayer(buildingsLayer, x, y);
+//                selectedEntity.set
                 this.world.getStaticEntities().add(selectedEntity);
 
                 // If the placed entity is a building, remove its cost from the total resources
