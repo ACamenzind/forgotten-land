@@ -1,266 +1,341 @@
 package com.strategy.game.screens.sidebar;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.strategy.game.Assets;
-import com.strategy.game.buildings.MapEntity;
+import com.strategy.game.GameButton;
+import com.strategy.game.ResourceContainer;
+import com.strategy.game.buildings.Building;
 
 /**
- * Class displaying building info in the bottom-left corner of the screen.
- *
- * Created by Amedeo on 01/05/16.
+ * Created by Amedeo on 12/05/16.
  */
 public class SidebarBuildingInfo extends Table implements Display {
 
-    private static final Label.LabelStyle style = Assets.makeLabelStyle(12, Color.BLACK);
+    public class ResourcesTable extends Table {
 
-    private MapEntity building;
+        private static final int RESOURCES_NUMBER = 5;
 
-    private Image buildingImage;
+        private Label[][] table;
+        private int tableHeight;
+        private int tableWidth;
 
-    private final Group buildingStatus;
-    private Label buildingName;
-    private Label buildingLife;
-    private Label buildingWorkers;
+        public ResourcesTable(int columnsNumber) {
+            tableWidth = columnsNumber + 1;
+            tableHeight = RESOURCES_NUMBER + 1;
 
-    private final Group buildingResources;
-    private final Group rowTop;
-    private final Label resources, resFood, resWood, resGold, resRock, resPeople;
-    private final Group rowMiddle;
-    private Label cost, costFood, costWood, costGold, costRock, costPeople;
-    private final Group rowBottom;
-    private Label profit, proFood, proWood, proGold, proRock, proPeople;
+            table = new Label[RESOURCES_NUMBER + 1][columnsNumber + 1];
+            table[1][0] = Assets.makeLabel("F", 12, Color.BLACK);
+            table[2][0] = Assets.makeLabel("W", 12, Color.BLACK);
+            table[3][0] = Assets.makeLabel("M", 12, Color.BLACK);
+            table[4][0] = Assets.makeLabel("G", 12, Color.BLACK);
+            table[5][0] = Assets.makeLabel("P", 12, Color.BLACK);
 
-    // Positions on x-axis for the resources cost/profit table
-    private static final float MARGIN = 0.05f;
-    private static final float COLUMN_TITLES = MARGIN;
-    private static final float COLUMN_FOOD = MARGIN + 1f / 6f;
-    private static final float COLUMN_GOLD = MARGIN + 2f / 6f;
-    private static final float COLUMN_WOOD = MARGIN + 3f / 6f;
-    private static final float COLUMN_ROCK = MARGIN + 4f / 6f;
-    private static final float COLUMN_PEOPLE = MARGIN + 5f / 6f;
+            for (int y = 0; y < table.length; y++) {
+                for (int x = 0; x < table[y].length; x++) {
+                    if (x == 0) {
+                        add(table[y][x]);//.uniform();
+                    }
+                    else {
+                        table[y][x] = Assets.makeLabel("", 12, Color.BLACK);
+                        add(table[y][x]).uniform().expand();
+                    }
+
+                }
+                row();
+            }
+
+            updatePosition();
+        }
+
+        public void set(String[] titles, int[][] values) {
+            for (int i = 0; i < titles.length; i++) {
+                table[0][i+1].setText(titles[i]);
+            }
+            set(values);
+        }
+
+        public void set(int[][] values) {
+            for (int x = 0; x < values.length; x++) {
+                for (int y = 0; y < values[x].length; y++) {
+                    table[y+1][x+1].setText(Integer.toString(values[x][y]));
+                }
+            }
+        }
+
+        public void set(ResourceContainer[] resourceContainers) {
+            for (int i = 0; i < resourceContainers.length; i++) {
+                table[1][i+1].setText(Integer.toString(resourceContainers[i].food));
+                table[2][i+1].setText(Integer.toString(resourceContainers[i].wood));
+                table[3][i+1].setText(Integer.toString(resourceContainers[i].rock));
+                table[4][i+1].setText(Integer.toString(resourceContainers[i].gold));
+                table[5][i+1].setText(Integer.toString(resourceContainers[i].people));
+            }
+        }
+    }
+
+    // BUILDING
+    Building building;
+
+    // TABLES
+    private Table tableInfo = new Table();
+    private Table tableCost = new Table();
+    private Table tableProfit = new Table();
+
+    // NAME
+    private Label name = Assets.makeLabel("Nothing", 14, Color.BLACK);
+    private static final float NAME_POSITION_X = 0.075f;
+    private static final float NAME_POSITION_Y = 0.85f;
+    private static final Label COST = Assets.makeLabel(" - Cost", 14, Color.BLACK);
+    //    private static final float COST_POSITION_X = 0.075f;
+    private static final float COST_POSITION_Y = NAME_POSITION_Y;
+    private static final Label PROFIT = Assets.makeLabel(" - Profit", 14, Color.BLACK);
+    //    private static final float PROFIT_POSITION_X = 0.075f;
+    private static final float PROFIT_POSITION_Y = NAME_POSITION_Y;
+
+    // MENU
+    private static final int MENU_ITEMS = 3;
+    private static final float MENU_WIDTH = 1f;
+    private static final float MENU_HEIGHT = 0.125f;
+    private static final float MENU_BUTTON_WIDTH = MENU_WIDTH / MENU_ITEMS;
+    private static final float MENU_BUTTON_HEIGHT = MENU_HEIGHT;
+    private GameButton menuButtonInfo = new GameButton(Assets.sidebarBuildInfoInfo);
+    private GameButton menuButtonCost = new GameButton(Assets.sidebarBuildInfoCost);
+    private GameButton menuButtonProfit = new GameButton(Assets.sidebarBuildInfoProfit);
+
+    //IMAGE
+    private Image image = new Image();
+    private static final float IMAGE_SIZE = 0.35f;
+    private static final float IMAGE_POSITION_X = NAME_POSITION_X;
+    private static final float IMAGE_POSITION_Y = NAME_POSITION_Y - IMAGE_SIZE - 0.05f;
+
+    // LIFE
+    private Label life = Assets.makeLabel("Life:\n1000 / 1000", 12, Color.BLACK);
+    private static final float LIFE_POSITION_X = IMAGE_POSITION_X + IMAGE_SIZE + 0.05f;
+    private static final float LIFE_POSITION_Y = IMAGE_POSITION_Y + IMAGE_SIZE / 2f;
+
+    //WORKERS
+    private Label workers = Assets.makeLabel("Workers:\n100 / 100", 12, Color.BLACK);
+    private static final float WORKERS_POSITION_X = IMAGE_POSITION_X + IMAGE_SIZE + 0.05f;
+    private static final float WORKERS_POSITION_Y = IMAGE_POSITION_Y;
+    private GameButton workersButtonAdd = new GameButton(Assets.sidebarBuildInfoPlus);
+    private GameButton workersButtonRemove = new GameButton(Assets.sidebarBuildInfoMinus);
+    private static final float WORKERS_BUTTON_SIZE = 0.075f;
+    private static final float WORKERS_BUTTON_POSITION_X = WORKERS_POSITION_X + 0.3f;
+    private static final float WORKERS_BUTTON_POSITION_Y = IMAGE_POSITION_Y;
+
+    //DESTROY
+    private GameButton destroyButton = new GameButton(Assets.sidebarBuildInfoDestroy);
+    private static final float DESTROY_WIDTH = IMAGE_SIZE;
+    private static final float DESTROY_HEIGHT = 0.125f;
+    private static final float DESTROY_POSITION_X = NAME_POSITION_X;
+    private static final float DESTROY_POSITION_Y = IMAGE_POSITION_Y - DESTROY_HEIGHT - 0.05f;
+
+    //RESOURCES_BALANCE
+    private ResourcesTable resourcesBalance = new ResourcesTable(1);
+    private static final float RESOURCES_BALANCE_WIDTH = 0.1f;
+    private static final float RESOURCES_BALANCE_HEIGHT = 0.1f;
+    private static final float RESOURCES_BALANCE_POSITION_X = 0.1f;
+    private static final float RESOURCES_BALANCE_POSITION_Y = 0.1f;
+
+    // COST
+    private ResourcesTable resourcesCost = new ResourcesTable(2);
+    private static final float RESOURCES_COST_WIDTH = 0.75f;
+    private static final float RESOURCES_COST_HEIGHT = 0.6f;
+    private static final float RESOURCES_COST_POSITION_X = 0.5f;
+    private static final float RESOURCES_COST_POSITION_Y = 0.5f;
+
+    // PROFIT
+    private ResourcesTable resourcesProfit = new ResourcesTable(2);
+    private static final float RESOURCES_PROFIT_WIDTH = 0.75f;
+    private static final float RESOURCES_PROFIT_HEIGHT = 0.6f;
+    private static final float RESOURCES_PROFIT_POSITION_X = 0.5f;
+    private static final float RESOURCES_PROFIT_POSITION_Y = 0.5f;
 
     public SidebarBuildingInfo() {
-        this(null);
-    }
 
-    public SidebarBuildingInfo(MapEntity building) {
+        // GENERAL
+        this.building = null;
 
-        Assets.setBackground(this, "core/assets/textures/gameScreen/sidebar_bottom.png");
+        addActor(name);
 
+        menuButtonInfo.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                updateMenu(1);
+                return false;
+            }
+        });
+        addActor(menuButtonInfo);
+        menuButtonCost.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                updateMenu(2);
+                return false;
+            }
+        });
+        addActor(menuButtonCost);
+        menuButtonProfit.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                updateMenu(3);
+                return false;
+            }
+        });
+        addActor(menuButtonProfit);
 
-        // BUILDING IMAGE
-        buildingImage = new Image();
-        addActor(buildingImage);
+        // INFO
+        tableInfo.addActor(life);
+        tableInfo.addActor(workers);
+        tableInfo.addActor(image);
 
+        workersButtonAdd.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                if (building != null) {
+                    building.changeWorker(1);
+                    setBuilding(building);
+                }
+                return false;
+            }
+        });
+        tableInfo.addActor(workersButtonAdd);
+        workersButtonRemove.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                if (building != null) {
+                    building.changeWorker(-1);
+                    setBuilding(building);
+                }
+                return false;
+            }
+        });
+        tableInfo.addActor(workersButtonRemove);
 
-        // BUILDING DATA
-        buildingStatus = new Group();
-        addActor(buildingStatus);
+        tableInfo.addActor(destroyButton);
 
-        buildingName = new Label("", style);
-        buildingStatus.addActor(buildingName);
+//        String[] resourcesBalanceTitles = { "Worth" };
+//        int[][] resourcesBalanceValues = { { 1, 2, 3, 4, -1 } };
+//        resourcesBalance.set(resourcesBalanceTitles, resourcesBalanceValues);
+//        tableInfo.addActor(resourcesBalance);
 
-        buildingLife = new Label("Life:", style);
-        buildingStatus.addActor(buildingLife);
+        // COST
+        tableCost.addActor(COST);
+        String[] resourcesCostTitles = { "To build", "Per turn" };
+        int[][] resourcesCostValues = { { 1, 2, 0, 0, 1 }, { 1, 2, 0, 0, 1 } };
+        resourcesCost.set(resourcesCostTitles, resourcesCostValues);
+        tableCost.addActor(resourcesCost);
 
-        buildingWorkers = new Label("Workers:", style);
-        buildingStatus.addActor(buildingWorkers);
+        // PROFIT
+        tableProfit.addActor(PROFIT);
+        String[] resourcesProfitTitles = { "Per worker", "Per turn" };
+        int[][] resourcesProfitValues = { { 1, 2, 0, 0, 1 }, { 1, 2, 0, 0, 1 } };
+        resourcesProfit.set(resourcesProfitTitles, resourcesProfitValues);
+        tableProfit.addActor(resourcesProfit);
 
+        // TABLES
+        addActor(tableInfo);
+        addActor(tableCost);
+        addActor(tableProfit);
 
-        // BUILDING RESOURCES
-        buildingResources = new Group();
-        addActor(buildingResources);
-
-        // ROW 1
-        rowTop = new Group();
-        buildingResources.addActor(rowTop);
-
-        resources = new Label("Resources:", style);
-//        rowTop.addActor(resources);
-
-        resFood = new Label("F", style);
-        rowTop.addActor(resFood);
-
-        resGold = new Label("G", style);
-        rowTop.addActor(resGold);
-
-        resWood = new Label("W", style);
-        rowTop.addActor(resWood);;
-
-        resRock = new Label("R", style);
-        rowTop.addActor(resRock);
-
-        resPeople = new Label("P", style);
-        rowTop.addActor(resPeople);
-
-        // ROW 2
-        rowMiddle = new Group();
-        buildingResources.addActor(rowMiddle);
-
-        cost = new Label("Cost:", style);
-        rowMiddle.addActor(cost);
-
-        costFood = new Label("", style);
-        rowMiddle.addActor(costFood);
-
-        costGold = new Label("", style);
-        rowMiddle.addActor(costGold);
-
-        costWood = new Label("", style);
-        rowMiddle.addActor(costWood);
-
-        costRock = new Label("", style);
-        rowMiddle.addActor(costRock);
-
-        costPeople = new Label("", style);
-        rowMiddle.addActor(costPeople);
-
-        // ROW BOTTOM
-        rowBottom = new Group();
-        buildingResources.addActor(rowBottom);
-
-        profit = new Label("Profit:", style);
-        rowBottom.addActor(profit);
-
-        proFood = new Label("", style);
-        rowBottom.addActor(proFood);
-
-        proGold = new Label("", style);
-        rowBottom.addActor(proGold);
-
-        proWood = new Label("", style);
-        rowBottom.addActor(proWood);
-
-        proRock = new Label("", style);
-        rowBottom.addActor(proRock);
-
-        proPeople = new Label("", style);
-        rowBottom.addActor(proPeople);
-
-        updatePosition();
-        setBuilding(building);
+        // INIT
+        updateMenu(3);
     }
 
 
-    /**
-     * Sets the building for the class and all Labels with the newBuilding values.
-     * @param newBuilding: the newBuilding from which values are taken. If null, "empty" values are used instead.
-     */
-    public void setBuilding(MapEntity newBuilding) {
-        building = newBuilding;
-
-        if (building != null) {
-            //TODO: change demo values with building values
-            buildingImage.setDrawable(new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("core/assets/house1.png")))));
-
-            costFood.setText("0");
-            costGold.setText("0");
-            costWood.setText("50");
-            costRock.setText("50");
-            costPeople.setText("0");
-        }
-        else {
-            buildingImage.setDrawable(null);
-
-            costFood.setText("-");
-            costGold.setText("-");
-            costWood.setText("-");
-            costRock.setText("-");
-            costPeople.setText("-");
-        }
-
-        updateBuildingData();
-    }
-
-    /**
-     * Updates the life, workers and profit counters of the building. If building is null, "empty" values are used.
-     */
-    public void updateBuildingData() {
-
-        if (building != null) {
-            //TODO: change demo values with building values
-            buildingName.setText("House");
-            buildingLife.setText("Life: " + "50 / 50");
-            buildingWorkers.setText(("Workers: " + "4 / 5"));
-
-            proFood.setText("0");
-            proGold.setText("0");
-            proWood.setText("0");
-            proRock.setText("0");
-            proPeople.setText("10");
-        }
-        else {
-            buildingName.setText("-");
-            buildingLife.setText("Life: - / -");
-            buildingWorkers.setText(("Workers: - / -"));
-
-            proFood.setText("-");
-            proGold.setText("-");
-            proWood.setText("-");
-            proRock.setText("-");
-            proPeople.setText("-");
-        }
-    }
-
-    /**
-     * Updates the position of all Actors in SidebarBuildingInfo. Also called in constructor to first place the Actors.
-     */
     @Override
     public void updatePosition() {
-        // BUILDING IMAGE
-        Assets.setSizeRelative(buildingImage, 0.4f, 0.4f);
-        Assets.setPositionRelative(buildingImage, 0.05f, 0.55f);
+
+        // TABLES
+        Assets.setSizeRelative(tableInfo, 1f, 1f);
+        Assets.setSizeRelative(tableCost, 1f, 1f);
+        Assets.setSizeRelative(tableProfit, 1f, 1f);
+
+        // TITLE
+        Assets.setPositionRelative(name, NAME_POSITION_X, NAME_POSITION_Y);
+        Assets.setPositionRelative(COST, NAME_POSITION_X + name.getWidth() / getWidth(), COST_POSITION_Y);
+        Assets.setPositionRelative(PROFIT, NAME_POSITION_X + name.getWidth() / getWidth(), PROFIT_POSITION_Y);
+
+        // MENU
+        Assets.setSizeRelative(menuButtonInfo, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT);
+        Assets.setSizeRelative(menuButtonCost, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT);
+        Assets.setSizeRelative(menuButtonProfit, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT);
+
+        Assets.setPositionRelative(menuButtonInfo, 0, 0);
+        Assets.setPositionRelative(menuButtonCost, MENU_BUTTON_WIDTH, 0);
+        Assets.setPositionRelative(menuButtonProfit, MENU_BUTTON_WIDTH * 2, 0);
+
+        // INFO
+        Assets.setSizeRelative(image, IMAGE_SIZE, IMAGE_SIZE);
+        Assets.setPositionRelative(image, IMAGE_POSITION_X, IMAGE_POSITION_Y);
+
+        Assets.setPositionRelative(life, LIFE_POSITION_X, LIFE_POSITION_Y);
+        Assets.setPositionRelative(workers, WORKERS_POSITION_X, WORKERS_POSITION_Y);
+
+        Assets.setSizeRelative(workersButtonAdd, WORKERS_BUTTON_SIZE, WORKERS_BUTTON_SIZE);
+        Assets.setSizeRelative(workersButtonRemove, WORKERS_BUTTON_SIZE, WORKERS_BUTTON_SIZE);
+        Assets.setPositionRelative(workersButtonAdd, WORKERS_BUTTON_POSITION_X, WORKERS_BUTTON_POSITION_Y);
+        Assets.setPositionRelative(workersButtonRemove, WORKERS_BUTTON_POSITION_X + WORKERS_BUTTON_SIZE, WORKERS_BUTTON_POSITION_Y);
+
+        Assets.setSizeRelative(destroyButton, DESTROY_WIDTH, DESTROY_HEIGHT);
+        Assets.setPositionRelative(destroyButton, DESTROY_POSITION_X, DESTROY_POSITION_Y);
+
+//        Assets.setSizeRelative(resourcesBalance, RESOURCES_BALANCE_WIDTH, RESOURCES_BALANCE_HEIGHT);
+//        Assets.setPositionRelative(resourcesBalance, RESOURCES_BALANCE_POSITION_X, RESOURCES_BALANCE_POSITION_Y);
+
+        // COSTS
+        Assets.setSizeRelative(resourcesCost, RESOURCES_COST_WIDTH, RESOURCES_COST_HEIGHT);
+        Assets.setPositionRelative(resourcesCost, RESOURCES_COST_POSITION_X, RESOURCES_COST_POSITION_Y, true, true);
+
+        // PROFIT
+        Assets.setSizeRelative(resourcesProfit, RESOURCES_PROFIT_WIDTH, RESOURCES_PROFIT_HEIGHT);
+        Assets.setPositionRelative(resourcesProfit, RESOURCES_PROFIT_POSITION_X, RESOURCES_PROFIT_POSITION_Y, true, true);
+    }
+
+    public void updateMenu(int menu) {
+        if (menu == 0) {
+            tableInfo.setVisible(false);
+            tableCost.setVisible(false);
+            tableProfit.setVisible(false);
+        }
+        if (menu == 1) {
+            tableInfo.setVisible(true);
+            tableCost.setVisible(false);
+            tableProfit.setVisible(false);
+        }
+        else if (menu == 2) {
+            tableInfo.setVisible(false);
+            tableCost.setVisible(true);
+            tableProfit.setVisible(false);
+        }
+        else if (menu == 3) {
+            tableInfo.setVisible(false);
+            tableCost.setVisible(false);
+            tableProfit.setVisible(true);
+        }
+        else {
+            tableInfo.setVisible(false);
+            tableCost.setVisible(false);
+            tableProfit.setVisible(false);
+        }
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
+        if (building != null) {
+            name.setText(building.getName());
+            image.setDrawable(new SpriteDrawable(new Sprite(building.getMainTexture())));
+            life.setText("Life: " + Integer.toString(building.getLife()) + " / " + Integer.toString(building.getMaxLife()));
+            workers.setText("Workers: " + Integer.toString(building.getWorkers()) + " / " + Integer.toString(building.getMaxWorkers()));
+
+            ResourceContainer[] resourceCostContainer = {building.getCosts(), building.getMaintenanceCosts()};
+            resourcesCost.set(resourceCostContainer);
+
+            ResourceContainer[] resourceProfitContainer = {building.getProductionsPerWorker(), building.getProductionsPerTurn()};
+            resourcesProfit.set(resourceProfitContainer);
 
 
-        // BUILDING DATA
-        Assets.setSizeRelative(buildingStatus, 0.5f, 0.5f);
-        Assets.setPositionRelative(buildingStatus, 0.5f, 0.5f);
-        Assets.setPositionRelative(buildingName, 0.1f, 0.75f, false, true);
-        Assets.setPositionRelative(buildingLife, 0.1f, 0.5f, false, true);
-        Assets.setPositionRelative(buildingWorkers, 0.1f, 0.25f, false, true);
-
-
-        // BUILDING RESOURCES
-        Assets.setPositionRelative(buildingResources, 0f, 0f);
-        Assets.setSizeRelative(buildingResources, 1f, 0.5f);
-
-        // ROW 1
-        Assets.setPositionRelative(rowTop, 0f, 2f / 3f);
-        Assets.setSizeRelative(rowTop, 1f, 1f / 3f);
-//        Assets.setPositionRelative(resources, COLUMN_TITLES, 0.5f, false, true);
-        Assets.setPositionRelative(resFood, COLUMN_FOOD, 0.5f, true, true);
-        Assets.setPositionRelative(resGold, COLUMN_GOLD, 0.5f, true, true);
-        Assets.setPositionRelative(resWood, COLUMN_WOOD, 0.5f, true, true);
-        Assets.setPositionRelative(resRock, COLUMN_ROCK, 0.5f, true, true);
-        Assets.setPositionRelative(resPeople, COLUMN_PEOPLE, 0.5f, true, true);
-
-        // ROW 2
-        Assets.setPositionRelative(rowMiddle, 0f, 1f / 3f);
-        Assets.setSizeRelative(rowMiddle, 1f, 1f / 3f);
-        Assets.setPositionRelative(cost, COLUMN_TITLES, 0.5f, false, true);
-        Assets.setPositionRelative(costFood, COLUMN_FOOD, 0.5f, true, true);
-        Assets.setPositionRelative(costGold, COLUMN_GOLD, 0.5f, true, true);
-        Assets.setPositionRelative(costWood, COLUMN_WOOD, 0.5f, true, true);
-        Assets.setPositionRelative(costRock, COLUMN_ROCK, 0.5f, true, true);
-        Assets.setPositionRelative(costPeople, COLUMN_PEOPLE, 0.5f, true, true);
-
-        // ROW BOTTOM
-        Assets.setPositionRelative(rowBottom, 0f, 0f);
-        Assets.setSizeRelative(rowBottom, 1f, 1f / 3f);
-        Assets.setPositionRelative(profit, COLUMN_TITLES, 0.5f, false, true);
-        Assets.setPositionRelative(proFood, COLUMN_FOOD, 0.5f, true, true);
-        Assets.setPositionRelative(proGold, COLUMN_GOLD, 0.5f, true, true);
-        Assets.setPositionRelative(proWood, COLUMN_WOOD, 0.5f, true, true);
-        Assets.setPositionRelative(proRock, COLUMN_ROCK, 0.5f, true, true);
-        Assets.setPositionRelative(proPeople, COLUMN_PEOPLE, 0.5f, true, true);
+        }
     }
 }

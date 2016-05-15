@@ -40,6 +40,10 @@ public abstract class Building extends MapEntity {
         sliceTexture(mainTexture);
     }
 
+    public String getName() {
+        return name;
+    }
+
     public ResourceContainer getCosts() {
         return costs;
     }
@@ -54,6 +58,14 @@ public abstract class Building extends MapEntity {
 
     public ResourceContainer getProductions() {
         return productions;
+    }
+
+    public ResourceContainer getProductionsPerWorker() {
+        return productions;
+    }
+
+    public ResourceContainer getProductionsPerTurn() {
+        return productions.multiply(workers);
     }
 
     public ResourceContainer getMaintenanceCosts() {

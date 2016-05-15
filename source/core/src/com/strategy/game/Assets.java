@@ -22,6 +22,9 @@ public class Assets {
 
     public static TiledMap map;
     public static Texture house1, castle, leftwall, middlewall, rightwall, emptyTile, redTile, cows, warehouse, wheat;
+    // SIDEBAR BUILDING INFO
+    public static Texture sidebarBuildInfoInfo, sidebarBuildInfoCost, sidebarBuildInfoProfit, sidebarBuildInfoPlus,
+            sidebarBuildInfoMinus, sidebarBuildInfoDestroy;
     public static Sound bgSound, hit;
     private static final String DEFAULT_FONT_PATH = "core/assets/fonts/times_new_roman.ttf";
 
@@ -36,6 +39,13 @@ public class Assets {
         rightwall = new Texture(Gdx.files.internal("core/assets/textures/buildings/wall/Wall_R.png"));
         emptyTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/empty.png"));
         redTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/red.png"));
+        // SIDEBAR BUILDING INFO
+        sidebarBuildInfoInfo = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_info.png"));
+        sidebarBuildInfoCost = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_cost.png"));
+        sidebarBuildInfoProfit = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_profit.png"));
+        sidebarBuildInfoPlus = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_plus.png"));
+        sidebarBuildInfoMinus = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_minus.png"));
+        sidebarBuildInfoDestroy = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_destroy.png"));
 
         cows = new Texture(Gdx.files.internal("core/assets/textures/buildings/cows.png"));
         warehouse = new Texture(Gdx.files.internal("core/assets/textures/buildings/warehouse.png"));

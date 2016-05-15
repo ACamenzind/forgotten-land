@@ -48,6 +48,16 @@ public class ResourceContainer {
         return new ResourceContainer(wood, food, rock, gold, people);
     }
 
+    public ResourceContainer multiply(int n) {
+        final int wood = this.wood * n;
+        final int food = this.food * n;
+        final int rock = this.rock * n;
+        final int gold = this.gold * n;
+        final int people = this.people * n;
+
+        return new ResourceContainer(wood, food, rock, gold, people);
+    }
+
     @Override
     public String toString() {
         return "W: " + wood + " F: " + food + " R: " + rock + " G: " + gold + " P: " + people;
