@@ -33,6 +33,21 @@ public class ResourceContainer {
         return new ResourceContainer(wood, food, rock, gold, people);
     }
 
+    /**
+     * Returns a new ResourceContainer with the sum of the two.
+     * @param rc
+     * @return New ResourceContainer with the sum of the two.
+     */
+    public ResourceContainer subtract(final ResourceContainer rc) {
+        final int wood = this.wood - rc.wood;
+        final int food = this.food - rc.food;
+        final int rock = this.rock - rc.rock;
+        final int gold = this.gold - rc.gold;
+        final int people = this.people - rc.people;
+
+        return new ResourceContainer(wood, food, rock, gold, people);
+    }
+
     @Override
     public String toString() {
         return "W: " + wood + " F: " + food + " R: " + rock + " G: " + gold + " P: " + people;

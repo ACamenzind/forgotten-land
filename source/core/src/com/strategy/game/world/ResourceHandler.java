@@ -115,7 +115,8 @@ public class ResourceHandler {
 
     /**
      * Updates the state of all the resources.
-     * Goes through all the buildings and adds their production to the total.
+     * Goes through all the buildings and adds their production to the total,
+     * as well as removing the maintenance costs.
      */
     public void update() {
         woodCounter += startingIncrement + woodIncrementer;
@@ -126,7 +127,9 @@ public class ResourceHandler {
         for (MapEntity building:
              world.getStaticEntities()) {
             ResourceContainer production = ((Building) building).getProductions();
+            ResourceContainer maintenance = ((Building) building).getMaintenanceCosts();
             totalResources = totalResources.add(production);
+            totalResources = totalResources.subtract(maintenance);
         }
     }
 
