@@ -1,5 +1,9 @@
 package com.strategy.game.world;
 
+import com.strategy.game.ResourceContainer;
+import com.strategy.game.buildings.Building;
+import com.strategy.game.buildings.MapEntity;
+
 /**
  * Created by francescosani on 27/04/16.
  */
@@ -16,7 +20,11 @@ public class ResourceHandler {
     private int foodIncrementer;
     private int rockIncrementer;
 
-    public ResourceHandler(int startingIncrement, int woodCounter, int goldCounter, int foodCounter, int rockCounter) {
+    private World world;
+
+    private ResourceContainer totalResources;
+
+    public ResourceHandler(World world, int startingIncrement, int woodCounter, int goldCounter, int foodCounter, int rockCounter, int people) {
         this.startingIncrement = startingIncrement;
         this.woodCounter = woodCounter;
         this.goldCounter = goldCounter;
@@ -26,8 +34,13 @@ public class ResourceHandler {
         this.goldIncrementer = 0;
         this.foodIncrementer = 0;
         this.rockIncrementer = 0;
+        this.world = world;
+        this.totalResources = new ResourceContainer(woodCounter, goldCounter, foodCounter, rockCounter, people);
     }
 
+    public ResourceContainer getTotalResources() {
+        return totalResources;
+    }
 
     public void incrementWoodIncrementer(int woodIncrementerIncrease) {
         woodIncrementer += woodIncrementerIncrease;
@@ -100,13 +113,21 @@ public class ResourceHandler {
     }
 
 
-
+    /**
+     * Updates the state of all the resources.
+     * Goes through all the buildings and adds their production to the total.
+     */
     public void update() {
         woodCounter += startingIncrement + woodIncrementer;
         goldCounter += startingIncrement + goldCounter;
         foodCounter += startingIncrement + foodIncrementer;
         rockCounter += startingIncrement + rockIncrementer;
 
+        for (MapEntity building:
+             world.getStaticEntities()) {
+            ResourceContainer production = ((Building) building).getProductions();
+            totalResources = totalResources.add(production);
+        }
     }
 
 

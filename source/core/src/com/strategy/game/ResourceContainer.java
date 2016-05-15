@@ -32,4 +32,9 @@ public class ResourceContainer {
 
         return new ResourceContainer(wood, food, rock, gold, people);
     }
+
+    @Override
+    public String toString() {
+        return "W: " + wood + " F: " + food + " R: " + rock + " G: " + gold + " P: " + people;
+    }
 }

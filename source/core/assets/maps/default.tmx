@@ -11,7 +11,7 @@
  <tileset firstgid="2" name="grass_and_water2" tilewidth="128" tileheight="128" tilecount="24" columns="4">
   <image source="../textures/terrains/grass_and_water2.png" width="512" height="768"/>
  </tileset>
- <tileset firstgid="26" name="plants" tilewidth="256" tileheight="256" tilecount="79" columns="0">
+ <tileset firstgid="26" name="plants" tilewidth="256" tileheight="256" tilecount="80" columns="0">
   <tile id="0">
    <properties>
     <property name="obstacle" type="bool" value="true"/>
@@ -550,8 +550,15 @@
    </properties>
    <image width="128" height="64" source="../resources/weed06.png"/>
   </tile>
+  <tile id="79">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="rock"/>
+   </properties>
+   <image width="256" height="256" source="../textures/buildings/rocks.png"/>
+  </tile>
  </tileset>
- <tileset firstgid="105" name="grid" tilewidth="128" tileheight="128" tilecount="1" columns="0">
+ <tileset firstgid="106" name="grid" tilewidth="128" tileheight="128" tilecount="1" columns="0">
   <tile id="0">
    <image width="128" height="118" source="../textures/terrains/grid.png"/>
   </tile>
@@ -563,12 +570,12 @@
  </layer>
  <layer name="Buildings" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt2FluwjAUBVDvou1f1tEvbwCibIH9L6KNaIR5NR3jxIhzJMsZ+LDexQOkBAAAAAAAAAC09rL3ALgij77Ioy/y6Is8+iKPvsijL/Loizz6Io++yKMv8mjv+RftaacxAgAAAEA07T0AuCNTMme28F2dx6KXx7bK2o833tFW+Z0fw/VQ3B9TPSfWNRV9mcEY2vw+bzy2R7fU/vW9HdJ5TiytfM+25pofPtp8XWYS2ePbGdKl9ksm83UunkXyWE886+Z0mQ9LHuVza1V7U+jjPl7bR2pk1U7MI6fPedTqf2o+sscQ94Ahneud07nGOV3OusfQs76v/jPJoR9DTxsxj/m+PPP+pP7Wq/aWM5b5sI/a2nVK19/9W2vbqfJZ/i9mMqTrGt+qd3zut+L6YjbLvmIO7Ke2huUdxsFny/5gLboPcgIAAAAAAAAAAAAAAAD+4g1d/yvF
+   eJzt2EtuwjAUBVDvou0s6+goG4AoW2DG/jfQRjTCPEwpIk5ccY5kOR9UWe/iT0kJAAAAAAAAAKjtY+sBcEEebZFHW+TRFnm0RR5tkUdb5NEWebRFHm2RR1vkUd/7A+1tozECAAAAQDRuPQD4R8ZkzqzhXp2HrJfHuvLaDzfeUVf+nR/CdZfd71M5J5Y1Zn2ewRDa9L5feWyvbq7953fbpdOcmFv+nnVNNd/9tOk6zySyx9fTpXPt50ym6z57FsljOfGs26fzfJjzyJ9bq+obQx/38dI+UiKremIefbrOo1T/Q/WRvYa4B3TpVO8+nWrcp/NZdx96lvfbbyZ96IfQU0fMY7rPz7x/qb/1qr75jGU+bKO0dh3S5Xf/1tp2KHyW58VMunRZ41v1js/v/a94vHPPtZjNvK+YA9sprWH9E3/PPFjOvD/43ep/eCSnY+Ha3AFa5LwLAAAAAAAAAAAAAAD1fQHw+S8N
   </data>
  </layer>
  <layer name="Grid" width="100" height="100" visible="0">
   <data encoding="base64" compression="zlib">
-   eJztwwEJAAAMBKGr+/0LDJZDwVVTVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/AZcEBoE=
+   eJztwwEJAAAMBKHL+/0DDJZDwVVTVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/AVoHLZE=
   </data>
  </layer>
  <layer name="Selection" width="100" height="100">

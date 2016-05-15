@@ -22,8 +22,5 @@ public class House extends Building {
     private static final Vector2 COLLISION = new Vector2(2,2);
     public House() {
         super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION);
-//        this.mainTexture = Assets.house1;
-//        this.collisionSize = new Vector2(2,2);
-        sliceTexture(mainTexture);
     }
 }
