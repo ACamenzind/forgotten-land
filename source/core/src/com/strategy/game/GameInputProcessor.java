@@ -130,47 +130,22 @@ public class GameInputProcessor implements InputProcessor{
         // Set coords used for selection box
         screen.setTouchDownCoords(new Vector2(screenX, screenY));
         screen.setSelecting(true);
-        isPressingMouse = true;
+
+        if (button == Input.Buttons.LEFT) {
+            isPressingMouse = true;
+        }
 
 
         Vector3 pickedTile = Utils.cartesianToIso(touch, camera);
         //TODO: better to handle coords inside the builder?
-        if (screen.getBuilder().getSelectedEntity() != null) {
+        if (screen.getBuilder().getSelectedEntity() != null && button == Input.Buttons.LEFT) {
             screen.getBuilder().placeSelectedEntity((int) pickedTile.x, (int) pickedTile.y, false);
         }
-        else if (screen.getBuilder().getSelectedEntity() == null)  {
-            //TODO: get tile info and show window
-            // for debugging purposes
-//            TiledMapTileLayer.Cell cell = ((TiledMapTileLayer) (screen.getMap().getLayers().get(1)))
-//                    .getCell((int) pickedTile.x, (int) pickedTile.y);
-//            if (cell != null) {
-//                ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
-//                MapEntity selected = tile.getObject();
-//                selected.setClicked(true);
-//                System.out.println("set clicked!");
-//
-//
-//
-//                MapObject obj = new RectangleMapObject(selected.getCoords().x * Utils.TILE_SIZE,
-//                        selected.getCoords().y * Utils.TILE_SIZE ,
-//                        selected.getCollisionSize().x * Utils.TILE_SIZE,
-//                        selected.getCollisionSize().y * Utils.TILE_SIZE);
-//                obj.setVisible(true);
-//
-//
-//                MapLayer objLayer = screen.getMap().getLayers().get(3);
-//
-//                obj.setColor(new Color(Color.RED));
-////                obj.setName("HELLO WORLD ------------------------------------");
-//                obj.setOpacity(1.f);
-////                objLayer.getObjects().add(obj);
-//
-//            }
-//            else {
-//                System.out.println("Empty");
-//            }
+        else if (screen.getBuilder().getSelectedEntity() == null && button == Input.Buttons.LEFT)  {
 
-//            Utils.printTileInfo(pickedTile, screen);
+            // TODO: show building info from here
+            MapEntity clickedEntity = screen.getBuilder().getEntityAt((int)pickedTile.x, (int)pickedTile.y);
+
         }
         return true;
     }

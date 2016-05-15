@@ -93,6 +93,33 @@ public class StaticEntityBuilder {
         }
     }
 
+//    public void destroy(int x, int y) {
+//        TiledMapTileLayer.Cell buildingsCell = buildingsLayer.getCell(x, y);
+//        if (buildingsCell != null) {
+//            TiledMapTile tile = buildingsCell.getTile();
+//            System.out.println(tile.toString());
+//        }
+//    }
+
+    /**
+     * Returns the entity which has been clicked, if it's there.
+     * @param x tile coordinate
+     * @param y tile coordinate
+     * @return The clicked entity.
+     */
+    public MapEntity getEntityAt(int x, int y) {
+        TiledMapTileLayer.Cell buildingsCell = buildingsLayer.getCell(x,y);
+        if (buildingsCell != null) {
+            TiledMapTile tile = buildingsCell.getTile();
+            if (tile instanceof ExtendedStaticTiledMapTile) {
+                return ((ExtendedStaticTiledMapTile) tile).getObject();
+            }
+        }
+        return null;
+    }
+
+
+
     /**
      *  Places the selected building onto the buildings layer.
      * @param x : tile coordinate
