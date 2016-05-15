@@ -80,6 +80,8 @@ public class SidebarBuildingInfo extends Table implements Display {
         }
     }
 
+    public enum Menu { NONE, INFO, COST, PROFIT }
+
     // BUILDING
     Building building;
 
@@ -167,21 +169,21 @@ public class SidebarBuildingInfo extends Table implements Display {
 
         menuButtonInfo.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                updateMenu(1);
+                updateMenu(Menu.INFO);
                 return false;
             }
         });
         addActor(menuButtonInfo);
         menuButtonCost.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                updateMenu(2);
+                updateMenu(Menu.COST);
                 return false;
             }
         });
         addActor(menuButtonCost);
         menuButtonProfit.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                updateMenu(3);
+                updateMenu(Menu.PROFIT);
                 return false;
             }
         });
@@ -240,7 +242,7 @@ public class SidebarBuildingInfo extends Table implements Display {
         addActor(tableProfit);
 
         // INIT
-        updateMenu(3);
+        updateMenu(Menu.INFO);
     }
 
 
@@ -293,23 +295,18 @@ public class SidebarBuildingInfo extends Table implements Display {
         Assets.setPositionRelative(resourcesProfit, RESOURCES_PROFIT_POSITION_X, RESOURCES_PROFIT_POSITION_Y, true, true);
     }
 
-    public void updateMenu(int menu) {
-        if (menu == 0) {
-            tableInfo.setVisible(false);
-            tableCost.setVisible(false);
-            tableProfit.setVisible(false);
-        }
-        if (menu == 1) {
+    public void updateMenu(Menu menu) {
+        if (menu == Menu.INFO) {
             tableInfo.setVisible(true);
             tableCost.setVisible(false);
             tableProfit.setVisible(false);
         }
-        else if (menu == 2) {
+        else if (menu == Menu.COST) {
             tableInfo.setVisible(false);
             tableCost.setVisible(true);
             tableProfit.setVisible(false);
         }
-        else if (menu == 3) {
+        else if (menu == Menu.PROFIT) {
             tableInfo.setVisible(false);
             tableCost.setVisible(false);
             tableProfit.setVisible(true);
@@ -335,7 +332,7 @@ public class SidebarBuildingInfo extends Table implements Display {
             ResourceContainer[] resourceProfitContainer = {building.getProductionsPerWorker(), building.getProductionsPerTurn()};
             resourcesProfit.set(resourceProfitContainer);
 
-
+            updateMenu(Menu.NONE);
         }
     }
 }
