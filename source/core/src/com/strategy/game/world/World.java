@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  * Contains the world simulation.
- * TODO: implement
+ *
  */
 public class World implements Disposable{
 
@@ -74,6 +74,10 @@ public class World implements Disposable{
             tick++;
 
 
+//            for (MapEntity e :
+//                    staticEntities) {
+//                System.out.println(e);
+//            }
 
             System.out.println("--- Resources at turn " + tick + " ---");
             System.out.println(resourceHandler.getTotalResources().toString());

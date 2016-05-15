@@ -88,6 +88,10 @@ public class StaticEntityBuilder {
                             ExtendedStaticTiledMapTile influenceTile = new ExtendedStaticTiledMapTile(new TextureRegion(Assets.redTile));
                             influenceCell.setTile(influenceTile);
                             influenceLayer.setCell(i, j, influenceCell);
+                        } else {
+//                            ExtendedStaticTiledMapTile influenceTile = new ExtendedStaticTiledMapTile(new TextureRegion(Assets.redTile));
+                            influenceCell.setTile(null);
+                            influenceLayer.setCell(i, j, influenceCell);
                         }
                     }
                 }
@@ -114,8 +118,50 @@ public class StaticEntityBuilder {
 
     public void destroy(Building building) {
 
-    }
+        if (building != null) {
 
+            System.out.println("Destroyed " + building.getName());
+            world.getStaticEntities().remove(building);
+
+            Vector2 coords = building.getCoords();
+            // Remove building tiles
+
+            for (int i = (int) coords.x; i < (int) coords.x + building.collisionSize.x; i++) {
+                for (int j = (int) coords.y; j < (int) coords.y + building.collisionSize.y; j++) {
+                    TiledMapTileLayer.Cell buildingsCell = buildingsLayer.getCell(i, j);
+                    ExtendedStaticTiledMapTile buildingTile = (ExtendedStaticTiledMapTile) buildingsCell.getTile();
+                    buildingTile.setTextureRegion(new TextureRegion(Assets.emptyTile));
+//                    System.out.println("removed " + buildingTile.getObject());
+                    buildingTile.setObject(null);
+
+
+                    buildingsCell.setTile(buildingTile);
+                    buildingsLayer.setCell(i, j, buildingsCell);
+                }
+            }
+
+            int startX = (int) coords.x - building.getInfluenceRadius();
+            int startY = (int) coords.y - building.getInfluenceRadius();
+            int endY = (int) coords.y + building.getInfluenceRadius() + (int) building.collisionSize.y;
+            int endX = (int) coords.x + building.getInfluenceRadius() + (int) building.collisionSize.x;
+
+            // TODO: 12/05/2016 Add also for upper limits
+            if (startX < 0) startX = 0;
+            if (startY < 0) startY = 0;
+
+            for (int j = startY; j < endY; j++) {
+                for (int i = startX; i < endX; i++) {
+                    TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
+                    if (cell != null) {
+                        ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
+                        tile.decBuildingsNearby();
+                        cell.setTile(tile);
+                        buildingsLayer.setCell(i, j, cell);
+                    }
+                }
+            }
+        }
+    }
 
 
     /**
@@ -184,8 +230,20 @@ public class StaticEntityBuilder {
                 long id = sound.play(0.5f);
                 sound.setPitch(id, 0.75f);
 
+                // Places the selected entity on the buildings layer, and add it to the list
+                selectedEntity.placeOnLayer(buildingsLayer, x, y);
+//                selectedEntity.set
+                this.world.getStaticEntities().add(selectedEntity);
+
+                // If the placed entity is a building, remove its cost from the total resources
+                // Note: for now, all placeable entities are buildings, but in the future
+                // we may add a map editor
+                if (selectedEntity instanceof Building)
+                    this.world.getResourceHandler().removeFromTotal(((Building) selectedEntity).getCosts());
+
+
                 try {
-                    // Makes a new instance of the proper subclass
+                    // Makes a new instance of the proper subclass after placing it (for the next one)
                     // TODO: check if this creates other problems.
                     Texture currentTex = selectedEntity.getMainTexture();
                     selectedEntity = selectedEntity.getClass().newInstance();
@@ -197,16 +255,6 @@ public class StaticEntityBuilder {
                     e.printStackTrace();
                 }
 
-                // Places the selected entity on the buildings layer, and add it to the list
-                selectedEntity.placeOnLayer(buildingsLayer, x, y);
-//                selectedEntity.set
-                this.world.getStaticEntities().add(selectedEntity);
-
-                // If the placed entity is a building, remove its cost from the total resources
-                // Note: for now, all placeable entities are buildings, but in the future
-                // we may add a map editor
-                if (selectedEntity instanceof Building)
-                    this.world.getResourceHandler().removeFromTotal(((Building) selectedEntity).getCosts());
 
 
 

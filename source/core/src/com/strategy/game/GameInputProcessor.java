@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.buildings.*;
 import com.strategy.game.screens.GameScreen;
+import com.strategy.game.world.World;
 
 
 /**
@@ -25,10 +26,12 @@ public class GameInputProcessor implements InputProcessor{
     private Vector2 touchDownCoords;
     private boolean isPressingMouse;
     private Vector2 prevMouseCoords;
+    private World world;
 
     public GameInputProcessor(GameScreen screen) {
         this.screen = screen;
         this.camera = screen.getCamera();
+        this.world = screen.getWorld();
         this.isPressingMouse = false;
         this.prevMouseCoords = new Vector2(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
     }
@@ -146,7 +149,12 @@ public class GameInputProcessor implements InputProcessor{
             // TODO: show building info from here
             MapEntity clickedEntity = screen.getBuilder().getEntityAt((int)pickedTile.x, (int)pickedTile.y);
             screen.getSidebar().setBuilding((Building) clickedEntity);
+            if (clickedEntity != null)
+                System.out.println(clickedEntity.toString());
 
+        } else {
+//            MapEntity clickedEntity = screen.getBuilder().getEntityAt((int)pickedTile.x, (int)pickedTile.y);
+//            screen.getBuilder().destroy((Building)clickedEntity);
         }
         return true;
     }

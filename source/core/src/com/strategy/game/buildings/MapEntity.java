@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.strategy.game.Assets;
 import com.strategy.game.ExtendedStaticTiledMapTile;
 import com.strategy.game.Utils;
+import com.strategy.game.world.World;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,8 @@ public abstract class MapEntity implements Disposable{
     private int counter;
     protected int influenceRadius;
 
+    private Vector2 position;
+
     private ExtendedStaticTiledMapTile[][] tiles;
     private TiledMapTileLayer.Cell[][] prevCells;
     private TiledMapTileLayer.Cell[][] prevCellsInfluence;
@@ -39,6 +42,14 @@ public abstract class MapEntity implements Disposable{
         this.isClicked = false;
         this.counter = 0;
         this.textures = new ArrayList<Texture>();
+    }
+
+    public Vector2 getPosition() {
+        return position;
+    }
+
+    public void setPosition(Vector2 position) {
+        this.position = position;
     }
 
     public boolean isClicked() {
@@ -66,6 +77,9 @@ public abstract class MapEntity implements Disposable{
         this.mainTexture = mainTexture;
         sliceTexture(mainTexture);
     }
+
+
+
 
     /**
      * Switch to alternative textures, if they exist.
@@ -109,6 +123,68 @@ public abstract class MapEntity implements Disposable{
         }
     }
 
+    /**
+     * Removes this building from the game.
+     */
+//    public void destroy() {
+//        System.out.println("Destroyed");
+////        MapEntity entity = getEntityAt(x, y);
+//        world.getStaticEntities().remove(entity);
+////
+////        if (entity != null) {
+////            Vector2 coords = entity.getCoords();
+////            for (int i = (int)coords.x; i < (int)coords.x + entity.collisionSize.x; i++) {
+////                for (int j = (int)coords.y; j < (int)coords.y + entity.collisionSize.y; j++) {
+////                    TiledMapTileLayer.Cell buildingsCell = buildingsLayer.getCell(i,j);
+////                    ExtendedStaticTiledMapTile buildingTile = (ExtendedStaticTiledMapTile) buildingsCell.getTile();
+////                    buildingTile.setTextureRegion(new TextureRegion(Assets.emptyTile));
+////                    buildingTile.setObject(null);
+////
+////                    buildingsCell.setTile(buildingTile);
+////                    buildingsLayer.setCell(i,j,buildingsCell);
+////                }
+////            }
+////
+////
+//////            // Set influence radius
+//////            int startX = x - entity.getInfluenceRadius();
+//////            int startY = y - entity.getInfluenceRadius();
+//////            int endY = y + entity.getInfluenceRadius() + (int) entity.collisionSize.y;
+//////            int endX = x + entity.getInfluenceRadius() + (int) entity.collisionSize.x;
+//////
+//////            // TODO: 12/05/2016 Add also for upper limits
+//////            if (startX < 0) startX = 0;
+//////            if (startY < 0) startY = 0;
+//////
+//////            for (int j = startY; j < endY; j++) {
+//////                for (int i = startX; i < endX; i++) {
+//////                    TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
+//////                    if (cell != null) {
+//////                        ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
+//////                        tile.decBuildingsNearby();
+//////
+//////
+//////                        cell.setTile(tile);
+//////                        buildingsLayer.setCell(i, j, cell);
+//////                    }
+//////                }
+//////            }
+////        }
+////
+//////        TiledMapTileLayer.Cell buildingsCell = buildingsLayer.getCell(x,y);
+//////        if (buildingsCell != null) {
+//////            TiledMapTile tile = buildingsCell.getTile();
+//////            if (tile instanceof ExtendedStaticTiledMapTile) {
+//////                tile.setTextureRegion(new TextureRegion(Assets.redTile));
+//////                buildingsCell.setTile(tile);
+//////                buildingsLayer.setCell(x, y, buildingsCell);
+//////            }
+//////        }
+////
+////        System.out.println("Destroyed!");
+////        System.out.println(getEntityAt(x, y));
+//
+//    }
 
 
     /**

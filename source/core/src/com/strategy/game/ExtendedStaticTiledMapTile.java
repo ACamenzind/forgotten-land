@@ -42,6 +42,10 @@ public class ExtendedStaticTiledMapTile extends StaticTiledMapTile {
         this.buildingsNearby += 1;
     }
 
+    public void decBuildingsNearby() {
+        this.buildingsNearby -= 1;
+    }
+
     public MapEntity getObject() {
         return object;
     }

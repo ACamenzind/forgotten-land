@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.strategy.game.ResourceContainer;
 import com.strategy.game.buildings.MapEntity;
+import com.strategy.game.world.World;
 
 /**
  * A building with its resources. Inherit from this to create new ones.
