@@ -135,6 +135,10 @@ public class GameScreen implements Screen {
         return builder;
     }
 
+    public Sidebar getSidebar() {
+        return sidebar;
+    }
+
     @Override
     public void show() {
 
@@ -194,7 +198,7 @@ public class GameScreen implements Screen {
         // Draw stage
         stage.act(delta);
         sidebar.updatePosition();
-        stage.setDebugAll(true); // For debug purpose
+//        stage.setDebugAll(true); // For debug purpose
         stage.getViewport().apply();
         stage.draw();
 

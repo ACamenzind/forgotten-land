@@ -145,6 +145,7 @@ public class GameInputProcessor implements InputProcessor{
 
             // TODO: show building info from here
             MapEntity clickedEntity = screen.getBuilder().getEntityAt((int)pickedTile.x, (int)pickedTile.y);
+            screen.getSidebar().setBuilding((Building) clickedEntity);
 
         }
         return true;
