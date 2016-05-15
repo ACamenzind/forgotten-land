@@ -212,6 +212,16 @@ public class SidebarBuildingInfo extends Table implements Display {
         });
         tableInfo.addActor(workersButtonRemove);
 
+        destroyButton.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                if (building != null && hasParent()) {
+                    Sidebar sidebar = (Sidebar) getParent();
+                    sidebar.getScreen().getBuilder().destroy(building);
+                    updateMenu(Menu.NONE);
+                }
+                return false;
+            }
+        });
         tableInfo.addActor(destroyButton);
 
 //        String[] resourcesBalanceTitles = { "Worth" };
