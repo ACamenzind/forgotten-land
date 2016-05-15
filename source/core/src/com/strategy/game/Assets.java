@@ -38,8 +38,8 @@ public class Assets {
         redTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/red.png"));
 
         cows = new Texture(Gdx.files.internal("core/assets/textures/buildings/cows.png"));
-        warehouse = new Texture(Gdx.files.internal("core/assets/textures/buildings/cows.png"));
-        wheat = new Texture(Gdx.files.internal("core/assets/textures/buildings/cows.png"));
+        warehouse = new Texture(Gdx.files.internal("core/assets/textures/buildings/warehouse.png"));
+        wheat = new Texture(Gdx.files.internal("core/assets/textures/buildings/wheat.png"));
 
         // http://opengameart.org/content/outdoor-ambiance CC3.0
         bgSound = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/Outdoor_ambiance.mp3"));

@@ -17,7 +17,7 @@ public class WarehouseRock extends Building {
     private static final int MAX_LIFE = 10;
     private static final int MAX_WORKERS = 5;
     private static final int INFLUENCE_RADIUS = 5;
-    private static final Texture TEXTURE = Assets.house1;
+    private static final Texture TEXTURE = Assets.warehouse;
     private static final Vector2 COLLISION = new Vector2(2,2);
     private int life = MAX_LIFE;
     private int workers = 0;
