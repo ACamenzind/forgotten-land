@@ -171,16 +171,18 @@ public class StaticEntityBuilder {
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
+
+                // Places the selected entity on the buildings layer, and add it to the list
                 selectedEntity.placeOnLayer(buildingsLayer, x, y);
                 this.world.getStaticEntities().add(selectedEntity);
 
-                if (this.getSelectedEntity() instanceof House) //TODO: abstract a bit
-                    world.getResourceHandler().incrementWoodCounter(-100);
-                else if (this.getSelectedEntity() instanceof Castle)
-                    world.getResourceHandler().incrementRockCounter(-100);
+                // If the placed entity is a building, remove its cost from the total resources
+                // Note: for now, all placeable entities are buildings, but in the future
+                // we may add a map editor
+                if (selectedEntity instanceof Building)
+                    this.world.getResourceHandler().removeFromTotal(((Building) selectedEntity).getCosts());
 
 
-                //remove resources
 
             } else {
                 long id = sound.play(0.5f);

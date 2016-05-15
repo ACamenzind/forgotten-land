@@ -112,6 +112,9 @@ public class ResourceHandler {
         return rockIncrementer;
     }
 
+    public void removeFromTotal(ResourceContainer amount) {
+        totalResources = totalResources.subtract(amount);
+    }
 
     /**
      * Updates the state of all the resources.
