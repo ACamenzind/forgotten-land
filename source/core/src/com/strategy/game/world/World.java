@@ -39,7 +39,7 @@ public class World implements Disposable{
         this.staticEntities = new ArrayList<MapEntity>();
         this.movableEntities = new ArrayList<MovableEntity>();
 //        this.builder = new StaticEntityBuilder(this);
-        this.resourceHandler = new ResourceHandler(this, 0, 100, 100, 100, 100, 5);
+        this.resourceHandler = new ResourceHandler(this, 0, 1000, 1000, 1000, 1000, 5);
         this.updateCounter = 0;
         this.populationHandler = new PopulationHandler(5, 200, 20);
         this.tick = 0;
@@ -86,20 +86,9 @@ public class World implements Disposable{
             updateCounter = 0;
             tick++;
 
-
-//            for (MapEntity e :
-//                    staticEntities) {
-//                System.out.println(e);
-//            }
-
             System.out.println("--- Resources at turn " + tick + " ---");
             System.out.println(resourceHandler.getTotalResources().toString());
-//            System.out.println("Food: " + resourceHandler.getFoodCounter());
-//            System.out.println("Gold: " + resourceHandler.getGoldCounter());
-//            System.out.println("Rock: " + resourceHandler.getRockCounter());
-//            System.out.println("Wood: " + resourceHandler.getWoodCounter());
-//            System.out.println("People: " + populationHandler.getPopulationCounter());
-//            System.out.println("-----------------");
+
             //TODO: make that you have to press something to go to next turn?
 
 ////            int treeCount = 0;

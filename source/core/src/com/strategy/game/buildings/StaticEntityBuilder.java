@@ -232,16 +232,19 @@ public class StaticEntityBuilder {
                 long id = sound.play(0.5f);
                 sound.setPitch(id, 0.75f);
 
-                // Places the selected entity on the buildings layer, and add it to the list
-                selectedEntity.placeOnLayer(buildingsLayer, x, y);
-//                selectedEntity.set
-                this.world.getStaticEntities().add(selectedEntity);
 
-                // If the placed entity is a building, remove its cost from the total resources
+
+                // If the placed entity is a building, remove its cost from the total resources if possible
                 // Note: for now, all placeable entities are buildings, but in the future
                 // we may add a map editor
-                if (selectedEntity instanceof Building)
+                boolean placeable = world.getResourceHandler().canPlaceBuilding((Building) selectedEntity);
+                if (selectedEntity instanceof Building && placeable) {
+                    // Places the selected entity on the buildings layer, and add it to the list
+                    selectedEntity.placeOnLayer(buildingsLayer, x, y);
+                    this.world.getStaticEntities().add(selectedEntity);
                     this.world.getResourceHandler().removeFromTotal(((Building) selectedEntity).getCosts());
+                }
+
 
 
                 try {

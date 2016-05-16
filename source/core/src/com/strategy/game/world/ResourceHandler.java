@@ -38,6 +38,7 @@ public class ResourceHandler {
         this.rockIncrementer = 0;
         this.world = world;
         this.totalResources = new ResourceContainer(woodCounter, goldCounter, foodCounter, rockCounter, people);
+        this.maximumResources = new ResourceContainer(100, 100, 100, 100, 10);
     }
 
     public ResourceContainer getTotalResources() {
@@ -116,6 +117,11 @@ public class ResourceHandler {
 
     public void removeFromTotal(ResourceContainer amount) {
         totalResources = totalResources.subtract(amount);
+    }
+
+    public boolean canPlaceBuilding(Building building) {
+        ResourceContainer result = totalResources.subtract(building.getCosts());
+        return result.noNegativeResources();
     }
 
     /**

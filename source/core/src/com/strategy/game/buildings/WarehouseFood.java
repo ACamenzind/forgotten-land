@@ -13,7 +13,7 @@ public class WarehouseFood extends Building {
     private static final ResourceContainer COST = new ResourceContainer(40, 0, 10, 0, 0);
     private static final ResourceContainer PRODUCTION = new ResourceContainer(10, 0, 0, 1, 0);
     private static final ResourceContainer MAINTENANCE = new ResourceContainer(10, 0, 0, 1, 0);
-    private static final ResourceContainer RESOURCE_STORED = new ResourceContainer(0, 0, 0, 0, 0);
+    private static final ResourceContainer RESOURCE_STORED = new ResourceContainer(0, 500, 0, 0, 0);
     private static final int MAX_LIFE = 10;
     private static final int MAX_WORKERS = 5;
     private static final int INFLUENCE_RADIUS = 5;

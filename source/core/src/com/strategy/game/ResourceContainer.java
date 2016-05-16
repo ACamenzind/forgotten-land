@@ -58,6 +58,10 @@ public class ResourceContainer {
         return new ResourceContainer(wood, food, rock, gold, people);
     }
 
+    public boolean noNegativeResources() {
+        return wood >= 0 && food >= 0 && rock >= 0 && gold >= 0;
+    }
+
     @Override
     public String toString() {
         return "W: " + wood + " F: " + food + " R: " + rock + " G: " + gold + " P: " + people;
