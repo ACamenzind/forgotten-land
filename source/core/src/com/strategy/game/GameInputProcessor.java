@@ -121,6 +121,9 @@ public class GameInputProcessor implements InputProcessor{
             case Input.Keys.R:
                 screen.getBuilder().rotate();
                 break;
+            case Input.Keys.P:
+                screen.getWorld().toggleRunning();
+                break;
         }
         return false;
     }

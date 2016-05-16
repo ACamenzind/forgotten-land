@@ -23,6 +23,8 @@ public class ResourceHandler {
     private World world;
 
     private ResourceContainer totalResources;
+    private ResourceContainer maximumResources;
+
 
     public ResourceHandler(World world, int startingIncrement, int woodCounter, int goldCounter, int foodCounter, int rockCounter, int people) {
         this.startingIncrement = startingIncrement;

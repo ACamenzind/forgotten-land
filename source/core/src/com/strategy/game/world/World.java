@@ -18,6 +18,7 @@ import java.util.ArrayList;
  */
 public class World implements Disposable{
 
+    public static final int TICK_DURATION = 300;
     private Stage gameStage;
     private GameScreen gameScreen;
     private ArrayList<MapEntity> staticEntities;
@@ -28,6 +29,7 @@ public class World implements Disposable{
     private int updateCounter;
     private PopulationHandler populationHandler;
     private int tick;
+    private boolean isRunning;
 
 
     public World(GameScreen gameScreen) {
@@ -41,6 +43,7 @@ public class World implements Disposable{
         this.updateCounter = 0;
         this.populationHandler = new PopulationHandler(5, 200, 20);
         this.tick = 0;
+        this.isRunning = true;
     }
 
     public ArrayList<MapEntity> getStaticEntities() {
@@ -60,15 +63,25 @@ public class World implements Disposable{
     }
 
     /**
+     * Toggles between running and pausing the game.
+     */
+    public void toggleRunning() {
+        isRunning = !isRunning;
+        if (isRunning) System.out.println("Game resumed!");
+        else System.out.println("Game paused!");
+    }
+
+    /**
      * Searches the map file for tiles that are of type resource, and adds them to the resource list
      * to keep track of them.
+     * TODO: implement
      */
     private void readResources() {
 
     }
 
     public void update(float delta) {
-        if(updateCounter / 300 >= 1) {
+        if(updateCounter / TICK_DURATION >= 1 && isRunning) {
             resourceHandler.update();
             updateCounter = 0;
             tick++;
