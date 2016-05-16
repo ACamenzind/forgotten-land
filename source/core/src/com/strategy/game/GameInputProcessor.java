@@ -139,20 +139,15 @@ public class GameInputProcessor implements InputProcessor{
             isPressingMouse = true;
         }
 
-
         Vector3 pickedTile = Utils.cartesianToIso(touch, camera);
-        //TODO: better to handle coords inside the builder?
+
         if (screen.getBuilder().getSelectedEntity() != null && button == Input.Buttons.LEFT) {
             screen.getBuilder().placeSelectedEntity((int) pickedTile.x, (int) pickedTile.y, false);
         }
         else if (screen.getBuilder().getSelectedEntity() == null && button == Input.Buttons.LEFT)  {
-
             // TODO: show building info from here
             MapEntity clickedEntity = screen.getBuilder().getEntityAt((int)pickedTile.x, (int)pickedTile.y);
             screen.getSidebar().setBuilding((Building) clickedEntity);
-            if (clickedEntity != null)
-                System.out.println(clickedEntity.toString());
-
         } else {
             //
         }
