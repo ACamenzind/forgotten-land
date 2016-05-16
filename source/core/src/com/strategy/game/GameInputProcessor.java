@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -153,8 +154,7 @@ public class GameInputProcessor implements InputProcessor{
                 System.out.println(clickedEntity.toString());
 
         } else {
-//            MapEntity clickedEntity = screen.getBuilder().getEntityAt((int)pickedTile.x, (int)pickedTile.y);
-//            screen.getBuilder().destroy((Building)clickedEntity);
+            //
         }
         return true;
     }

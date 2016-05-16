@@ -78,9 +78,6 @@ public abstract class MapEntity implements Disposable{
         sliceTexture(mainTexture);
     }
 
-
-
-
     /**
      * Switch to alternative textures, if they exist.
      */
@@ -124,70 +121,6 @@ public abstract class MapEntity implements Disposable{
     }
 
     /**
-     * Removes this building from the game.
-     */
-//    public void destroy() {
-//        System.out.println("Destroyed");
-////        MapEntity entity = getEntityAt(x, y);
-//        world.getStaticEntities().remove(entity);
-////
-////        if (entity != null) {
-////            Vector2 coords = entity.getCoords();
-////            for (int i = (int)coords.x; i < (int)coords.x + entity.collisionSize.x; i++) {
-////                for (int j = (int)coords.y; j < (int)coords.y + entity.collisionSize.y; j++) {
-////                    TiledMapTileLayer.Cell buildingsCell = buildingsLayer.getCell(i,j);
-////                    ExtendedStaticTiledMapTile buildingTile = (ExtendedStaticTiledMapTile) buildingsCell.getTile();
-////                    buildingTile.setTextureRegion(new TextureRegion(Assets.emptyTile));
-////                    buildingTile.setObject(null);
-////
-////                    buildingsCell.setTile(buildingTile);
-////                    buildingsLayer.setCell(i,j,buildingsCell);
-////                }
-////            }
-////
-////
-//////            // Set influence radius
-//////            int startX = x - entity.getInfluenceRadius();
-//////            int startY = y - entity.getInfluenceRadius();
-//////            int endY = y + entity.getInfluenceRadius() + (int) entity.collisionSize.y;
-//////            int endX = x + entity.getInfluenceRadius() + (int) entity.collisionSize.x;
-//////
-//////            // TODO: 12/05/2016 Add also for upper limits
-//////            if (startX < 0) startX = 0;
-//////            if (startY < 0) startY = 0;
-//////
-//////            for (int j = startY; j < endY; j++) {
-//////                for (int i = startX; i < endX; i++) {
-//////                    TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
-//////                    if (cell != null) {
-//////                        ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
-//////                        tile.decBuildingsNearby();
-//////
-//////
-//////                        cell.setTile(tile);
-//////                        buildingsLayer.setCell(i, j, cell);
-//////                    }
-//////                }
-//////            }
-////        }
-////
-//////        TiledMapTileLayer.Cell buildingsCell = buildingsLayer.getCell(x,y);
-//////        if (buildingsCell != null) {
-//////            TiledMapTile tile = buildingsCell.getTile();
-//////            if (tile instanceof ExtendedStaticTiledMapTile) {
-//////                tile.setTextureRegion(new TextureRegion(Assets.redTile));
-//////                buildingsCell.setTile(tile);
-//////                buildingsLayer.setCell(x, y, buildingsCell);
-//////            }
-//////        }
-////
-////        System.out.println("Destroyed!");
-////        System.out.println(getEntityAt(x, y));
-//
-//    }
-
-
-    /**
      * Places the Entity onto the given layer at the specified coordinates
      * @param layer the layer onto which to put the entity
      * @param clickX tile coordinate
@@ -205,14 +138,24 @@ public abstract class MapEntity implements Disposable{
                 prevCells[x][y] = cell;
                 if (cell == null)
                     cell = new TiledMapTileLayer.Cell();
+
+                TiledMapTile oldTile = cell.getTile();
+                int oldInfluence = 0;
+                // Copy the previous influence, since it gets overwritten
+                if (oldTile != null && oldTile instanceof ExtendedStaticTiledMapTile) {
+                    oldInfluence = ((ExtendedStaticTiledMapTile) oldTile).getBuildingsNearby();
+                }
                 tiles[x][y].setObstacle(true);
                 tiles[x][y].setObject(this);
+                tiles[x][y].setBuildingsNearby(oldInfluence);
+
                 cell.setTile(tiles[x][y]);
                 layer.setCell(clickX + x, clickY + y, cell);
             }
         }
 
         // Set influence radius
+//        influenceRadius = 0;
         int startY = clickY - influenceRadius;
         int startX = clickX - influenceRadius;
         int endY = clickY + influenceRadius + (int) collisionSize.y;
@@ -235,7 +178,6 @@ public abstract class MapEntity implements Disposable{
                 TextureRegion texture;
                 //TODO: remove the first condition (temporarily left there)
                 if (layer.getName().equals("Selection") && cell.getTile() != null) {
-//                    texture = new TextureRegion(Assets.redTile);
                     texture = cell.getTile().getTextureRegion();
                 } else if (cell.getTile() != null) {
                     texture = cell.getTile().getTextureRegion();
@@ -245,12 +187,21 @@ public abstract class MapEntity implements Disposable{
 
                 TiledMapTile tile;
                 tile = cell.getTile();
+
+                // Creates a new tile if needed
                 if (!(tile instanceof ExtendedStaticTiledMapTile)) {
-                    if (tile == null) tile = new ExtendedStaticTiledMapTile(texture);
-                    else    tile = new ExtendedStaticTiledMapTile((StaticTiledMapTile) tile);
+                    if (tile == null) {
+                        tile = new ExtendedStaticTiledMapTile(texture);
+                    }
+                    else {
+                        tile = new ExtendedStaticTiledMapTile((StaticTiledMapTile) tile);
+                    }
                 }
 
-                ((ExtendedStaticTiledMapTile) tile).incBuildingsNearby();
+                // Increments the count only on the buildings layer
+                if (layer.getName().equals("Buildings")) {
+                    ((ExtendedStaticTiledMapTile) tile).incBuildingsNearby();
+                }
                 cell.setTile(tile);
                 layer.setCell(x, y, cell);
             }

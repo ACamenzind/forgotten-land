@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.Assets;
@@ -75,7 +74,7 @@ public class StaticEntityBuilder {
      * Draws the influence area of all placed buildings.
      * (Checks whether each tile has any buildings nearby and if so, highlights the tile)
      */
-    private void drawInfluence() {
+    private void refreshInfluence() {
         for (int i = 0; i < influenceLayer.getWidth(); i++) {
             for (int j = 0; j < influenceLayer.getHeight(); j++) {
                 TiledMapTileLayer.Cell influenceCell = new TiledMapTileLayer.Cell();
@@ -89,7 +88,6 @@ public class StaticEntityBuilder {
                             influenceCell.setTile(influenceTile);
                             influenceLayer.setCell(i, j, influenceCell);
                         } else {
-//                            ExtendedStaticTiledMapTile influenceTile = new ExtendedStaticTiledMapTile(new TextureRegion(Assets.redTile));
                             influenceCell.setTile(null);
                             influenceLayer.setCell(i, j, influenceCell);
                         }
@@ -116,25 +114,24 @@ public class StaticEntityBuilder {
         return null;
     }
 
+    /**
+     * Removes the given building
+     * FIXME: not really precise at removing the influence area for some reason
+     * @param building the building to remove
+     */
     public void destroy(Building building) {
-
         if (building != null) {
-
-            System.out.println("Destroyed " + building.getName());
             world.getStaticEntities().remove(building);
 
             Vector2 coords = building.getCoords();
-            // Remove building tiles
 
+            // Remove the building tiles
             for (int i = (int) coords.x; i < (int) coords.x + building.collisionSize.x; i++) {
                 for (int j = (int) coords.y; j < (int) coords.y + building.collisionSize.y; j++) {
                     TiledMapTileLayer.Cell buildingsCell = buildingsLayer.getCell(i, j);
                     ExtendedStaticTiledMapTile buildingTile = (ExtendedStaticTiledMapTile) buildingsCell.getTile();
                     buildingTile.setTextureRegion(new TextureRegion(Assets.emptyTile));
-//                    System.out.println("removed " + buildingTile.getObject());
                     buildingTile.setObject(null);
-
-
                     buildingsCell.setTile(buildingTile);
                     buildingsLayer.setCell(i, j, buildingsCell);
                 }
@@ -142,24 +139,29 @@ public class StaticEntityBuilder {
 
             int startX = (int) coords.x - building.getInfluenceRadius();
             int startY = (int) coords.y - building.getInfluenceRadius();
-            int endY = (int) coords.y + building.getInfluenceRadius() + (int) building.collisionSize.y;
+
             int endX = (int) coords.x + building.getInfluenceRadius() + (int) building.collisionSize.x;
+            int endY = (int) coords.y + building.getInfluenceRadius() + (int) building.collisionSize.y;
 
             // TODO: 12/05/2016 Add also for upper limits
             if (startX < 0) startX = 0;
             if (startY < 0) startY = 0;
 
+            // Resets the influence area
             for (int j = startY; j < endY; j++) {
                 for (int i = startX; i < endX; i++) {
                     TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
                     if (cell != null) {
                         ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
-                        tile.decBuildingsNearby();
+                        int buildingsNearby = tile.getBuildingsNearby();
+                        if (buildingsNearby > 0)
+                            tile.decBuildingsNearby();
                         cell.setTile(tile);
                         buildingsLayer.setCell(i, j, cell);
                     }
                 }
             }
+            refreshInfluence(); // Redraws the influence area with the new data
         }
     }
 
@@ -286,7 +288,7 @@ public class StaticEntityBuilder {
         Vector3 touch = new Vector3(screenX, screenY, 0);
         Vector3 pickedTile = Utils.cartesianToIso(touch, camera);
         if (selectedEntity != null) {
-            drawInfluence(); // Refresh the influence area view
+            refreshInfluence(); // Refresh the influence area view
             selectedEntity.placeOnLayer(selectionLayer, (int)pickedTile.x, (int)pickedTile.y);
         }
     }

@@ -30,8 +30,12 @@ public class ExtendedStaticTiledMapTile extends StaticTiledMapTile {
         this.id = copy.getId();
         if (copy instanceof ExtendedStaticTiledMapTile) {
             this.object = ((ExtendedStaticTiledMapTile) copy).getObject();
-//            this.isObstacle
+            this.buildingsNearby = ((ExtendedStaticTiledMapTile) copy).getBuildingsNearby();
         }
+    }
+
+    public void setBuildingsNearby(int buildingsNearby) {
+        this.buildingsNearby = buildingsNearby;
     }
 
     public int getBuildingsNearby() {
