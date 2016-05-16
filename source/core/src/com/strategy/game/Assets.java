@@ -21,7 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 public class Assets {
 
     public static TiledMap map;
-    public static Texture house1, castle, leftwall, middlewall, rightwall, emptyTile, redTile, cows, warehouse, wheat;
+    public static Texture house1, castle, leftwall, middlewall, rightwall, emptyTile, redTile, cows, warehouse, wheat, lumberjack;
     // SIDEBAR BUILDING INFO
     public static Texture sidebarBuildInfoInfo, sidebarBuildInfoCost, sidebarBuildInfoProfit, sidebarBuildInfoPlus,
             sidebarBuildInfoMinus, sidebarBuildInfoDestroy;
@@ -50,6 +50,7 @@ public class Assets {
         cows = new Texture(Gdx.files.internal("core/assets/textures/buildings/cows.png"));
         warehouse = new Texture(Gdx.files.internal("core/assets/textures/buildings/warehouse.png"));
         wheat = new Texture(Gdx.files.internal("core/assets/textures/buildings/wheat.png"));
+        lumberjack = new Texture(Gdx.files.internal("core/assets/textures/buildings/lumberjack.png"));
 
         // http://opengameart.org/content/outdoor-ambiance CC3.0
         bgSound = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/Outdoor_ambiance.mp3"));
