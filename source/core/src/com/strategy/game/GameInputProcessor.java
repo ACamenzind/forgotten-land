@@ -8,14 +8,13 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.buildings.*;
 import com.strategy.game.screens.GameScreen;
 import com.strategy.game.world.World;
-
-import java.io.Serializable;
 
 
 /**
@@ -26,13 +25,19 @@ public class GameInputProcessor implements InputProcessor{
     private OrthographicCamera camera;
     private final int EDGE_THRESHOLD_WIDTH = 50;
     private Vector2 touchDownCoords;
+    private boolean isPressingMouse;
+    private Vector2 prevMouseCoords;
+    private World world;
 
     public GameInputProcessor(GameScreen screen) {
         this.screen = screen;
         this.camera = screen.getCamera();
+        this.world = screen.getWorld();
+        this.isPressingMouse = false;
+        this.prevMouseCoords = new Vector2(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
     }
 
-    // Used for continuous presses
+    // Used to handle continuous presses
     public void pollKeyboard() {
         // Moves the camera in the specified direction
         if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
@@ -75,6 +80,18 @@ public class GameInputProcessor implements InputProcessor{
                 (mouseX > (camera.viewportWidth / 4)) &&
                 (mouseX < (camera.viewportWidth * 3/4)))
             camera.translate(0, camera.zoom*(-Utils.BASE_CAMERA_SPEED));
+
+
+        // Move the camera when clicking and dragging.
+        // TODO: make it so that you have to press it for a certain amount of time to start dragging
+        Vector2 currentMouseCoords = new Vector2(Gdx.input.getX(), Gdx.input.getY());
+        Vector2 deltaMouse = new Vector2(currentMouseCoords.x - prevMouseCoords.x, currentMouseCoords.y - prevMouseCoords.y);
+
+        // Only works when not placing a building
+        if (isPressingMouse && screen.getBuilder().getSelectedEntity() == null) {
+            camera.translate(-deltaMouse.x * camera.zoom, deltaMouse.y * camera.zoom);
+        }
+        prevMouseCoords = new Vector2(currentMouseCoords);
     }
 
     @Override
@@ -89,15 +106,23 @@ public class GameInputProcessor implements InputProcessor{
             case Input.Keys.NUM_3:
                 screen.getBuilder().toggleSelectEntity(new Wall());
                 break;
+            case Input.Keys.NUM_4:
+                screen.getBuilder().toggleSelectEntity(new CollectorWood());
+                break;
+            case Input.Keys.NUM_5:
+                screen.getBuilder().toggleSelectEntity(new CollectorFood());
+                break;
+            case Input.Keys.NUM_6:
+                screen.getBuilder().toggleSelectEntity(new WarehouseFood());
+                break;
+            case Input.Keys.ESCAPE:
+                screen.getBuilder().untoggleSelectEntity();
+                break;
             case Input.Keys.R:
                 screen.getBuilder().rotate();
                 break;
-            case Input.Keys.S:
-                World.saveGame(screen.getWorld());
-                break;
-            case Input.Keys.L:
-                World temporaryWorld = World.loadSavedGame();
-                screen.setLoadedWorld(temporaryWorld);
+            case Input.Keys.P:
+                screen.getWorld().toggleRunning();
                 break;
         }
         return false;
@@ -122,45 +147,21 @@ public class GameInputProcessor implements InputProcessor{
         screen.setTouchDownCoords(new Vector2(screenX, screenY));
         screen.setSelecting(true);
 
+        if (button == Input.Buttons.LEFT) {
+            isPressingMouse = true;
+        }
 
         Vector3 pickedTile = Utils.cartesianToIso(touch, camera);
-        //TODO: better to handle coords inside the builder?
-        if (screen.getBuilder().getSelectedEntity() != null) {
-            screen.getBuilder().placeSelectedEntity((int) pickedTile.x, (int) pickedTile.y);
-        }
-        else if (screen.getBuilder().getSelectedEntity() == null)  {
-            //TODO: get tile info and show window
-            // for debugging purposes
-//            TiledMapTileLayer.Cell cell = ((TiledMapTileLayer) (screen.getMap().getLayers().get(1)))
-//                    .getCell((int) pickedTile.x, (int) pickedTile.y);
-//            if (cell != null) {
-//                ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
-//                MapEntity selected = tile.getObject();
-//                selected.setClicked(true);
-//                System.out.println("set clicked!");
-//
-//
-//
-//                MapObject obj = new RectangleMapObject(selected.getCoords().x * Utils.TILE_SIZE,
-//                        selected.getCoords().y * Utils.TILE_SIZE ,
-//                        selected.getCollisionSize().x * Utils.TILE_SIZE,
-//                        selected.getCollisionSize().y * Utils.TILE_SIZE);
-//                obj.setVisible(true);
-//
-//
-//                MapLayer objLayer = screen.getMap().getLayers().get(3);
-//
-//                obj.setColor(new Color(Color.RED));
-////                obj.setName("HELLO WORLD ------------------------------------");
-//                obj.setOpacity(1.f);
-////                objLayer.getObjects().add(obj);
-//
-//            }
-//            else {
-//                System.out.println("Empty");
-//            }
 
-//            Utils.printTileInfo(pickedTile, screen);
+        if (screen.getBuilder().getSelectedEntity() != null && button == Input.Buttons.LEFT) {
+            screen.getBuilder().placeSelectedEntity((int) pickedTile.x, (int) pickedTile.y, false);
+        }
+        else if (screen.getBuilder().getSelectedEntity() == null && button == Input.Buttons.LEFT)  {
+            // TODO: show building info from here
+            MapEntity clickedEntity = screen.getBuilder().getEntityAt((int)pickedTile.x, (int)pickedTile.y);
+            screen.getSidebar().setBuilding((Building) clickedEntity);
+        } else {
+            //
         }
         return true;
     }
@@ -168,7 +169,8 @@ public class GameInputProcessor implements InputProcessor{
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 //        screen.setTouchUpCoords(new Vector2(screenX, screenY));
-        screen.setSelecting(false);
+//        screen.setSelecting(false);
+        isPressingMouse = false;
         return false;
     }
 
@@ -186,15 +188,25 @@ public class GameInputProcessor implements InputProcessor{
 
     @Override
     public boolean scrolled(int amount) {
-        // TODO: add limits
         float mouseX = Gdx.input.getX();
         float mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
-        if(camera.zoom > 0.2 || amount > 0) {
-            camera.zoom += amount / 10.f;
+
+        // The center coordinates of the screen
+        float centerX = Gdx.graphics.getWidth() / 2;
+        float centerY = Gdx.graphics.getHeight() / 2;
+
+        // Attenuates the amount of scrolling
+        final float FACTOR = 7.5f;
+
+        final float MAX_ZOOM = 0.4f;
+        final float MIN_ZOOM = 100f;
+
+        if(camera.zoom + amount / FACTOR > MAX_ZOOM && camera.zoom + amount / FACTOR < MIN_ZOOM) {
+            camera.zoom += amount / FACTOR;
+            camera.translate(- amount * (mouseX - centerX) / FACTOR, - amount * (mouseY - centerY) / FACTOR);
         }
-        // Not working properly
-        //camera.translate(mouseX-1280, mouseY-720);
-        camera.update();
+
+        camera.update(); // Applies the changes.
         return true;
     }
 }

@@ -13,11 +13,13 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.strategy.game.*;
+import com.strategy.game.buildings.House;
 import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.screens.sidebar.Sidebar;
 import com.strategy.game.world.World;
@@ -48,6 +50,8 @@ public class GameScreen implements Screen, Serializable {
 
     private Sidebar sidebar;
 
+
+
     private Vector2 touchDownCoords;
     private Vector2 touchUpCoords;
 
@@ -66,7 +70,7 @@ public class GameScreen implements Screen, Serializable {
         this.map = Assets.map;
 //        this.renderer = new IsometricTiledMapRenderer(map);
         this.renderer = new BetterRenderer(map);
-        this.camera = new OrthographicCamera(Utils.DEFAULT_WIDTH, Utils.DEFAULT_HEIGHT);
+        this.camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         this.gameInputMultiplexer = new InputMultiplexer();
         this.gameInputProcessor = new GameInputProcessor(this);
         this.builder = new StaticEntityBuilder(this);
@@ -83,6 +87,15 @@ public class GameScreen implements Screen, Serializable {
         Gdx.input.setInputProcessor(gameInputMultiplexer);
 
         this.isSelecting = false;
+
+
+        // Starting building
+        // TODO: remove magic numbers (make it random?)
+        builder.toggleSelectEntity(new House());
+        builder.placeSelectedEntity(25, 20, true);
+        builder.untoggleSelectEntity();
+        camera.translate(25*128, 0);
+
     }
 
     public boolean isSelecting() {
@@ -125,6 +138,10 @@ public class GameScreen implements Screen, Serializable {
         return builder;
     }
 
+    public Sidebar getSidebar() {
+        return sidebar;
+    }
+
 
     public void setLoadedWorld(World world) {
         this.world.setStaticEntities(world.getStaticEntities());
@@ -162,27 +179,30 @@ public class GameScreen implements Screen, Serializable {
 
         builder.clear();
 
+        // Draw selection box, bugged when resizing the screen
+        // Doesn't really do anything at the moment
+//        if (isSelecting) {
+//            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+//            float x = touchDownCoords.x;
+//            float y = Gdx.graphics.getHeight() - touchDownCoords.y;
+//            float dx = Gdx.input.getX() - x;
+//            float dy = (Gdx.graphics.getHeight() - Gdx.input.getY()) - y;
+//            Rectangle rect = new Rectangle(x, y, dx, dy);
+//            shapeRenderer.rect(rect.x, rect.y, rect.width, rect.height);
+//            shapeRenderer.end();
+//        }
 
-        // Draw selection box
-        if (isSelecting) {
-            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-            float x = touchDownCoords.x;
-            float y = Gdx.graphics.getHeight() - touchDownCoords.y;
-            float dx = Gdx.input.getX() - x;
-            float dy = (Gdx.graphics.getHeight() - Gdx.input.getY()) - y;
-            Rectangle rect = new Rectangle(x, y, dx, dy);
-            shapeRenderer.rect(rect.x, rect.y, rect.width, rect.height);
-            shapeRenderer.end();
-        }
+
+//        System.out.println(deltaMouse.toString());
 
 
 
-        MapProperties prop = map.getProperties();
-
-        int mapWidth = prop.get("width", Integer.class);
-        int mapHeight = prop.get("height", Integer.class);
-        int tileWidth = prop.get("tilewidth", Integer.class);
-        int tileHeight = prop.get("tileheight", Integer.class);
+//        MapProperties prop = map.getProperties();
+//
+//        int mapWidth = prop.get("width", Integer.class);
+//        int mapHeight = prop.get("height", Integer.class);
+//        int tileWidth = prop.get("tilewidth", Integer.class);
+//        int tileHeight = prop.get("tileheight", Integer.class);
 
         // Draw FPS counter on the top left
         batch.begin();
@@ -192,7 +212,7 @@ public class GameScreen implements Screen, Serializable {
         // Draw stage
         stage.act(delta);
         sidebar.updatePosition();
-        stage.setDebugAll(true); // For debug purpose
+//        stage.setDebugAll(true); // For debug purpose
         stage.getViewport().apply();
         stage.draw();
 

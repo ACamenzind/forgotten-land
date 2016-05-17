@@ -1,5 +1,9 @@
 package com.strategy.game.world;
 
+import com.strategy.game.ResourceContainer;
+import com.strategy.game.buildings.Building;
+import com.strategy.game.buildings.MapEntity;
+
 import java.io.Serializable;
 
 /**
@@ -11,25 +15,37 @@ public class ResourceHandler implements Serializable{
     private int woodCounter;
     private int goldCounter;
     private int foodCounter;
-    private int stoneCounter;
+    private int rockCounter;
 
     private int woodIncrementer;
     private int goldIncrementer;
     private int foodIncrementer;
-    private int stoneIncrementer;
+    private int rockIncrementer;
 
-    public ResourceHandler(int startingIncrement, int woodCounter, int goldCounter, int foodCounter, int stoneCounter) {
+    private World world;
+
+    private ResourceContainer totalResources;
+    private ResourceContainer maximumResources;
+
+
+    public ResourceHandler(World world, int startingIncrement, int woodCounter, int goldCounter, int foodCounter, int rockCounter, int people) {
         this.startingIncrement = startingIncrement;
         this.woodCounter = woodCounter;
         this.goldCounter = goldCounter;
         this.foodCounter = foodCounter;
-        this.stoneCounter = stoneCounter;
+        this.rockCounter = rockCounter;
         this.woodIncrementer = 0;
         this.goldIncrementer = 0;
         this.foodIncrementer = 0;
-        this.stoneIncrementer = 0;
+        this.rockIncrementer = 0;
+        this.world = world;
+        this.totalResources = new ResourceContainer(woodCounter, goldCounter, foodCounter, rockCounter, people);
+        this.maximumResources = new ResourceContainer(100, 100, 100, 100, 10);
     }
 
+    public ResourceContainer getTotalResources() {
+        return totalResources;
+    }
 
     public void incrementWoodIncrementer(int woodIncrementerIncrease) {
         woodIncrementer += woodIncrementerIncrease;
@@ -43,8 +59,8 @@ public class ResourceHandler implements Serializable{
         foodIncrementer += foodIncrementerIncrease;
     }
 
-    public void incrementStoneIncrementer(int stoneIncrementerIncrease) {
-        stoneIncrementer += stoneIncrementerIncrease;
+    public void incrementRockIncrementer(int rockIncrementerIncrease) {
+        rockIncrementer += rockIncrementerIncrease;
     }
 
 
@@ -60,8 +76,8 @@ public class ResourceHandler implements Serializable{
         foodCounter += foodCounterIncrease;
     }
 
-    public void incrementStoneCounter (int stoneCounterIncrease) {
-        stoneCounter += stoneCounterIncrease;
+    public void incrementRockCounter (int rockCounterIncrease) {
+        rockCounter += rockCounterIncrease;
     }
 
 
@@ -81,8 +97,8 @@ public class ResourceHandler implements Serializable{
         return foodCounter;
     }
 
-    public int getStoneCounter() {
-        return stoneCounter;
+    public int getRockCounter() {
+        return rockCounter;
     }
 
     public int getWoodIncrementer() {
@@ -97,18 +113,37 @@ public class ResourceHandler implements Serializable{
         return foodIncrementer;
     }
 
-    public int getStoneIncrementer() {
-        return stoneIncrementer;
+    public int getRockIncrementer() {
+        return rockIncrementer;
     }
 
+    public void removeFromTotal(ResourceContainer amount) {
+        totalResources = totalResources.subtract(amount);
+    }
 
+    public boolean canPlaceBuilding(Building building) {
+        ResourceContainer result = totalResources.subtract(building.getCosts());
+        return result.noNegativeResources();
+    }
 
+    /**
+     * Updates the state of all the resources.
+     * Goes through all the buildings and adds their production to the total,
+     * as well as removing the maintenance costs.
+     */
     public void update() {
         woodCounter += startingIncrement + woodIncrementer;
         goldCounter += startingIncrement + goldCounter;
         foodCounter += startingIncrement + foodIncrementer;
-        stoneCounter += startingIncrement + stoneIncrementer;
+        rockCounter += startingIncrement + rockIncrementer;
 
+        for (MapEntity building:
+             world.getStaticEntities()) {
+            ResourceContainer production = ((Building) building).getProductions();
+            ResourceContainer maintenance = ((Building) building).getMaintenanceCosts();
+            totalResources = totalResources.add(production);
+            totalResources = totalResources.subtract(maintenance);
+        }
     }
 
 

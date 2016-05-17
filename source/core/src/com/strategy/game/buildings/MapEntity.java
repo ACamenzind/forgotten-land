@@ -2,41 +2,55 @@ package com.strategy.game.buildings;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 import com.strategy.game.Assets;
 import com.strategy.game.ExtendedStaticTiledMapTile;
 import com.strategy.game.Utils;
+import com.strategy.game.world.World;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * A generic object to put on the map. Inherit from this to create new buildings.
+ * A generic object to put on the map.
  */
-public class MapEntity implements Disposable, Serializable{
+public abstract class MapEntity implements Disposable, Serializable{
     protected Vector2 collisionSize; // The x and y length of the collision rectangle
     protected Texture mainTexture;
     private boolean isClicked;
-    private ArrayList<ExtendedStaticTiledMapTile> tiles;
-    private int x,y;
+    private int clickX, clickY;
     protected Vector2 imgOffset; //TODO: useless?
     private TiledMapTileLayer layer;
-    private ArrayList<TiledMapTileLayer.Cell> prevCells;
     protected ArrayList<Texture> textures;
     private int counter;
+    protected int influenceRadius;
+
+    private Vector2 position;
+
+    private ExtendedStaticTiledMapTile[][] tiles;
+    private TiledMapTileLayer.Cell[][] prevCells;
+    private TiledMapTileLayer.Cell[][] prevCellsInfluence;
+
 
     public MapEntity() {
         this.mainTexture = null;
-        this.tiles = new ArrayList<ExtendedStaticTiledMapTile>();
-        this.prevCells = new ArrayList<TiledMapTileLayer.Cell>();
         this.collisionSize = new Vector2(0,0);
         this.imgOffset = new Vector2(0,0);
         this.isClicked = false;
         this.counter = 0;
         this.textures = new ArrayList<Texture>();
-//        sliceTexture(mainTexture);
+    }
+
+    public Vector2 getPosition() {
+        return position;
+    }
+
+    public void setPosition(Vector2 position) {
+        this.position = position;
     }
 
     public boolean isClicked() {
@@ -48,8 +62,12 @@ public class MapEntity implements Disposable, Serializable{
         //TODO: make pop-up window appear with details about the building.
     }
 
+    public int getInfluenceRadius() {
+        return influenceRadius;
+    }
+
     public Vector2 getCoords() {
-        return new Vector2(x,y);
+        return new Vector2(clickX, clickY);
     }
 
     public Texture getMainTexture() {
@@ -61,10 +79,12 @@ public class MapEntity implements Disposable, Serializable{
         sliceTexture(mainTexture);
     }
 
+    /**
+     * Switch to alternative textures, if they exist.
+     */
     public void changeTexture() {
         if (textures.size() > 0) {
             counter = (counter + 1) % textures.size();
-//            mainTexture = null;
             mainTexture = textures.get(counter);
             sliceTexture(mainTexture);
         }
@@ -74,23 +94,29 @@ public class MapEntity implements Disposable, Serializable{
         return collisionSize;
     }
 
-    public ArrayList<ExtendedStaticTiledMapTile> getTiles() {
-        return tiles;
-    }
-
     /**
-     * Splits the entity's mainTexture into vertical slices of width TILE_SIZE
+     * Splits the texture based on the size of the building.
+     * @param mainTexture the building's texture
      */
     protected void sliceTexture(Texture mainTexture) {
-        tiles = new ArrayList<ExtendedStaticTiledMapTile>(); // Reset tiles
+        this.tiles = new ExtendedStaticTiledMapTile[(int)collisionSize.x][(int)collisionSize.y];
+        this.prevCells = new TiledMapTileLayer.Cell[(int)collisionSize.x][(int)collisionSize.y];
+        // TODO: 13/05/2016 Set dynamically
+        this.prevCellsInfluence = new TiledMapTileLayer.Cell[1000][1000];
+
         this.mainTexture = mainTexture;
         if (mainTexture != null) {
             TextureRegion tex = new TextureRegion(mainTexture);
-            TextureRegion[][] arr = tex.split(Utils.TILE_SIZE, tex.getRegionHeight());
 
-            for (int i = 0; i < tex.getRegionWidth() / Utils.TILE_SIZE; i++) {
-                ExtendedStaticTiledMapTile tile = new ExtendedStaticTiledMapTile(arr[0][i]);
-                tiles.add(tile);
+            int TILE_HEIGHT = Utils.TILE_SIZE/2;
+            for (int y = 0; y < collisionSize.y; y++) {
+                for (int x = 0; x < collisionSize.x; x++) {
+                    float cY = (collisionSize.x - 1 + (y - x)) * (TILE_HEIGHT/2);
+                    float cX = (x + y) * Utils.TILE_SIZE/2;
+                    TextureRegion current = new TextureRegion(tex, (int)cX, 0, Utils.TILE_SIZE, tex.getRegionHeight() - (int)cY);
+                    ExtendedStaticTiledMapTile tile = new ExtendedStaticTiledMapTile(current);
+                    tiles[x][y] = tile;
+                }
             }
         }
     }
@@ -98,58 +124,116 @@ public class MapEntity implements Disposable, Serializable{
     /**
      * Places the Entity onto the given layer at the specified coordinates
      * @param layer the layer onto which to put the entity
-     * @param x tile coordinate
-     * @param y tile coordinate
+     * @param clickX tile coordinate
+     * @param clickY tile coordinate
      */
-    public void placeOnLayer(TiledMapTileLayer layer, int x, int y) {
-        int offset = 0;
+    public void placeOnLayer(TiledMapTileLayer layer, int clickX, int clickY) {
         this.layer = layer;
-        this.x = x;
-        this.y = y;
+        this.clickX = clickX;
+        this.clickY = clickY;
 
-        //TODO: refactor a bit
+        // Set collision on cells
+        for (int y = 0; y < collisionSize.y; y++) {
+            for (int x = 0; x < collisionSize.x; x++) {
+                TiledMapTileLayer.Cell cell = layer.getCell(clickX + x, clickY + y);
+                prevCells[x][y] = cell;
+                if (cell == null)
+                    cell = new TiledMapTileLayer.Cell();
 
-        // Occupy cells
-        for (int i = x; i < x + collisionSize.x; i++) {
-            for (int j = y; j < y + collisionSize.y; j++) {
-                TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-                TextureRegion tex = new TextureRegion(Assets.emptyTile);
-                ExtendedStaticTiledMapTile tile = new ExtendedStaticTiledMapTile(tex);
-                tile.setObject(this);
-                tile.setObstacle(true);
-                cell.setTile(tile);
-                layer.setCell(i, j, cell);
+                TiledMapTile oldTile = cell.getTile();
+                int oldInfluence = 0;
+                // Copy the previous influence, since it gets overwritten
+                if (oldTile != null && oldTile instanceof ExtendedStaticTiledMapTile) {
+                    oldInfluence = ((ExtendedStaticTiledMapTile) oldTile).getBuildingsNearby();
+                }
+                tiles[x][y].setObstacle(true);
+                tiles[x][y].setObject(this);
+                tiles[x][y].setBuildingsNearby(oldInfluence);
+
+                cell.setTile(tiles[x][y]);
+                layer.setCell(clickX + x, clickY + y, cell);
             }
         }
 
+        // Set influence radius
+//        influenceRadius = 0;
+        int startY = clickY - influenceRadius;
+        int startX = clickX - influenceRadius;
+        int endY = clickY + influenceRadius + (int) collisionSize.y;
+        int endX = clickX + influenceRadius + (int) collisionSize.x;
 
-        // Draw textures on the diagonal cells
-        for (ExtendedStaticTiledMapTile tile :
-                tiles) {
-            prevCells.add(layer.getCell(x + offset, y + offset)); // save previous state
-            TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-            tile.setObstacle(true);
-            tile.setObject(this);
-            cell.setTile(tile);
-            layer.setCell(x + offset, y + offset, cell);
-            offset++;
+        // TODO: 12/05/2016 Add also for upper limits
+        if (startX < 0) startX = 0;
+        if (startY < 0) startY = 0;
+
+        // Creates the influence area
+        for (int y = startY; y < endY; y++) {
+            for (int x = startX; x < endX; x++) {
+                TiledMapTileLayer.Cell cell = layer.getCell(x, y);
+                prevCellsInfluence[x][y] = cell;
+
+                if (cell == null) {
+                    cell = new TiledMapTileLayer.Cell();
+                }
+
+                TextureRegion texture;
+                //TODO: remove the first condition (temporarily left there)
+                if (layer.getName().equals("Selection") && cell.getTile() != null) {
+                    texture = cell.getTile().getTextureRegion();
+                } else if (cell.getTile() != null) {
+                    texture = cell.getTile().getTextureRegion();
+                } else {
+                    texture = new TextureRegion(Assets.emptyTile);
+                }
+
+                TiledMapTile tile;
+                tile = cell.getTile();
+
+                // Creates a new tile if needed
+                if (!(tile instanceof ExtendedStaticTiledMapTile)) {
+                    if (tile == null) {
+                        tile = new ExtendedStaticTiledMapTile(texture);
+                    }
+                    else {
+                        tile = new ExtendedStaticTiledMapTile((StaticTiledMapTile) tile);
+                    }
+                }
+
+                // Increments the count only on the buildings layer
+                if (layer.getName().equals("Buildings")) {
+                    ((ExtendedStaticTiledMapTile) tile).incBuildingsNearby();
+                }
+                cell.setTile(tile);
+                layer.setCell(x, y, cell);
+            }
         }
-//        System.out.println("placed!");
     }
 
     /**
      * Resets the tiles to their previous state
      */
     public void resetTiles() {
-        int offset = 0;
-        for (TiledMapTileLayer.Cell cell :
-                prevCells) {
-            layer.setCell(x + offset, y + offset, cell);
-            offset++;
+        int startY = clickY - influenceRadius;
+        int startX = clickX - influenceRadius;
+        int endY = clickY + influenceRadius + (int) collisionSize.y;
+        int endX = clickX + influenceRadius + (int) collisionSize.x;
+
+        // TODO: 12/05/2016 Add also for upper limits
+        if (startX < 0) startX = 0;
+        if (startY < 0) startY = 0;
+
+        for (int y = startY; y < endY; y++) {
+            for (int x = startX; x < endX; x++) {
+                layer.setCell(x, y, prevCellsInfluence[x][y]);
+            }
+        }
+
+        for (int y = 0; y < collisionSize.y; y++) {
+            for (int x = 0; x < collisionSize.x; x++) {
+                layer.setCell(clickX + x, clickY + y, prevCells[x][y]);
+            }
         }
     }
-
-
 
     @Override
     public void dispose() {

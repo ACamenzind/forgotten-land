@@ -1,10 +1,10 @@
 package com.strategy.game.screens.sidebar;
 
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
+import com.strategy.game.buildings.Building;
 import com.strategy.game.screens.GameScreen;
 
 /**
@@ -28,7 +28,7 @@ public class Sidebar extends Table implements Display {
         this.stage.addActor(this);
         this.screen = screen;
 
-        Assets.setBackground(this, "core/assets/GameScreenTextures/sidebar.png");
+        Assets.setBackground(this, "core/assets/textures/gameScreen/sidebar.png");
 
         displayTop = new SidebarMenu();
         addActor(displayTop);
@@ -43,7 +43,10 @@ public class Sidebar extends Table implements Display {
     }
 
     public void setDisplayMiddle(DisplayType display) {
-        displayMiddle.remove();
+        if (displayMiddle != null) {
+            displayMiddle.remove();
+        }
+        screen.getBuilder().untoggleSelectEntity();
 
         if (display == DisplayType.GAME_INFO) {
             displayMiddle = new SidebarGameInfo();
@@ -63,6 +66,10 @@ public class Sidebar extends Table implements Display {
 
         addActor(displayMiddle);
         updatePosition();
+    }
+
+    public void setBuilding(Building building) {
+        ((SidebarBuildingInfo) displayBottom).setBuilding(building);
     }
 
     public GameScreen getScreen() {

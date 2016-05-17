@@ -11,11 +11,14 @@ import com.strategy.game.buildings.MapEntity;
 public class ExtendedStaticTiledMapTile extends StaticTiledMapTile {
     private MapEntity object;
     private boolean isObstacle;
+    private int buildingsNearby;
     private TextureRegion textureRegion;
     private int id;
 
     public ExtendedStaticTiledMapTile(TextureRegion textureRegion) {
         super(textureRegion);
+        this.isObstacle = false;
+        this.buildingsNearby = 0;
     }
 
     public ExtendedStaticTiledMapTile(StaticTiledMapTile copy) {
@@ -25,6 +28,26 @@ public class ExtendedStaticTiledMapTile extends StaticTiledMapTile {
         }
         this.textureRegion = copy.getTextureRegion();
         this.id = copy.getId();
+        if (copy instanceof ExtendedStaticTiledMapTile) {
+            this.object = ((ExtendedStaticTiledMapTile) copy).getObject();
+            this.buildingsNearby = ((ExtendedStaticTiledMapTile) copy).getBuildingsNearby();
+        }
+    }
+
+    public void setBuildingsNearby(int buildingsNearby) {
+        this.buildingsNearby = buildingsNearby;
+    }
+
+    public int getBuildingsNearby() {
+        return buildingsNearby;
+    }
+
+    public void incBuildingsNearby() {
+        this.buildingsNearby += 1;
+    }
+
+    public void decBuildingsNearby() {
+        this.buildingsNearby -= 1;
     }
 
     public MapEntity getObject() {

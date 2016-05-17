@@ -6,23 +6,24 @@ import com.strategy.game.Assets;
 import com.strategy.game.ResourceContainer;
 
 /**
- * A type of MapEntity
+ * Created by francescosani on 12/05/16.
  */
-public class House extends Building {
-    //TODO: maybe put buildings properties into a single object.
-    private static final String NAME = "House";
-    private static final ResourceContainer COST = new ResourceContainer(100, 100, 100, 100, 0);
-    private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 0, 0, 0, 0);
-    private static final ResourceContainer MAINTENANCE = new ResourceContainer(1, 1, 1, 1, 0);
+public class WarehouseWood extends Building {
+    private static final String NAME = "Wood Warehouse";
+    private static final ResourceContainer COST = new ResourceContainer(40, 0, 10, 0, 0);
+    private static final ResourceContainer PRODUCTION = new ResourceContainer(10, 0, 0, 1, 0);
+    private static final ResourceContainer MAINTENANCE = new ResourceContainer(10, 0, 0, 1, 0);
     private static final ResourceContainer RESOURCE_STORED = new ResourceContainer(0, 0, 0, 0, 0);
-
-
     private static final int MAX_LIFE = 10;
     private static final int MAX_WORKERS = 5;
     private static final int INFLUENCE_RADIUS = 5;
-    private static final Texture TEXTURE = Assets.house1;
+    private static final Texture TEXTURE = Assets.warehouse;
     private static final Vector2 COLLISION = new Vector2(2,2);
-    public House() {
+    private int life = MAX_LIFE;
+    private int workers = 0;
+    // TODO: add max wood storable
+
+    public WarehouseWood() {
         super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION);
     }
 }

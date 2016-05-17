@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="isometric" renderorder="right-down" width="100" height="100" tilewidth="128" tileheight="64" nextobjectid="20">
+ <tileset firstgid="1" name="grass" tilewidth="128" tileheight="128" tilecount="1" columns="0">
+  <terraintypes>
+   <terrain name="New Terrain" tile="-1"/>
+  </terraintypes>
+  <tile id="0" terrain="0,0,,">
+   <image width="128" height="128" source="../textures/terrains/grass_slice.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="2" name="grass_and_water2" tilewidth="128" tileheight="128" tilecount="24" columns="4">
+  <image source="../textures/terrains/grass_and_water2.png" width="512" height="768"/>
+ </tileset>
+ <tileset firstgid="26" name="plants" tilewidth="256" tileheight="256" tilecount="80" columns="0">
+  <tile id="0">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/bamboo01.png"/>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/bamboo02.png"/>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/bamboo03.png"/>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/bamboo04.png"/>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+   </properties>
+   <image width="256" height="128" source="../resources/bamboo05.png"/>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/bamboo06.png"/>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/bigtree01.png"/>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/bigtree02.png"/>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/bigtree03.png"/>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+   </properties>
+   <image width="256" height="128" source="../resources/bush01.png"/>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="128" height="64" source="../resources/bush02.png"/>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="128" height="64" source="../resources/bush03.png"/>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="128" height="64" source="../resources/bush04.png"/>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/bush05.png"/>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+   </properties>
+   <image width="128" height="128" source="../resources/cactus01.png"/>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="128" height="128" source="../resources/cactus02.png"/>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="128" height="128" source="../resources/cactus03.png"/>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="128" height="128" source="../resources/cactus04.png"/>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="128" height="64" source="../resources/grasses01.png"/>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+   </properties>
+   <image width="128" height="64" source="../resources/grasses02.png"/>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="128" height="64" source="../resources/grasses03.png"/>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="128" height="64" source="../resources/grasses04.png"/>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="128" height="64" source="../resources/grasses05.png"/>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/hemp01.png"/>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+   </properties>
+   <image width="256" height="128" source="../resources/hemp02.png"/>
+  </tile>
+  <tile id="25">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/hemp03.png"/>
+  </tile>
+  <tile id="26">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/palm01.png"/>
+  </tile>
+  <tile id="27">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/palm02.png"/>
+  </tile>
+  <tile id="28">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/palm03.png"/>
+  </tile>
+  <tile id="29">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+   </properties>
+   <image width="256" height="128" source="../resources/palm04.png"/>
+  </tile>
+  <tile id="30">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/palm05.png"/>
+  </tile>
+  <tile id="31">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/palm06.png"/>
+  </tile>
+  <tile id="32">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-full01.png"/>
+  </tile>
+  <tile id="33">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-full02.png"/>
+  </tile>
+  <tile id="34">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-full03.png"/>
+  </tile>
+  <tile id="35">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-full04.png"/>
+  </tile>
+  <tile id="36">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-full05.png"/>
+  </tile>
+  <tile id="37">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-full06.png"/>
+  </tile>
+  <tile id="38">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-full07.png"/>
+  </tile>
+  <tile id="39">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-full08.png"/>
+  </tile>
+  <tile id="40">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-half01.png"/>
+  </tile>
+  <tile id="41">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-half02.png"/>
+  </tile>
+  <tile id="42">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-half03.png"/>
+  </tile>
+  <tile id="43">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-half04.png"/>
+  </tile>
+  <tile id="44">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-half05.png"/>
+  </tile>
+  <tile id="45">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-half06.png"/>
+  </tile>
+  <tile id="46">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-half07.png"/>
+  </tile>
+  <tile id="47">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-half08.png"/>
+  </tile>
+  <tile id="48">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-none01.png"/>
+  </tile>
+  <tile id="49">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-none02.png"/>
+  </tile>
+  <tile id="50">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-none03.png"/>
+  </tile>
+  <tile id="51">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-none04.png"/>
+  </tile>
+  <tile id="52">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-none05.png"/>
+  </tile>
+  <tile id="53">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-none06.png"/>
+  </tile>
+  <tile id="54">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-none07.png"/>
+  </tile>
+  <tile id="55">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="256" source="../resources/pine-none08.png"/>
+  </tile>
+  <tile id="56">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/shrub1-01.png"/>
+  </tile>
+  <tile id="57">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/shrub1-02.png"/>
+  </tile>
+  <tile id="58">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/shrub1-03.png"/>
+  </tile>
+  <tile id="59">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+   </properties>
+   <image width="256" height="128" source="../resources/shrub1-04.png"/>
+  </tile>
+  <tile id="60">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/shrub1-05.png"/>
+  </tile>
+  <tile id="61">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/shrub2-01.png"/>
+  </tile>
+  <tile id="62">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/shrub2-02.png"/>
+  </tile>
+  <tile id="63">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/shrub2-03.png"/>
+  </tile>
+  <tile id="64">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+   </properties>
+   <image width="256" height="128" source="../resources/shrub2-04.png"/>
+  </tile>
+  <tile id="65">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/shrub2-05.png"/>
+  </tile>
+  <tile id="66">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="128" height="64" source="../resources/swirl01.png"/>
+  </tile>
+  <tile id="67">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="128" height="64" source="../resources/swirl02.png"/>
+  </tile>
+  <tile id="68">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/tropical01.png"/>
+  </tile>
+  <tile id="69">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+   </properties>
+   <image width="256" height="128" source="../resources/tropical02.png"/>
+  </tile>
+  <tile id="70">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/tropical03.png"/>
+  </tile>
+  <tile id="71">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/tropical04.png"/>
+  </tile>
+  <tile id="72">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="256" height="128" source="../resources/tropical05.png"/>
+  </tile>
+  <tile id="73">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="128" height="64" source="../resources/weed01.png"/>
+  </tile>
+  <tile id="74">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+   </properties>
+   <image width="128" height="64" source="../resources/weed02.png"/>
+  </tile>
+  <tile id="75">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="128" height="64" source="../resources/weed03.png"/>
+  </tile>
+  <tile id="76">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="128" height="64" source="../resources/weed04.png"/>
+  </tile>
+  <tile id="77">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="128" height="64" source="../resources/weed05.png"/>
+  </tile>
+  <tile id="78">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
+   </properties>
+   <image width="128" height="64" source="../resources/weed06.png"/>
+  </tile>
+  <tile id="79">
+   <properties>
+    <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="rock"/>
+   </properties>
+   <image width="256" height="256" source="../textures/buildings/rocks.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="106" name="grid" tilewidth="128" tileheight="128" tilecount="1" columns="0">
+  <tile id="0">
+   <image width="128" height="118" source="../textures/terrains/grid.png"/>
+  </tile>
+ </tileset>
+ <layer name="Terrain" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztw8EJAAAMA6H7ZP+VC51DwVVTVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/AWtAw1E=
+  </data>
+ </layer>
+ <layer name="Buildings" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt2EtuwjAUBVDvou0s6+goG4AoW2DG/jfQRjTCPEwpIk5ccY5kOR9UWe/iT0kJAAAAAAAAAKjtY+sBcEEebZFHW+TRFnm0RR5tkUdb5NEWebRFHm2RR1vkUd/7A+1tozECAAAAQDRuPQD4R8ZkzqzhXp2HrJfHuvLaDzfeUVf+nR/CdZfd71M5J5Y1Zn2ewRDa9L5feWyvbq7953fbpdOcmFv+nnVNNd/9tOk6zySyx9fTpXPt50ym6z57FsljOfGs26fzfJjzyJ9bq+obQx/38dI+UiKremIefbrOo1T/Q/WRvYa4B3TpVO8+nWrcp/NZdx96lvfbbyZ96IfQU0fMY7rPz7x/qb/1qr75jGU+bKO0dh3S5Xf/1tp2KHyW58VMunRZ41v1js/v/a94vHPPtZjNvK+YA9sprWH9E3/PPFjOvD/43ep/eCSnY+Ha3AFa5LwLAAAAAAAAAAAAAAD1fQHw+S8N
+  </data>
+ </layer>
+ <layer name="Grid" width="100" height="100" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAMBKHL+/0DDJZDwVVTVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/AVoHLZE=
+  </data>
+ </layer>
+ <layer name="Selection" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
+ <objectgroup color="#ff0000" name="Object Layer 1"/>
+ <layer name="Influence" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
+</map>

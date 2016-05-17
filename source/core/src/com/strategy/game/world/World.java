@@ -16,10 +16,11 @@ import java.util.ArrayList;
 
 /**
  * Contains the world simulation.
- * TODO: implement
+ *
  */
 public class World implements Disposable, Serializable {
 
+    public static final int TICK_DURATION = 300;
     private transient Stage gameStage;
     private transient GameScreen gameScreen;
     private ArrayList<MapEntity> staticEntities;
@@ -30,6 +31,7 @@ public class World implements Disposable, Serializable {
     private int updateCounter;
     private PopulationHandler populationHandler;
     private int tick;
+    private boolean isRunning;
 
     private static String filePath = "saveGame.ser";
 
@@ -41,10 +43,11 @@ public class World implements Disposable, Serializable {
         this.staticEntities = new ArrayList<MapEntity>();
         this.movableEntities = new ArrayList<MovableEntity>();
 //        this.builder = new StaticEntityBuilder(this);
-        this.resourceHandler = new ResourceHandler(0, 100, 100, 100, 100);
+        this.resourceHandler = new ResourceHandler(this, 0, 1000, 1000, 1000, 1000, 5);
         this.updateCounter = 0;
         this.populationHandler = new PopulationHandler(5, 200, 20);
         this.tick = 0;
+        this.isRunning = true;
     }
 
     public ArrayList<MapEntity> getStaticEntities() {
@@ -105,41 +108,56 @@ public class World implements Disposable, Serializable {
     }
 
 
+    /**
+     * Toggles between running and pausing the game.
+     */
+    public void toggleRunning() {
+        isRunning = !isRunning;
+        if (isRunning) System.out.println("Game resumed!");
+        else System.out.println("Game paused!");
+    }
+
+    /**
+     * Searches the map file for tiles that are of type resource, and adds them to the resource list
+     * to keep track of them.
+     * TODO: implement
+     */
+    private void readResources() {
+
+    }
+
     public void update(float delta) {
-        if(updateCounter / 300 >= 1) {
+        if(updateCounter / TICK_DURATION >= 1 && isRunning) {
             resourceHandler.update();
             updateCounter = 0;
             tick++;
 
             System.out.println("--- Resources at turn " + tick + " ---");
-            System.out.println("Food: " + resourceHandler.getFoodCounter());
-            System.out.println("Gold: " + resourceHandler.getGoldCounter());
-            System.out.println("Stone: " + resourceHandler.getStoneCounter());
-            System.out.println("Wood: " + resourceHandler.getWoodCounter());
-            System.out.println("People: " + populationHandler.getPopulationCounter());
-            System.out.println("-----------------");
+            System.out.println(resourceHandler.getTotalResources().toString());
+
             //TODO: make that you have to press something to go to next turn?
 
+////            int treeCount = 0;
+//            TiledMapTileLayer buildingsLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Buildings");
+//
+//            // Increment wood per tick for each tree in the world
+//            // TODO: make it so it only increments it if there is an appropriate building in range
+//            // TODO: do the same for other resources
 //            int treeCount = 0;
-            TiledMapTileLayer buildingsLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Buildings");
+//            for (int i = 0; i < buildingsLayer.getWidth(); i++) {
+//                for (int j = 0; j < buildingsLayer.getHeight(); j++) {
+//                    TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i,j);
+//                    if (cell != null) {
+//                        String type = cell.getTile().getProperties().get("type", String.class);
+//                        if (type != null && type.equals("wood")) {
+//                            treeCount++;
+//                        }
+//                    }
+//                }
+//            }
+//            System.out.println("num of trees: " + treeCount);
+//            resourceHandler.incrementWoodCounter(treeCount);
 
-            // Increment wood per tick for each tree in the world
-            // TODO: make it so it only increments it if there is an appropriate building in range
-            // TODO: do the same for other resources
-            int treeCount = 0;
-            for (int i = 0; i < buildingsLayer.getWidth(); i++) {
-                for (int j = 0; j < buildingsLayer.getHeight(); j++) {
-                    TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i,j);
-                    if (cell != null) {
-                        String type = cell.getTile().getProperties().get("type", String.class);
-                        if (type != null && type.equals("wood")) {
-                            treeCount++;
-                        }
-                    }
-                }
-            }
-            System.out.println("num of trees: " + treeCount);
-            resourceHandler.incrementWoodCounter(treeCount);
         }
         updateCounter++;
 

@@ -28,7 +28,7 @@ public class MainMenuScreen implements Screen{
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private BitmapFont font;
-    private Texture menubk = new Texture(Gdx.files.internal("core/assets/MainMenuScreenTextures/menu.png"));
+    private Texture menubk = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/menu.png"));
     private Stage stage;
     private Stage backStage;
 
@@ -132,7 +132,7 @@ public class MainMenuScreen implements Screen{
         buttons.setPosition(Gdx.graphics.getWidth() * 0.7f, Gdx.graphics.getHeight() * 0.05f);
 
         // NEW GAME BUTTON
-        GameButton newGameButton = new GameButton("core/assets/MainMenuScreenTextures/newgame.png");
+        GameButton newGameButton = new GameButton("core/assets/textures/mainMenuScreen/newgame.png");
         newGameButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 game.setScreen(new GameScreen(game));
@@ -146,7 +146,7 @@ public class MainMenuScreen implements Screen{
         Assets.setPositionRelative(newGameButton, 0f, 0.8f, false, true);
 
         //LOAD GAME BUTTON
-        GameButton loadGameButton = new GameButton("core/assets/MainMenuScreenTextures/loadgame.png");
+        GameButton loadGameButton = new GameButton("core/assets/textures/mainMenuScreen/loadgame.png");
         loadGameButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 //                Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
@@ -160,7 +160,7 @@ public class MainMenuScreen implements Screen{
         Assets.setPositionRelative(loadGameButton, 0f, 0.5f, false, true);
 
         // SETTINGS BUTTON
-        GameButton settingsButton = new GameButton("core/assets/MainMenuScreenTextures/settings.png");
+        GameButton settingsButton = new GameButton("core/assets/textures/mainMenuScreen/settings.png");
         settingsButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 //                Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
