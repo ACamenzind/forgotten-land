@@ -40,7 +40,7 @@ public class SidebarBuildingInfo extends Table implements Display {
             for (int y = 0; y < table.length; y++) {
                 for (int x = 0; x < table[y].length; x++) {
                     if (x == 0) {
-                        add(table[y][x]);//.uniform();
+                        add(table[y][x]);
                     }
                     else {
                         table[y][x] = Assets.makeLabel("", 12, Color.BLACK);

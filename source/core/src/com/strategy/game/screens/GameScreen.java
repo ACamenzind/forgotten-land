@@ -47,7 +47,7 @@ public class GameScreen implements Screen {
     private StaticEntityBuilder builder;
 
     private Sidebar sidebar;
-
+    private ResourcesBar resourcesBar;
 
 
     private Vector2 touchDownCoords;
@@ -75,6 +75,7 @@ public class GameScreen implements Screen {
         this.builder = new StaticEntityBuilder(this);
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         this.sidebar = new Sidebar(stage, this);
+        this.resourcesBar = new ResourcesBar(stage, world);
 
         // Looping background sound
         Sound sound = Assets.bgSound;
@@ -146,6 +147,10 @@ public class GameScreen implements Screen {
         return sidebar;
     }
 
+    public ResourcesBar getResourcesBar() {
+        return resourcesBar;
+    }
+
     @Override
     public void show() {
 
@@ -204,8 +209,8 @@ public class GameScreen implements Screen {
 
         // Draw stage
         stage.act(delta);
-        sidebar.updatePosition();
-//        stage.setDebugAll(true); // For debug purpose
+//        sidebar.updatePosition();
+        stage.setDebugAll(true); // For debug purpose
         stage.getViewport().apply();
         stage.draw();
 
@@ -235,7 +240,7 @@ public class GameScreen implements Screen {
         camera.viewportWidth = width;
         camera.viewportHeight = height;
         camera.update();
-
+        sidebar.updatePosition();
         stage.getViewport().update(width, height);
     }
 

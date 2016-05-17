@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.strategy.game.buildings.MapEntity;
 import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.screens.GameScreen;
+import com.strategy.game.screens.ResourcesBar;
 //import com.sun.javafx.scene.control.skin.VirtualFlow;
 
 import java.util.ArrayList;
@@ -116,7 +117,7 @@ public class World implements Disposable{
 //            }
 //            System.out.println("num of trees: " + treeCount);
 //            resourceHandler.incrementWoodCounter(treeCount);
-
+            gameScreen.getResourcesBar().updatePosition();
         }
         updateCounter++;
 

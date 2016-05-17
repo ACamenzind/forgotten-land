@@ -157,6 +157,12 @@ public class Assets {
         return new Label.LabelStyle(makeFont(fontPath, fontSize, fontColor), fontColor);
     }
 
+    /**
+     *
+     * @param fontSize
+     * @param fontColor
+     * @return
+     */
     public static Label.LabelStyle makeLabelStyle(int fontSize, final Color fontColor) {
         return makeLabelStyle(DEFAULT_FONT_PATH, fontSize, fontColor);
     }
