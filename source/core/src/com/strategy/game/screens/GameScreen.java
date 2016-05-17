@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -66,7 +67,7 @@ public class GameScreen implements Screen {
         Assets.load();
 
         this.map = Assets.map;
-//        this.convertMap(TiledMap map);
+        this.convertMap(map);
 //        this.renderer = new IsometricTiledMapRenderer(map);
         this.renderer = new BetterRenderer(map);
         this.camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -97,9 +98,21 @@ public class GameScreen implements Screen {
 
     }
 
+    /**
+     * Converts all tiles to ExtendedStaticTiledMapTiles
+     * @param map the tiled map to be converted
+     */
     public void convertMap(TiledMap map) {
-//        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("Buildings");
-//
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("Buildings");
+        for (int x = 0; x < layer.getWidth(); x++) {
+            for (int y = 0; y < layer.getHeight(); y++) {
+                TiledMapTileLayer.Cell cell = layer.getCell(x,y);
+                if (cell != null) {
+                    ExtendedStaticTiledMapTile newTile = new ExtendedStaticTiledMapTile((StaticTiledMapTile) cell.getTile());
+                    cell.setTile(newTile);
+                }
+            }
+        }
     }
 
     public boolean isSelecting() {
