@@ -88,9 +88,9 @@ public class World implements Disposable{
             updateCounter = 0;
             tick++;
 
-            System.out.println("--- Resources at turn " + tick + " ---");
-            System.out.println(resourceHandler.getTotalResources().toString());
-            System.out.println(resourceHandler.getTotalResources().food);
+//            System.out.println("--- Resources at turn " + tick + " ---");
+//            System.out.println(resourceHandler.getTotalResources().toString());
+//            System.out.println(resourceHandler.getTotalResources().food);
 
             //TODO: make that you have to press something to go to next turn?
 

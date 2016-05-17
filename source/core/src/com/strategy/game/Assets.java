@@ -25,6 +25,7 @@ public class Assets {
     // SIDEBAR BUILDING INFO
     public static Texture sidebarBuildInfoInfo, sidebarBuildInfoCost, sidebarBuildInfoProfit, sidebarBuildInfoPlus,
             sidebarBuildInfoMinus, sidebarBuildInfoDestroy;
+    public static Texture resourcesBarPause, resourcesBarResume;
     public static Sound bgSound, hit;
     private static final String DEFAULT_FONT_PATH = "core/assets/fonts/times_new_roman.ttf";
 
@@ -34,6 +35,10 @@ public class Assets {
         map = new TmxMapLoader().load("core/assets/maps/default.tmx");
         house1 = new Texture(Gdx.files.internal("core/assets/textures/buildings/house1.png"));
         castle = new Texture(Gdx.files.internal("core/assets/textures/buildings/castle.png"));
+        cows = new Texture(Gdx.files.internal("core/assets/textures/buildings/cows.png"));
+        warehouse = new Texture(Gdx.files.internal("core/assets/textures/buildings/warehouse.png"));
+        wheat = new Texture(Gdx.files.internal("core/assets/textures/buildings/wheat.png"));
+        lumberjack = new Texture(Gdx.files.internal("core/assets/textures/buildings/lumberjack.png"));
         leftwall = new Texture(Gdx.files.internal("core/assets/textures/buildings/wall/Wall_L.png"));
         middlewall = new Texture(Gdx.files.internal("core/assets/textures/buildings/wall/Wall_M.png"));
         rightwall = new Texture(Gdx.files.internal("core/assets/textures/buildings/wall/Wall_R.png"));
@@ -46,11 +51,10 @@ public class Assets {
         sidebarBuildInfoPlus = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_plus.png"));
         sidebarBuildInfoMinus = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_minus.png"));
         sidebarBuildInfoDestroy = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_destroy.png"));
+        // RESOURCES_BAR
+        resourcesBarPause = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcesbar_pause.png"));
+        resourcesBarResume = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcesbar_resume.png"));
 
-        cows = new Texture(Gdx.files.internal("core/assets/textures/buildings/cows.png"));
-        warehouse = new Texture(Gdx.files.internal("core/assets/textures/buildings/warehouse.png"));
-        wheat = new Texture(Gdx.files.internal("core/assets/textures/buildings/wheat.png"));
-        lumberjack = new Texture(Gdx.files.internal("core/assets/textures/buildings/lumberjack.png"));
 
         // http://opengameart.org/content/outdoor-ambiance CC3.0
         bgSound = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/Outdoor_ambiance.mp3"));

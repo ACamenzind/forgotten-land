@@ -21,7 +21,7 @@ public class Sidebar extends Table implements Display {
 
     private static final float DISPLAY_TOP_HEIGHT = 0.05f;
 
-    public enum DisplayType { GAME_INFO, BUILD, BUILD_RESOURCES_COLLECTORS, BUILD_SUPPORT, GAME_MENU }
+    public enum DisplayType { GAME_INFO, BUILD, BUILD_RESOURCES_COLLECTORS, BUILD_SUPPORT, BUILD_DECORATIONS,  GAME_MENU }
 
 
     public Sidebar(final Stage stage, final GameScreen screen) {
@@ -59,7 +59,10 @@ public class Sidebar extends Table implements Display {
             displayMiddle = new SidebarBuildResourcesCollectors();
         }
         else if (display == DisplayType.BUILD_SUPPORT) {
-            displayMiddle = new SidebarBuildingSupport();
+            displayMiddle = new SidebarBuildSupport();
+        }
+        else if (display == DisplayType.BUILD_DECORATIONS) {
+            displayMiddle = new SidebarBuildDecorations();
         }
         else if (display == DisplayType.GAME_MENU) {
             displayMiddle = new SidebarGameMenu();

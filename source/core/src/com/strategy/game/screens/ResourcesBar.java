@@ -1,10 +1,13 @@
 package com.strategy.game.screens;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
+import com.strategy.game.GameButton;
 import com.strategy.game.world.ResourceHandler;
 import com.strategy.game.world.World;
 
@@ -16,6 +19,8 @@ public class ResourcesBar extends Table implements Display {
     private Stage stage;
     private World world;
     private Table resources = new Table();
+
+    private static final float CELL_SIZE = 75; //TODO: make it proportional
 
     private static final Label food = Assets.makeLabel("Food: ", 14, Color.BLACK);
     private static final Label wood = Assets.makeLabel("Wood: ", 14, Color.BLACK);
@@ -29,7 +34,9 @@ public class ResourcesBar extends Table implements Display {
     private Label rockCount = Assets.makeLabel("", 14, Color.BLACK);
     private Label peopleCount = Assets.makeLabel("", 14, Color.BLACK);
 
-    public ResourcesBar(Stage stage, World world) {
+    private GameButton pause = new GameButton(Assets.resourcesBarPause, Assets.resourcesBarResume, Assets.resourcesBarResume);
+
+    public ResourcesBar(final Stage stage, final World world) {
         this.stage = stage;
         this.stage.addActor(this);
         this.world = world;
@@ -37,17 +44,25 @@ public class ResourcesBar extends Table implements Display {
         Assets.setBackground(this, "core/assets/textures/gameScreen/resourcesbar_bg.png");
 
         resources.add(food);
-        resources.add(foodCount).width(75);
+        resources.add(foodCount).width(CELL_SIZE);
         resources.add(wood);
-        resources.add(woodCount).width(75);
+        resources.add(woodCount).width(CELL_SIZE);
         resources.add(rock);
-        resources.add(rockCount).width(75);
+        resources.add(rockCount).width(CELL_SIZE);
         resources.add(gold);
-        resources.add(goldCount).width(75);
+        resources.add(goldCount).width(CELL_SIZE);
         resources.add(people);
-        resources.add(peopleCount).width(75);
+        resources.add(peopleCount).width(CELL_SIZE);
 
         addActor(resources);
+
+        pause.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                world.toggleRunning();
+                return false;
+            }
+        });
+        addActor(pause);
 
         update();
     }
@@ -96,5 +111,8 @@ public class ResourcesBar extends Table implements Display {
         else
             peopleCount.setStyle(Assets.makeLabelStyle(14, Color.RED));
         peopleCount.setText(newPeopleCount);
+
+        Assets.setSizeRelative(pause, 0.075f, 0.6f);
+        Assets.setPositionRelative(pause, 0.0125f, 0.5f, false, true);
     }
 }

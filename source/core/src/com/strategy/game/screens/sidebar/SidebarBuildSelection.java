@@ -9,7 +9,7 @@ import com.strategy.game.screens.Display;
 /**
  * Created by Amedeo on 09/05/16.
  */
-public class SidebarBuildingSelection extends Table implements Display {
+public class SidebarBuildSelection extends Table implements Display {
 
     protected Label title;
     protected GameButton[][] buttons;
@@ -24,7 +24,7 @@ public class SidebarBuildingSelection extends Table implements Display {
     private static final float TITLE_POSITION_X = 0.5f;
     private static final float TITLE_POSITION_Y = 0.9f;
 
-    public SidebarBuildingSelection() {
+    public SidebarBuildSelection() {
         Assets.setBackground(this, "core/assets/textures/gameScreen/sidebar_build.png");
         buttons = new GameButton[BUTTONS_PER_COLUMN][BUTTONS_PER_ROW];
 

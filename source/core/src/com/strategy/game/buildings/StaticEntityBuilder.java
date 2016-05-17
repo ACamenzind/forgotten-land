@@ -259,7 +259,8 @@ public class StaticEntityBuilder {
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
-
+                // Updates resources bar after placing building
+                world.getGameScreen().getResourcesBar().update();
 
 
 

@@ -29,6 +29,7 @@ public class SidebarBuild extends SidebarOptionsSelection {
         addActor(support);
 
         buttons[2][0] = decorations;
+        decorations.addListenerLink(Sidebar.DisplayType.BUILD_DECORATIONS);
         addActor(decorations);
 
         buttons[3][0] = other;
