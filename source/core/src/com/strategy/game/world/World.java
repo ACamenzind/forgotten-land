@@ -46,6 +46,10 @@ public class World implements Disposable{
         this.isRunning = true;
     }
 
+    public GameScreen getGameScreen() {
+        return gameScreen;
+    }
+
     public ArrayList<MapEntity> getStaticEntities() {
         return staticEntities;
     }
@@ -88,6 +92,7 @@ public class World implements Disposable{
 
             System.out.println("--- Resources at turn " + tick + " ---");
             System.out.println(resourceHandler.getTotalResources().toString());
+            System.out.println(resourceHandler.getTotalResources().food);
 
             //TODO: make that you have to press something to go to next turn?
 

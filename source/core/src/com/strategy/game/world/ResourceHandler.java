@@ -1,7 +1,10 @@
 package com.strategy.game.world;
 
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Vector2;
 import com.strategy.game.ResourceContainer;
 import com.strategy.game.buildings.Building;
+import com.strategy.game.buildings.CollectorWood;
 import com.strategy.game.buildings.MapEntity;
 
 /**
@@ -45,76 +48,6 @@ public class ResourceHandler {
         return totalResources;
     }
 
-    public void incrementWoodIncrementer(int woodIncrementerIncrease) {
-        woodIncrementer += woodIncrementerIncrease;
-    }
-
-    public void incrementGoldIncrementer(int goldIncrementerIncrease) {
-        goldIncrementer += goldIncrementerIncrease;
-    }
-
-    public void incrementFoodIncrementer(int foodIncrementerIncrease) {
-        foodIncrementer += foodIncrementerIncrease;
-    }
-
-    public void incrementRockIncrementer(int rockIncrementerIncrease) {
-        rockIncrementer += rockIncrementerIncrease;
-    }
-
-
-    public void incrementWoodCounter(int woodCounterIncrease) {
-        woodCounter += woodCounterIncrease;
-    }
-
-    public void incrementGoldCounter(int goldCounterIncrease) {
-        goldCounter += goldCounterIncrease;
-    }
-
-    public void incrementFoodCounter (int foodCounterIncrease) {
-        foodCounter += foodCounterIncrease;
-    }
-
-    public void incrementRockCounter (int rockCounterIncrease) {
-        rockCounter += rockCounterIncrease;
-    }
-
-
-    public int getStartingIncrement() {
-        return startingIncrement;
-    }
-
-    public int getWoodCounter() {
-        return woodCounter;
-    }
-
-    public int getGoldCounter() {
-        return goldCounter;
-    }
-
-    public int getFoodCounter() {
-        return foodCounter;
-    }
-
-    public int getRockCounter() {
-        return rockCounter;
-    }
-
-    public int getWoodIncrementer() {
-        return woodIncrementer;
-    }
-
-    public int getGoldIncrementer() {
-        return goldIncrementer;
-    }
-
-    public int getFoodIncrementer() {
-        return foodIncrementer;
-    }
-
-    public int getRockIncrementer() {
-        return rockIncrementer;
-    }
-
     public void removeFromTotal(ResourceContainer amount) {
         totalResources = totalResources.subtract(amount);
     }
@@ -130,14 +63,38 @@ public class ResourceHandler {
      * as well as removing the maintenance costs.
      */
     public void update() {
-        woodCounter += startingIncrement + woodIncrementer;
-        goldCounter += startingIncrement + goldCounter;
-        foodCounter += startingIncrement + foodIncrementer;
-        rockCounter += startingIncrement + rockIncrementer;
 
         for (MapEntity building:
              world.getStaticEntities()) {
-            ResourceContainer production = ((Building) building).getProductions();
+            if (building instanceof CollectorWood) {
+                TiledMapTileLayer buildingsLayer = (TiledMapTileLayer) world.getGameScreen().getMap().getLayers().get("Buildings");
+                int treeCount = 0;
+                Vector2 coords = building.getCoords();
+
+                int startX = (int)coords.x;
+                int endX = (int) (startX + building.getCollisionSize().x + building.getInfluenceRadius());
+
+                int startY = (int)coords.y;
+                int endY = (int) (startY + building.getCollisionSize().y + building.getInfluenceRadius());
+
+                for (int i = startX; i < endX; i++) {
+                    for (int j = startY; j < endY; j++) {
+                        TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i,j);
+                        if (cell != null) {
+                            String type = cell.getTile().getProperties().get("type", String.class);
+                            if (type != null && type.equals("wood")) {
+                                treeCount++;
+                            }
+                        }
+                    }
+                }
+//                System.out.println("num of trees: " + treeCount);
+                ((CollectorWood) building).setTreeCount(treeCount);
+//                System.out.println("Per worker: " + ((CollectorWood) building).getProductionsPerWorker().toString());
+//                System.out.println("Per turn: " + ((CollectorWood) building).getProductionsPerTurn().toString());
+
+            }
+            ResourceContainer production = ((Building) building).getProductionsPerTurn();
             ResourceContainer maintenance = ((Building) building).getMaintenanceCosts();
             totalResources = totalResources.add(production);
             totalResources = totalResources.subtract(maintenance);

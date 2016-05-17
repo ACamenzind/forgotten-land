@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -65,6 +66,7 @@ public class GameScreen implements Screen {
         Assets.load();
 
         this.map = Assets.map;
+//        this.convertMap(TiledMap map);
 //        this.renderer = new IsometricTiledMapRenderer(map);
         this.renderer = new BetterRenderer(map);
         this.camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -93,6 +95,11 @@ public class GameScreen implements Screen {
         builder.untoggleSelectEntity();
         camera.translate(25*128, 0);
 
+    }
+
+    public void convertMap(TiledMap map) {
+//        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("Buildings");
+//
     }
 
     public boolean isSelecting() {

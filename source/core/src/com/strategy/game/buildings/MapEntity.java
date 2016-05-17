@@ -21,7 +21,7 @@ public abstract class MapEntity implements Disposable{
     protected Vector2 collisionSize;
     protected Texture mainTexture;
     private boolean isClicked;
-    private int clickX, clickY;
+    protected int clickX, clickY;
     protected Vector2 imgOffset; //TODO: useless?
     private TiledMapTileLayer layer;
     protected ArrayList<Texture> textures;

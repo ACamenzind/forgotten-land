@@ -14,10 +14,10 @@ public abstract class Building extends MapEntity {
     private final ResourceContainer costs;
     private final int maxLife;
     private final int maxWorkers;
-    private final ResourceContainer productions;
+    protected ResourceContainer productions;
     private final ResourceContainer maintenanceCosts;
     private int life;
-    private int workers;
+    protected int workers;
 
     public Building(final String name,
                     final ResourceContainer costs,
@@ -62,6 +62,10 @@ public abstract class Building extends MapEntity {
     }
 
     public ResourceContainer getProductionsPerWorker() {
+        return productions;
+    }
+
+    public ResourceContainer getProductionsPerWorker(World world) {
         return productions;
     }
 
