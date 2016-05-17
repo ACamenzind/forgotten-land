@@ -22,7 +22,7 @@ import java.io.Serializable;
 /**
  * Handles the game input
  */
-public class GameInputProcessor implements InputProcessor, Serializable{
+public class GameInputProcessor implements InputProcessor, Serializable {
     private GameScreen screen;
     private OrthographicCamera camera;
     private final int EDGE_THRESHOLD_WIDTH = 50;

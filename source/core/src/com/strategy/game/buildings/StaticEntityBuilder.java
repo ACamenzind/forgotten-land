@@ -23,12 +23,12 @@ import java.io.Serializable;
  */
 public class StaticEntityBuilder implements Serializable{
     private GameScreen gameScreen;
-    private TiledMapTileLayer buildingsLayer; // the buildings layer
-    private TiledMapTileLayer selectionLayer; // contains the selected building
-    private TiledMapTileLayer influenceLayer;
+    private transient TiledMapTileLayer buildingsLayer; // the buildings layer
+    private transient TiledMapTileLayer selectionLayer; // contains the selected building
+    private transient TiledMapTileLayer influenceLayer;
     private MapEntity selectedEntity;
     private World world;
-    private TiledMapTileLayer gridLayer;
+    private transient TiledMapTileLayer gridLayer;
 
 
     public StaticEntityBuilder(GameScreen gameScreen) {

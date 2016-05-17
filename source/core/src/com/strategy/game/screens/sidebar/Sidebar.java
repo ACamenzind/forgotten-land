@@ -7,16 +7,18 @@ import com.strategy.game.Assets;
 import com.strategy.game.buildings.Building;
 import com.strategy.game.screens.GameScreen;
 
+import java.io.Serializable;
+
 /**
  * Created by Amedeo on 02/05/16.
  */
-public class Sidebar extends Table implements Display {
-    Stage stage;
+public class Sidebar extends Table implements Display, Serializable {
+    transient Stage stage;
     GameScreen screen;
 
-    private Actor displayTop;
-    private Actor displayMiddle;
-    private Actor displayBottom;
+    private transient Actor displayTop;
+    private transient Actor displayMiddle;
+    private transient Actor displayBottom;
 
     private static final float DISPLAY_TOP_HEIGHT = 0.05f;
 

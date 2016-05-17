@@ -1,9 +1,11 @@
 package com.strategy.game;
 
+import java.io.Serializable;
+
 /**
  * Created by batta on 28/04/16.
  */
-public class ResourceContainer {
+public class ResourceContainer implements Serializable{
     public int wood;
     public int food;
     public int rock;

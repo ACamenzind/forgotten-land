@@ -34,16 +34,16 @@ import java.io.*;
  */
 public class GameScreen implements Screen, Serializable {
 
-    private Stage stage;
-    private final StrategyGame game;
-    private OrthographicCamera camera;
-    private SpriteBatch batch;
-    private BitmapFont font;
-    private Image testPlayer;
+    private transient Stage stage;
+    private transient final StrategyGame game;
+    private transient OrthographicCamera camera;
+    private transient SpriteBatch batch;
+    private transient BitmapFont font;
+    private transient Image testPlayer;
     private TiledMap map;
 //    private IsometricTiledMapRenderer renderer;
     private BetterRenderer renderer;
-    private InputMultiplexer gameInputMultiplexer;
+    private transient InputMultiplexer gameInputMultiplexer;
     private GameInputProcessor gameInputProcessor;
     private World world;
     private StaticEntityBuilder builder;
@@ -55,7 +55,7 @@ public class GameScreen implements Screen, Serializable {
     private Vector2 touchDownCoords;
     private Vector2 touchUpCoords;
 
-    private ShapeRenderer shapeRenderer;
+    private transient ShapeRenderer shapeRenderer;
     private boolean isSelecting;
 
 
@@ -151,6 +151,7 @@ public class GameScreen implements Screen, Serializable {
         this.world.setUpdateCounter(world.getUpdateCounter());
         this.world.setPopulationHandler(world.getPopulationHandler());
         this.world.setTick(world.getTick());
+        this.world.setIsRunning(world.getIsRunning());
     }
 
     @Override

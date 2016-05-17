@@ -20,20 +20,20 @@ import java.util.ArrayList;
  */
 public abstract class MapEntity implements Disposable, Serializable{
     protected Vector2 collisionSize; // The x and y length of the collision rectangle
-    protected Texture mainTexture;
+    protected transient Texture mainTexture;
     private boolean isClicked;
     private int clickX, clickY;
     protected Vector2 imgOffset; //TODO: useless?
-    private TiledMapTileLayer layer;
-    protected ArrayList<Texture> textures;
+    private transient TiledMapTileLayer layer;
+    protected transient ArrayList<Texture> textures;
     private int counter;
     protected int influenceRadius;
 
     private Vector2 position;
 
-    private ExtendedStaticTiledMapTile[][] tiles;
-    private TiledMapTileLayer.Cell[][] prevCells;
-    private TiledMapTileLayer.Cell[][] prevCellsInfluence;
+    private transient ExtendedStaticTiledMapTile[][] tiles;
+    private transient TiledMapTileLayer.Cell[][] prevCells;
+    private transient TiledMapTileLayer.Cell[][] prevCellsInfluence;
 
 
     public MapEntity() {

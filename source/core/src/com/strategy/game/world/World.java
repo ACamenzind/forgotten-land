@@ -78,6 +78,10 @@ public class World implements Disposable, Serializable {
         return tick;
     }
 
+    public boolean getIsRunning() {
+        return isRunning;
+    }
+
 
     public void setStaticEntities(ArrayList<MapEntity> staticEntities) {
         this.staticEntities = staticEntities;
@@ -105,6 +109,10 @@ public class World implements Disposable, Serializable {
 
     public void setTick(int tick) {
         this.tick = tick;
+    }
+
+    public void setIsRunning(boolean isRunning) {
+        this.isRunning = isRunning;
     }
 
 
