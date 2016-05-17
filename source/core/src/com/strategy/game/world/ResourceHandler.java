@@ -56,6 +56,11 @@ public class ResourceHandler {
         totalResources = totalResources.subtract(amount);
     }
 
+    /**
+     * Checks whether there are enough resources to place a building
+     * @param building the building that is being placed
+     * @return true if the building is placeable
+     */
     public boolean canPlaceBuilding(Building building) {
         ResourceContainer result = totalResources.subtract(building.getCosts());
         return result.noNegativeResources();
