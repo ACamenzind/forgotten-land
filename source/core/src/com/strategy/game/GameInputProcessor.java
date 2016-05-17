@@ -16,11 +16,13 @@ import com.strategy.game.buildings.*;
 import com.strategy.game.screens.GameScreen;
 import com.strategy.game.world.World;
 
+import java.io.Serializable;
+
 
 /**
  * Handles the game input
  */
-public class GameInputProcessor implements InputProcessor{
+public class GameInputProcessor implements InputProcessor, Serializable{
     private GameScreen screen;
     private OrthographicCamera camera;
     private final int EDGE_THRESHOLD_WIDTH = 50;
@@ -123,6 +125,13 @@ public class GameInputProcessor implements InputProcessor{
                 break;
             case Input.Keys.P:
                 screen.getWorld().toggleRunning();
+                break;
+            case Input.Keys.S:
+                World.saveGame(screen.getWorld());
+                break;
+            case Input.Keys.L:
+                World temporaryWorld = World.loadSavedGame();
+                screen.setLoadedWorld(temporaryWorld);
                 break;
         }
         return false;
