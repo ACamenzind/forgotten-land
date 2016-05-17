@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
+import com.strategy.game.screens.Display;
 
 /**
  * Created by Amedeo on 02/05/16.
@@ -58,11 +59,11 @@ public class SidebarMenu extends Table implements Display {
         });
         addActor(mainMenuButton);
 
-        updatePosition();
+        update();
     }
 
     @Override
-    public void updatePosition() {
+    public void update() {
         Assets.setSizeRelative(gameInfoButton, BUTTON_WIDTH, BUTTON_HEIGHT);
         Assets.setPositionRelative(gameInfoButton, MARGIN, 0.5f, false, true);
 

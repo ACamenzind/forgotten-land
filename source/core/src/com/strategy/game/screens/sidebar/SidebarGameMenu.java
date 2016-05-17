@@ -1,9 +1,6 @@
 package com.strategy.game.screens.sidebar;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
 
@@ -34,6 +31,6 @@ public class SidebarGameMenu extends SidebarOptionsSelection {
         buttons[3][0] = quitGame;
         addActor(quitGame);
 
-        updatePosition();
+        update();
     }
 }

@@ -27,6 +27,6 @@ public class SidebarBuildResourcesCollectors extends SidebarBuildingSelection {
 //        house2.addListenerBuilding(new House());
 //        addActor(house2);
 
-        updatePosition();
+        update();
     }
 }

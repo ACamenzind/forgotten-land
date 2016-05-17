@@ -28,6 +28,6 @@ public class SidebarBuildingSupport extends SidebarBuildingSelection {
         wall.addListenerBuilding(new Wall());
         addActor(wall);
 
-        updatePosition();
+        update();
     }
 }

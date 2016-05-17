@@ -1,15 +1,8 @@
 package com.strategy.game.screens.sidebar;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
-
-import java.awt.*;
 
 /**
  * Created by Amedeo on 07/05/16.
@@ -41,6 +34,6 @@ public class SidebarBuild extends SidebarOptionsSelection {
         buttons[3][0] = other;
         addActor(other);
 
-        updatePosition();
+        update();
     }
 }

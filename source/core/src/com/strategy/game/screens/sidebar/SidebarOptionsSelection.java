@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
+import com.strategy.game.screens.Display;
 
 /**
  * Created by Amedeo on 10/05/16.
@@ -28,7 +29,7 @@ public class SidebarOptionsSelection extends Table implements Display {
     }
 
     @Override
-    public void updatePosition() {
+    public void update() {
         Assets.setPositionRelative(title, TITLE_POSITION_X, TITLE_POSITION_Y, true, true);
 
         for (int y = 0; y < buttons.length; y++) {

@@ -12,6 +12,7 @@ import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
 import com.strategy.game.ResourceContainer;
 import com.strategy.game.buildings.Building;
+import com.strategy.game.screens.Display;
 
 /**
  * Created by Amedeo on 12/05/16.
@@ -51,7 +52,7 @@ public class SidebarBuildingInfo extends Table implements Display {
                 row();
             }
 
-            updatePosition();
+            update();
         }
 
         public void set(String[] titles, int[][] values) {
@@ -255,7 +256,7 @@ public class SidebarBuildingInfo extends Table implements Display {
 
 
     @Override
-    public void updatePosition() {
+    public void update() {
 
         // TABLES
         Assets.setSizeRelative(menu, MENU_WIDTH, MENU_HEIGHT);

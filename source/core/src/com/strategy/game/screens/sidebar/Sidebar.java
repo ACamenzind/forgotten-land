@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
 import com.strategy.game.buildings.Building;
+import com.strategy.game.screens.Display;
 import com.strategy.game.screens.GameScreen;
 
 /**
@@ -39,7 +40,7 @@ public class Sidebar extends Table implements Display {
         displayBottom = new SidebarBuildingInfo();
         addActor(displayBottom);
 
-        updatePosition();
+        update();
     }
 
     public void setDisplayMiddle(DisplayType display) {
@@ -65,7 +66,7 @@ public class Sidebar extends Table implements Display {
         }
 
         addActor(displayMiddle);
-        updatePosition();
+        update();
     }
 
     public void setBuilding(Building building) {
@@ -77,7 +78,7 @@ public class Sidebar extends Table implements Display {
     }
 
     @Override
-    public void updatePosition() {
+    public void update() {
         setSize(stage.getWidth() * 0.15f, stage.getHeight());
         setPosition(stage.getWidth() - getWidth(), 0);
 
@@ -90,8 +91,8 @@ public class Sidebar extends Table implements Display {
         Assets.setSizeRelative(displayMiddle, 1f, 1f - DISPLAY_TOP_HEIGHT - (getWidth() / getHeight()));
         Assets.setPositionRelative(displayMiddle, 0, displayBottom.getHeight() / getHeight());
 
-        ((Display) displayTop).updatePosition();
-        ((Display) displayMiddle).updatePosition();
-        ((Display) displayBottom).updatePosition();
+        ((Display) displayTop).update();
+        ((Display) displayMiddle).update();
+        ((Display) displayBottom).update();
     }
 }

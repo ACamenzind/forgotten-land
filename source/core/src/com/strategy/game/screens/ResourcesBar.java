@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
-import com.strategy.game.screens.sidebar.Display;
 import com.strategy.game.world.ResourceHandler;
 import com.strategy.game.world.World;
 
@@ -19,12 +18,12 @@ public class ResourcesBar extends Table implements Display {
     private Table resources = new Table();
 
     private static final Label food = Assets.makeLabel("Food: ", 14, Color.BLACK);
-    private static final Label wood = Assets.makeLabel(" | Wood: ", 14, Color.BLACK);
-    private static final Label gold = Assets.makeLabel(" | Gold: ", 14, Color.BLACK);
-    private static final Label rock = Assets.makeLabel(" | Minerals: ", 14, Color.BLACK);
-    private static final Label people = Assets.makeLabel(" | People: ", 14, Color.BLACK);
+    private static final Label wood = Assets.makeLabel("Wood: ", 14, Color.BLACK);
+    private static final Label gold = Assets.makeLabel("Gold: ", 14, Color.BLACK);
+    private static final Label rock = Assets.makeLabel("Minerals: ", 14, Color.BLACK);
+    private static final Label people = Assets.makeLabel("People: ", 14, Color.BLACK);
 
-    private Label foodCount = Assets.makeLabel("TEST", 14, Color.BLACK);
+    private Label foodCount = Assets.makeLabel("", 14, Color.BLACK);
     private Label woodCount = Assets.makeLabel("", 14, Color.BLACK);
     private Label goldCount = Assets.makeLabel("", 14, Color.BLACK);
     private Label rockCount = Assets.makeLabel("", 14, Color.BLACK);
@@ -38,23 +37,23 @@ public class ResourcesBar extends Table implements Display {
         Assets.setBackground(this, "core/assets/textures/gameScreen/resourcesbar_bg.png");
 
         resources.add(food);
-        resources.add(foodCount);
+        resources.add(foodCount).width(75);
         resources.add(wood);
-        resources.add(woodCount);
+        resources.add(woodCount).width(75);
         resources.add(rock);
-        resources.add(rockCount);
+        resources.add(rockCount).width(75);
         resources.add(gold);
-        resources.add(goldCount);
+        resources.add(goldCount).width(75);
         resources.add(people);
-        resources.add(peopleCount);
+        resources.add(peopleCount).width(75);
 
         addActor(resources);
 
-        updatePosition();
+        update();
     }
 
     @Override
-    public void updatePosition() {
+    public void update() {
         setSize(stage.getWidth() * 0.85f, stage.getHeight() * 0.05f);
         setPosition(0, stage.getHeight() * 0.95f);
 

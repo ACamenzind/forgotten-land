@@ -1,14 +1,11 @@
 package com.strategy.game.world;
 
-import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Disposable;
 import com.strategy.game.buildings.MapEntity;
 import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.screens.GameScreen;
-import com.strategy.game.screens.ResourcesBar;
 //import com.sun.javafx.scene.control.skin.VirtualFlow;
 
 import java.util.ArrayList;
@@ -117,7 +114,7 @@ public class World implements Disposable{
 //            }
 //            System.out.println("num of trees: " + treeCount);
 //            resourceHandler.incrementWoodCounter(treeCount);
-            gameScreen.getResourcesBar().updatePosition();
+            gameScreen.getResourcesBar().update();
         }
         updateCounter++;
 
