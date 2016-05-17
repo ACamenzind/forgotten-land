@@ -48,6 +48,10 @@ public class ResourceHandler {
         return totalResources;
     }
 
+    public ResourceContainer getMaximumResources() {
+        return maximumResources;
+    }
+
     public void removeFromTotal(ResourceContainer amount) {
         totalResources = totalResources.subtract(amount);
     }
