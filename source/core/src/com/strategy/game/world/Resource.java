@@ -13,4 +13,20 @@ public class Resource extends MapEntity {
         this.maxAmount = maxAmount;
         this.amountLeft = amountLeft;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getMaxAmount() {
+        return maxAmount;
+    }
+
+    public int getAmountLeft() {
+        return amountLeft;
+    }
+
+    public void removeResourceAmount(int amount){
+        amountLeft -= amount;
+    }
 }

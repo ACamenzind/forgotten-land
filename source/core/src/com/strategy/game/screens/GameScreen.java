@@ -57,7 +57,7 @@ public class GameScreen implements Screen {
 
     public GameScreen(StrategyGame game) {
         this.game = game;
-        this.world = new World(this);
+
         this.batch = game.getBatch();
         this.font = game.getFont();
         this.shapeRenderer = new ShapeRenderer();
@@ -65,6 +65,8 @@ public class GameScreen implements Screen {
 
         this.map = Assets.map;
         this.convertMap(map);
+
+        this.world = new World(this);
 //        this.renderer = new IsometricTiledMapRenderer(map);
         this.renderer = new BetterRenderer(map);
         this.camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.buildings.*;
 import com.strategy.game.screens.GameScreen;
+import com.strategy.game.world.Resource;
 import com.strategy.game.world.World;
 
 
@@ -159,9 +160,14 @@ public class GameInputProcessor implements InputProcessor{
         else if (screen.getBuilder().getSelectedEntity() == null && button == Input.Buttons.LEFT)  {
             // TODO: show building info from here
             MapEntity clickedEntity = screen.getBuilder().getEntityAt((int)pickedTile.x, (int)pickedTile.y);
-            screen.getSidebar().setBuilding((Building) clickedEntity);
+            if (clickedEntity instanceof Building) {
+                screen.getSidebar().setBuilding((Building) clickedEntity);
+            }
+            else if (clickedEntity instanceof Resource) {
+//                System.out.println(clickedEntity.toString());
+            }
         } else {
-            //
+
         }
         return true;
     }

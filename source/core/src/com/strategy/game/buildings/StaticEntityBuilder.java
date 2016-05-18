@@ -69,6 +69,14 @@ public class StaticEntityBuilder {
         influenceLayer.setVisible(false);
     }
 
+    /**
+     * Iterates over all buildings and resources placed in the map
+     * and destroys those that have negative health.
+     */
+    public void checkDeadBuildings() {
+
+    }
+
 
     /**
      * Draws the influence area of all placed buildings.
@@ -116,7 +124,6 @@ public class StaticEntityBuilder {
 
     /**
      * Removes the given building
-     * FIXME: not really precise at removing the influence area for some reason
      * @param building the building to remove
      */
     public void destroy(Building building) {

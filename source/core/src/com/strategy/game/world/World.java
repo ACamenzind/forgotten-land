@@ -1,8 +1,12 @@
 package com.strategy.game.world;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Disposable;
+import com.strategy.game.ExtendedStaticTiledMapTile;
 import com.strategy.game.buildings.MapEntity;
 import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.screens.GameScreen;
@@ -20,6 +24,7 @@ public class World implements Disposable{
     private Stage gameStage;
     private GameScreen gameScreen;
     private ArrayList<MapEntity> staticEntities;
+    private ArrayList<Resource> resources;
     private ArrayList<MovableEntity> movableEntities;
     private TiledMap map;
     private StaticEntityBuilder builder;
@@ -35,6 +40,7 @@ public class World implements Disposable{
         this.gameScreen = gameScreen;
         this.map = gameScreen.getMap();
         this.staticEntities = new ArrayList<MapEntity>();
+        this.resources = new ArrayList<Resource>();
         this.movableEntities = new ArrayList<MovableEntity>();
 //        this.builder = new StaticEntityBuilder(this);
         this.resourceHandler = new ResourceHandler(this, 0, 1000, 1000, 1000, 1000, 5);
@@ -42,6 +48,7 @@ public class World implements Disposable{
         this.populationHandler = new PopulationHandler(5, 200, 20);
         this.tick = 0;
         this.isRunning = true;
+        readResources();
     }
 
     public GameScreen getGameScreen() {
@@ -76,10 +83,34 @@ public class World implements Disposable{
     /**
      * Searches the map file for tiles that are of type resource, and adds them to the resource list
      * to keep track of them.
-     * TODO: implement
+     * TODO: refactor
      */
     private void readResources() {
-
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("Buildings");
+        for (int x = 0; x < layer.getWidth(); x++) {
+            for (int y = 0; y < layer.getHeight(); y++) {
+                TiledMapTileLayer.Cell cell = layer.getCell(x,y);
+                if (cell != null && cell.getTile() != null) {
+                    ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
+                    String type = tile.getProperties().get("type", String.class);
+                    if (type != null) {
+                        if (type.equals("wood")) {
+                            Resource wood = new Resource("wood", 100, 100);
+                            wood.setPosition(new Vector2(x, y));
+                            resources.add(wood);
+                            tile.setObject(wood);
+//                            System.out.println("added wood");
+                        } else if (type.equals("rock")) {
+                            Resource rock = new Resource("rock", 100, 100);
+                            rock.setPosition(new Vector2(x, y));
+                            resources.add(rock);
+                            tile.setObject(rock);
+//                            System.out.println("added wood");
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public void update(float delta) {
