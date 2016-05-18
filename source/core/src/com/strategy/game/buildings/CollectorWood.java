@@ -34,15 +34,15 @@ public class CollectorWood extends Building {
         return resourceCollected;
     }
 
-    @Override
-    public ResourceContainer getProductionsPerWorker() {
-        return productions.multiply(treeCount);
-    }
-
-    @Override
-    public ResourceContainer getProductionsPerTurn() {
-        return productions.multiply(treeCount).multiply(workers);
-    }
+//    @Override
+//    public ResourceContainer getProductionsPerWorker() {
+//        return productions.multiply(treeCount);
+//    }
+//
+//    @Override
+//    public ResourceContainer getProductionsPerTurn() {
+//        return productions.multiply(treeCount).multiply(workers);
+//    }
 
     public int getTreeCount() {
         return treeCount;

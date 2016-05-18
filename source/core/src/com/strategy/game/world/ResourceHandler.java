@@ -79,9 +79,9 @@ public class ResourceHandler {
 
         for (MapEntity entity:
              world.getStaticEntities()) {
+            ResourceContainer maintenance = new ResourceContainer(0,0,0,0,0);
             if (entity instanceof CollectorWood) {
                 TiledMapTileLayer buildingsLayer = (TiledMapTileLayer) world.getGameScreen().getMap().getLayers().get("Buildings");
-                int treeCount = 0;
                 Vector2 coords = entity.getCoords();
 
                 int startX = (int)coords.x - entity.getInfluenceRadius();
@@ -92,18 +92,28 @@ public class ResourceHandler {
 
                 // Goes through the tiles inside the building's influence area and removes resources from the first
                 // resource (either rock or wood) it finds.
+                // TODO: 18/05/16 Refactor 
                 boolean foundAResource = false;
                 for (int i = startX; i < endX; i++) {
                     for (int j = startY; j < endY; j++) {
                         TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i,j);
+
                         if (cell != null && cell.getTile() != null) {
                             ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
                             MapEntity object = tile.getObject();
                             String property = tile.getProperties().get("type", String.class);
                             String resourceType = ((CollectorWood) entity).getResourceCollected();
+
                             if (property != null && property.equals(resourceType) && object != null && !foundAResource) {
-                                int amount = ((CollectorWood) entity).getWorkers() * 10;
+                                ResourceContainer resourceProduction = ((CollectorWood) entity).getProductionsPerTurn();
                                 int available = object.getLife();
+                                int amount = 0;
+                                if (resourceType.equals("wood")) {
+                                    amount = resourceProduction.wood;
+                                } else if (resourceType.equals("rock")) {
+                                    amount = resourceProduction.rock;
+                                }
+
                                 if (available - amount > 0) {
                                     object.removeLife(amount);
                                 } else {
@@ -111,21 +121,18 @@ public class ResourceHandler {
                                     world.getBuilder().destroy(object);
                                 }
                                 foundAResource = true;
+                                totalResources = totalResources.add(resourceProduction);
                             }
                         }
                     }
                 }
-//                System.out.println("Looped");
-//                System.out.println("num of trees: " + treeCount);
-//                ((CollectorWood) building).setTreeCount(treeCount);
-//                System.out.println("Per worker: " + ((CollectorWood) building).getProductionsPerWorker().toString());
-//                System.out.println("Per turn: " + ((CollectorWood) building).getProductionsPerTurn().toString());
-
+            }
+            else if (entity instanceof Building) {
+                maintenance = ((Building) entity).getMaintenanceCosts();
             }
 //            ResourceContainer production = ((Building) building).getProductionsPerTurn();
-//            ResourceContainer maintenance = ((Building) building).getMaintenanceCosts();
 //            totalResources = totalResources.add(production);
-//            totalResources = totalResources.subtract(maintenance);
+            totalResources = totalResources.subtract(maintenance);
         }
     }
 
