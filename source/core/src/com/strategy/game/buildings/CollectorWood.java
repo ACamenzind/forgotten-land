@@ -21,7 +21,8 @@ public class CollectorWood extends Building {
 
     private static final Texture TEXTURE = Assets.lumberjack;
     private static final Vector2 COLLISION = new Vector2(2,2);
-    private int life = MAX_LIFE;
+//    private int life = MAX_LIFE;
+    private String resourceCollected = "wood";
 //    private int workers = 0;
     private int treeCount;
 
@@ -29,7 +30,9 @@ public class CollectorWood extends Building {
         super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION);
     }
 
-
+    public String getResourceCollected() {
+        return resourceCollected;
+    }
 
     @Override
     public ResourceContainer getProductionsPerWorker() {

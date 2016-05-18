@@ -20,6 +20,11 @@ public class CollectorRock extends Building {
     private static final Vector2 COLLISION = new Vector2(2,2);
     private int life = MAX_LIFE;
     private int workers = 0;
+    private String resourceCollected = "wood";
+
+    public String getResourceCollected() {
+        return resourceCollected;
+    }
 
     public CollectorRock() {
         super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION);

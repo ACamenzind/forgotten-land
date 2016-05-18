@@ -90,7 +90,9 @@ public class ResourceHandler {
                 int startY = (int)coords.y - entity.getInfluenceRadius();
                 int endY = (int) (coords.x + entity.getCollisionSize().y + entity.getInfluenceRadius());
 
-                boolean foundATree = false;
+                // Goes through the tiles inside the building's influence area and removes resources from the first
+                // resource (either rock or wood) it finds.
+                boolean foundAResource = false;
                 for (int i = startX; i < endX; i++) {
                     for (int j = startY; j < endY; j++) {
                         TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i,j);
@@ -98,7 +100,8 @@ public class ResourceHandler {
                             ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
                             MapEntity object = tile.getObject();
                             String property = tile.getProperties().get("type", String.class);
-                            if (property != null && property.equals("wood") && object != null && !foundATree) {
+                            String resourceType = ((CollectorWood) entity).getResourceCollected();
+                            if (property != null && property.equals(resourceType) && object != null && !foundAResource) {
                                 int amount = ((CollectorWood) entity).getWorkers() * 10;
                                 int available = object.getLife();
                                 if (available - amount > 0) {
@@ -107,7 +110,7 @@ public class ResourceHandler {
                                     System.out.println("Resource empty");
                                     world.getBuilder().destroy(object);
                                 }
-                                foundATree = true;
+                                foundAResource = true;
                             }
                         }
                     }
