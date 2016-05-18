@@ -164,9 +164,10 @@ public class GameInputProcessor implements InputProcessor{
                 screen.getSidebar().setBuilding((Building) clickedEntity);
             }
             else if (clickedEntity instanceof Resource) {
+                // Debugging stuff
 //                screen.getBuilder().destroy(clickedEntity);
 //                System.out.println("Destroyed");
-                System.out.println(clickedEntity.getLife());
+//                System.out.println(clickedEntity.getLife());
             }
         } else {
 

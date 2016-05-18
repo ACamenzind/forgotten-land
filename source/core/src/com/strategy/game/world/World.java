@@ -41,7 +41,7 @@ public class World implements Disposable{
         this.staticEntities = new ArrayList<MapEntity>();
         this.resources = new ArrayList<Resource>();
         this.movableEntities = new ArrayList<MovableEntity>();
-        this.resourceHandler = new ResourceHandler(this, 0, 1000, 1000, 1000, 1000, 5);
+        this.resourceHandler = new ResourceHandler(this, 1000, 1000, 1000, 1000, 5);
         this.updateCounter = 0;
         this.populationHandler = new PopulationHandler(5, 200, 20);
         this.tick = 0;

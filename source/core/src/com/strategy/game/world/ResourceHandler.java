@@ -15,34 +15,13 @@ import java.util.Iterator;
  * Created by francescosani on 27/04/16.
  */
 public class ResourceHandler {
-    private final int startingIncrement;
-
-    private int woodCounter;
-    private int goldCounter;
-    private int foodCounter;
-    private int rockCounter;
-
-    private int woodIncrementer;
-    private int goldIncrementer;
-    private int foodIncrementer;
-    private int rockIncrementer;
-
     private World world;
 
     private ResourceContainer totalResources;
     private ResourceContainer maximumResources;
 
 
-    public ResourceHandler(World world, int startingIncrement, int woodCounter, int goldCounter, int foodCounter, int rockCounter, int people) {
-        this.startingIncrement = startingIncrement;
-        this.woodCounter = woodCounter;
-        this.goldCounter = goldCounter;
-        this.foodCounter = foodCounter;
-        this.rockCounter = rockCounter;
-        this.woodIncrementer = 0;
-        this.goldIncrementer = 0;
-        this.foodIncrementer = 0;
-        this.rockIncrementer = 0;
+    public ResourceHandler(World world, int woodCounter, int goldCounter, int foodCounter, int rockCounter, int people) {
         this.world = world;
         this.totalResources = new ResourceContainer(woodCounter, goldCounter, foodCounter, rockCounter, people);
         this.maximumResources = new ResourceContainer(100, 100, 100, 100, 10);
@@ -80,6 +59,7 @@ public class ResourceHandler {
         for (MapEntity entity:
              world.getStaticEntities()) {
             ResourceContainer maintenance = new ResourceContainer(0,0,0,0,0);
+
             if (entity instanceof CollectorWood) {
                 TiledMapTileLayer buildingsLayer = (TiledMapTileLayer) world.getGameScreen().getMap().getLayers().get("Buildings");
                 Vector2 coords = entity.getCoords();
@@ -92,7 +72,7 @@ public class ResourceHandler {
 
                 // Goes through the tiles inside the building's influence area and removes resources from the first
                 // resource (either rock or wood) it finds.
-                // TODO: 18/05/16 Refactor 
+                // TODO: 18/05/16 Refactor
                 boolean foundAResource = false;
                 for (int i = startX; i < endX; i++) {
                     for (int j = startY; j < endY; j++) {
@@ -130,8 +110,6 @@ public class ResourceHandler {
             else if (entity instanceof Building) {
                 maintenance = ((Building) entity).getMaintenanceCosts();
             }
-//            ResourceContainer production = ((Building) building).getProductionsPerTurn();
-//            totalResources = totalResources.add(production);
             totalResources = totalResources.subtract(maintenance);
         }
     }
