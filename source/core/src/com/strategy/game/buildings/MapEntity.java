@@ -28,6 +28,8 @@ public abstract class MapEntity implements Disposable{
     private int counter;
     protected int influenceRadius;
 
+    protected int life, maxLife;
+
     private Vector2 position;
 
     private ExtendedStaticTiledMapTile[][] tiles;
@@ -44,13 +46,26 @@ public abstract class MapEntity implements Disposable{
         this.textures = new ArrayList<Texture>();
     }
 
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    public void removeLife(int amount) {
+        this.life -= amount;
+    }
+
     public Vector2 getPosition() {
         return position;
     }
 
-    public void setPosition(Vector2 position) {
-        this.position = position;
-    }
+//    public void setPosition(Vector2 position) {
+//        this.position = position;
+//    }
 
     public boolean isClicked() {
         return isClicked;
@@ -67,6 +82,11 @@ public abstract class MapEntity implements Disposable{
 
     public Vector2 getCoords() {
         return new Vector2(clickX, clickY);
+    }
+
+    public void setCoords(Vector2 coords) {
+        clickX = (int)coords.x;
+        clickY = (int)coords.y;
     }
 
     public Texture getMainTexture() {

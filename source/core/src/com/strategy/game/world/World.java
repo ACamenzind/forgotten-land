@@ -2,7 +2,6 @@ package com.strategy.game.world;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Disposable;
@@ -23,7 +22,7 @@ public class World implements Disposable{
     public static final int TICK_DURATION = 300;
     private Stage gameStage;
     private GameScreen gameScreen;
-    private ArrayList<MapEntity> staticEntities;
+    private ArrayList<MapEntity> staticEntities; // Resources and Buildings
     private ArrayList<Resource> resources;
     private ArrayList<MovableEntity> movableEntities;
     private TiledMap map;
@@ -42,7 +41,6 @@ public class World implements Disposable{
         this.staticEntities = new ArrayList<MapEntity>();
         this.resources = new ArrayList<Resource>();
         this.movableEntities = new ArrayList<MovableEntity>();
-//        this.builder = new StaticEntityBuilder(this);
         this.resourceHandler = new ResourceHandler(this, 0, 1000, 1000, 1000, 1000, 5);
         this.updateCounter = 0;
         this.populationHandler = new PopulationHandler(5, 200, 20);
@@ -51,8 +49,16 @@ public class World implements Disposable{
         readResources();
     }
 
+    public void setBuilder(StaticEntityBuilder builder) {
+        this.builder = builder;
+    }
+
     public GameScreen getGameScreen() {
         return gameScreen;
+    }
+
+    public ArrayList<Resource> getResources() {
+        return resources;
     }
 
     public ArrayList<MapEntity> getStaticEntities() {
@@ -95,17 +101,15 @@ public class World implements Disposable{
                     String type = tile.getProperties().get("type", String.class);
                     if (type != null) {
                         if (type.equals("wood")) {
-                            Resource wood = new Resource("wood", 100, 100);
-                            wood.setPosition(new Vector2(x, y));
+                            Resource wood = new Resource("wood", 100);
+                            wood.setCoords(new Vector2(x, y));
                             resources.add(wood);
                             tile.setObject(wood);
-//                            System.out.println("added wood");
                         } else if (type.equals("rock")) {
-                            Resource rock = new Resource("rock", 100, 100);
-                            rock.setPosition(new Vector2(x, y));
+                            Resource rock = new Resource("rock", 100);
+                            rock.setCoords(new Vector2(x, y));
                             resources.add(rock);
                             tile.setObject(rock);
-//                            System.out.println("added wood");
                         }
                     }
                 }
@@ -118,35 +122,8 @@ public class World implements Disposable{
             resourceHandler.update();
             updateCounter = 0;
             tick++;
+            builder.checkDeadEntities();
 
-//            builder.checkDeadBuildings(); //TODO: fix dependency
-
-//            System.out.println("--- Resources at turn " + tick + " ---");
-//            System.out.println(resourceHandler.getTotalResources().toString());
-//            System.out.println(resourceHandler.getTotalResources().food);
-
-            //TODO: make that you have to press something to go to next turn?
-
-////            int treeCount = 0;
-//            TiledMapTileLayer buildingsLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Buildings");
-//
-//            // Increment wood per tick for each tree in the world
-//            // TODO: make it so it only increments it if there is an appropriate building in range
-//            // TODO: do the same for other resources
-//            int treeCount = 0;
-//            for (int i = 0; i < buildingsLayer.getWidth(); i++) {
-//                for (int j = 0; j < buildingsLayer.getHeight(); j++) {
-//                    TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i,j);
-//                    if (cell != null) {
-//                        String type = cell.getTile().getProperties().get("type", String.class);
-//                        if (type != null && type.equals("wood")) {
-//                            treeCount++;
-//                        }
-//                    }
-//                }
-//            }
-//            System.out.println("num of trees: " + treeCount);
-//            resourceHandler.incrementWoodCounter(treeCount);
             gameScreen.getResourcesBar().update();
         }
         updateCounter++;

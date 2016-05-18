@@ -75,14 +75,12 @@ public class StaticEntityBuilder {
      * and destroys those that have negative health.
      * TODO: needs testing
      */
-    public void checkDeadBuildings() {
-        for (MapEntity e : world.getStaticEntities()) {
-            if (e instanceof Building) {
-                if (((Building) e).getLife() <= 0) {
-                    destroy((Building) e);
-                }
-            }
-        }
+    public void checkDeadEntities() {
+//        for (MapEntity e : world.getStaticEntities()) {
+//            if (e.getLife() <= 0) {
+//                destroy(e);
+//            }
+//        }
     }
 
 
@@ -132,47 +130,51 @@ public class StaticEntityBuilder {
 
     /**
      * Removes the given building
-     * @param building the building to remove
+     * @param entity the building to remove
      */
-    public void destroy(Building building) {
-        if (building != null) {
-            world.getStaticEntities().remove(building);
+    public void destroy(MapEntity entity) {
+        if (entity != null) {
+            world.getResources().remove(entity);
 
-            Vector2 coords = building.getCoords();
+            Vector2 coords = entity.getCoords();
 
             // Remove the building tiles
-            for (int i = (int) coords.x; i < (int) coords.x + building.collisionSize.x; i++) {
-                for (int j = (int) coords.y; j < (int) coords.y + building.collisionSize.y; j++) {
+            for (int i = (int) coords.x; i < (int) coords.x + entity.collisionSize.x; i++) {
+                for (int j = (int) coords.y; j < (int) coords.y + entity.collisionSize.y; j++) {
+                    System.out.println(coords);
                     TiledMapTileLayer.Cell buildingsCell = buildingsLayer.getCell(i, j);
                     ExtendedStaticTiledMapTile buildingTile = (ExtendedStaticTiledMapTile) buildingsCell.getTile();
                     buildingTile.setTextureRegion(new TextureRegion(Assets.emptyTile));
                     buildingTile.setObject(null);
                     buildingsCell.setTile(buildingTile);
                     buildingsLayer.setCell(i, j, buildingsCell);
+//                    System.out.println("Loop");
                 }
             }
 
-            int startX = (int) coords.x - building.getInfluenceRadius();
-            int startY = (int) coords.y - building.getInfluenceRadius();
+            int startX = (int) coords.x - entity.getInfluenceRadius();
+            int startY = (int) coords.y - entity.getInfluenceRadius();
 
-            int endX = (int) coords.x + building.getInfluenceRadius() + (int) building.collisionSize.x;
-            int endY = (int) coords.y + building.getInfluenceRadius() + (int) building.collisionSize.y;
+            int endX = (int) coords.x + entity.getInfluenceRadius() + (int) entity.collisionSize.x;
+            int endY = (int) coords.y + entity.getInfluenceRadius() + (int) entity.collisionSize.y;
 
             // TODO: 12/05/2016 Add also for upper limits
             if (startX < 0) startX = 0;
             if (startY < 0) startY = 0;
 
             // Resets the influence area
-            for (int j = startY; j < endY; j++) {
-                for (int i = startX; i < endX; i++) {
-                    TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
-                    if (cell != null) {
-                        ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
-                        int buildingsNearby = tile.getBuildingsNearby();
-                        if (buildingsNearby > 0)
-                            tile.decBuildingsNearby();
-                        cell.setTile(tile);
-                        buildingsLayer.setCell(i, j, cell);
+            if (entity instanceof Building) {
+                for (int j = startY; j < endY; j++) {
+                    for (int i = startX; i < endX; i++) {
+                        TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
+                        if (cell != null) {
+                            ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
+                            int buildingsNearby = tile.getBuildingsNearby();
+                            if (buildingsNearby > 0)
+                                tile.decBuildingsNearby();
+                            cell.setTile(tile);
+                            buildingsLayer.setCell(i, j, cell);
+                        }
                     }
                 }
             }
@@ -247,8 +249,6 @@ public class StaticEntityBuilder {
                 long id = sound.play(0.5f);
                 sound.setPitch(id, 0.75f);
 
-
-
                 // If the placed entity is a building, remove its cost from the total resources if possible
                 // Note: for now, all placeable entities are buildings, but in the future
                 // we may add a map editor
@@ -258,9 +258,9 @@ public class StaticEntityBuilder {
                     selectedEntity.placeOnLayer(buildingsLayer, x, y);
                     this.world.getStaticEntities().add(selectedEntity);
                     this.world.getResourceHandler().removeFromTotal(((Building) selectedEntity).getCosts());
+                    // Updates resources bar after placing building
+                    world.getGameScreen().getResourcesBar().update();
                 }
-
-
 
                 try {
                     // Makes a new instance of the proper subclass after placing it (for the next one)
@@ -274,11 +274,6 @@ public class StaticEntityBuilder {
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
-                // Updates resources bar after placing building
-                world.getGameScreen().getResourcesBar().update();
-
-
-
             } else {
                 long id = sound.play(0.5f);
                 sound.setPitch(id, 5f);
@@ -290,7 +285,6 @@ public class StaticEntityBuilder {
         if (selectedEntity != null) {
             selectedEntity.changeTexture();
         }
-//        System.out.println(selectedEntity.getTiles().toString());
     }
 
     /**
@@ -300,9 +294,6 @@ public class StaticEntityBuilder {
     public void renderSelection(OrthographicCamera camera) {
         int screenX = Gdx.input.getX();
         int screenY = Gdx.input.getY();
-
-
-
 
         Vector3 touch = new Vector3(screenX, screenY, 0);
         Vector3 pickedTile = Utils.cartesianToIso(touch, camera);

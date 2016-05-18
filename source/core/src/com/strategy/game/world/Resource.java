@@ -1,5 +1,6 @@
 package com.strategy.game.world;
 
+import com.badlogic.gdx.math.Vector2;
 import com.strategy.game.buildings.MapEntity;
 
 /**
@@ -7,26 +8,27 @@ import com.strategy.game.buildings.MapEntity;
  */
 public class Resource extends MapEntity {
     private String type;
-    private int maxAmount, amountLeft;
-    public Resource(String type, int maxAmount, int amountLeft) {
+//    private int maxAmount, amountLeft;
+    public Resource(String type, int maxAmount) {
         this.type = type;
-        this.maxAmount = maxAmount;
-        this.amountLeft = amountLeft;
+        this.maxLife = maxAmount;
+        this.life = maxAmount;
+        this.collisionSize = new Vector2(1,1);
     }
 
     public String getType() {
         return type;
     }
-
-    public int getMaxAmount() {
-        return maxAmount;
-    }
-
-    public int getAmountLeft() {
-        return amountLeft;
-    }
-
-    public void removeResourceAmount(int amount){
-        amountLeft -= amount;
-    }
+//
+//    public int getMaxAmount() {
+//        return maxAmount;
+//    }
+//
+//    public int getAmountLeft() {
+//        return amountLeft;
+//    }
+//
+//    public void removeResourceAmount(int amount){
+//        amountLeft -= amount;
+//    }
 }

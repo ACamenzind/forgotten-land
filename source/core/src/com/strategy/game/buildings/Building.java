@@ -12,11 +12,11 @@ import com.strategy.game.world.World;
 public abstract class Building extends MapEntity {
     private final String name;
     private final ResourceContainer costs;
-    private final int maxLife;
+//    private final int maxLife;
     private final int maxWorkers;
     protected ResourceContainer productions;
     private final ResourceContainer maintenanceCosts;
-    private int life;
+//    private int life;
     protected int workers;
 
     public Building(final String name,

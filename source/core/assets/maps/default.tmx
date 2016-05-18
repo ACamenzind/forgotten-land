@@ -43,6 +43,7 @@
   <tile id="4">
    <properties>
     <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
    </properties>
    <image width="256" height="128" source="../resources/bamboo05.png"/>
   </tile>
@@ -77,6 +78,7 @@
   <tile id="9">
    <properties>
     <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
    </properties>
    <image width="256" height="128" source="../resources/bush01.png"/>
   </tile>
@@ -111,6 +113,7 @@
   <tile id="14">
    <properties>
     <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
    </properties>
    <image width="128" height="128" source="../resources/cactus01.png"/>
   </tile>
@@ -145,6 +148,7 @@
   <tile id="19">
    <properties>
     <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
    </properties>
    <image width="128" height="64" source="../resources/grasses02.png"/>
   </tile>
@@ -179,6 +183,7 @@
   <tile id="24">
    <properties>
     <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
    </properties>
    <image width="256" height="128" source="../resources/hemp02.png"/>
   </tile>
@@ -213,6 +218,7 @@
   <tile id="29">
    <properties>
     <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
    </properties>
    <image width="256" height="128" source="../resources/palm04.png"/>
   </tile>
@@ -247,6 +253,7 @@
   <tile id="34">
    <properties>
     <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
    </properties>
    <image width="256" height="256" source="../resources/pine-full03.png"/>
   </tile>
@@ -281,6 +288,7 @@
   <tile id="39">
    <properties>
     <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
    </properties>
    <image width="256" height="256" source="../resources/pine-full08.png"/>
   </tile>
@@ -315,6 +323,7 @@
   <tile id="44">
    <properties>
     <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
    </properties>
    <image width="256" height="256" source="../resources/pine-half05.png"/>
   </tile>
@@ -349,6 +358,7 @@
   <tile id="49">
    <properties>
     <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
    </properties>
    <image width="256" height="256" source="../resources/pine-none02.png"/>
   </tile>
@@ -383,6 +393,7 @@
   <tile id="54">
    <properties>
     <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
    </properties>
    <image width="256" height="256" source="../resources/pine-none07.png"/>
   </tile>
@@ -417,6 +428,7 @@
   <tile id="59">
    <properties>
     <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
    </properties>
    <image width="256" height="128" source="../resources/shrub1-04.png"/>
   </tile>
@@ -451,6 +463,7 @@
   <tile id="64">
    <properties>
     <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
    </properties>
    <image width="256" height="128" source="../resources/shrub2-04.png"/>
   </tile>
@@ -485,6 +498,7 @@
   <tile id="69">
    <properties>
     <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
    </properties>
    <image width="256" height="128" source="../resources/tropical02.png"/>
   </tile>
@@ -519,6 +533,7 @@
   <tile id="74">
    <properties>
     <property name="obstacle" type="bool" value="true"/>
+    <property name="type" value="wood"/>
    </properties>
    <image width="128" height="64" source="../resources/weed02.png"/>
   </tile>
@@ -570,7 +585,7 @@
  </layer>
  <layer name="Buildings" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt2EtuwjAUBVDvou0s6+goG4AoW2DG/jfQRjTCPEwpIk5ccY5kOR9UWe/iT0kJAAAAAAAAAKjtY+sBcEEebZFHW+TRFnm0RR5tkUdb5NEWebRFHm2RR1vkUd/7A+1tozECAAAAQDRuPQD4R8ZkzqzhXp2HrJfHuvLaDzfeUVf+nR/CdZfd71M5J5Y1Zn2ewRDa9L5feWyvbq7953fbpdOcmFv+nnVNNd/9tOk6zySyx9fTpXPt50ym6z57FsljOfGs26fzfJjzyJ9bq+obQx/38dI+UiKremIefbrOo1T/Q/WRvYa4B3TpVO8+nWrcp/NZdx96lvfbbyZ96IfQU0fMY7rPz7x/qb/1qr75jGU+bKO0dh3S5Xf/1tp2KHyW58VMunRZ41v1js/v/a94vHPPtZjNvK+YA9sprWH9E3/PPFjOvD/43ep/eCSnY+Ha3AFa5LwLAAAAAAAAAAAAAAD1fQHw+S8N
+   eJzt2V1qAjEQAODcou1rL+LjvlRK38QbeP8LlIADsyFWW5s14PeB5GcVwoyzyWopAAAAAAAAAMBob49eACvyMRf5mIt8zEU+5iIfc5GPucjHXORjLvIxF/mYi3yM9/qL18uD1ggAAAAAAAD8v/2Vfp5jrK9mvKT+8dx+brQW1iIXtR52zVzMq5WxevekJbXHdE2dbKPGfEn9sGvafI2xaqzr97/GPuphKetaKena+3ZLexo57tWxadv39T6vZsaIuObc7Mt6Pz+Udf0wVuzXbd1c2vMjh+2Zmb+LWOZa2JV1XbT7eqZWxsjf8VonNR/5OSTUe9ZHkYct/VQH7TXnrTHybyPt/lHbXo6WztwtTlfGXBbnqRz7uJcdzmP3rnEi1tEP7dmrdbgwn6mD+7XnrtIZM96lvSHq49CZu9Wp01c7fb3Y5n29fV6HZ9b7X+Te85TzLgAAAAAAAAAAAAAAjPcNXUIn6w==
   </data>
  </layer>
  <layer name="Grid" width="100" height="100" visible="0">

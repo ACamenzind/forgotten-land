@@ -71,9 +71,11 @@ public class GameScreen implements Screen {
         this.renderer = new BetterRenderer(map);
         this.camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         this.gameInputMultiplexer = new InputMultiplexer();
+
         this.gameInputProcessor = new GameInputProcessor(this);
         this.world = new World(this);
         this.builder = new StaticEntityBuilder(this);
+        world.setBuilder(builder);
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         this.sidebar = new Sidebar(stage, this);
         this.resourcesBar = new ResourcesBar(stage, world);
