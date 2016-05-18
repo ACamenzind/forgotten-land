@@ -7,9 +7,7 @@ import com.strategy.game.ResourceContainer;
 import com.strategy.game.buildings.Building;
 import com.strategy.game.buildings.CollectorWood;
 import com.strategy.game.buildings.MapEntity;
-import com.sun.xml.internal.xsom.impl.scd.Iterators;
 
-import java.util.Iterator;
 
 /**
  * Created by francescosani on 27/04/16.
