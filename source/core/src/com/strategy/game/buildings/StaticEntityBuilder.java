@@ -13,6 +13,7 @@ import com.strategy.game.Assets;
 import com.strategy.game.ExtendedStaticTiledMapTile;
 import com.strategy.game.Utils;
 import com.strategy.game.screens.GameScreen;
+import com.strategy.game.world.Resource;
 import com.strategy.game.world.World;
 
 /**
@@ -72,9 +73,16 @@ public class StaticEntityBuilder {
     /**
      * Iterates over all buildings and resources placed in the map
      * and destroys those that have negative health.
+     * TODO: needs testing
      */
     public void checkDeadBuildings() {
-
+        for (MapEntity e : world.getStaticEntities()) {
+            if (e instanceof Building) {
+                if (((Building) e).getLife() <= 0) {
+                    destroy((Building) e);
+                }
+            }
+        }
     }
 
 

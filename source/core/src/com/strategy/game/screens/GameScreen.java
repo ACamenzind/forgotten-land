@@ -66,16 +66,19 @@ public class GameScreen implements Screen {
         this.map = Assets.map;
         this.convertMap(map);
 
-        this.world = new World(this);
+
 //        this.renderer = new IsometricTiledMapRenderer(map);
         this.renderer = new BetterRenderer(map);
         this.camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         this.gameInputMultiplexer = new InputMultiplexer();
         this.gameInputProcessor = new GameInputProcessor(this);
+        this.world = new World(this);
         this.builder = new StaticEntityBuilder(this);
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         this.sidebar = new Sidebar(stage, this);
         this.resourcesBar = new ResourcesBar(stage, world);
+
+
 
         // Looping background sound
         Sound sound = Assets.bgSound;

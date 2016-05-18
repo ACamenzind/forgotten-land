@@ -119,6 +119,8 @@ public class World implements Disposable{
             updateCounter = 0;
             tick++;
 
+//            builder.checkDeadBuildings(); //TODO: fix dependency
+
 //            System.out.println("--- Resources at turn " + tick + " ---");
 //            System.out.println(resourceHandler.getTotalResources().toString());
 //            System.out.println(resourceHandler.getTotalResources().food);
