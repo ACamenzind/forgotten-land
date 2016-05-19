@@ -1,5 +1,6 @@
 package com.strategy.game.screens.sidebar;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
@@ -12,7 +13,7 @@ import com.strategy.game.screens.Display;
 public class SidebarOptionsSelection extends Table implements Display {
 
     protected Label title;
-    protected GameButton[][] buttons = new GameButton[BUTTONS_PER_COLUMN][BUTTONS_PER_ROW];
+    protected Actor[][] buttons = new Actor[BUTTONS_PER_COLUMN][BUTTONS_PER_ROW];
 
     private static final int BUTTONS_PER_COLUMN = 6;
     private static final int BUTTONS_PER_ROW = 1;
@@ -24,7 +25,7 @@ public class SidebarOptionsSelection extends Table implements Display {
     private static final float TITLE_POSITION_Y = 0.9f;
 
     public SidebarOptionsSelection() {
-        Assets.setBackground(this, "core/assets/textures/gameScreen/sidebar_build.png");
+        Assets.setBackground(this, Assets.sidebarDisplayMiddleBackground);
 
     }
 

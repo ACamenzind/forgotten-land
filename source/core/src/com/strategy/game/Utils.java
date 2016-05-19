@@ -16,6 +16,14 @@ public class Utils {
     public static final int DEFAULT_HEIGHT = 720;
     public static final int BASE_CAMERA_SPEED = 10;
     public static final int RENDER_OFFSET = 20;
+    // Without HDPI
+    public static final int FONT_SIZE_SMALL = 12;
+    public static final int FONT_SIZE_MEDIUM = 14;
+    public static final int FONT_SIZE_BIG = 20;
+    // With HDPI
+//    public static final int FONT_SIZE_SMALL = 24;
+//    public static final int FONT_SIZE_MEDIUM = 28;
+//    public static final int FONT_SIZE_BIG = 40;
 
 
     public static Matrix4 isoTransformMatrix() {

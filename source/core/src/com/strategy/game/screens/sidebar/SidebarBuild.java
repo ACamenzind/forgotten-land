@@ -3,6 +3,7 @@ package com.strategy.game.screens.sidebar;
 import com.badlogic.gdx.graphics.Color;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
+import com.strategy.game.Utils;
 
 /**
  * Created by Amedeo on 07/05/16.
@@ -17,7 +18,7 @@ public class SidebarBuild extends SidebarOptionsSelection {
 
     public SidebarBuild() {
 
-        title = Assets.makeLabel("Buildings", 20, Color.BLACK);
+        title = Assets.makeLabel("Buildings", Utils.FONT_SIZE_BIG, Color.BLACK);
         addActor(title);
 
         buttons[0][0] = resourcesCollectors;

@@ -201,7 +201,7 @@ public class GameScreen implements Screen {
         // Draw stage
         stage.act(delta);
 //        sidebar.update();
-        stage.setDebugAll(true); // For debug purpose
+//        stage.setDebugAll(true); // For debug purpose
         stage.getViewport().apply();
         stage.draw();
     }

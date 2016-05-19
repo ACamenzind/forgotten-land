@@ -25,7 +25,7 @@ public class SidebarBuildSelection extends Table implements Display {
     private static final float TITLE_POSITION_Y = 0.9f;
 
     public SidebarBuildSelection() {
-        Assets.setBackground(this, "core/assets/textures/gameScreen/sidebar_build.png");
+        Assets.setBackground(this, Assets.sidebarDisplayMiddleBackground);
         buttons = new GameButton[BUTTONS_PER_COLUMN][BUTTONS_PER_ROW];
 
         rotate = new GameButton("core/assets/textures/gameScreen/sidebar_build_rotate.png");
