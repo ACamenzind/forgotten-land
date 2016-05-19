@@ -15,7 +15,7 @@ public class DesktopLauncher {
         config.useHDPI = Utils.HDPI;
 		config.title = "A Strategy Game [Working title]";
 		config.vSyncEnabled = true;
-		config.resizable = true;
+		config.resizable = false;
 		new LwjglApplication(new StrategyGame(), config);
 	}
 }
