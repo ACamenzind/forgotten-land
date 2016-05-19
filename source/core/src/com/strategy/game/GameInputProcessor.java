@@ -3,6 +3,7 @@ package com.strategy.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapLayer;
@@ -12,10 +13,18 @@ import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Json;
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.io.Output;
 import com.strategy.game.buildings.*;
 import com.strategy.game.screens.GameScreen;
 import com.strategy.game.world.Resource;
 import com.strategy.game.world.World;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 
 /**
@@ -131,6 +140,12 @@ public class GameInputProcessor implements InputProcessor{
             case Input.Keys.L:
                 screen.getWorld().setGameSpeed(World.GameSpeed.FAST);
                 break;
+            case Input.Keys.Y:
+                saveGame();
+                break;
+            case Input.Keys.U:
+                loadGame();
+                break;
         }
         return false;
     }
@@ -223,5 +238,32 @@ public class GameInputProcessor implements InputProcessor{
 
         camera.update(); // Applies the changes.
         return true;
+    }
+
+
+
+    public void saveGame() {
+        Kryo kryo = new Kryo();
+        Output output = null;
+        try {
+            output = new Output(new FileOutputStream("file.bin"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        kryo.writeObject(output, screen.getWorld());
+        output.close();
+
+    }
+
+    public void loadGame() {
+        Kryo kryo = new Kryo();
+        com.esotericsoftware.kryo.io.Input input = null;
+        try {
+            input = new com.esotericsoftware.kryo.io.Input(new FileInputStream("file.bin"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        World savedWorld = kryo.readObject(input, World.class);
+        input.close();
     }
 }
