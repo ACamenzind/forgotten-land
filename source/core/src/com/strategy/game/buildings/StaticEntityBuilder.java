@@ -93,8 +93,8 @@ public class StaticEntityBuilder {
             for (int j = 0; j < influenceLayer.getHeight(); j++) {
                 TiledMapTileLayer.Cell influenceCell = new TiledMapTileLayer.Cell();
                 TiledMapTileLayer.Cell buildingsCell = buildingsLayer.getCell(i,j);
-                boolean condition = buildingsCell != null && buildingsCell.getTile() != null;
-                if (condition) {
+                boolean isTileValid = buildingsCell != null && buildingsCell.getTile() != null;
+                if (isTileValid) {
                     TiledMapTile buildingTile = buildingsCell.getTile();
                     if (buildingTile instanceof ExtendedStaticTiledMapTile) {
                         if (((ExtendedStaticTiledMapTile) buildingTile).getBuildingsNearby() > 0) {
