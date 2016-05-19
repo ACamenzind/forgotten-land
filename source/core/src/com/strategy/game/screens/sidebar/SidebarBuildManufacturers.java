@@ -32,5 +32,6 @@ public class SidebarBuildManufacturers extends SidebarBuildSelection {
         addActor(buttons[2][0]);
 
         update();
+        updatePosition();
     }
 }

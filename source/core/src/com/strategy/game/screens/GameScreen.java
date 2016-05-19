@@ -223,8 +223,8 @@ public class GameScreen implements Screen {
         camera.viewportWidth = width;
         camera.viewportHeight = height;
         camera.update();
-        sidebar.update();
-        resourcesBar.update();
+//        sidebar.update(); //Apparently not necessary
+//        resourcesBar.update(); //Apparently not necessary
         stage.getViewport().update(width, height);
     }
 

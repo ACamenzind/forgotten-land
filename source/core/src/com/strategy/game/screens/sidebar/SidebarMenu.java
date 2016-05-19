@@ -60,10 +60,16 @@ public class SidebarMenu extends Table implements Display {
         addActor(mainMenuButton);
 
         update();
+        updatePosition();
     }
 
     @Override
     public void update() {
+
+    }
+
+    @Override
+    public void updatePosition() {
         Assets.setSizeRelative(gameInfoButton, BUTTON_WIDTH, BUTTON_HEIGHT);
         Assets.setPositionRelative(gameInfoButton, MARGIN, 0.5f, false, true);
 

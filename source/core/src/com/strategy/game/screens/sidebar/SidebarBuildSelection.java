@@ -44,13 +44,14 @@ public class SidebarBuildSelection extends Table implements Display {
         addActor(back);
     }
 
-
     @Override
     public void update() {
 
-//        title.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_BIG, Color.BLACK));
-        Assets.setPositionRelative(title, TITLE_POSITION_X, TITLE_POSITION_Y, true, true);
+    }
 
+    @Override
+    public void updatePosition() {
+        Assets.setPositionRelative(title, TITLE_POSITION_X, TITLE_POSITION_Y, true, true);
 
         final float BUTTON_HEIGHT = getWidth() * BUTTON_WIDTH / getHeight();
         for (int y = 0; y < buttons.length; y++) {

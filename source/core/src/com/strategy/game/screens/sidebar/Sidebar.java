@@ -21,7 +21,7 @@ public class Sidebar extends Table implements Display {
 
     private static final float DISPLAY_TOP_HEIGHT = 0.05f;
 
-    public enum DisplayType { GAME_INFO, BUILD, BUILD_RESOURCES_COLLECTORS, BUILD_SUPPORT, BUILD_DECORATIONS,  GAME_MENU }
+    public enum DisplayType { GAME_INFO, BUILD, BUILD_MANUFACTURERS, BUILD_WAREHOUSES, BUILD_DECORATIONS,  GAME_MENU }
 
 
     public Sidebar(final Stage stage, final GameScreen screen) {
@@ -41,6 +41,7 @@ public class Sidebar extends Table implements Display {
         addActor(displayBottom);
 
         update();
+        updatePosition();
     }
 
     public void setDisplayMiddle(DisplayType display) {
@@ -55,10 +56,10 @@ public class Sidebar extends Table implements Display {
         else if (display == DisplayType.BUILD) {
             displayMiddle = new SidebarBuild();
         }
-        else if (display == DisplayType.BUILD_RESOURCES_COLLECTORS) {
+        else if (display == DisplayType.BUILD_MANUFACTURERS) {
             displayMiddle = new SidebarBuildManufacturers();
         }
-        else if (display == DisplayType.BUILD_SUPPORT) {
+        else if (display == DisplayType.BUILD_WAREHOUSES) {
             displayMiddle = new SidebarBuildWarehouses();
         }
         else if (display == DisplayType.BUILD_DECORATIONS) {
@@ -70,6 +71,7 @@ public class Sidebar extends Table implements Display {
 
         addActor(displayMiddle);
         update();
+        updatePosition();
     }
 
     public void setBuilding(Building building) {
@@ -82,6 +84,13 @@ public class Sidebar extends Table implements Display {
 
     @Override
     public void update() {
+        ((Display) displayTop).update();
+        ((Display) displayMiddle).update();
+        ((Display) displayBottom).update();
+    }
+
+    @Override
+    public void updatePosition() {
         setSize(stage.getWidth() * 0.15f, stage.getHeight());
         setPosition(stage.getWidth() - getWidth(), 0);
 
@@ -94,8 +103,8 @@ public class Sidebar extends Table implements Display {
         Assets.setSizeRelative(displayMiddle, 1f, 1f - DISPLAY_TOP_HEIGHT - (getWidth() / getHeight()));
         Assets.setPositionRelative(displayMiddle, 0, displayBottom.getHeight() / getHeight());
 
-        ((Display) displayTop).update();
-        ((Display) displayMiddle).update();
-        ((Display) displayBottom).update();
+        ((Display) displayTop).updatePosition();
+        ((Display) displayMiddle).updatePosition();
+        ((Display) displayBottom).updatePosition();
     }
 }

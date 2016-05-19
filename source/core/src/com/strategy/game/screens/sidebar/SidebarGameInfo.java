@@ -44,6 +44,7 @@ public class SidebarGameInfo extends Table implements Display {
         addActor(unemployed);
 
         update();
+        updatePosition();
     }
 
     @Override
@@ -55,7 +56,10 @@ public class SidebarGameInfo extends Table implements Display {
         total_population.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_BLACK));
         workers.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_BLACK));
         unemployed.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_BLACK));
+    }
 
+    @Override
+    public void updatePosition() {
         Assets.setPositionRelative(title, TITLE_POSITION_X, TITLE_POSITION_Y, true, false);
         Assets.setPositionRelative(total_population, TOTAL_POPULATION_POSITION_X, TOTAL_POPULATION_POSITION_Y);
         Assets.setPositionRelative(workers, WORKERS_POSITION_X, WORKERS_POSITION_Y);

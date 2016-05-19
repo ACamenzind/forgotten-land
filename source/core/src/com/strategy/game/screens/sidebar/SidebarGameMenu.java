@@ -33,5 +33,6 @@ public class SidebarGameMenu extends SidebarOptionsSelection {
         addActor(quitGame);
 
         update();
+        updatePosition();
     }
 }

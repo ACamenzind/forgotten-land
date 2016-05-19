@@ -52,8 +52,7 @@ public class SidebarBuildingInfo extends Table implements Display {
                 }
                 row();
             }
-
-            update();
+//            updatePosition();
         }
 
         public void set(String[] titles, int[][] values) {
@@ -252,12 +251,19 @@ public class SidebarBuildingInfo extends Table implements Display {
         addActor(tableProfit);
 
         // INIT
+        update();
+        updatePosition();
         updateMenu(Menu.NONE);
+    }
+
+    @Override
+    public void update() {
+
     }
 
 
     @Override
-    public void update() {
+    public void updatePosition() {
 
         // TABLES
         Assets.setSizeRelative(menu, MENU_WIDTH, MENU_HEIGHT);

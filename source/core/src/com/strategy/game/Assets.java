@@ -168,28 +168,9 @@ public class Assets {
 
     /**
      * Generates a LabelStyle, using parameters for font.
-     * @param fontPath: The path of the .ttf font file.
-     * @param fontSize: The size of the font.
-     * @param fontColor: The color of the font.
+     * @param font: The font on which the LabelStyle is based on.
      * @return The LabelStyle with the given font.
      */
-
-//    public static Label.LabelStyle makeLabelStyle(final String fontPath, int fontSize, final Color fontColor) {
-//        BitmapFont font = makeFont(fontPath, fontSize, fontColor);
-//        Label.LabelStyle style = new Label.LabelStyle(font, Color.GOLD);
-////        font.dispose();
-//        return style;
-//    }
-//
-//    /**
-//     *
-//     * @param fontSize
-//     * @param fontColor
-//     * @return
-//     */
-//    public static Label.LabelStyle makeLabelStyle(int fontSize, final Color fontColor) {
-//        return makeLabelStyle(DEFAULT_FONT_PATH, fontSize, fontColor);
-//    }
     public static Label.LabelStyle makeLabelStyle(BitmapFont font) {
         return new Label.LabelStyle(font, font.getColor());
     }
@@ -197,31 +178,10 @@ public class Assets {
     /**
      * Generates a Label, using parameters for font.
      * @param text: The text written in the Label.
-     * @param fontPath: The path of the .ttf font file.
-     * @param fontSize: The size of the font.
-     * @param fontColor: The color of the font.
+     * @param font: The font that defines the LabelStyle.
      * @return The Label, with given text and font.
      */
     public static Label makeLabel(String text, BitmapFont font) {
         return new Label(text, new Label.LabelStyle(font, font.getColor()));
     }
-
-//    public static Label makeLabel(final String text, final String fontPath, int fontSize, final Color fontColor) {
-//        return new Label(text, makeLabelStyle(fontPath, fontSize, fontColor));
-//    }
-//
-//    public static Label makeLabel(final String text, int fontSize, final Color fontColor) {
-//        return makeLabel(text, DEFAULT_FONT_PATH, fontSize, fontColor);
-//    }
-//
-//    public static Label buildLabel(Label label, String text, int fontSize, Color fontColor) {
-//        if (label == null) {
-//            label = makeLabel(text, DEFAULT_FONT_PATH, fontSize, fontColor);
-//        }
-//        else {
-//            label.getStyle().font.dispose();
-//            label = makeLabel(text, DEFAULT_FONT_PATH, fontSize, fontColor);
-//        }
-//        return label;
-//    }
 }

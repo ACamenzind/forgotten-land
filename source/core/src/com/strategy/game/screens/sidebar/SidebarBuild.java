@@ -22,11 +22,11 @@ public class SidebarBuild extends SidebarOptionsSelection {
         addActor(title);
 
         buttons[0][0] = resourcesCollectors;
-        resourcesCollectors.addListenerLink(Sidebar.DisplayType.BUILD_RESOURCES_COLLECTORS);
+        resourcesCollectors.addListenerLink(Sidebar.DisplayType.BUILD_MANUFACTURERS);
         addActor(resourcesCollectors);
 
         buttons[1][0] = support;
-        support.addListenerLink(Sidebar.DisplayType.BUILD_SUPPORT);
+        support.addListenerLink(Sidebar.DisplayType.BUILD_WAREHOUSES);
         addActor(support);
 
         buttons[2][0] = decorations;
@@ -37,5 +37,6 @@ public class SidebarBuild extends SidebarOptionsSelection {
         addActor(other);
 
         update();
+        updatePosition();
     }
 }

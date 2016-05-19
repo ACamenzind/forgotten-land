@@ -68,7 +68,7 @@ public class ResourcesBar extends Table implements Display {
         addActor(pause);
 
         update();
-
+        updatePosition();
         foodCountCell.width(cell_size());
         woodCountCell.width(cell_size());
         rockCountCell.width(cell_size());
@@ -77,10 +77,10 @@ public class ResourcesBar extends Table implements Display {
 
     @Override
     public void update() {
-        setSize(stage.getWidth() * 0.85f, stage.getHeight() * 0.05f);
-        setPosition(0, stage.getHeight() * 0.95f);
-
-        Assets.setPositionRelative(resources, 0.5f, 0.5f, true, true);
+//        setSize(stage.getWidth() * 0.85f, stage.getHeight() * 0.05f);
+//        setPosition(0, stage.getHeight() * 0.95f);
+//
+//        Assets.setPositionRelative(resources, 0.5f, 0.5f, true, true);
 
         String newFoodCount = "" + world.getResourceHandler().getTotalResources().food;
         String newWoodCount = "" + world.getResourceHandler().getTotalResources().wood;
@@ -120,6 +120,17 @@ public class ResourcesBar extends Table implements Display {
             peopleCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
         peopleCount.setText(newPeopleCount);
 
+//        Assets.setSizeRelative(pause, 0.075f, 0.6f);
+//        Assets.setPositionRelative(pause, 0.0125f, 0.5f, false, true);
+//        updatePosition();
+    }
+
+    @Override
+    public void updatePosition() {
+        setSize(stage.getWidth() * 0.85f, stage.getHeight() * 0.05f);
+        setPosition(0, stage.getHeight() * 0.95f);
+
+        Assets.setPositionRelative(resources, 0.5f, 0.5f, true, true);
         Assets.setSizeRelative(pause, 0.075f, 0.6f);
         Assets.setPositionRelative(pause, 0.0125f, 0.5f, false, true);
     }

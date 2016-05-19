@@ -15,8 +15,7 @@ public class SidebarBuildWarehouses extends SidebarBuildSelection {
     public SidebarBuildWarehouses() {
         super();
 
-//        title = Assets.makeLabel("Warehouses", Utils.FONT_SIZE_BIG, Color.BLACK);
-        Assets.makeLabel("Warehouses", Utils.FONT_BIG_BLACK);
+        title = Assets.makeLabel("Warehouses", Utils.FONT_BIG_BLACK);
         addActor(title);
 
         buttons[0][0] = new GameButton(Assets.house1);
@@ -26,7 +25,8 @@ public class SidebarBuildWarehouses extends SidebarBuildSelection {
         buttons[1][0] = new GameButton(Assets.warehouse);
         buttons[1][0].addListenerBuilding(new WarehouseFood());
         addActor(buttons[1][0]);
-
+//
         update();
+        updatePosition();
     }
 }

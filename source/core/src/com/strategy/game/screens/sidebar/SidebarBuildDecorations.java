@@ -22,5 +22,6 @@ public class SidebarBuildDecorations extends SidebarBuildSelection {
         addActor(buttons[0][0]);
 
         update();
+        updatePosition();
     }
 }

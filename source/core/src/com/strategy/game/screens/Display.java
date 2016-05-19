@@ -5,4 +5,5 @@ package com.strategy.game.screens;
  */
 public interface Display {
     public void update();
+    public void updatePosition();
 }

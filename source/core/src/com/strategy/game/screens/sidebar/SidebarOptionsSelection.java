@@ -33,6 +33,11 @@ public class SidebarOptionsSelection extends Table implements Display {
 
     @Override
     public void update() {
+
+    }
+
+    @Override
+    public void updatePosition() {
         Assets.setPositionRelative(title, TITLE_POSITION_X, TITLE_POSITION_Y, true, true);
 
         title.setStyle(Assets.makeLabelStyle(Utils.FONT_BIG_BLACK));
