@@ -3,6 +3,7 @@ package com.strategy.game.screens.sidebar;
 import com.badlogic.gdx.graphics.Color;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
+import com.strategy.game.Utils;
 import com.strategy.game.buildings.Castle;
 import com.strategy.game.buildings.CollectorFood;
 import com.strategy.game.buildings.CollectorWood;
@@ -15,7 +16,7 @@ public class SidebarBuildResourcesCollectors extends SidebarBuildSelection {
     public SidebarBuildResourcesCollectors() {
         super();
 
-        title = Assets.makeLabel("Resources Collectors", 20, Color.BLACK);
+        title = Assets.makeLabel("Resources Collectors", Utils.FONT_SIZE_BIG, Color.BLACK);
         addActor(title);
 
         buttons[0][0] = new GameButton(Assets.castle);

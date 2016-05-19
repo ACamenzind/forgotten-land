@@ -29,7 +29,7 @@ public class Sidebar extends Table implements Display {
         this.stage.addActor(this);
         this.screen = screen;
 
-        Assets.setBackground(this, "core/assets/textures/gameScreen/sidebar.png");
+        Assets.setBackground(this, Assets.sidebarBackground);
 
         displayTop = new SidebarMenu();
         addActor(displayTop);
@@ -50,7 +50,7 @@ public class Sidebar extends Table implements Display {
         screen.getBuilder().untoggleSelectEntity();
 
         if (display == DisplayType.GAME_INFO) {
-            displayMiddle = new SidebarGameInfo();
+            displayMiddle = new SidebarGameInfo(screen.getWorld());
         }
         else if (display == DisplayType.BUILD) {
             displayMiddle = new SidebarBuild();

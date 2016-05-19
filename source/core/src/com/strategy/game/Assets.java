@@ -21,11 +21,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 public class Assets {
 
     public static TiledMap map;
+    // BUILDINGS
     public static Texture house1, castle, leftwall, middlewall, rightwall, emptyTile, redTile, cows, warehouse, wheat, lumberjack;
+    // SIDEBAR BACKGROUNDS
+    public static Texture sidebarBackground, sidebarDisplayMiddleBackground;
     // SIDEBAR BUILDING INFO
     public static Texture sidebarBuildInfoInfo, sidebarBuildInfoCost, sidebarBuildInfoProfit, sidebarBuildInfoPlus,
             sidebarBuildInfoMinus, sidebarBuildInfoDestroy;
-    public static Texture resourcesBarPause, resourcesBarResume;
+    // RESOURCES_BAR
+    public static Texture resourcesBarBackground, resourcesBarPause, resourcesBarResume;
     public static Sound bgSound, hit;
     private static final String DEFAULT_FONT_PATH = "core/assets/fonts/times_new_roman.ttf";
 
@@ -33,6 +37,7 @@ public class Assets {
 //        map = new TmxMapLoader().load("core/assets/maps/big_map.tmx");
         //TODO: add credit for CC3.0 sprites
         map = new TmxMapLoader().load("core/assets/maps/default.tmx");
+        // BUILDINGS
         house1 = new Texture(Gdx.files.internal("core/assets/textures/buildings/house1.png"));
         castle = new Texture(Gdx.files.internal("core/assets/textures/buildings/castle.png"));
         cows = new Texture(Gdx.files.internal("core/assets/textures/buildings/cows.png"));
@@ -44,6 +49,9 @@ public class Assets {
         rightwall = new Texture(Gdx.files.internal("core/assets/textures/buildings/wall/Wall_R.png"));
         emptyTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/empty.png"));
         redTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/red.png"));
+        // SIDEBAR BACKGROUNDS
+        sidebarBackground = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar.png"));
+        sidebarDisplayMiddleBackground = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_displaymiddle_background.png"));
         // SIDEBAR BUILDING INFO
         sidebarBuildInfoInfo = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_info.png"));
         sidebarBuildInfoCost = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_cost.png"));
@@ -52,6 +60,7 @@ public class Assets {
         sidebarBuildInfoMinus = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_minus.png"));
         sidebarBuildInfoDestroy = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_destroy.png"));
         // RESOURCES_BAR
+        resourcesBarBackground = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcesbar_bg.png"));
         resourcesBarPause = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcesbar_pause.png"));
         resourcesBarResume = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcesbar_resume.png"));
 
@@ -70,9 +79,16 @@ public class Assets {
      * @param table: The Table to set the background image.
      * @param backgroundPath: The path to the background image.
      */
-    public static void setBackground(final Table table, String backgroundPath) {
+//    public static void setBackground(final Table table, String backgroundPath) {
+//        if (table != null) {
+//            SpriteDrawable buildingBg = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal(backgroundPath))));
+//            table.setBackground(buildingBg);
+//        }
+//    }
+
+    public static void setBackground(final Table table, Texture texture) {
         if (table != null) {
-            SpriteDrawable buildingBg = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal(backgroundPath))));
+            SpriteDrawable buildingBg = new SpriteDrawable(new Sprite(texture));
             table.setBackground(buildingBg);
         }
     }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
+import com.strategy.game.Utils;
 import com.strategy.game.world.ResourceHandler;
 import com.strategy.game.world.World;
 
@@ -22,17 +23,17 @@ public class ResourcesBar extends Table implements Display {
 
     private static final float CELL_SIZE = 75; //TODO: make it proportional
 
-    private static final Label food = Assets.makeLabel("Food: ", 14, Color.BLACK);
-    private static final Label wood = Assets.makeLabel("Wood: ", 14, Color.BLACK);
-    private static final Label gold = Assets.makeLabel("Gold: ", 14, Color.BLACK);
-    private static final Label rock = Assets.makeLabel("Minerals: ", 14, Color.BLACK);
-    private static final Label people = Assets.makeLabel("People: ", 14, Color.BLACK);
+    private static final Label food = Assets.makeLabel("Food: ", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
+    private static final Label wood = Assets.makeLabel("Wood: ", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
+    private static final Label gold = Assets.makeLabel("Gold: ", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
+    private static final Label rock = Assets.makeLabel("Minerals: ", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
+    private static final Label people = Assets.makeLabel("People: ", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
 
-    private Label foodCount = Assets.makeLabel("", 14, Color.BLACK);
-    private Label woodCount = Assets.makeLabel("", 14, Color.BLACK);
-    private Label goldCount = Assets.makeLabel("", 14, Color.BLACK);
-    private Label rockCount = Assets.makeLabel("", 14, Color.BLACK);
-    private Label peopleCount = Assets.makeLabel("", 14, Color.BLACK);
+    private Label foodCount = Assets.makeLabel("", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
+    private Label woodCount = Assets.makeLabel("", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
+    private Label goldCount = Assets.makeLabel("", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
+    private Label rockCount = Assets.makeLabel("", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
+    private Label peopleCount = Assets.makeLabel("", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
 
     private GameButton pause = new GameButton(Assets.resourcesBarPause, Assets.resourcesBarResume, Assets.resourcesBarResume);
 
@@ -41,7 +42,7 @@ public class ResourcesBar extends Table implements Display {
         this.stage.addActor(this);
         this.world = world;
 
-        Assets.setBackground(this, "core/assets/textures/gameScreen/resourcesbar_bg.png");
+        Assets.setBackground(this, Assets.resourcesBarBackground);
 
         resources.add(food);
         resources.add(foodCount).width(CELL_SIZE);
@@ -52,7 +53,7 @@ public class ResourcesBar extends Table implements Display {
         resources.add(gold);
         resources.add(goldCount).width(CELL_SIZE);
         resources.add(people);
-        resources.add(peopleCount).width(CELL_SIZE);
+        resources.add(peopleCount);
 
         addActor(resources);
 
@@ -83,33 +84,33 @@ public class ResourcesBar extends Table implements Display {
         ResourceHandler resourceHandler = world.getResourceHandler();
 
         if (resourceHandler.getTotalResources().food < resourceHandler.getMaximumResources().food)
-            foodCount.setStyle(Assets.makeLabelStyle(14, Color.BLACK));
+            foodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.BLACK));
         else
-            foodCount.setStyle(Assets.makeLabelStyle(14, Color.RED));
+            foodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.RED));
         foodCount.setText(newFoodCount);
 
         if (resourceHandler.getTotalResources().wood < resourceHandler.getMaximumResources().wood)
-            woodCount.setStyle(Assets.makeLabelStyle(14, Color.BLACK));
+            woodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.BLACK));
         else
-            woodCount.setStyle(Assets.makeLabelStyle(14, Color.RED));
+            woodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.RED));
         woodCount.setText(newWoodCount);
 
         if (resourceHandler.getTotalResources().rock < resourceHandler.getMaximumResources().rock)
-            rockCount.setStyle(Assets.makeLabelStyle(14, Color.BLACK));
+            rockCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.BLACK));
         else
-            rockCount.setStyle(Assets.makeLabelStyle(14, Color.RED));
+            rockCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.RED));
         rockCount.setText(newRockCount);
 
         if (resourceHandler.getTotalResources().gold < resourceHandler.getMaximumResources().gold)
-            goldCount.setStyle(Assets.makeLabelStyle(14, Color.BLACK));
+            goldCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.BLACK));
         else
-            goldCount.setStyle(Assets.makeLabelStyle(14, Color.RED));
+            goldCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.RED));
         goldCount.setText(newGoldCount);
 
         if (resourceHandler.getTotalResources().people < resourceHandler.getMaximumResources().people)
-            peopleCount.setStyle(Assets.makeLabelStyle(14, Color.BLACK));
+            peopleCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.BLACK));
         else
-            peopleCount.setStyle(Assets.makeLabelStyle(14, Color.RED));
+            peopleCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.RED));
         peopleCount.setText(newPeopleCount);
 
         Assets.setSizeRelative(pause, 0.075f, 0.6f);
