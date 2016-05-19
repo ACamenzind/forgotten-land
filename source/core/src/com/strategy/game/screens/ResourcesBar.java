@@ -60,6 +60,7 @@ public class ResourcesBar extends Table implements Display {
         pause.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 world.toggleRunning();
+                world.getGameScreen().toggleGamePaused();
                 return false;
             }
         });

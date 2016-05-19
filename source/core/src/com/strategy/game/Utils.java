@@ -20,10 +20,12 @@ public class Utils {
     public static final int FONT_SIZE_SMALL = 12;
     public static final int FONT_SIZE_MEDIUM = 14;
     public static final int FONT_SIZE_BIG = 20;
+    public static final int FONT_SIZE_HUGE = 40;
     // With HDPI
 //    public static final int FONT_SIZE_SMALL = 24;
 //    public static final int FONT_SIZE_MEDIUM = 28;
 //    public static final int FONT_SIZE_BIG = 40;
+//    public static final int FONT_SIZE_HUGE = 80;
 
 
     public static Matrix4 isoTransformMatrix() {

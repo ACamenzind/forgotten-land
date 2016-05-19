@@ -1,10 +1,12 @@
 package com.strategy.game.screens.sidebar;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
+import com.strategy.game.Utils;
 import com.strategy.game.screens.Display;
 
 /**
@@ -32,6 +34,8 @@ public class SidebarOptionsSelection extends Table implements Display {
     @Override
     public void update() {
         Assets.setPositionRelative(title, TITLE_POSITION_X, TITLE_POSITION_Y, true, true);
+
+        title.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_BIG, Color.BLACK));
 
         for (int y = 0; y < buttons.length; y++) {
             final float POSITION_Y = 1f - BUTTON_HEIGHT * (y + 2) * 2;

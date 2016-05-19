@@ -79,12 +79,12 @@ public class Assets {
      * @param table: The Table to set the background image.
      * @param backgroundPath: The path to the background image.
      */
-//    public static void setBackground(final Table table, String backgroundPath) {
-//        if (table != null) {
-//            SpriteDrawable buildingBg = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal(backgroundPath))));
-//            table.setBackground(buildingBg);
-//        }
-//    }
+    public static void setBackground(final Table table, String backgroundPath) {
+        if (table != null) {
+            SpriteDrawable buildingBg = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal(backgroundPath))));
+            table.setBackground(buildingBg);
+        }
+    }
 
     public static void setBackground(final Table table, Texture texture) {
         if (table != null) {

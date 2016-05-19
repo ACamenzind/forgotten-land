@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.strategy.game.*;
 import com.strategy.game.buildings.House;
@@ -45,7 +47,7 @@ public class GameScreen implements Screen {
 
     private Sidebar sidebar;
     private ResourcesBar resourcesBar;
-
+    private Label gamePaused;
 
     private Vector2 touchDownCoords;
     private Vector2 touchUpCoords;
@@ -78,6 +80,11 @@ public class GameScreen implements Screen {
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         this.sidebar = new Sidebar(stage, this);
         this.resourcesBar = new ResourcesBar(stage, world);
+        // Make method for readability?
+        this.gamePaused = Assets.makeLabel("GAME PAUSED", Utils.FONT_SIZE_HUGE, Color.RED);
+        stage.addActor(gamePaused);
+        gamePaused.setPosition((Gdx.graphics.getWidth() - sidebar.getWidth() - gamePaused.getWidth()) / 2f, Gdx.graphics.getHeight() * 0.75f);
+        gamePaused.setVisible(false);
 
 
 
@@ -165,6 +172,10 @@ public class GameScreen implements Screen {
 
     public ResourcesBar getResourcesBar() {
         return resourcesBar;
+    }
+
+    public void toggleGamePaused() {
+        gamePaused.setVisible(!gamePaused.isVisible());
     }
 
     @Override
