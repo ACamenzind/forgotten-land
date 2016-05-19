@@ -331,6 +331,14 @@ public class SidebarBuildingInfo extends Table implements Display {
             tableCost.setVisible(false);
             tableProfit.setVisible(false);
         }
+
+        boolean manufacturer = false;
+        if (building != null)
+            manufacturer = building.getType() == Building.BuildingType.MANUFACTURER;
+
+        workers.setVisible(manufacturer);
+        workersButtonAdd.setVisible(manufacturer);
+        workersButtonRemove.setVisible(manufacturer);
     }
 
     public void setBuilding(Building building) {

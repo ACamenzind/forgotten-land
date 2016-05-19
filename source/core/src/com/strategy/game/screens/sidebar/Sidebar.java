@@ -56,10 +56,10 @@ public class Sidebar extends Table implements Display {
             displayMiddle = new SidebarBuild();
         }
         else if (display == DisplayType.BUILD_RESOURCES_COLLECTORS) {
-            displayMiddle = new SidebarBuildResourcesCollectors();
+            displayMiddle = new SidebarBuildManufacturers();
         }
         else if (display == DisplayType.BUILD_SUPPORT) {
-            displayMiddle = new SidebarBuildSupport();
+            displayMiddle = new SidebarBuildWarehouses();
         }
         else if (display == DisplayType.BUILD_DECORATIONS) {
             displayMiddle = new SidebarBuildDecorations();

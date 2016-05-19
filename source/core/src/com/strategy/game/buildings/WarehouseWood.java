@@ -24,6 +24,6 @@ public class WarehouseWood extends Building {
     // TODO: add max wood storable
 
     public WarehouseWood() {
-        super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION);
+        super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION, BuildingType.WAREHOUSE);
     }
 }

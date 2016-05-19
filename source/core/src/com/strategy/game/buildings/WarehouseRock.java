@@ -24,6 +24,6 @@ public class WarehouseRock extends Building {
     //TODO: add max rock storable
 
     public WarehouseRock() {
-        super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION);
+        super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION, BuildingType.WAREHOUSE);
     }
 }

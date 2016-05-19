@@ -12,7 +12,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = Utils.DEFAULT_WIDTH;
 		config.height = Utils.DEFAULT_HEIGHT;
-        config.useHDPI = true;
+        config.useHDPI = Utils.HDPI;
 		config.title = "A Strategy Game [Working title]";
 		config.vSyncEnabled = true;
 		new LwjglApplication(new StrategyGame(), config);

@@ -11,12 +11,12 @@ import com.strategy.game.buildings.CollectorWood;
 /**
  * Created by Amedeo on 08/05/16.
  */
-public class SidebarBuildResourcesCollectors extends SidebarBuildSelection {
+public class SidebarBuildManufacturers extends SidebarBuildSelection {
 
-    public SidebarBuildResourcesCollectors() {
+    public SidebarBuildManufacturers() {
         super();
 
-        title = Assets.makeLabel("Resources Collectors", Utils.FONT_SIZE_BIG, Color.BLACK);
+        title = Assets.makeLabel("Manufacturers", Utils.FONT_SIZE_BIG, Color.BLACK);
         addActor(title);
 
         buttons[0][0] = new GameButton(Assets.castle);

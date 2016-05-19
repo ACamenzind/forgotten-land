@@ -23,7 +23,7 @@ public class Wall extends Building {
     private static final Vector2 COLLISION = new Vector2(1,1);
 
     public Wall() {
-        super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION);
+        super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION, BuildingType.DECORATION);
         this.textures.add(Assets.leftwall);
         this.textures.add(Assets.rightwall);
         this.textures.add(Assets.middlewall);

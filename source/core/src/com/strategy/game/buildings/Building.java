@@ -18,6 +18,9 @@ public abstract class Building extends MapEntity {
     private final ResourceContainer maintenanceCosts;
 //    private int life;
     protected int workers;
+    private BuildingType type;
+
+    public enum BuildingType { MANUFACTURER, WAREHOUSE, DECORATION, OTHER }
 
     public Building(final String name,
                     final ResourceContainer costs,
@@ -27,7 +30,8 @@ public abstract class Building extends MapEntity {
                     final int maxWorkers,
                     final int influenceRadius,
                     final Texture mainTexture,
-                    final Vector2 collisionSize) {
+                    final Vector2 collisionSize,
+                    final BuildingType type) {
         this.name = name;
         this.costs = costs;
         this.productions = productions;
@@ -38,6 +42,7 @@ public abstract class Building extends MapEntity {
         this.influenceRadius = influenceRadius;
         this.mainTexture = mainTexture;
         this.collisionSize = collisionSize;
+        this.type = type;
         sliceTexture(mainTexture);
     }
 
@@ -91,6 +96,10 @@ public abstract class Building extends MapEntity {
 
     public void setWorkers(int workers) {
         this.workers = workers;
+    }
+
+    public BuildingType getType() {
+        return type;
     }
 
     /**

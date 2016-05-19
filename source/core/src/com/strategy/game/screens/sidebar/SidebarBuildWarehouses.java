@@ -10,12 +10,12 @@ import com.strategy.game.buildings.WarehouseFood;
 /**
  * Created by Amedeo on 09/05/16.
  */
-public class SidebarBuildSupport extends SidebarBuildSelection {
+public class SidebarBuildWarehouses extends SidebarBuildSelection {
 
-    public SidebarBuildSupport() {
+    public SidebarBuildWarehouses() {
         super();
 
-        title = Assets.makeLabel("Support", Utils.FONT_SIZE_BIG, Color.BLACK);
+        title = Assets.makeLabel("Warehouses", Utils.FONT_SIZE_BIG, Color.BLACK);
         addActor(title);
 
         buttons[0][0] = new GameButton(Assets.house1);

@@ -52,9 +52,9 @@ public class SidebarGameInfo extends Table implements Display {
 //        workers.setText(("Workers: " + world.getWorkers()));
         unemployed.setText(("Unemployed: " + world.getResourceHandler().getTotalResources().people));
 
-        total_population.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_BIG, Color.BLACK));
-        workers.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_BIG, Color.BLACK));
-        unemployed.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_BIG, Color.BLACK));
+        total_population.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.BLACK));
+        workers.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.BLACK));
+        unemployed.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.BLACK));
 
         Assets.setPositionRelative(title, TITLE_POSITION_X, TITLE_POSITION_Y, true, false);
         Assets.setPositionRelative(total_population, TOTAL_POPULATION_POSITION_X, TOTAL_POPULATION_POSITION_Y);
