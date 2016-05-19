@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class World implements Disposable{
 
-    public static final int TICK_DURATION = 300;
+    private int tickDuration;
     private Stage gameStage;
     private GameScreen gameScreen;
     private ArrayList<MapEntity> staticEntities; // Resources and Buildings
@@ -32,6 +32,12 @@ public class World implements Disposable{
     private PopulationHandler populationHandler;
     private int tick;
     private boolean isRunning;
+    private static final int DEFAULT_TICK_DURATION = 300;
+    private static final int FAST_TICK_DURATION = 50;
+
+    public enum GameSpeed {
+        NORMAL, FAST
+    }
 
 
     public World(GameScreen gameScreen) {
@@ -46,6 +52,7 @@ public class World implements Disposable{
         this.populationHandler = new PopulationHandler(5, 200, 20);
         this.tick = 0;
         this.isRunning = true;
+        this.tickDuration = DEFAULT_TICK_DURATION;
         readResources();
     }
 
@@ -75,6 +82,17 @@ public class World implements Disposable{
 
     public PopulationHandler getPopulationHandler() {
         return populationHandler;
+    }
+
+    public void setGameSpeed(GameSpeed speed) {
+        switch (speed){
+            case NORMAL:
+                tickDuration = DEFAULT_TICK_DURATION;
+                break;
+            case FAST:
+                tickDuration = FAST_TICK_DURATION;
+                break;
+        }
     }
 
     /**
@@ -118,7 +136,7 @@ public class World implements Disposable{
     }
 
     public void update(float delta) {
-        if(updateCounter / TICK_DURATION >= 1 && isRunning) {
+        if(updateCounter / tickDuration >= 1 && isRunning) {
             resourceHandler.update();
             updateCounter = 0;
             tick++;

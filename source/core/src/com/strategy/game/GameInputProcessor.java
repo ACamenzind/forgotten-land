@@ -125,6 +125,12 @@ public class GameInputProcessor implements InputProcessor{
             case Input.Keys.P:
                 screen.getWorld().toggleRunning();
                 break;
+            case Input.Keys.K:
+                screen.getWorld().setGameSpeed(World.GameSpeed.NORMAL);
+                break;
+            case Input.Keys.L:
+                screen.getWorld().setGameSpeed(World.GameSpeed.FAST);
+                break;
         }
         return false;
     }
