@@ -127,14 +127,25 @@ public class GameInputProcessor implements InputProcessor, Serializable {
                 screen.getWorld().toggleRunning();
                 break;
             case Input.Keys.S:
-                World.saveGame(screen.getWorld());
+                World.saveGame(world);
                 break;
             case Input.Keys.L:
                 World temporaryWorld = World.loadSavedGame();
-                screen.setLoadedWorld(temporaryWorld);
+                setLoadedWorld(temporaryWorld);
                 break;
         }
         return false;
+    }
+
+    public void setLoadedWorld(World world) {
+        this.world.setStaticEntities(world.getStaticEntities());
+        this.world.setMovableEntities(world.getMovableEntities());
+        this.world.setBuilder(world.getBuilder());
+        this.world.setResourceHandler(world.getResourceHandler());
+        this.world.setUpdateCounter(world.getUpdateCounter());
+        this.world.setPopulationHandler(world.getPopulationHandler());
+        this.world.setTick(world.getTick());
+        this.world.setIsRunning(world.getIsRunning());
     }
 
     @Override

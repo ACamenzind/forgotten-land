@@ -199,8 +199,8 @@ public class World implements Disposable, Serializable {
 
     public static World loadSavedGame() {
         try {
-            File fileToLoad = new File(filePath);
-            FileInputStream fis = new FileInputStream(fileToLoad);
+            // File fileToLoad = new File(filePath);
+            FileInputStream fis = new FileInputStream(filePath);
             ObjectInputStream ois  = new ObjectInputStream(fis);
             World gs = (World) ois.readObject();
             ois.close();

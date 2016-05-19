@@ -143,16 +143,7 @@ public class GameScreen implements Screen, Serializable {
     }
 
 
-    public void setLoadedWorld(World world) {
-        this.world.setStaticEntities(world.getStaticEntities());
-        this.world.setMovableEntities(world.getMovableEntities());
-        this.world.setBuilder(world.getBuilder());
-        this.world.setResourceHandler(world.getResourceHandler());
-        this.world.setUpdateCounter(world.getUpdateCounter());
-        this.world.setPopulationHandler(world.getPopulationHandler());
-        this.world.setTick(world.getTick());
-        this.world.setIsRunning(world.getIsRunning());
-    }
+
 
     @Override
     public void show() {
