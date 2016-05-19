@@ -12,7 +12,7 @@ import com.strategy.game.screens.GameScreen;
  */
 public class Utils {
     public static final int TILE_SIZE = 128;
-    public static final float DEFAULT_RATIO = 1.5f;
+    public static final float DEFAULT_RATIO = 1.1f;
     public static final int DEFAULT_WIDTH = (int) (1280 * DEFAULT_RATIO);
     public static final int DEFAULT_HEIGHT = (int) (720 * DEFAULT_RATIO);
     public static final int BASE_CAMERA_SPEED = 10;
