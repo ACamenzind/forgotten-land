@@ -174,7 +174,10 @@ public class Assets {
      * @return The LabelStyle with the given font.
      */
     public static Label.LabelStyle makeLabelStyle(final String fontPath, int fontSize, final Color fontColor) {
-        return new Label.LabelStyle(makeFont(fontPath, fontSize, fontColor), fontColor);
+        BitmapFont font = makeFont(fontPath, fontSize, fontColor);
+        Label.LabelStyle style = new Label.LabelStyle(font, fontColor);
+        font.dispose();
+        return style;
     }
 
     /**
