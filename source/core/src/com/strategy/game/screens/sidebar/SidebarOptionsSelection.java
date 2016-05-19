@@ -35,7 +35,7 @@ public class SidebarOptionsSelection extends Table implements Display {
     public void update() {
         Assets.setPositionRelative(title, TITLE_POSITION_X, TITLE_POSITION_Y, true, true);
 
-        title.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_BIG, Color.BLACK));
+        title.setStyle(Assets.makeLabelStyle(Utils.FONT_BIG_BLACK));
 
         for (int y = 0; y < buttons.length; y++) {
             final float POSITION_Y = 1f - BUTTON_HEIGHT * (y + 2) * 2;

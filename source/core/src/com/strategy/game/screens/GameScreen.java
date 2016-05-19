@@ -81,7 +81,7 @@ public class GameScreen implements Screen {
         this.sidebar = new Sidebar(stage, this);
         this.resourcesBar = new ResourcesBar(stage, world);
         // Make method for readability?
-        this.gamePaused = Assets.makeLabel("GAME PAUSED", Utils.FONT_SIZE_HUGE, Color.RED);
+        this.gamePaused = Assets.makeLabel("GAME PAUSED", Utils.FONT_HUGE_RED);
         stage.addActor(gamePaused);
         gamePaused.setPosition((Gdx.graphics.getWidth() - sidebar.getWidth() - gamePaused.getWidth()) / 2f, Gdx.graphics.getHeight() * 0.75f);
         gamePaused.setVisible(false);

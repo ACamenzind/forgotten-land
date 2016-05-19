@@ -16,7 +16,7 @@ public class SidebarBuildManufacturers extends SidebarBuildSelection {
     public SidebarBuildManufacturers() {
         super();
 
-        title = Assets.makeLabel("Manufacturers", Utils.FONT_SIZE_BIG, Color.BLACK);
+        title = Assets.makeLabel("Manufacturers", Utils.FONT_BIG_BLACK);
         addActor(title);
 
         buttons[0][0] = new GameButton(Assets.castle);

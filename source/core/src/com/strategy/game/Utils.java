@@ -1,6 +1,8 @@
 package com.strategy.game;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
@@ -18,17 +20,16 @@ public class Utils {
     public static final int BASE_CAMERA_SPEED = 10;
     public static final int RENDER_OFFSET = 20;
     // HDPI
-    public static final boolean HDPI = true;
-    // Without HDPI
+    public static final boolean HDPI = false;
     public static final int FONT_SIZE_SMALL = HDPI ? (int) (12 * DEFAULT_RATIO) * 2 : (int) (12 * DEFAULT_RATIO);
     public static final int FONT_SIZE_MEDIUM = HDPI ? (int) (14 * DEFAULT_RATIO) * 2 : (int) (14 * DEFAULT_RATIO);
     public static final int FONT_SIZE_BIG = HDPI ? (int) (20 * DEFAULT_RATIO) * 2 : (int) (20 * DEFAULT_RATIO);
     public static final int FONT_SIZE_HUGE = HDPI ? (int) (40 * DEFAULT_RATIO) * 2 : (int) (40 * DEFAULT_RATIO);
-    // With HDPI
-//    public static final int FONT_SIZE_SMALL = (int) (24 * DEFAULT_RATIO);
-//    public static final int FONT_SIZE_MEDIUM = (int) (28 * DEFAULT_RATIO);
-//    public static final int FONT_SIZE_BIG = (int) (40 * DEFAULT_RATIO);
-//    public static final int FONT_SIZE_HUGE = (int) (80 * DEFAULT_RATIO);
+    public static BitmapFont FONT_SMALL_BLACK = Assets.makeFont(FONT_SIZE_SMALL, Color.BLACK);
+    public static BitmapFont FONT_MEDIUM_BLACK = Assets.makeFont(FONT_SIZE_MEDIUM, Color.BLACK);;
+    public static BitmapFont FONT_MEDIUM_RED = Assets.makeFont(FONT_SIZE_MEDIUM, Color.RED);;
+    public static BitmapFont FONT_BIG_BLACK = Assets.makeFont(FONT_SIZE_BIG, Color.BLACK);;
+    public static BitmapFont FONT_HUGE_RED = Assets.makeFont(FONT_SIZE_HUGE, Color.RED);;
 
 
     public static Matrix4 isoTransformMatrix() {

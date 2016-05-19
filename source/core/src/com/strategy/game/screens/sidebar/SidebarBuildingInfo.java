@@ -33,11 +33,11 @@ public class SidebarBuildingInfo extends Table implements Display {
             tableHeight = RESOURCES_NUMBER + 1;
 
             table = new Label[RESOURCES_NUMBER + 1][columnsNumber + 1];
-            table[1][0] = Assets.makeLabel("Food", Utils.FONT_SIZE_SMALL, Color.BLACK);
-            table[2][0] = Assets.makeLabel("Wood", Utils.FONT_SIZE_SMALL, Color.BLACK);
-            table[3][0] = Assets.makeLabel("Minerals", Utils.FONT_SIZE_SMALL, Color.BLACK);
-            table[4][0] = Assets.makeLabel("Gold", Utils.FONT_SIZE_SMALL, Color.BLACK);
-            table[5][0] = Assets.makeLabel("People", Utils.FONT_SIZE_SMALL, Color.BLACK);
+            table[1][0] = Assets.makeLabel("Food", Utils.FONT_SMALL_BLACK);
+            table[2][0] = Assets.makeLabel("Wood", Utils.FONT_SMALL_BLACK);
+            table[3][0] = Assets.makeLabel("Minerals", Utils.FONT_SMALL_BLACK);
+            table[4][0] = Assets.makeLabel("Gold", Utils.FONT_SMALL_BLACK);
+            table[5][0] = Assets.makeLabel("People", Utils.FONT_SMALL_BLACK);
 
             for (int y = 0; y < table.length; y++) {
                 for (int x = 0; x < table[y].length; x++) {
@@ -45,7 +45,7 @@ public class SidebarBuildingInfo extends Table implements Display {
                         add(table[y][x]);
                     }
                     else {
-                        table[y][x] = Assets.makeLabel("", Utils.FONT_SIZE_SMALL, Color.BLACK);
+                        table[y][x] = Assets.makeLabel("", Utils.FONT_SMALL_BLACK);
                         add(table[y][x]).uniform().expand();
                     }
 
@@ -93,9 +93,9 @@ public class SidebarBuildingInfo extends Table implements Display {
     private Table tableProfit = new Table();
 
     // NAME
-    private Label name = Assets.makeLabel("", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
-    private Label nameCost = Assets.makeLabel(" - Cost", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
-    private Label nameProfit = Assets.makeLabel(" - Profit", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
+    private Label name = Assets.makeLabel("", Utils.FONT_MEDIUM_BLACK);
+    private Label nameCost = Assets.makeLabel(" - Cost", Utils.FONT_MEDIUM_BLACK);
+    private Label nameProfit = Assets.makeLabel(" - Profit", Utils.FONT_MEDIUM_BLACK);
     private static final float NAME_POSITION_X = 0.075f;
     private static final float NAME_POSITION_Y = 0.85f;
 
@@ -117,12 +117,12 @@ public class SidebarBuildingInfo extends Table implements Display {
     private static final float IMAGE_POSITION_Y = NAME_POSITION_Y - IMAGE_SIZE - 0.05f;
 
     // LIFE
-    private Label life = Assets.makeLabel("Life:\n1000 / 1000", Utils.FONT_SIZE_SMALL, Color.BLACK);
+    private Label life = Assets.makeLabel("Life:\n1000 / 1000", Utils.FONT_SMALL_BLACK);
     private static final float LIFE_POSITION_X = IMAGE_POSITION_X + IMAGE_SIZE + 0.05f;
     private static final float LIFE_POSITION_Y = IMAGE_POSITION_Y + IMAGE_SIZE / 2f;
 
     //WORKERS
-    private Label workers = Assets.makeLabel("Workers:\n100 / 100", Utils.FONT_SIZE_SMALL, Color.BLACK);
+    private Label workers = Assets.makeLabel("Workers:\n100 / 100", Utils.FONT_SMALL_BLACK);
     private static final float WORKERS_POSITION_X = IMAGE_POSITION_X + IMAGE_SIZE + 0.05f;
     private static final float WORKERS_POSITION_Y = IMAGE_POSITION_Y;
     private GameButton workersButtonAdd = new GameButton(Assets.sidebarBuildInfoPlus);

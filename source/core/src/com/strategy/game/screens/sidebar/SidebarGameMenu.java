@@ -17,7 +17,7 @@ public class SidebarGameMenu extends SidebarOptionsSelection {
 
     public SidebarGameMenu() {
 
-        title = Assets.makeLabel("Menu", Utils.FONT_SIZE_BIG, Color.BLACK);
+        title = Assets.makeLabel("Menu", Utils.FONT_BIG_BLACK);
         addActor(title);
 
         buttons[0][0] = loadGame;

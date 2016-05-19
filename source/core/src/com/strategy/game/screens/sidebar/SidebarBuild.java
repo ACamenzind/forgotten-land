@@ -18,7 +18,7 @@ public class SidebarBuild extends SidebarOptionsSelection {
 
     public SidebarBuild() {
 
-        title = Assets.makeLabel("Buildings", Utils.FONT_SIZE_BIG, Color.BLACK);
+        title = Assets.makeLabel("Buildings", Utils.FONT_BIG_BLACK);
         addActor(title);
 
         buttons[0][0] = resourcesCollectors;

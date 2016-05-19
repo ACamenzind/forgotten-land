@@ -24,17 +24,17 @@ public class ResourcesBar extends Table implements Display {
 
     private static final float CELL_SIZE = 75; //TODO: make it proportional
 
-    private static final Label food = Assets.makeLabel("Food: ", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
-    private static final Label wood = Assets.makeLabel("Wood: ", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
-    private static final Label gold = Assets.makeLabel("Gold: ", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
-    private static final Label rock = Assets.makeLabel("Minerals: ", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
-    private static final Label people = Assets.makeLabel("People: ", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
+    private static final Label food = Assets.makeLabel("Food: ", Utils.FONT_MEDIUM_BLACK);
+    private static final Label wood = Assets.makeLabel("Wood: ", Utils.FONT_MEDIUM_BLACK);
+    private static final Label gold = Assets.makeLabel("Gold: ", Utils.FONT_MEDIUM_BLACK);
+    private static final Label rock = Assets.makeLabel("Minerals: ", Utils.FONT_MEDIUM_BLACK);
+    private static final Label people = Assets.makeLabel("People: ", Utils.FONT_MEDIUM_BLACK);
 
-    private Label foodCount = Assets.makeLabel("", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
-    private Label woodCount = Assets.makeLabel("", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
-    private Label goldCount = Assets.makeLabel("", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
-    private Label rockCount = Assets.makeLabel("", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
-    private Label peopleCount = Assets.makeLabel("", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
+    private Label foodCount = Assets.makeLabel("", Utils.FONT_MEDIUM_BLACK);
+    private Label woodCount = Assets.makeLabel("", Utils.FONT_MEDIUM_BLACK);
+    private Label goldCount = Assets.makeLabel("", Utils.FONT_MEDIUM_BLACK);
+    private Label rockCount = Assets.makeLabel("", Utils.FONT_MEDIUM_BLACK);
+    private Label peopleCount = Assets.makeLabel("", Utils.FONT_MEDIUM_BLACK);
 
     private GameButton pause = new GameButton(Assets.resourcesBarPause, Assets.resourcesBarResume, Assets.resourcesBarResume);
 
@@ -91,33 +91,33 @@ public class ResourcesBar extends Table implements Display {
         ResourceHandler resourceHandler = world.getResourceHandler();
 
         if (resourceHandler.getTotalResources().food < resourceHandler.getMaximumResources().food)
-            foodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.BLACK));
+            foodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_BLACK));
         else
-            foodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.RED));
+            foodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
         foodCount.setText(newFoodCount);
 
         if (resourceHandler.getTotalResources().wood < resourceHandler.getMaximumResources().wood)
-            woodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.BLACK));
+            woodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_BLACK));
         else
-            woodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.RED));
+            woodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
         woodCount.setText(newWoodCount);
 
         if (resourceHandler.getTotalResources().rock < resourceHandler.getMaximumResources().rock)
-            rockCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.BLACK));
+            rockCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_BLACK));
         else
-            rockCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.RED));
+            rockCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
         rockCount.setText(newRockCount);
 
         if (resourceHandler.getTotalResources().gold < resourceHandler.getMaximumResources().gold)
-            goldCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.BLACK));
+            goldCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_BLACK));
         else
-            goldCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.RED));
+            goldCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
         goldCount.setText(newGoldCount);
 
         if (resourceHandler.getTotalResources().people < resourceHandler.getMaximumResources().people)
-            peopleCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.BLACK));
+            peopleCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_BLACK));
         else
-            peopleCount.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_MEDIUM, Color.RED));
+            peopleCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
         peopleCount.setText(newPeopleCount);
 
         Assets.setSizeRelative(pause, 0.075f, 0.6f);
