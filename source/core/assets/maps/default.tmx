@@ -570,7 +570,7 @@
     <property name="obstacle" type="bool" value="true"/>
     <property name="type" value="rock"/>
    </properties>
-   <image width="256" height="256" source="../textures/buildings/rocks.png"/>
+   <image width="128" height="128" source="../textures/buildings/rocks.png"/>
   </tile>
  </tileset>
  <tileset firstgid="106" name="grid" tilewidth="128" tileheight="128" tilecount="1" columns="0">
@@ -585,7 +585,7 @@
  </layer>
  <layer name="Buildings" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt2V1qAjEQAODcou1rL+LjvlRK38QbeP8LlIADsyFWW5s14PeB5GcVwoyzyWopAAAAAAAAAMBob49eACvyMRf5mIt8zEU+5iIfc5GPucjHXORjLvIxF/mYi3yM9/qL18uD1ggAAAAAAAD8v/2Vfp5jrK9mvKT+8dx+brQW1iIXtR52zVzMq5WxevekJbXHdE2dbKPGfEn9sGvafI2xaqzr97/GPuphKetaKena+3ZLexo57tWxadv39T6vZsaIuObc7Mt6Pz+Udf0wVuzXbd1c2vMjh+2Zmb+LWOZa2JV1XbT7eqZWxsjf8VonNR/5OSTUe9ZHkYct/VQH7TXnrTHybyPt/lHbXo6WztwtTlfGXBbnqRz7uJcdzmP3rnEi1tEP7dmrdbgwn6mD+7XnrtIZM96lvSHq49CZu9Wp01c7fb3Y5n29fV6HZ9b7X+Te85TzLgAAAAAAAAAAAAAAjPcNXUIn6w==
+   eJzt2UFqwzAQBVCdpRfJ0puG0p3xDXL/CxRBBsaD3IQGedG8t5EsJ2BG/pactAYAAAAAAAAAAAAAAAAAAAAAAADAf3B90M9jzPVdjpfU3+7t10nXwl7MRc/DpYzFuKzMNXomLand0jk5OUev+ZL64VLafI65eq37/d9rH3lY2j4rLZ37OO/S3kaue7eVtn5u9H2ZmSPqmufm2vbr+dr2+WGuWK9rbo7W/JjDumfm76KWOQuXts9FXdczWZkj3+M9J30+8ntI6M+sz2YezvRbDuo5+6058m8jdf3o7WiOlsHYM24PjjkW+6lc+3iWrfdjz655otbRD3XvVa0H45kcvK7uu9rgmPmO1obIxzoYe9Zt0JedsVFt87pe39fhnY3+F3l1P2W/CwAAAAAAAAAAAAAA8/0AihEloA==
   </data>
  </layer>
  <layer name="Grid" width="100" height="100" visible="0">

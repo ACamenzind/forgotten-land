@@ -62,25 +62,25 @@ public class GameInputProcessor implements InputProcessor{
 
         // Moves the camera accordingly if the cursor is near an edge.
         // The speed also depends on the current zoom.
-        if ((mouseX > camera.viewportWidth - EDGE_THRESHOLD_WIDTH) &&
-                (mouseY > (camera.viewportHeight / 4)) &&
-                (mouseY < (camera.viewportHeight* 3/4)))
-            camera.translate(camera.zoom*Utils.BASE_CAMERA_SPEED, 0);
-
-        if ((mouseX < EDGE_THRESHOLD_WIDTH) &&
-                (mouseY > (camera.viewportHeight / 4)) &&
-                (mouseY < (camera.viewportHeight * 3/4)))
-            camera.translate(camera.zoom*(-Utils.BASE_CAMERA_SPEED), 0);
-
-        if ((mouseY > camera.viewportHeight - EDGE_THRESHOLD_WIDTH) &&
-                (mouseX > (camera.viewportWidth / 4)) &&
-                (mouseX < (camera.viewportWidth * 3/4)))
-            camera.translate(0, camera.zoom*Utils.BASE_CAMERA_SPEED);
-
-        if ((mouseY < EDGE_THRESHOLD_WIDTH) &&
-                (mouseX > (camera.viewportWidth / 4)) &&
-                (mouseX < (camera.viewportWidth * 3/4)))
-            camera.translate(0, camera.zoom*(-Utils.BASE_CAMERA_SPEED));
+//        if ((mouseX > camera.viewportWidth - EDGE_THRESHOLD_WIDTH) &&
+//                (mouseY > (camera.viewportHeight / 4)) &&
+//                (mouseY < (camera.viewportHeight* 3/4)))
+//            camera.translate(camera.zoom*Utils.BASE_CAMERA_SPEED, 0);
+//
+//        if ((mouseX < EDGE_THRESHOLD_WIDTH) &&
+//                (mouseY > (camera.viewportHeight / 4)) &&
+//                (mouseY < (camera.viewportHeight * 3/4)))
+//            camera.translate(camera.zoom*(-Utils.BASE_CAMERA_SPEED), 0);
+//
+//        if ((mouseY > camera.viewportHeight - EDGE_THRESHOLD_WIDTH) &&
+//                (mouseX > (camera.viewportWidth / 4)) &&
+//                (mouseX < (camera.viewportWidth * 3/4)))
+//            camera.translate(0, camera.zoom*Utils.BASE_CAMERA_SPEED);
+//
+//        if ((mouseY < EDGE_THRESHOLD_WIDTH) &&
+//                (mouseX > (camera.viewportWidth / 4)) &&
+//                (mouseX < (camera.viewportWidth * 3/4)))
+//            camera.translate(0, camera.zoom*(-Utils.BASE_CAMERA_SPEED));
 
 
         // Move the camera when clicking and dragging.
