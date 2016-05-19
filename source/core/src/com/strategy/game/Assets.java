@@ -176,7 +176,7 @@ public class Assets {
     public static Label.LabelStyle makeLabelStyle(final String fontPath, int fontSize, final Color fontColor) {
         BitmapFont font = makeFont(fontPath, fontSize, fontColor);
         Label.LabelStyle style = new Label.LabelStyle(font, fontColor);
-        font.dispose();
+//        font.dispose();
         return style;
     }
 
