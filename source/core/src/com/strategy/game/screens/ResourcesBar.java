@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
@@ -45,13 +46,13 @@ public class ResourcesBar extends Table implements Display {
         Assets.setBackground(this, Assets.resourcesBarBackground);
 
         resources.add(food);
-        resources.add(foodCount).width(CELL_SIZE);
+        Cell foodCountCell = resources.add(foodCount).width(cell_size());
         resources.add(wood);
-        resources.add(woodCount).width(CELL_SIZE);
+        Cell woodCountCell = resources.add(woodCount).width(cell_size());
         resources.add(rock);
-        resources.add(rockCount).width(CELL_SIZE);
+        Cell rockCountCell = resources.add(rockCount).width(cell_size());
         resources.add(gold);
-        resources.add(goldCount).width(CELL_SIZE);
+        Cell goldCountCell = resources.add(goldCount).width(cell_size());
         resources.add(people);
         resources.add(peopleCount);
 
@@ -67,6 +68,11 @@ public class ResourcesBar extends Table implements Display {
         addActor(pause);
 
         update();
+
+        foodCountCell.width(cell_size());
+        woodCountCell.width(cell_size());
+        rockCountCell.width(cell_size());
+        goldCountCell.width(cell_size());
     }
 
     @Override
@@ -116,5 +122,9 @@ public class ResourcesBar extends Table implements Display {
 
         Assets.setSizeRelative(pause, 0.075f, 0.6f);
         Assets.setPositionRelative(pause, 0.0125f, 0.5f, false, true);
+    }
+
+    private float cell_size() {
+        return getWidth() * 0.05f;
     }
 }

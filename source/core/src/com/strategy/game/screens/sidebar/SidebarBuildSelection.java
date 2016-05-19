@@ -1,9 +1,11 @@
 package com.strategy.game.screens.sidebar;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
+import com.strategy.game.Utils;
 import com.strategy.game.screens.Display;
 
 /**
@@ -26,6 +28,7 @@ public class SidebarBuildSelection extends Table implements Display {
 
     public SidebarBuildSelection() {
         Assets.setBackground(this, Assets.sidebarDisplayMiddleBackground);
+
         buttons = new GameButton[BUTTONS_PER_COLUMN][BUTTONS_PER_ROW];
 
         rotate = new GameButton("core/assets/textures/gameScreen/sidebar_build_rotate.png");
@@ -45,7 +48,9 @@ public class SidebarBuildSelection extends Table implements Display {
     @Override
     public void update() {
 
+//        title.setStyle(Assets.makeLabelStyle(Utils.FONT_SIZE_BIG, Color.BLACK));
         Assets.setPositionRelative(title, TITLE_POSITION_X, TITLE_POSITION_Y, true, true);
+
 
         final float BUTTON_HEIGHT = getWidth() * BUTTON_WIDTH / getHeight();
         for (int y = 0; y < buttons.length; y++) {

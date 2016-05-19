@@ -12,20 +12,21 @@ import com.strategy.game.screens.GameScreen;
  */
 public class Utils {
     public static final int TILE_SIZE = 128;
-    public static final int DEFAULT_WIDTH = 1280;
-    public static final int DEFAULT_HEIGHT = 720;
+    public static final float DEFAULT_RATIO = 1.5f;
+    public static final int DEFAULT_WIDTH = (int) (1280 * DEFAULT_RATIO);
+    public static final int DEFAULT_HEIGHT = (int) (720 * DEFAULT_RATIO);
     public static final int BASE_CAMERA_SPEED = 10;
     public static final int RENDER_OFFSET = 20;
     // Without HDPI
-    public static final int FONT_SIZE_SMALL = 12;
-    public static final int FONT_SIZE_MEDIUM = 14;
-    public static final int FONT_SIZE_BIG = 20;
-    public static final int FONT_SIZE_HUGE = 40;
+//    public static final int FONT_SIZE_SMALL = (int) (12 * DEFAULT_RATIO);
+//    public static final int FONT_SIZE_MEDIUM = (int) (14 * DEFAULT_RATIO);
+//    public static final int FONT_SIZE_BIG = (int) (20 * DEFAULT_RATIO);
+//    public static final int FONT_SIZE_HUGE = (int) (40 * DEFAULT_RATIO);
     // With HDPI
-//    public static final int FONT_SIZE_SMALL = 24;
-//    public static final int FONT_SIZE_MEDIUM = 28;
-//    public static final int FONT_SIZE_BIG = 40;
-//    public static final int FONT_SIZE_HUGE = 80;
+    public static final int FONT_SIZE_SMALL = (int) (24 * DEFAULT_RATIO);
+    public static final int FONT_SIZE_MEDIUM = (int) (28 * DEFAULT_RATIO);
+    public static final int FONT_SIZE_BIG = (int) (40 * DEFAULT_RATIO);
+    public static final int FONT_SIZE_HUGE = (int) (80 * DEFAULT_RATIO);
 
 
     public static Matrix4 isoTransformMatrix() {
