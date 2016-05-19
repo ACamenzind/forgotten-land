@@ -151,7 +151,7 @@ public abstract class MapEntity implements Disposable{
         this.clickX = clickX;
         this.clickY = clickY;
 
-        // Set collision on cells
+        // Set collision on cells and influence on those tiles
         for (int y = 0; y < collisionSize.y; y++) {
             for (int x = 0; x < collisionSize.x; x++) {
                 TiledMapTileLayer.Cell cell = layer.getCell(clickX + x, clickY + y);
@@ -196,17 +196,20 @@ public abstract class MapEntity implements Disposable{
                 }
 
                 TextureRegion texture;
-                //TODO: remove the first condition (temporarily left there)
+                TiledMapTile tile;
+                tile = cell.getTile();
                 if (layer.getName().equals("Selection") && cell.getTile() != null) {
                     texture = cell.getTile().getTextureRegion();
-                } else if (cell.getTile() != null) {
+                } else if (layer.getName().equals("Selection") && cell.getTile() == null) {
+                    texture = new TextureRegion(Assets.redTile);
+                }
+                else if (cell.getTile() != null) {
                     texture = cell.getTile().getTextureRegion();
                 } else {
                     texture = new TextureRegion(Assets.emptyTile);
                 }
 
-                TiledMapTile tile;
-                tile = cell.getTile();
+
 
                 // Creates a new tile if needed
                 if (!(tile instanceof ExtendedStaticTiledMapTile)) {

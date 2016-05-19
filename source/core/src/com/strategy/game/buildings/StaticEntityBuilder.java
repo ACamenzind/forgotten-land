@@ -18,7 +18,7 @@ import com.strategy.game.world.World;
 
 /**
  * Handles the creation and placement of static entities (e.g. buildings)
- * // TODO: 14/05/2016 Add deletion
+ *
  */
 public class StaticEntityBuilder {
     private GameScreen gameScreen;
@@ -73,7 +73,7 @@ public class StaticEntityBuilder {
     /**
      * Iterates over all buildings and resources placed in the map
      * and destroys those that have negative health.
-     * TODO: needs testing
+     *
      */
     public void checkDeadEntities() {
 //        for (MapEntity e : world.getStaticEntities()) {
@@ -93,8 +93,8 @@ public class StaticEntityBuilder {
             for (int j = 0; j < influenceLayer.getHeight(); j++) {
                 TiledMapTileLayer.Cell influenceCell = new TiledMapTileLayer.Cell();
                 TiledMapTileLayer.Cell buildingsCell = buildingsLayer.getCell(i,j);
-                boolean condition = buildingsCell != null && buildingsCell.getTile() != null;
-                if (condition) {
+                boolean isTileValid = buildingsCell != null && buildingsCell.getTile() != null;
+                if (isTileValid) {
                     TiledMapTile buildingTile = buildingsCell.getTile();
                     if (buildingTile instanceof ExtendedStaticTiledMapTile) {
                         if (((ExtendedStaticTiledMapTile) buildingTile).getBuildingsNearby() > 0) {
@@ -148,7 +148,6 @@ public class StaticEntityBuilder {
                     buildingTile.setObject(null);
                     buildingsCell.setTile(buildingTile);
                     buildingsLayer.setCell(i, j, buildingsCell);
-//                    System.out.println("Loop");
                 }
             }
 

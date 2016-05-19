@@ -25,8 +25,7 @@ import com.strategy.game.world.World;
 
 /**
  * The main game screen, where the gameplay is rendered.
- *  TODO: Make another input handler for the UI, and use multiplexing.
-    TODO: Maybe create a new class to handle game logic and hold the game state, with Scene2D
+ *
  */
 public class GameScreen implements Screen {
 
@@ -194,31 +193,6 @@ public class GameScreen implements Screen {
 
         builder.clear();
 
-        // Draw selection box, bugged when resizing the screen
-        // Doesn't really do anything at the moment
-//        if (isSelecting) {
-//            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-//            float x = touchDownCoords.x;
-//            float y = Gdx.graphics.getHeight() - touchDownCoords.y;
-//            float dx = Gdx.input.getX() - x;
-//            float dy = (Gdx.graphics.getHeight() - Gdx.input.getY()) - y;
-//            Rectangle rect = new Rectangle(x, y, dx, dy);
-//            shapeRenderer.rect(rect.x, rect.y, rect.width, rect.height);
-//            shapeRenderer.end();
-//        }
-
-
-//        System.out.println(deltaMouse.toString());
-
-
-
-//        MapProperties prop = map.getProperties();
-//
-//        int mapWidth = prop.get("width", Integer.class);
-//        int mapHeight = prop.get("height", Integer.class);
-//        int tileWidth = prop.get("tilewidth", Integer.class);
-//        int tileHeight = prop.get("tileheight", Integer.class);
-
         // Draw FPS counter on the top left
         batch.begin();
         font.draw(batch, "FPS: "+ Gdx.graphics.getFramesPerSecond(), 0, Gdx.graphics.getHeight());
@@ -230,25 +204,6 @@ public class GameScreen implements Screen {
 //        stage.setDebugAll(true); // For debug purpose
         stage.getViewport().apply();
         stage.draw();
-
-
-
-
-//        batch.setProjectionMatrix(camera.combined);
-//
-//
-//        batch.begin();
-//
-//        for (int col=0; col < mapWidth; col++) {
-//            for (int row = 0; row < mapHeight; row++) {
-//                Vector3 screen_coords = new Vector3(row*64, col*64, 0);
-//                screen_coords.mul(Utils.isoTransformMatrix());
-//
-//                font.draw(batch, "(" +  row +":"+ col +")", screen_coords.x, screen_coords.y);
-//            }
-//        }
-//        font.draw(batch, "tile", 10, 20);
-//        batch.end();
     }
 
     @Override
