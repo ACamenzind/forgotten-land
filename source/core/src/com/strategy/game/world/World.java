@@ -100,8 +100,6 @@ public class World implements Disposable{
      */
     public void toggleRunning() {
         isRunning = !isRunning;
-        if (isRunning) System.out.println("Game resumed!");
-        else System.out.println("Game paused!");
     }
 
     /**

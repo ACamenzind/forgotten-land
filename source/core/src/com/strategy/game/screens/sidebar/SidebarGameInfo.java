@@ -29,6 +29,10 @@ public class SidebarGameInfo extends Table implements Display {
     private static final float WORKERS_POSITION_Y = 0.75f;
     private Label workers = Assets.makeLabel("Workers: 0", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
 
+    private static final float UNEMPLYED_POSITION_X = MARGIN;
+    private static final float UNEMPLYED_POSITION_Y = 0.7f;
+    private Label unemployed = Assets.makeLabel("Unemployed: 0", Utils.FONT_SIZE_MEDIUM, Color.BLACK);
+
     public SidebarGameInfo(World world) {
         this.world = world;
 
@@ -37,6 +41,7 @@ public class SidebarGameInfo extends Table implements Display {
         addActor(title);
         addActor(total_population);
         addActor(workers);
+        addActor(unemployed);
 
         update();
     }
@@ -49,5 +54,6 @@ public class SidebarGameInfo extends Table implements Display {
         Assets.setPositionRelative(title, TITLE_POSITION_X, TITLE_POSITION_Y, true, false);
         Assets.setPositionRelative(total_population, TOTAL_POPULATION_POSITION_X, TOTAL_POPULATION_POSITION_Y);
         Assets.setPositionRelative(workers, WORKERS_POSITION_X, WORKERS_POSITION_Y);
+        Assets.setPositionRelative(unemployed, UNEMPLYED_POSITION_X, UNEMPLYED_POSITION_Y);
     }
 }
