@@ -36,8 +36,20 @@ public class ResourceHandler {
         return maximumResources;
     }
 
+    /**
+     * Removes from the total count of resources
+     * @param amount
+     */
     public void removeFromTotal(ResourceContainer amount) {
         totalResources = totalResources.subtract(amount);
+    }
+
+    /**
+     * Adds to the total amount of resources
+     * @param amount the amount to add
+     */
+    public void addToTotal(ResourceContainer amount) {
+        totalResources = totalResources.add(amount);
     }
 
     /**

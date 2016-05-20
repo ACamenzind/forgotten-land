@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.Assets;
 import com.strategy.game.ExtendedStaticTiledMapTile;
+import com.strategy.game.ResourceContainer;
 import com.strategy.game.Utils;
 import com.strategy.game.screens.GameScreen;
 import com.strategy.game.world.Resource;
@@ -151,7 +152,12 @@ public class StaticEntityBuilder {
             if (entity instanceof Resource) {
                 world.getResources().remove(entity);
             } else {
+                // When destroying a building, you get half its costs back
                 world.getBuildings().remove(entity);
+                ResourceContainer refund = ((Building) entity).getCosts().multiply(0.5f);
+                world.getResourceHandler().addToTotal(refund);
+                // Updates resources bar
+                world.getGameScreen().getResourcesBar().update();
             }
 
 

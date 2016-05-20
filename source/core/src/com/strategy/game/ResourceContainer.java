@@ -48,12 +48,12 @@ public class ResourceContainer {
         return new ResourceContainer(wood, food, rock, gold, people);
     }
 
-    public ResourceContainer multiply(int n) {
-        final int wood = this.wood * n;
-        final int food = this.food * n;
-        final int rock = this.rock * n;
-        final int gold = this.gold * n;
-        final int people = this.people * n;
+    public ResourceContainer multiply(float n) {
+        final int wood = (int)(this.wood * n);
+        final int food = (int)(this.food * n);
+        final int rock = (int)(this.rock * n);
+        final int gold = (int)(this.gold * n);
+        final int people = (int)(this.people * n);
 
         return new ResourceContainer(wood, food, rock, gold, people);
     }
