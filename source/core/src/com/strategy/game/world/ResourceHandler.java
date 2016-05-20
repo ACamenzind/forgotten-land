@@ -55,20 +55,20 @@ public class ResourceHandler {
      */
     public void update() {
 
-        for (MapEntity entity:
+        for (Building building:
              world.getStaticEntities()) {
             ResourceContainer maintenance;
 
             // Resource collectors: lumberjack and mine
-            if (entity instanceof Collector) {
+            if (building instanceof Collector) {
                 TiledMapTileLayer buildingsLayer = (TiledMapTileLayer) world.getGameScreen().getMap().getLayers().get("Buildings");
-                Vector2 coords = entity.getCoords();
+                Vector2 coords = building.getCoords();
 
-                int startX = (int)coords.x - entity.getInfluenceRadius();
-                int endX = (int) (coords.x + entity.getCollisionSize().x + entity.getInfluenceRadius());
+                int startX = (int)coords.x - building.getInfluenceRadius();
+                int endX = (int) (coords.x + building.getCollisionSize().x + building.getInfluenceRadius());
 
-                int startY = (int)coords.y - entity.getInfluenceRadius();
-                int endY = (int) (coords.x + entity.getCollisionSize().y + entity.getInfluenceRadius());
+                int startY = (int)coords.y - building.getInfluenceRadius();
+                int endY = (int) (coords.x + building.getCollisionSize().y + building.getInfluenceRadius());
 
                 // Goes through the tiles inside the building's influence area and removes resources from the first
                 // resource (either rock or wood) it finds.
@@ -82,10 +82,10 @@ public class ResourceHandler {
                             ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
                             MapEntity object = tile.getObject();
                             String property = tile.getProperties().get("type", String.class);
-                            String resourceType = ((Collector) entity).getResourceCollected();
+                            String resourceType = ((Collector) building).getResourceCollected();
 
                             if (property != null && property.equals(resourceType) && object != null && !foundAResource) {
-                                ResourceContainer resourceProduction = ((Collector) entity).getProductionsPerTurn();
+                                ResourceContainer resourceProduction = building.getProductionsPerTurn();
                                 int available = object.getLife();
                                 int amount = 0;
                                 if (resourceType.equals("wood")) {
@@ -106,11 +106,11 @@ public class ResourceHandler {
                         }
                     }
                 }
+            } else { // normal buildings
+                ResourceContainer production = building.getProductionsPerTurn();
+                totalResources = totalResources.add(production);
             }
-//            else if (entity instanceof Building) {
-//                // Other buildings, which only have maintenance
-            maintenance = ((Building) entity).getMaintenanceCosts();
-//            }
+            maintenance = building.getMaintenanceCosts();
             totalResources = totalResources.subtract(maintenance);
         }
     }

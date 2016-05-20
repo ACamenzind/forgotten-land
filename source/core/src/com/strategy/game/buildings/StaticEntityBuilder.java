@@ -255,7 +255,7 @@ public class StaticEntityBuilder {
                 if (selectedEntity instanceof Building && placeable) {
                     // Places the selected entity on the buildings layer, and add it to the list
                     selectedEntity.placeOnLayer(buildingsLayer, x, y);
-                    this.world.getStaticEntities().add(selectedEntity);
+                    this.world.getStaticEntities().add((Building) selectedEntity);
                     this.world.getResourceHandler().removeFromTotal(((Building) selectedEntity).getCosts());
                     // Updates resources bar after placing building
                     world.getGameScreen().getResourcesBar().update();

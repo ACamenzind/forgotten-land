@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Disposable;
 import com.strategy.game.ExtendedStaticTiledMapTile;
+import com.strategy.game.buildings.Building;
 import com.strategy.game.buildings.MapEntity;
 import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.screens.GameScreen;
@@ -22,7 +23,7 @@ public class World implements Disposable{
     private int tickDuration;
     private Stage gameStage;
     private GameScreen gameScreen;
-    private ArrayList<MapEntity> staticEntities; // Resources and Buildings
+    private ArrayList<Building> staticEntities; // Resources and Buildings
     private ArrayList<Resource> resources;
     private ArrayList<MovableEntity> movableEntities;
     private TiledMap map;
@@ -44,7 +45,7 @@ public class World implements Disposable{
         this.gameStage = new Stage();
         this.gameScreen = gameScreen;
         this.map = gameScreen.getMap();
-        this.staticEntities = new ArrayList<MapEntity>();
+        this.staticEntities = new ArrayList<Building>();
         this.resources = new ArrayList<Resource>();
         this.movableEntities = new ArrayList<MovableEntity>();
         this.resourceHandler = new ResourceHandler(this, 1000, 1000, 1000, 1000, 5);
@@ -68,7 +69,7 @@ public class World implements Disposable{
         return resources;
     }
 
-    public ArrayList<MapEntity> getStaticEntities() {
+    public ArrayList<Building> getStaticEntities() {
         return staticEntities;
     }
 

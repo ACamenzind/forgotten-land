@@ -24,8 +24,5 @@ public class Castle extends Building {
 
     public Castle() {
         super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION, BuildingType.MANUFACTURER);
-//        this.mainTexture = Assets.castle;
-//        this.collisionSize = new Vector2(4, 4);
-//        sliceTexture(mainTexture);
     }
 }
