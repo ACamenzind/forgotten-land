@@ -116,6 +116,9 @@ public class GameInputProcessor implements InputProcessor{
             case Input.Keys.NUM_6:
                 screen.getBuilder().toggleSelectEntity(new WarehouseFood());
                 break;
+            case Input.Keys.NUM_7:
+                screen.getBuilder().toggleSelectEntity(new CollectorRock());
+                break;
             case Input.Keys.ESCAPE:
                 screen.getBuilder().untoggleSelectEntity();
                 break;

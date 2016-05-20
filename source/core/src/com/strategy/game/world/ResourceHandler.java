@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.strategy.game.ExtendedStaticTiledMapTile;
 import com.strategy.game.ResourceContainer;
 import com.strategy.game.buildings.Building;
+import com.strategy.game.buildings.Collector;
 import com.strategy.game.buildings.CollectorWood;
 import com.strategy.game.buildings.MapEntity;
 
@@ -56,9 +57,10 @@ public class ResourceHandler {
 
         for (MapEntity entity:
              world.getStaticEntities()) {
-            ResourceContainer maintenance = new ResourceContainer(0,0,0,0,0);
+            ResourceContainer maintenance;
 
-            if (entity instanceof CollectorWood) {
+            // Resource collectors: lumberjack and mine
+            if (entity instanceof Collector) {
                 TiledMapTileLayer buildingsLayer = (TiledMapTileLayer) world.getGameScreen().getMap().getLayers().get("Buildings");
                 Vector2 coords = entity.getCoords();
 
@@ -80,10 +82,10 @@ public class ResourceHandler {
                             ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
                             MapEntity object = tile.getObject();
                             String property = tile.getProperties().get("type", String.class);
-                            String resourceType = ((CollectorWood) entity).getResourceCollected();
+                            String resourceType = ((Collector) entity).getResourceCollected();
 
                             if (property != null && property.equals(resourceType) && object != null && !foundAResource) {
-                                ResourceContainer resourceProduction = ((CollectorWood) entity).getProductionsPerTurn();
+                                ResourceContainer resourceProduction = ((Collector) entity).getProductionsPerTurn();
                                 int available = object.getLife();
                                 int amount = 0;
                                 if (resourceType.equals("wood")) {
@@ -105,9 +107,10 @@ public class ResourceHandler {
                     }
                 }
             }
-            else if (entity instanceof Building) {
-                maintenance = ((Building) entity).getMaintenanceCosts();
-            }
+//            else if (entity instanceof Building) {
+//                // Other buildings, which only have maintenance
+            maintenance = ((Building) entity).getMaintenanceCosts();
+//            }
             totalResources = totalResources.subtract(maintenance);
         }
     }

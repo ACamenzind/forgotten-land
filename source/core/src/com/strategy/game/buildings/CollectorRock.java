@@ -8,7 +8,7 @@ import com.strategy.game.ResourceContainer;
 /**
  * Created by francescosani on 12/05/16.
  */
-public class CollectorRock extends Building {
+public class CollectorRock extends Collector {
     private static final String NAME = "Mine";
     private static final ResourceContainer COST = new ResourceContainer(40, 0, 10, 5, 0);
     private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 0, 10, 0, 0);
@@ -16,17 +16,11 @@ public class CollectorRock extends Building {
     private static final int MAX_LIFE = 10;
     private static final int MAX_WORKERS = 5;
     private static final int INFLUENCE_RADIUS = 5;
-    private static final Texture TEXTURE = Assets.house1;
-    private static final Vector2 COLLISION = new Vector2(2,2);
-    private int life = MAX_LIFE;
-    private int workers = 0;
-    private String resourceCollected = "wood";
-
-    public String getResourceCollected() {
-        return resourceCollected;
-    }
+    private static final Texture TEXTURE = Assets.mine;
+    private static final Vector2 COLLISION = new Vector2(3,3);
 
     public CollectorRock() {
         super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION, BuildingType.MANUFACTURER);
+        this.resourceCollected = "rock";
     }
 }

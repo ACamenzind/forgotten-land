@@ -22,7 +22,7 @@ public class Assets {
 
     public static TiledMap map;
     // BUILDINGS
-    public static Texture house1, castle, leftwall, middlewall, rightwall, emptyTile, redTile, cows, warehouse, wheat, lumberjack;
+    public static Texture house1, castle, leftwall, middlewall, rightwall, emptyTile, redTile, cows, warehouse, wheat, lumberjack, mine;
     // SIDEBAR BACKGROUNDS
     public static Texture sidebarBackground, sidebarDisplayMiddleBackground;
     // SIDEBAR BUILDING INFO
@@ -44,6 +44,7 @@ public class Assets {
         warehouse = new Texture(Gdx.files.internal("core/assets/textures/buildings/warehouse.png"));
         wheat = new Texture(Gdx.files.internal("core/assets/textures/buildings/wheat.png"));
         lumberjack = new Texture(Gdx.files.internal("core/assets/textures/buildings/lumberjack.png"));
+        mine = new Texture(Gdx.files.internal("core/assets/textures/buildings/mine.png"));
         leftwall = new Texture(Gdx.files.internal("core/assets/textures/buildings/wall/Wall_L.png"));
         middlewall = new Texture(Gdx.files.internal("core/assets/textures/buildings/wall/Wall_M.png"));
         rightwall = new Texture(Gdx.files.internal("core/assets/textures/buildings/wall/Wall_R.png"));
