@@ -11,7 +11,7 @@ import com.strategy.game.ResourceContainer;
 public class Castle extends Building {
     //TODO: maybe put buildings properties into a single object.
     private static final String NAME = "Castle";
-    private static final ResourceContainer COST = new ResourceContainer(100, 100, 100, 100, 5);
+    private static final ResourceContainer COST = new ResourceContainer(100, 100, 100, 100, 0);
     private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 0, 0, 0, 0);
     private static final ResourceContainer MAINTENANCE = new ResourceContainer(1,1,1,1,0);
 

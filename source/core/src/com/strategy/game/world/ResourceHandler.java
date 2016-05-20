@@ -6,7 +6,6 @@ import com.strategy.game.ExtendedStaticTiledMapTile;
 import com.strategy.game.ResourceContainer;
 import com.strategy.game.buildings.Building;
 import com.strategy.game.buildings.Collector;
-import com.strategy.game.buildings.CollectorWood;
 import com.strategy.game.buildings.MapEntity;
 
 
@@ -23,7 +22,8 @@ public class ResourceHandler {
     public ResourceHandler(World world, int woodCounter, int goldCounter, int foodCounter, int rockCounter, int people) {
         this.world = world;
         this.totalResources = new ResourceContainer(woodCounter, goldCounter, foodCounter, rockCounter, people);
-        this.maximumResources = new ResourceContainer(100, 100, 100, 100, 10);
+        this.maximumResources = new ResourceContainer(500, 500, 500, 500, 10);
+
     }
 
     public ResourceContainer getTotalResources() {
@@ -46,6 +46,44 @@ public class ResourceHandler {
     public boolean canPlaceBuilding(Building building) {
         ResourceContainer result = totalResources.subtract(building.getCosts());
         return result.noNegativeResources();
+    }
+
+
+    /**
+     * Limits the resource count
+     */
+    private void capResourceCount() {
+        int wood = Math.min(totalResources.wood, maximumResources.wood);
+        int food = Math.min(totalResources.food, maximumResources.food);
+        int rock = Math.min(totalResources.rock, maximumResources.rock);
+        int gold = Math.min(totalResources.gold, maximumResources.gold);
+        int people = Math.min(totalResources.people, maximumResources.people);
+
+        totalResources = new ResourceContainer(wood, food, rock, gold, people);
+    }
+
+    /**
+     * Handles what happens when resources go negative.
+     */
+    private void handleNegativeResourceCount() {
+        int food = totalResources.food;
+        // for every 10 food negative 1 person dies
+        if (food <= -10) {
+            int factor = - totalResources.food / 10;
+            removeFromTotal(new ResourceContainer(0, 0, 0, 0, factor));
+        }
+
+        // If the people count goes negative, the game is lost.
+        int people = totalResources.people;
+        if (people <= 0) {
+            world.handleGameLost();
+        }
+
+        int wood = Math.max(totalResources.wood, 0);
+        int rock = Math.max(totalResources.rock, 0);
+        int gold = Math.max(totalResources.gold, 0);
+
+        totalResources = new ResourceContainer(wood, food, rock, gold, people);
     }
 
     /**
@@ -113,7 +151,7 @@ public class ResourceHandler {
             maintenance = building.getMaintenanceCosts();
             totalResources = totalResources.subtract(maintenance);
         }
+        capResourceCount();
+        handleNegativeResourceCount();
     }
-
-
 }

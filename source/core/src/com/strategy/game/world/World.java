@@ -48,7 +48,7 @@ public class World implements Disposable{
         this.staticEntities = new ArrayList<Building>();
         this.resources = new ArrayList<Resource>();
         this.movableEntities = new ArrayList<MovableEntity>();
-        this.resourceHandler = new ResourceHandler(this, 1000, 1000, 1000, 1000, 5);
+        this.resourceHandler = new ResourceHandler(this, 300, 300, 300, 300, 5);
         this.updateCounter = 0;
         this.populationHandler = new PopulationHandler(5, 200, 20);
         this.tick = 0;
@@ -85,6 +85,10 @@ public class World implements Disposable{
         return populationHandler;
     }
 
+    /**
+     * Sets the simulation speed (i.e. the tick duration).
+     * @param speed the requested speed (either normal or fast).
+     */
     public void setGameSpeed(GameSpeed speed) {
         switch (speed){
             case NORMAL:
@@ -101,6 +105,14 @@ public class World implements Disposable{
      */
     public void toggleRunning() {
         isRunning = !isRunning;
+    }
+
+    /**
+     * What happens when the game-lost conditions are satisfied (i.e. people <= 0 for now).
+     */
+    public void handleGameLost() {
+        isRunning = false;
+        //TODO: add a message or something else
     }
 
     /**
@@ -134,6 +146,10 @@ public class World implements Disposable{
         }
     }
 
+    /**
+     * The main world simulation loop, called every frame.
+     * @param delta time since last frame
+     */
     public void update(float delta) {
         if(updateCounter / tickDuration >= 1 && isRunning) {
             resourceHandler.update();
@@ -144,8 +160,6 @@ public class World implements Disposable{
             gameScreen.getResourcesBar().update();
         }
         updateCounter++;
-
-
     }
 
 

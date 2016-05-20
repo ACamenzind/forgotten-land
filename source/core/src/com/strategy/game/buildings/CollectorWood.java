@@ -13,7 +13,7 @@ import com.strategy.game.world.World;
 public class CollectorWood extends Collector {
     private static final String NAME = "Lumber camp";
     private static final ResourceContainer COST = new ResourceContainer(40, 0, 10, 5, 0);
-    private static final ResourceContainer PRODUCTION = new ResourceContainer(1, 0, 0, 0, 0);
+    private static final ResourceContainer PRODUCTION = new ResourceContainer(3, 0, 0, 0, 0);
     private static final ResourceContainer MAINTENANCE = new ResourceContainer(0, 0, 1, 1, 0);
     private static final int MAX_LIFE = 10;
     private static final int MAX_WORKERS = 5;
