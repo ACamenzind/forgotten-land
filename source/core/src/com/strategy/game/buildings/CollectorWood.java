@@ -15,7 +15,7 @@ public class CollectorWood extends Collector {
     private static final ResourceContainer COST = new ResourceContainer(40, 0, 10, 5, 0);
     private static final ResourceContainer PRODUCTION = new ResourceContainer(3, 0, 0, 0, 0);
     private static final ResourceContainer MAINTENANCE = new ResourceContainer(0, 0, 1, 1, 0);
-    private static final int MAX_LIFE = 10;
+    private static final int MAX_LIFE = 100;
     private static final int MAX_WORKERS = 5;
     private static final int INFLUENCE_RADIUS = 5;
 

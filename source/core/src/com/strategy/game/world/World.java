@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Disposable;
 import com.strategy.game.ExtendedStaticTiledMapTile;
 import com.strategy.game.buildings.Building;
-import com.strategy.game.buildings.MapEntity;
 import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.screens.GameScreen;
 //import com.sun.javafx.scene.control.skin.VirtualFlow;
@@ -23,7 +22,7 @@ public class World implements Disposable{
     private int tickDuration;
     private Stage gameStage;
     private GameScreen gameScreen;
-    private ArrayList<Building> staticEntities; // Resources and Buildings
+    private ArrayList<Building> buildings; // Resources and Buildings
     private ArrayList<Resource> resources;
     private ArrayList<MovableEntity> movableEntities;
     private TiledMap map;
@@ -34,7 +33,7 @@ public class World implements Disposable{
     private int tick;
     private boolean isRunning;
     private static final int DEFAULT_TICK_DURATION = 300;
-    private static final int FAST_TICK_DURATION = 50;
+    private static final int FAST_TICK_DURATION = 10;
 
     public enum GameSpeed {
         NORMAL, FAST
@@ -45,7 +44,7 @@ public class World implements Disposable{
         this.gameStage = new Stage();
         this.gameScreen = gameScreen;
         this.map = gameScreen.getMap();
-        this.staticEntities = new ArrayList<Building>();
+        this.buildings = new ArrayList<Building>();
         this.resources = new ArrayList<Resource>();
         this.movableEntities = new ArrayList<MovableEntity>();
         this.resourceHandler = new ResourceHandler(this, 300, 300, 300, 300, 5);
@@ -69,8 +68,8 @@ public class World implements Disposable{
         return resources;
     }
 
-    public ArrayList<Building> getStaticEntities() {
-        return staticEntities;
+    public ArrayList<Building> getBuildings() {
+        return buildings;
     }
 
     public StaticEntityBuilder getBuilder() {
@@ -155,7 +154,7 @@ public class World implements Disposable{
             resourceHandler.update();
             updateCounter = 0;
             tick++;
-            builder.checkDeadEntities();
+            builder.checkDeadBuildings();
 
             gameScreen.getResourcesBar().update();
         }

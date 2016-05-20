@@ -16,6 +16,8 @@ import com.strategy.game.screens.GameScreen;
 import com.strategy.game.world.Resource;
 import com.strategy.game.world.World;
 
+import java.util.ArrayList;
+
 /**
  * Handles the creation and placement of static entities (e.g. buildings)
  *
@@ -71,12 +73,12 @@ public class StaticEntityBuilder {
     }
 
     /**
-     * Iterates over all buildings and resources placed in the map
+     * Iterates over all buildings placed in the map
      * and destroys those that have negative health.
      *
      */
-    public void checkDeadEntities() {
-//        for (MapEntity e : world.getStaticEntities()) {
+    public void checkDeadBuildings() {
+//        for (Building e : world.getBuildings()) {
 //            if (e.getLife() <= 0) {
 //                destroy(e);
 //            }
@@ -129,19 +131,35 @@ public class StaticEntityBuilder {
     }
 
     /**
+     * Destroys the buildings in the given list. Used to collect buildings which should be
+     * destroyed, and destroy them later.
+     * @param buildingsToDestroy a list with buildings ready to be destroyed
+     */
+    public void destroyBuildings(ArrayList<Building> buildingsToDestroy) {
+        for (Building building: buildingsToDestroy) {
+            destroy(building);
+        }
+    }
+
+    /**
      * Removes the given building
      * @param entity the building to remove
      */
     public void destroy(MapEntity entity) {
         if (entity != null) {
-            world.getResources().remove(entity);
+
+            if (entity instanceof Resource) {
+                world.getResources().remove(entity);
+            } else {
+                world.getBuildings().remove(entity);
+            }
+
 
             Vector2 coords = entity.getCoords();
 
             // Remove the building tiles
             for (int i = (int) coords.x; i < (int) coords.x + entity.collisionSize.x; i++) {
                 for (int j = (int) coords.y; j < (int) coords.y + entity.collisionSize.y; j++) {
-                    System.out.println(coords);
                     TiledMapTileLayer.Cell buildingsCell = buildingsLayer.getCell(i, j);
                     ExtendedStaticTiledMapTile buildingTile = (ExtendedStaticTiledMapTile) buildingsCell.getTile();
                     buildingTile.setTextureRegion(new TextureRegion(Assets.emptyTile));
@@ -255,7 +273,7 @@ public class StaticEntityBuilder {
                 if (selectedEntity instanceof Building && placeable) {
                     // Places the selected entity on the buildings layer, and add it to the list
                     selectedEntity.placeOnLayer(buildingsLayer, x, y);
-                    this.world.getStaticEntities().add((Building) selectedEntity);
+                    this.world.getBuildings().add((Building) selectedEntity);
                     this.world.getResourceHandler().removeFromTotal(((Building) selectedEntity).getCosts());
                     // Updates resources bar after placing building
                     world.getGameScreen().getResourcesBar().update();

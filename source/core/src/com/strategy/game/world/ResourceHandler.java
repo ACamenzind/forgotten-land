@@ -8,9 +8,11 @@ import com.strategy.game.buildings.Building;
 import com.strategy.game.buildings.Collector;
 import com.strategy.game.buildings.MapEntity;
 
+import java.util.ArrayList;
+
 
 /**
- * Created by francescosani on 27/04/16.
+ * Handles all the resources in the world.
  */
 public class ResourceHandler {
     private World world;
@@ -22,7 +24,7 @@ public class ResourceHandler {
     public ResourceHandler(World world, int woodCounter, int goldCounter, int foodCounter, int rockCounter, int people) {
         this.world = world;
         this.totalResources = new ResourceContainer(woodCounter, goldCounter, foodCounter, rockCounter, people);
-        this.maximumResources = new ResourceContainer(500, 500, 500, 500, 10);
+        this.maximumResources = new ResourceContainer(5000, 5000, 5000, 5000, 10);
 
     }
 
@@ -79,6 +81,7 @@ public class ResourceHandler {
             world.handleGameLost();
         }
 
+        // The other resources just don't go below zero.
         int wood = Math.max(totalResources.wood, 0);
         int rock = Math.max(totalResources.rock, 0);
         int gold = Math.max(totalResources.gold, 0);
@@ -92,13 +95,15 @@ public class ResourceHandler {
      * as well as removing the maintenance costs.
      */
     public void update() {
+        ArrayList<Building> toDestroy = new ArrayList<Building>();
 
         for (Building building:
-             world.getStaticEntities()) {
+             world.getBuildings()) {
             ResourceContainer maintenance;
 
             // Resource collectors: lumberjack and mine
             if (building instanceof Collector) {
+
                 TiledMapTileLayer buildingsLayer = (TiledMapTileLayer) world.getGameScreen().getMap().getLayers().get("Buildings");
                 Vector2 coords = building.getCoords();
 
@@ -144,13 +149,19 @@ public class ResourceHandler {
                         }
                     }
                 }
+                if (!foundAResource) System.out.println("No resources found, move the building!");
             } else { // normal buildings
                 ResourceContainer production = building.getProductionsPerTurn();
                 totalResources = totalResources.add(production);
             }
             maintenance = building.getMaintenanceCosts();
             totalResources = totalResources.subtract(maintenance);
+            building.degrade();
+            if (building.getLife() <= 0) {
+                toDestroy.add(building);
+            }
         }
+        world.getBuilder().destroyBuildings(toDestroy);
         capResourceCount();
         handleNegativeResourceCount();
     }

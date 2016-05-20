@@ -17,7 +17,7 @@ public class House extends Building {
     private static final ResourceContainer RESOURCE_STORED = new ResourceContainer(0, 0, 0, 0, 0);
 
 
-    private static final int MAX_LIFE = 10;
+    private static final int MAX_LIFE = 100;
     private static final int MAX_WORKERS = 5;
     private static final int INFLUENCE_RADIUS = 5;
     private static final Texture TEXTURE = Assets.house1;

@@ -102,6 +102,10 @@ public abstract class Building extends MapEntity {
         return type;
     }
 
+    public void degrade() {
+        this.life--;
+    }
+
     /**
      * Collect returns the collected resources for one single turn.
      * @return Collected resources per turn.
