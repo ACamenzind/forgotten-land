@@ -19,13 +19,14 @@ public class ResourceHandler {
 
     private ResourceContainer totalResources;
     private ResourceContainer maximumResources;
+    private int totalWorkers;
 
 
     public ResourceHandler(World world, int woodCounter, int goldCounter, int foodCounter, int rockCounter, int people) {
         this.world = world;
         this.totalResources = new ResourceContainer(woodCounter, goldCounter, foodCounter, rockCounter, people);
-        this.maximumResources = new ResourceContainer(300, 300, 300, 300, 10);
-
+        this.maximumResources = new ResourceContainer(300, 300, 300, 300, 5);
+        this.totalWorkers = 0;
     }
 
     public ResourceContainer getTotalResources() {
@@ -34,6 +35,34 @@ public class ResourceHandler {
 
     public ResourceContainer getMaximumResources() {
         return maximumResources;
+    }
+
+    public int getTotalWorkers() {
+        return totalWorkers;
+    }
+
+    public void setTotalWorkers(int totalWorkers) {
+        this.totalWorkers = totalWorkers;
+    }
+
+    public void addWorker(Building building) {
+        if (totalWorkers < totalResources.people) {
+            building.changeWorker(1);
+            totalWorkers++;
+        }
+    }
+
+    public void removeWorker(Building building) {
+        if (totalWorkers > 0) {
+            building.changeWorker(-1);
+            totalWorkers--;
+        }
+    }
+
+    public void removeAllWorkers(Building building) {
+        int workers = building.getWorkers();
+        building.changeWorker(-workers);
+        totalWorkers -= workers;
     }
 
     /**
@@ -185,5 +214,8 @@ public class ResourceHandler {
         world.getBuilder().destroyBuildings(toDestroy);
         capResourceCount();
         handleNegativeResourceCount();
+//        System.out.println("Total population: " + totalResources.people);
+//        System.out.println("Unemployed: " + (totalResources.people - totalWorkers));
+//        System.out.println("Workers: " + totalWorkers);
     }
 }

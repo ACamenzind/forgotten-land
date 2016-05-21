@@ -15,6 +15,7 @@ import com.strategy.game.Utils;
 import com.strategy.game.buildings.Building;
 import com.strategy.game.buildings.Container;
 import com.strategy.game.screens.Display;
+import com.strategy.game.world.ResourceHandler;
 
 /**
  * Created by Amedeo on 12/05/16.
@@ -249,7 +250,10 @@ public class SidebarBuildingInfo extends Table implements Display {
         workersButtonAdd.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (building != null) {
-                    building.changeWorker(1);
+//                    building.changeWorker(1);
+                    Sidebar sidebar = (Sidebar) getParent();
+                    ResourceHandler handler = sidebar.getScreen().getWorld().getResourceHandler();
+                    handler.addWorker(building);
                     update();
                 }
                 return false;
@@ -259,7 +263,10 @@ public class SidebarBuildingInfo extends Table implements Display {
         workersButtonRemove.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (building != null) {
-                    building.changeWorker(-1);
+//                    building.changeWorker(-1);
+                    Sidebar sidebar = (Sidebar) getParent();
+                    ResourceHandler handler = sidebar.getScreen().getWorld().getResourceHandler();
+                    handler.removeWorker(building);
                     update();
                 }
                 return false;

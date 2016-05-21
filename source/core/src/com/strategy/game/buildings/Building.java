@@ -130,7 +130,6 @@ public abstract class Building extends MapEntity {
      */
     public void changeWorker(int n) {
         final int newWorkers = this.workers + n;
-
         if (newWorkers <= this.maxWorkers && newWorkers >= 0)
             this.workers = newWorkers;
     }

@@ -175,6 +175,7 @@ public class StaticEntityBuilder {
                 world.getBuildings().remove(entity);
                 ResourceContainer refund = ((Building) entity).getCosts().multiply(0.5f);
                 world.getResourceHandler().addToTotal(refund);
+                world.getResourceHandler().removeAllWorkers((Building) entity);
                 // Updates resources bar
                 world.getGameScreen().getResourcesBar().update();
             }
@@ -300,8 +301,8 @@ public class StaticEntityBuilder {
                     selectedEntity.placeOnLayer(buildingsLayer, x, y);
                     this.world.getBuildings().add((Building) selectedEntity);
                     this.world.getResourceHandler().removeFromTotal(((Building) selectedEntity).getCosts());
-                    if (selectedEntity instanceof Warehouse)
-                        this.world.getResourceHandler().addToMaximum(((Warehouse) selectedEntity).getResourcesStored());
+                    if (selectedEntity instanceof Container)
+                        this.world.getResourceHandler().addToMaximum(((Container) selectedEntity).getResourcesStored());
                     // Updates resources bar after placing building
                     world.getGameScreen().getResourcesBar().update();
                 }
