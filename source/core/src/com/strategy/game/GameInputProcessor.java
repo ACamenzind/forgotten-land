@@ -163,12 +163,14 @@ public class GameInputProcessor implements InputProcessor{
 
         Vector3 pickedTile = Utils.cartesianToIso(touch, camera);
 
+        MapEntity clickedEntity = screen.getBuilder().getEntityAt((int)pickedTile.x, (int)pickedTile.y);
+
         if (screen.getBuilder().getSelectedEntity() != null && button == Input.Buttons.LEFT) {
             screen.getBuilder().placeSelectedEntity((int) pickedTile.x, (int) pickedTile.y, false);
         }
         else if (screen.getBuilder().getSelectedEntity() == null && button == Input.Buttons.LEFT)  {
             // TODO: show building info from here
-            MapEntity clickedEntity = screen.getBuilder().getEntityAt((int)pickedTile.x, (int)pickedTile.y);
+
             if (clickedEntity instanceof Building) {
                 screen.getSidebar().setBuilding((Building) clickedEntity);
             }
@@ -179,7 +181,9 @@ public class GameInputProcessor implements InputProcessor{
 //                System.out.println(clickedEntity.getLife());
             }
         } else {
-
+//            if (clickedEntity instanceof Building) {
+//                screen.getBuilder().repairBuilding((Building) clickedEntity);
+//            }
         }
         return true;
     }

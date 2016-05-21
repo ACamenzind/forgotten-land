@@ -143,6 +143,25 @@ public class StaticEntityBuilder {
     }
 
     /**
+     * Repairs a building. The cost depends on how much the building is damaged,
+     * and the repair is only done if there are enough resources available.
+     * @param building the building to repair
+     */
+    public void repairBuilding(Building building) {
+        int currentLife = building.getLife();
+        int maxLife = building.getMaxLife();
+        int amountToRepair = maxLife - currentLife;
+
+        ResourceContainer cost = building.getCosts().multiply(amountToRepair/maxLife * 0.5f);
+        ResourceContainer available = world.getResourceHandler().getTotalResources();
+
+        if (available.subtract(cost).noNegativeResources()) {
+            building.addLife(amountToRepair);
+            // TODO: 21/05/2016 Add UI refresh (buildings health doesn't update except when closing and reopening the menu).
+        }
+    }
+
+    /**
      * Removes the given building
      * @param entity the building to remove
      */

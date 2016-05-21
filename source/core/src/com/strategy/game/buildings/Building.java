@@ -90,6 +90,10 @@ public abstract class Building extends MapEntity {
         this.life = life;
     }
 
+    public void addLife(int amount) {
+        this.life += amount;
+    }
+
     public int getWorkers() {
         return workers;
     }
