@@ -74,6 +74,10 @@ public class Sidebar extends Table implements Display {
         updatePosition();
     }
 
+    public void setBuilding(Building building, boolean preview) {
+        ((SidebarBuildingInfo) displayBottom).setBuilding(building, preview);
+    }
+
     public void setBuilding(Building building) {
         ((SidebarBuildingInfo) displayBottom).setBuilding(building);
     }

@@ -127,6 +127,7 @@ public class GameButton extends Button {
                     Sidebar sidebar = (Sidebar) getParent().getParent();
                     StaticEntityBuilder builder = sidebar.getScreen().getBuilder();
                     builder.toggleSelectEntity(building);
+                    sidebar.setBuilding(building, true);
                 }
                 return true;
             }

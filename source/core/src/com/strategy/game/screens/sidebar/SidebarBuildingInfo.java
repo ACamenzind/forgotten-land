@@ -13,6 +13,7 @@ import com.strategy.game.GameButton;
 import com.strategy.game.ResourceContainer;
 import com.strategy.game.Utils;
 import com.strategy.game.buildings.Building;
+import com.strategy.game.buildings.Container;
 import com.strategy.game.screens.Display;
 
 /**
@@ -81,35 +82,49 @@ public class SidebarBuildingInfo extends Table implements Display {
         }
     }
 
-    public enum Menu { NONE, INFO, COST, PROFIT }
+    public enum Menu { NONE, INFO, COST, PROFIT, CAPACITY }
 
     // BUILDING
-    Building building;
+    private Building building;
+    private boolean preview = false;
 
     // TABLES
     private Table tableInfo = new Table();
     private Table tableCost = new Table();
     private Table tableProfit = new Table();
+    private Table tableCapacity = new Table();
 
     // NAME
     private Label name = Assets.makeLabel("", Utils.FONT_MEDIUM_BLACK);
     private Label nameCost = Assets.makeLabel(" - Cost", Utils.FONT_MEDIUM_BLACK);
     private Label nameProfit = Assets.makeLabel(" - Profit", Utils.FONT_MEDIUM_BLACK);
+    private Label nameCapacity = Assets.makeLabel(" - Capacity", Utils.FONT_MEDIUM_BLACK);
     private static final float NAME_POSITION_X = 0.075f;
     private static final float NAME_POSITION_Y = 0.85f;
 
-    // MENU
-    private static final int MENU_ITEMS = 3;
-    private static final float MENU_WIDTH = 1f;
-    private static final float MENU_HEIGHT = 0.125f;
-    private static final float MENU_BUTTON_WIDTH = MENU_WIDTH / MENU_ITEMS;
-    private static final float MENU_BUTTON_HEIGHT = 1f;
-    private GameButton menuButtonInfo = new GameButton(Assets.sidebarBuildInfoInfo);
-    private GameButton menuButtonCost = new GameButton(Assets.sidebarBuildInfoCost);
-    private GameButton menuButtonProfit = new GameButton(Assets.sidebarBuildInfoProfit);
-    private Table menu = new Table();
+    // MENU x3
+    private static final int MENU3_ITEMS = 3;
+    private static final float MENU3_WIDTH = 1f;
+    private static final float MENU3_HEIGHT = 0.125f;
+    private static final float MENU3_BUTTON_WIDTH = MENU3_WIDTH / MENU3_ITEMS;
+    private static final float MENU3_BUTTON_HEIGHT = 1f;
+    private GameButton menu3ButtonInfo = new GameButton(Assets.sidebarBuildInfoInfo);
+    private GameButton menu3ButtonCost = new GameButton(Assets.sidebarBuildInfoCost);
+    private GameButton menu3ButtonProfit = new GameButton(Assets.sidebarBuildInfoProfit);
+    private GameButton menu3ButtonCapacity = new GameButton(Assets.sidebarBuildInfoCapacity);
+    private Table menu3 = new Table();
 
-    //IMAGE
+    // MENU x2
+    private static final int MENU2_ITEMS = 2;
+    private static final float MENU2_WIDTH = 1f;
+    private static final float MENU2_HEIGHT = 0.125f;
+    private static final float MENU2_BUTTON_WIDTH = MENU2_WIDTH / MENU2_ITEMS;
+    private static final float MENU2_BUTTON_HEIGHT = 1f;
+    private GameButton menu2ButtonInfo = new GameButton(Assets.sidebarBuildInfoInfo);
+    private GameButton menu2ButtonCost = new GameButton(Assets.sidebarBuildInfoCost);
+    private Table menu2 = new Table();
+
+    // IMAGE
     private Image image = new Image();
     private static final float IMAGE_SIZE = 0.35f;
     private static final float IMAGE_POSITION_X = NAME_POSITION_X;
@@ -120,7 +135,7 @@ public class SidebarBuildingInfo extends Table implements Display {
     private static final float LIFE_POSITION_X = IMAGE_POSITION_X + IMAGE_SIZE + 0.05f;
     private static final float LIFE_POSITION_Y = IMAGE_POSITION_Y + IMAGE_SIZE / 2f;
 
-    //WORKERS
+    // WORKERS
     private Label workers = Assets.makeLabel("Workers:\n100 / 100", Utils.FONT_SMALL_BLACK);
     private static final float WORKERS_POSITION_X = IMAGE_POSITION_X + IMAGE_SIZE + 0.05f;
     private static final float WORKERS_POSITION_Y = IMAGE_POSITION_Y;
@@ -130,21 +145,21 @@ public class SidebarBuildingInfo extends Table implements Display {
     private static final float WORKERS_BUTTON_POSITION_X = WORKERS_POSITION_X + 0.3f;
     private static final float WORKERS_BUTTON_POSITION_Y = IMAGE_POSITION_Y;
 
-    //DESTROY
+    // DESTROY
     private GameButton destroyButton = new GameButton(Assets.sidebarBuildInfoDestroy);
     private static final float DESTROY_WIDTH = IMAGE_SIZE / 2f - 0.025f;
     private static final float DESTROY_HEIGHT = 0.1f;
     private static final float DESTROY_POSITION_X = NAME_POSITION_X;
     private static final float DESTROY_POSITION_Y = IMAGE_POSITION_Y - DESTROY_HEIGHT - 0.05f;
 
-    //REPAIR
+    // REPAIR
     private GameButton repairButton = new GameButton(Assets.sidebarBuildInfoRepair);
     private static final float REPAIR_WIDTH = DESTROY_WIDTH;
     private static final float REPAIR_HEIGHT = 0.1f;
     private static final float REPAIR_POSITION_X = NAME_POSITION_X + DESTROY_WIDTH + 0.05f;
     private static final float REPAIR_POSITION_Y = DESTROY_POSITION_Y;
 
-    //RESOURCES_BALANCE
+    // RESOURCES_BALANCE
     private ResourcesTable resourcesBalance = new ResourcesTable(1);
     private static final float RESOURCES_BALANCE_WIDTH = 0.1f;
     private static final float RESOURCES_BALANCE_HEIGHT = 0.1f;
@@ -165,6 +180,13 @@ public class SidebarBuildingInfo extends Table implements Display {
     private static final float RESOURCES_PROFIT_POSITION_X = 0.5f;
     private static final float RESOURCES_PROFIT_POSITION_Y = 0.5f;
 
+    // CAPACITY
+    private ResourcesTable resourcesCapacity = new ResourcesTable(1);
+    private static final float RESOURCES_CAPACITY_WIDTH = 0.6f;
+    private static final float RESOURCES_CAPACITY_HEIGHT = 0.6f;
+    private static final float RESOURCES_CAPACITY_POSITION_X = 0.5f;
+    private static final float RESOURCES_CAPACITY_POSITION_Y = 0.5f;
+
     public SidebarBuildingInfo() {
 
         // GENERAL
@@ -172,27 +194,52 @@ public class SidebarBuildingInfo extends Table implements Display {
 
         tableInfo.addActor(name);
 
-        menuButtonInfo.addListener(new InputListener() {
+        //MENU3
+        menu3ButtonInfo.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 updateMenu(Menu.INFO);
                 return false;
             }
         });
-        menu.addActor(menuButtonInfo);
-        menuButtonCost.addListener(new InputListener() {
+        menu3.addActor(menu3ButtonInfo);
+        menu3ButtonCost.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 updateMenu(Menu.COST);
                 return false;
             }
         });
-        menu.addActor(menuButtonCost);
-        menuButtonProfit.addListener(new InputListener() {
+        menu3.addActor(menu3ButtonCost);
+        menu3ButtonProfit.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 updateMenu(Menu.PROFIT);
                 return false;
             }
         });
-        menu.addActor(menuButtonProfit);
+        menu3.addActor(menu3ButtonProfit);
+        menu3ButtonCapacity.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                updateMenu(Menu.CAPACITY);
+                return false;
+            }
+        });
+        menu3.addActor(menu3ButtonCapacity);
+
+
+        // MENU2
+        menu2ButtonInfo.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                updateMenu(Menu.INFO);
+                return false;
+            }
+        });
+        menu2.addActor(menu2ButtonInfo);
+        menu2ButtonCost.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                updateMenu(Menu.COST);
+                return false;
+            }
+        });
+        menu2.addActor(menu2ButtonCost);
 
         // INFO
         tableInfo.addActor(life);
@@ -264,11 +311,20 @@ public class SidebarBuildingInfo extends Table implements Display {
         resourcesProfit.set(resourcesProfitTitles, resourcesProfitValues);
         tableProfit.addActor(resourcesProfit);
 
+        // CAPACITY
+        tableCapacity.addActor(nameCapacity);
+        String[] resourcesCapacityTitles = { "Total" };
+        int[][] resourcesCapacityValues = { { 0, 0, 0, 0, 0 } };
+        resourcesCapacity.set(resourcesCapacityTitles, resourcesCapacityValues);
+        tableCapacity.addActor(resourcesCapacity);
+
         // TABLES
-        addActor(menu);
+        addActor(menu3);
+        addActor(menu2);
         addActor(tableInfo);
         addActor(tableCost);
         addActor(tableProfit);
+        addActor(tableCapacity);
 
         // INIT
         update();
@@ -279,7 +335,11 @@ public class SidebarBuildingInfo extends Table implements Display {
     @Override
     public void update() {
         if (building != null) {
-            life.setText("Life:\n" + Integer.toString(building.getLife()) + " / " + Integer.toString(building.getMaxLife()));
+            if (preview)
+                life.setText(("Life:\n" + building.getMaxLife() + " / " + building.getMaxLife()));
+            else
+                life.setText("Life:\n" + Integer.toString(building.getLife()) + " / " + Integer.toString(building.getMaxLife()));
+
             workers.setText("Workers:\n" + Integer.toString(building.getWorkers()) + " / " + Integer.toString(building.getMaxWorkers()));
 
             ResourceContainer[] resourceCostContainer = {building.getCosts(), building.getMaintenanceCosts()};
@@ -287,6 +347,13 @@ public class SidebarBuildingInfo extends Table implements Display {
 
             ResourceContainer[] resourceProfitContainer = {building.getProductionsPerWorker(), building.getProductionsPerTurn()};
             resourcesProfit.set(resourceProfitContainer);
+
+            ResourceContainer[] resourceCapacityContainer = { new ResourceContainer(0, 0, 0, 0, 0) };
+            if (building instanceof Container) {
+                Container container = (Container) building;
+                resourceCapacityContainer[0] = container.getResourcesStored();
+            }
+            resourcesCapacity.set(resourceCapacityContainer);
         }
     }
 
@@ -294,24 +361,36 @@ public class SidebarBuildingInfo extends Table implements Display {
     public void updatePosition() {
 
         // TABLES
-        Assets.setSizeRelative(menu, MENU_WIDTH, MENU_HEIGHT);
+        Assets.setSizeRelative(menu3, MENU3_WIDTH, MENU3_HEIGHT);
+        Assets.setSizeRelative(menu2, MENU2_WIDTH, MENU2_HEIGHT);
         Assets.setSizeRelative(tableInfo, 1f, 1f);
         Assets.setSizeRelative(tableCost, 1f, 1f);
         Assets.setSizeRelative(tableProfit, 1f, 1f);
+        Assets.setSizeRelative(tableCapacity, 1f, 1f);
 
         // TITLE
         Assets.setPositionRelative(name, NAME_POSITION_X, NAME_POSITION_Y);
         Assets.setPositionRelative(nameCost, NAME_POSITION_X, NAME_POSITION_Y);
         Assets.setPositionRelative(nameProfit, NAME_POSITION_X, NAME_POSITION_Y);
+        Assets.setPositionRelative(nameCapacity, NAME_POSITION_X, NAME_POSITION_Y);
 
-        // MENU
-        Assets.setSizeRelative(menuButtonInfo, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT);
-        Assets.setSizeRelative(menuButtonCost, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT);
-        Assets.setSizeRelative(menuButtonProfit, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT);
+        // MENU3
+        Assets.setSizeRelative(menu3ButtonInfo, MENU3_BUTTON_WIDTH, MENU3_BUTTON_HEIGHT);
+        Assets.setSizeRelative(menu3ButtonCost, MENU3_BUTTON_WIDTH, MENU3_BUTTON_HEIGHT);
+        Assets.setSizeRelative(menu3ButtonProfit, MENU3_BUTTON_WIDTH, MENU3_BUTTON_HEIGHT);
+        Assets.setSizeRelative(menu3ButtonCapacity, MENU3_BUTTON_WIDTH, MENU3_BUTTON_HEIGHT);
 
-        Assets.setPositionRelative(menuButtonInfo, 0, 0);
-        Assets.setPositionRelative(menuButtonCost, MENU_BUTTON_WIDTH, 0);
-        Assets.setPositionRelative(menuButtonProfit, MENU_BUTTON_WIDTH * 2, 0);
+        Assets.setPositionRelative(menu3ButtonInfo, 0, 0);
+        Assets.setPositionRelative(menu3ButtonCost, MENU3_BUTTON_WIDTH, 0);
+        Assets.setPositionRelative(menu3ButtonProfit, MENU3_BUTTON_WIDTH * 2, 0);
+        Assets.setPositionRelative(menu3ButtonCapacity, MENU3_BUTTON_WIDTH * 2, 0);
+
+        // MENU2
+        Assets.setSizeRelative(menu2ButtonInfo, MENU2_BUTTON_WIDTH, MENU2_BUTTON_HEIGHT);
+        Assets.setSizeRelative(menu2ButtonCost, MENU2_BUTTON_WIDTH, MENU2_BUTTON_HEIGHT);
+
+        Assets.setPositionRelative(menu2ButtonInfo, 0, 0);
+        Assets.setPositionRelative(menu2ButtonCost, MENU2_BUTTON_WIDTH, 0);
 
         // INFO
         Assets.setSizeRelative(image, IMAGE_SIZE, IMAGE_SIZE);
@@ -341,49 +420,77 @@ public class SidebarBuildingInfo extends Table implements Display {
         // PROFIT
         Assets.setSizeRelative(resourcesProfit, RESOURCES_PROFIT_WIDTH, RESOURCES_PROFIT_HEIGHT);
         Assets.setPositionRelative(resourcesProfit, RESOURCES_PROFIT_POSITION_X, RESOURCES_PROFIT_POSITION_Y, true, true);
+
+        // CAPACITY
+        Assets.setSizeRelative(resourcesCapacity, RESOURCES_CAPACITY_WIDTH, RESOURCES_CAPACITY_HEIGHT);
+        Assets.setPositionRelative(resourcesCapacity, RESOURCES_CAPACITY_POSITION_X, RESOURCES_CAPACITY_POSITION_Y, true, true);
     }
 
     public void updateMenu(Menu menu) {
-        if (menu == Menu.INFO) {
-            this.menu.setVisible(true);
-            tableInfo.setVisible(true);
-            tableCost.setVisible(false);
-            tableProfit.setVisible(false);
-        }
-        else if (menu == Menu.COST) {
-            this.menu.setVisible(true);
-            tableInfo.setVisible(false);
-            tableCost.setVisible(true);
-            tableProfit.setVisible(false);
-        }
-        else if (menu == Menu.PROFIT) {
-            this.menu.setVisible(true);
+        if (menu == Menu.NONE || building == null) {
+            this.menu2.setVisible(false);
+            this.menu3.setVisible(false);
             tableInfo.setVisible(false);
             tableCost.setVisible(false);
-            tableProfit.setVisible(true);
+            tableProfit.setVisible(false);
+            tableCapacity.setVisible(false);
         }
         else {
-            this.menu.setVisible(false);
-            tableInfo.setVisible(false);
-            tableCost.setVisible(false);
-            tableProfit.setVisible(false);
+            if (menu == Menu.INFO) {
+                tableInfo.setVisible(true);
+                tableCost.setVisible(false);
+                tableProfit.setVisible(false);
+                tableCapacity.setVisible(false);
+            }
+            else if (menu == Menu.COST) {
+                tableInfo.setVisible(false);
+                tableCost.setVisible(true);
+                tableProfit.setVisible(false);
+                tableCapacity.setVisible(false);
+            }
+            else if (menu == Menu.PROFIT) {
+                tableInfo.setVisible(false);
+                tableCost.setVisible(false);
+                tableProfit.setVisible(true);
+                tableCapacity.setVisible(false);
+            }
+            else if (menu == Menu.CAPACITY) {
+                tableInfo.setVisible(false);
+                tableCost.setVisible(false);
+                tableProfit.setVisible(false);
+                tableCapacity.setVisible(true);
+            }
+
+            boolean manufacturer = building.getType() == Building.BuildingType.MANUFACTURER;
+            workers.setVisible(manufacturer);
+            workersButtonAdd.setVisible(manufacturer && !preview);
+            workersButtonRemove.setVisible(manufacturer && !preview);
+
+            boolean warehouse = building.getType() == Building.BuildingType.WAREHOUSE;
+
+            menu3.setVisible(manufacturer || warehouse);
+            menu2.setVisible(!(manufacturer || warehouse));
+
+            menu3ButtonProfit.setVisible(!warehouse || manufacturer);
+            menu3ButtonCapacity.setVisible(warehouse || !manufacturer);
+
+            destroyButton.setVisible(!preview);
+            repairButton.setVisible(!preview);
         }
-
-        boolean manufacturer = false;
-        if (building != null)
-            manufacturer = building.getType() == Building.BuildingType.MANUFACTURER;
-
-        workers.setVisible(manufacturer);
-        workersButtonAdd.setVisible(manufacturer);
-        workersButtonRemove.setVisible(manufacturer);
     }
 
     public void setBuilding(Building building) {
+        setBuilding(building, false);
+    }
+
+    public void setBuilding(Building building, boolean preview) {
         this.building = building;
+        this.preview = preview;
         if (building != null) {
             name.setText(building.getName());
             nameCost.setText(building.getName() + " - Cost");
             nameProfit.setText(building.getName() + " - Profit");
+            nameCapacity.setText(building.getName() + " - Capacity");
             image.setDrawable(new SpriteDrawable(new Sprite(building.getMainTexture())));
             life.setText("Life:\n" + Integer.toString(building.getLife()) + " / " + Integer.toString(building.getMaxLife()));
             workers.setText("Workers:\n" + Integer.toString(building.getWorkers()) + " / " + Integer.toString(building.getMaxWorkers()));
@@ -393,6 +500,13 @@ public class SidebarBuildingInfo extends Table implements Display {
 
             ResourceContainer[] resourceProfitContainer = {building.getProductionsPerWorker(), building.getProductionsPerTurn()};
             resourcesProfit.set(resourceProfitContainer);
+
+            ResourceContainer[] resourceCapacityContainer = { new ResourceContainer(0, 0, 0, 0, 0) };
+            if (building instanceof Container) {
+                Container container = (Container) building;
+                resourceCapacityContainer[0] = container.getResourcesStored();
+            }
+            resourcesCapacity.set(resourceCapacityContainer);
 
             updateMenu(Menu.INFO);
         }

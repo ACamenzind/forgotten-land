@@ -26,8 +26,8 @@ public class Assets {
     // SIDEBAR BACKGROUNDS
     public static Texture sidebarBackground, sidebarDisplayMiddleBackground;
     // SIDEBAR BUILDING INFO
-    public static Texture sidebarBuildInfoInfo, sidebarBuildInfoCost, sidebarBuildInfoProfit, sidebarBuildInfoPlus,
-            sidebarBuildInfoMinus, sidebarBuildInfoDestroy, sidebarBuildInfoRepair;
+    public static Texture sidebarBuildInfoInfo, sidebarBuildInfoCost, sidebarBuildInfoProfit, sidebarBuildInfoCapacity,
+            sidebarBuildInfoPlus, sidebarBuildInfoMinus, sidebarBuildInfoDestroy, sidebarBuildInfoRepair;
     // RESOURCES_BAR
     public static Texture resourcesBarBackground, resourcesBarPause, resourcesBarResume;
     public static Sound bgSound, hit;
@@ -57,6 +57,7 @@ public class Assets {
         sidebarBuildInfoInfo = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_info.png"));
         sidebarBuildInfoCost = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_cost.png"));
         sidebarBuildInfoProfit = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_profit.png"));
+        sidebarBuildInfoCapacity = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_capacity.png"));
         sidebarBuildInfoPlus = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_plus.png"));
         sidebarBuildInfoMinus = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_minus.png"));
         sidebarBuildInfoDestroy = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_destroy.png"));
