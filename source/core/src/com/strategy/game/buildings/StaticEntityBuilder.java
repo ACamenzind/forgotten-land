@@ -147,7 +147,7 @@ public class StaticEntityBuilder {
      * @param entity the building to remove
      */
     public void destroy(MapEntity entity) {
-        if (entity != null) {
+        if (entity != null && world.getBuildings().size() > 1) {
 
             if (entity instanceof Resource) {
                 world.getResources().remove(entity);
