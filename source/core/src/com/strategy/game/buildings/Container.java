@@ -7,7 +7,7 @@ import com.strategy.game.ResourceContainer;
 /**
  * Created on 21/05/2016.
  */
-public class Container extends Building {
+public abstract class Container extends Building {
     protected ResourceContainer resourcesStored;
 
     public Container(String name,
