@@ -1,11 +1,10 @@
 package com.strategy.game.screens.sidebar;
 
-import com.badlogic.gdx.graphics.Color;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
 import com.strategy.game.Utils;
 import com.strategy.game.buildings.House;
-import com.strategy.game.buildings.WarehouseFood;
+import com.strategy.game.buildings.Warehouse;
 
 /**
  * Created by Amedeo on 09/05/16.
@@ -23,7 +22,7 @@ public class SidebarBuildWarehouses extends SidebarBuildSelection {
         addActor(buttons[0][0]);
 
         buttons[1][0] = new GameButton(Assets.warehouse);
-        buttons[1][0].addListenerBuilding(new WarehouseFood());
+        buttons[1][0].addListenerBuilding(new Warehouse());
         addActor(buttons[1][0]);
 //
         update();

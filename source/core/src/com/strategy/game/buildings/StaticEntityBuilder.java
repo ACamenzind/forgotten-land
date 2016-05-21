@@ -300,6 +300,8 @@ public class StaticEntityBuilder {
                     selectedEntity.placeOnLayer(buildingsLayer, x, y);
                     this.world.getBuildings().add((Building) selectedEntity);
                     this.world.getResourceHandler().removeFromTotal(((Building) selectedEntity).getCosts());
+                    if (selectedEntity instanceof Warehouse)
+                        this.world.getResourceHandler().addToMaximum(((Warehouse) selectedEntity).getResourcesStored());
                     // Updates resources bar after placing building
                     world.getGameScreen().getResourcesBar().update();
                 }

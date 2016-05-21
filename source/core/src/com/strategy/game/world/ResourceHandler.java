@@ -24,7 +24,7 @@ public class ResourceHandler {
     public ResourceHandler(World world, int woodCounter, int goldCounter, int foodCounter, int rockCounter, int people) {
         this.world = world;
         this.totalResources = new ResourceContainer(woodCounter, goldCounter, foodCounter, rockCounter, people);
-        this.maximumResources = new ResourceContainer(5000, 5000, 5000, 5000, 10);
+        this.maximumResources = new ResourceContainer(300, 300, 300, 300, 10);
 
     }
 
@@ -50,6 +50,14 @@ public class ResourceHandler {
      */
     public void addToTotal(ResourceContainer amount) {
         totalResources = totalResources.add(amount);
+    }
+
+    /**
+     * Adds to the maximum amount of resources (used for containers)
+     * @param amount
+     */
+    public void addToMaximum(ResourceContainer amount) {
+        maximumResources = maximumResources.add(amount);
     }
 
     /**
@@ -100,6 +108,7 @@ public class ResourceHandler {
 
         totalResources = new ResourceContainer(wood, food, rock, gold, people);
     }
+
 
     /**
      * Updates the state of all the resources.

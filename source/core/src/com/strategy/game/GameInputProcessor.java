@@ -3,13 +3,7 @@ package com.strategy.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.buildings.*;
@@ -114,7 +108,7 @@ public class GameInputProcessor implements InputProcessor{
                 screen.getBuilder().toggleSelectEntity(new CollectorFood());
                 break;
             case Input.Keys.NUM_6:
-                screen.getBuilder().toggleSelectEntity(new WarehouseFood());
+                screen.getBuilder().toggleSelectEntity(new Warehouse());
                 break;
             case Input.Keys.NUM_7:
                 screen.getBuilder().toggleSelectEntity(new CollectorRock());
