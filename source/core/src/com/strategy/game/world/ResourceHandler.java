@@ -41,6 +41,10 @@ public class ResourceHandler {
         return totalWorkers;
     }
 
+    public int getUnemployed() {
+        return totalResources.people - totalWorkers;
+    }
+
     public void setTotalWorkers(int totalWorkers) {
         this.totalWorkers = totalWorkers;
     }

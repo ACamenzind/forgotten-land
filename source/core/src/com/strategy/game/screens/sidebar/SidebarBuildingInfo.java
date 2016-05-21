@@ -22,66 +22,65 @@ import com.strategy.game.world.ResourceHandler;
  */
 public class SidebarBuildingInfo extends Table implements Display {
 
-    public class ResourcesTable extends Table {
-
-        private static final int RESOURCES_NUMBER = 5;
-
-        private Label[][] table;
-        private int tableHeight;
-        private int tableWidth;
-
-        public ResourcesTable(int columnsNumber) {
-            tableWidth = columnsNumber + 1;
-            tableHeight = RESOURCES_NUMBER + 1;
-
-            table = new Label[RESOURCES_NUMBER + 1][columnsNumber + 1];
-            table[1][0] = Assets.makeLabel("Food", Utils.FONT_SMALL_BLACK);
-            table[2][0] = Assets.makeLabel("Wood", Utils.FONT_SMALL_BLACK);
-            table[3][0] = Assets.makeLabel("Minerals", Utils.FONT_SMALL_BLACK);
-            table[4][0] = Assets.makeLabel("Gold", Utils.FONT_SMALL_BLACK);
-            table[5][0] = Assets.makeLabel("People", Utils.FONT_SMALL_BLACK);
-
-            for (int y = 0; y < table.length; y++) {
-                for (int x = 0; x < table[y].length; x++) {
-                    if (x == 0) {
-                        add(table[y][x]);
-                    }
-                    else {
-                        table[y][x] = Assets.makeLabel("", Utils.FONT_SMALL_BLACK);
-                        add(table[y][x]).uniform().expand();
-                    }
-
-                }
-                row();
-            }
-//            updatePosition();
-        }
-
-        public void set(String[] titles, int[][] values) {
-            for (int i = 0; i < titles.length; i++) {
-                table[0][i+1].setText(titles[i]);
-            }
-            set(values);
-        }
-
-        public void set(int[][] values) {
-            for (int x = 0; x < values.length; x++) {
-                for (int y = 0; y < values[x].length; y++) {
-                    table[y+1][x+1].setText(Integer.toString(values[x][y]));
-                }
-            }
-        }
-
-        public void set(ResourceContainer[] resourceContainers) {
-            for (int i = 0; i < resourceContainers.length; i++) {
-                table[1][i+1].setText(Integer.toString(resourceContainers[i].food));
-                table[2][i+1].setText(Integer.toString(resourceContainers[i].wood));
-                table[3][i+1].setText(Integer.toString(resourceContainers[i].rock));
-                table[4][i+1].setText(Integer.toString(resourceContainers[i].gold));
-                table[5][i+1].setText(Integer.toString(resourceContainers[i].people));
-            }
-        }
-    }
+//    public class ResourcesTable extends Table {
+//
+//        private static final int RESOURCES_NUMBER = 5;
+//
+//        private Label[][] table;
+//        private int tableHeight;
+//        private int tableWidth;
+//
+//        public ResourcesTable(int columnsNumber) {
+//            tableWidth = columnsNumber + 1;
+//            tableHeight = RESOURCES_NUMBER + 1;
+//
+//            table = new Label[RESOURCES_NUMBER + 1][columnsNumber + 1];
+//            table[1][0] = Assets.makeLabel("Food", Utils.FONT_SMALL_BLACK);
+//            table[2][0] = Assets.makeLabel("Wood", Utils.FONT_SMALL_BLACK);
+//            table[3][0] = Assets.makeLabel("Minerals", Utils.FONT_SMALL_BLACK);
+//            table[4][0] = Assets.makeLabel("Gold", Utils.FONT_SMALL_BLACK);
+//            table[5][0] = Assets.makeLabel("People", Utils.FONT_SMALL_BLACK);
+//
+//            for (int y = 0; y < table.length; y++) {
+//                for (int x = 0; x < table[y].length; x++) {
+//                    if (x == 0) {
+//                        add(table[y][x]);
+//                    }
+//                    else {
+//                        table[y][x] = Assets.makeLabel("", Utils.FONT_SMALL_BLACK);
+//                        add(table[y][x]).uniform().expand();
+//                    }
+//
+//                }
+//                row();
+//            }
+//        }
+//
+//        public void set(String[] titles, int[][] values) {
+//            for (int i = 0; i < titles.length; i++) {
+//                table[0][i+1].setText(titles[i]);
+//            }
+//            set(values);
+//        }
+//
+//        public void set(int[][] values) {
+//            for (int x = 0; x < values.length; x++) {
+//                for (int y = 0; y < values[x].length; y++) {
+//                    table[y+1][x+1].setText(Integer.toString(values[x][y]));
+//                }
+//            }
+//        }
+//
+//        public void set(ResourceContainer[] resourceContainers) {
+//            for (int i = 0; i < resourceContainers.length; i++) {
+//                table[1][i+1].setText(Integer.toString(resourceContainers[i].food));
+//                table[2][i+1].setText(Integer.toString(resourceContainers[i].wood));
+//                table[3][i+1].setText(Integer.toString(resourceContainers[i].rock));
+//                table[4][i+1].setText(Integer.toString(resourceContainers[i].gold));
+//                table[5][i+1].setText(Integer.toString(resourceContainers[i].people));
+//            }
+//        }
+//    }
 
     public enum Menu { NONE, INFO, COST, PROFIT, CAPACITY }
 
@@ -250,11 +249,11 @@ public class SidebarBuildingInfo extends Table implements Display {
         workersButtonAdd.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (building != null) {
-//                    building.changeWorker(1);
                     Sidebar sidebar = (Sidebar) getParent();
                     ResourceHandler handler = sidebar.getScreen().getWorld().getResourceHandler();
                     handler.addWorker(building);
-                    update();
+                    sidebar.getScreen().getResourcesBar().update();
+                    sidebar.update();
                 }
                 return false;
             }
@@ -263,11 +262,11 @@ public class SidebarBuildingInfo extends Table implements Display {
         workersButtonRemove.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (building != null) {
-//                    building.changeWorker(-1);
                     Sidebar sidebar = (Sidebar) getParent();
                     ResourceHandler handler = sidebar.getScreen().getWorld().getResourceHandler();
                     handler.removeWorker(building);
-                    update();
+                    sidebar.getScreen().getResourcesBar().update();
+                    sidebar.update();
                 }
                 return false;
             }
@@ -499,8 +498,8 @@ public class SidebarBuildingInfo extends Table implements Display {
             nameProfit.setText(building.getName() + " - Profit");
             nameCapacity.setText(building.getName() + " - Capacity");
             image.setDrawable(new SpriteDrawable(new Sprite(building.getMainTexture())));
-            life.setText("Life:\n" + Integer.toString(building.getLife()) + " / " + Integer.toString(building.getMaxLife()));
-            workers.setText("Workers:\n" + Integer.toString(building.getWorkers()) + " / " + Integer.toString(building.getMaxWorkers()));
+            life.setText("Life:\n" + building.getLife() + " / " + building.getMaxLife());
+            workers.setText("Workers:\n" + building.getWorkers() + " / " + building.getMaxWorkers());
 
             ResourceContainer[] resourceCostContainer = {building.getCosts(), building.getMaintenanceCosts()};
             resourcesCost.set(resourceCostContainer);

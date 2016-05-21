@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
+import com.strategy.game.ResourceContainer;
 import com.strategy.game.Utils;
 import com.strategy.game.screens.Display;
 import com.strategy.game.world.World;
@@ -33,6 +34,12 @@ public class SidebarGameInfo extends Table implements Display {
     private static final float UNEMPLYED_POSITION_Y = 0.7f;
     private Label unemployed = Assets.makeLabel("Unemployed: 0", Utils.FONT_MEDIUM_BLACK);
 
+    private ResourcesTable resources = new ResourcesTable(3);
+    private static final float RESOURCES_WIDTH = 0.8f;
+    private static final float RESOURCES_HEIGHT = 0.3f;
+    private static final float RESOURCES_POSITION_X = 0.5f;
+    private static final float RESOURCES_POSITION_Y = 0.25f;
+
     public SidebarGameInfo(World world) {
         this.world = world;
 
@@ -43,19 +50,30 @@ public class SidebarGameInfo extends Table implements Display {
         addActor(workers);
         addActor(unemployed);
 
+        //addActor(nameCapacity);
+        String[] resourcesCapacityTitles = { "Total", "Max", "Variance" };
+        int[][] resourcesCapacityValues = { { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } };
+        resources.set(resourcesCapacityTitles, resourcesCapacityValues);
+        addActor(resources);
+
         update();
         updatePosition();
     }
 
     @Override
     public void update() {
-//        total_population.setText("Population: " + world.getTotalPopulation());
-//        workers.setText(("Workers: " + world.getWorkers()));
-        unemployed.setText(("Unemployed: " + world.getResourceHandler().getTotalResources().people));
+        total_population.setText("Population: " + world.getResourceHandler().getTotalResources().people);
+        workers.setText("Workers: " + world.getResourceHandler().getTotalWorkers());
+        unemployed.setText("Unemployed: " + world.getResourceHandler().getUnemployed());
 
         total_population.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_BLACK));
         workers.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_BLACK));
         unemployed.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_BLACK));
+
+        ResourceContainer[] resourceProfitContainer = { world.getResourceHandler().getTotalResources(),
+                                                        world.getResourceHandler().getMaximumResources(),
+                                                        world.getResourceHandler().getTotalResources() };
+        resources.set(resourceProfitContainer);
     }
 
     @Override
@@ -64,5 +82,7 @@ public class SidebarGameInfo extends Table implements Display {
         Assets.setPositionRelative(total_population, TOTAL_POPULATION_POSITION_X, TOTAL_POPULATION_POSITION_Y);
         Assets.setPositionRelative(workers, WORKERS_POSITION_X, WORKERS_POSITION_Y);
         Assets.setPositionRelative(unemployed, UNEMPLYED_POSITION_X, UNEMPLYED_POSITION_Y);
+        Assets.setSizeRelative(resources, RESOURCES_WIDTH, RESOURCES_HEIGHT);
+        Assets.setPositionRelative(resources, RESOURCES_POSITION_X, RESOURCES_POSITION_Y, true, false);
     }
 }
