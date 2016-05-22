@@ -77,16 +77,11 @@ public class ResourcesBar extends Table implements Display {
 
     @Override
     public void update() {
-//        setSize(stage.getWidth() * 0.85f, stage.getHeight() * 0.05f);
-//        setPosition(0, stage.getHeight() * 0.95f);
-//
-//        Assets.setPositionRelative(resources, 0.5f, 0.5f, true, true);
-
         String newFoodCount = "" + world.getResourceHandler().getTotalResources().food;
         String newWoodCount = "" + world.getResourceHandler().getTotalResources().wood;
         String newRockCount = "" + world.getResourceHandler().getTotalResources().rock;
         String newGoldCount = "" + world.getResourceHandler().getTotalResources().gold;
-        String newPeopleCount = "" + world.getResourceHandler().getTotalResources().people;
+        String newPeopleCount = "" + world.getResourceHandler().getUnemployed();
 
         ResourceHandler resourceHandler = world.getResourceHandler();
 
