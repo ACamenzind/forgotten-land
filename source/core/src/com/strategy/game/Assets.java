@@ -31,7 +31,7 @@ public class Assets {
     // RESOURCES_BAR
     public static Texture resourcesBarBackground, resourcesBarPause, resourcesBarResume;
     public static Sound bgSound, hit;
-    private static final String DEFAULT_FONT_PATH = "core/assets/fonts/times_new_roman.ttf";
+    private static final String DEFAULT_FONT_PATH = "core/assets/fonts/san_francisco_regular.ttf";
 
     public static void load() {
 //        map = new TmxMapLoader().load("core/assets/maps/big_map.tmx");
