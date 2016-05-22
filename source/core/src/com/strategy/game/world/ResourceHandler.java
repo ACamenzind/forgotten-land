@@ -45,6 +45,10 @@ public class ResourceHandler {
         this.totalWorkers = totalWorkers;
     }
 
+    /**
+     * Moves a worker to the given building.
+     * @param building
+     */
     public void addWorker(Building building) {
         if (totalWorkers < totalResources.people) {
             building.changeWorker(1);
@@ -52,6 +56,10 @@ public class ResourceHandler {
         }
     }
 
+    /**
+     * Removes a worker from the given building
+     * @param building
+     */
     public void removeWorker(Building building) {
         if (totalWorkers > 0) {
             building.changeWorker(-1);
@@ -59,6 +67,10 @@ public class ResourceHandler {
         }
     }
 
+    /**
+     * Removes all workers from the given building (used when destroying).
+     * @param building
+     */
     public void removeAllWorkers(Building building) {
         int workers = building.getWorkers();
         building.changeWorker(-workers);
@@ -138,6 +150,18 @@ public class ResourceHandler {
         totalResources = new ResourceContainer(wood, food, rock, gold, people);
     }
 
+    /**
+     * Reduce 1 unit of food for each citizen per turn.
+     */
+    public void feedPopulation() {
+        int wood = totalResources.wood;
+        int food = totalResources.food - totalResources.people;
+        int rock = totalResources.rock;
+        int gold = totalResources.gold;
+        int people = totalResources.people;
+        totalResources = new ResourceContainer(wood, food, rock, gold, people);
+    }
+
 
     /**
      * Updates the state of all the resources.
@@ -212,8 +236,10 @@ public class ResourceHandler {
             }
         }
         world.getBuilder().destroyBuildings(toDestroy);
+        feedPopulation();
         capResourceCount();
         handleNegativeResourceCount();
+
 //        System.out.println("Total population: " + totalResources.people);
 //        System.out.println("Unemployed: " + (totalResources.people - totalWorkers));
 //        System.out.println("Workers: " + totalWorkers);

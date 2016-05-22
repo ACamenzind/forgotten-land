@@ -13,7 +13,7 @@ public class Wall extends Building {
     private static final String NAME = "Wall";
     private static final ResourceContainer COST = new ResourceContainer(0, 0, 0, 0, 0);
     private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 0, 0, 0, 0);
-    private static final ResourceContainer MAINTENANCE = new ResourceContainer(0, 1, 1, 1, 0);
+    private static final ResourceContainer MAINTENANCE = new ResourceContainer(0, 0, 1, 1, 0);
 
     private static final int MAX_LIFE = 100;
     private static final int MAX_WORKERS = 0;
