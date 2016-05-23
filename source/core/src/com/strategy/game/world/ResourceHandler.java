@@ -112,6 +112,16 @@ public class ResourceHandler {
     }
 
     /**
+     * Remove a certain amount of people from the game
+     * @param amount the number of people to kill
+     */
+    public void removePop(int amount) {
+        for (int i = 0; i < amount; i++) {
+            removeOnePop();
+        }
+    }
+
+    /**
      * Removes from the total count of resources
      * @param amount
      */

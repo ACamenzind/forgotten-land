@@ -1,5 +1,9 @@
 package com.strategy.game.world;
 
+import com.strategy.game.buildings.Building;
+
+import java.util.ArrayList;
+
 /**
  * Handles the world events (e.g. diseases, attacks, ...)
  */
@@ -32,13 +36,24 @@ public class WorldEventsHandler {
         }
     }
 
+    /**
+     * Fire random event: all buildings get damaged (50%).
+     */
     private void startFire() {
+        System.out.println("A fire suddenly damaged all your buildings!");
+        ArrayList<Building> buildings = world.getBuildings();
+        for (Building building: buildings) {
+            int halfLife = building.getLife() / 2;
+            building.setLife(halfLife);
+        }
     }
 
+    /**
+     * Plague random event: half of the population dies suddenly.
+     */
     public void startPlague() {
+        System.out.println("A plague has spread throughout your village! Half the population is now dead!");
         int halfPop = resourceHandler.getTotalResources().people / 2;
-        for (int i = 0; i < halfPop; i++) {
-            resourceHandler.removeOnePop();
-        }
+        resourceHandler.removePop(halfPop);
     }
 }

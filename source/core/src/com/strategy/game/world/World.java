@@ -52,7 +52,7 @@ public class World implements Disposable{
         this.buildings = new ArrayList<Building>();
         this.resources = new ArrayList<Resource>();
         this.movableEntities = new ArrayList<MovableEntity>();
-        this.resourceHandler = new ResourceHandler(this, 3000, 3000, 3000, 3000, 5);
+        this.resourceHandler = new ResourceHandler(this, 300, 300, 300, 300, 5);
         this.updateCounter = 0;
         this.populationHandler = new PopulationHandler(5, 200, 20);
         this.tick = 0;
@@ -171,8 +171,7 @@ public class World implements Disposable{
                 // Roll dice
                 int rand = new Random().nextInt(100);
                 if (rand > 50) { // 50% probability of having the plague
-                    System.out.println("Plague! Half the population dies");
-                    worldEventsHandler.startPlague();
+                    worldEventsHandler.randomEvent();
                 }
             }
 
