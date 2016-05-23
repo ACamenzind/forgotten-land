@@ -37,6 +37,7 @@ public class MainMenuScreen implements Screen{
         this.camera = new OrthographicCamera(Utils.DEFAULT_WIDTH, Utils.DEFAULT_HEIGHT);
         this.batch = game.getBatch();
         this.font = game.getFont();
+        menubk.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         camera.setToOrtho(false, 2*Utils.DEFAULT_WIDTH, 2*Utils.DEFAULT_HEIGHT);
 
         setupStage();
@@ -132,7 +133,9 @@ public class MainMenuScreen implements Screen{
         buttons.setPosition(Gdx.graphics.getWidth() * 0.7f, Gdx.graphics.getHeight() * 0.05f);
 
         // NEW GAME BUTTON
-        GameButton newGameButton = new GameButton("core/assets/textures/mainMenuScreen/newgame.png");
+        Texture newGameButtonT = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/newgame.png"));
+        newGameButtonT.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        GameButton newGameButton = new GameButton(newGameButtonT);
         newGameButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 game.setScreen(new GameScreen(game));
@@ -146,7 +149,9 @@ public class MainMenuScreen implements Screen{
         Assets.setPositionRelative(newGameButton, 0f, 0.8f, false, true);
 
         //LOAD GAME BUTTON
-        GameButton loadGameButton = new GameButton("core/assets/textures/mainMenuScreen/loadgame.png");
+        Texture loadGameButtonT = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/loadgame.png"));
+        loadGameButtonT.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        GameButton loadGameButton = new GameButton(loadGameButtonT);
         loadGameButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 //                Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
@@ -160,7 +165,9 @@ public class MainMenuScreen implements Screen{
         Assets.setPositionRelative(loadGameButton, 0f, 0.5f, false, true);
 
         // SETTINGS BUTTON
-        GameButton settingsButton = new GameButton("core/assets/textures/mainMenuScreen/settings.png");
+        Texture settingsButtonT = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/settings.png"));
+        settingsButtonT.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        GameButton settingsButton = new GameButton(settingsButtonT);
         settingsButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 //                Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
