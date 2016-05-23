@@ -1,7 +1,7 @@
 package com.strategy.game;
 
 /**
- * Created by batta on 28/04/16.
+ * Data structure that contains all the types of resources
  */
 public class ResourceContainer {
     public int wood;
@@ -58,8 +58,21 @@ public class ResourceContainer {
         return new ResourceContainer(wood, food, rock, gold, people);
     }
 
+    /**
+     * Returns true if none of the resources are negative.
+     * @return
+     */
     public boolean noNegativeResources() {
         return wood >= 0 && food >= 0 && rock >= 0 && gold >= 0;
+    }
+
+    /**
+     * Checks if any of the resources is zero
+     * @return
+     */
+    public boolean hasZeroResources() {
+        int result = wood * food * rock * gold;
+        return result == 0;
     }
 
     @Override

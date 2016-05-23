@@ -158,7 +158,7 @@ public class World implements Disposable{
 
     /**
      * The main world simulation loop, called every frame.
-     * @param delta time since last frame
+     * @param delta time since last frame (used for animations)
      */
     public void update(float delta) {
         if(updateCounter / tickDuration >= 1 && isRunning) {

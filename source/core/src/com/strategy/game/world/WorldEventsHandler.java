@@ -11,6 +11,14 @@ public class WorldEventsHandler {
     private World world;
     private ResourceHandler resourceHandler;
 
+    public WorldEventsHandler(World world) {
+        this.world = world;
+        this.resourceHandler = world.getResourceHandler();
+    }
+
+    /**
+     * Represents all types of world events.
+     */
     public enum WorldEvent {
         PLAGUE, FIRE;
 
@@ -19,11 +27,9 @@ public class WorldEventsHandler {
         }
     }
 
-    public WorldEventsHandler(World world) {
-        this.world = world;
-        this.resourceHandler = world.getResourceHandler();
-    }
-
+    /**
+     * Starts a random event from the list of the possible ones.
+     */
     public void randomEvent() {
         WorldEvent event = WorldEvent.getRandom();
         switch (event) {

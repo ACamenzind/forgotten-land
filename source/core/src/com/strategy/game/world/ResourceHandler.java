@@ -215,7 +215,7 @@ public class ResourceHandler {
      * as well as removing the maintenance costs.
      */
     public void update() {
-        ArrayList<Building> toDestroy = new ArrayList<Building>();
+
 
         for (Building building:
              world.getBuildings()) {
@@ -276,25 +276,26 @@ public class ResourceHandler {
             }
             maintenance = building.getMaintenanceCosts();
             totalResources = totalResources.subtract(maintenance);
+
+        }
+
+        feedPopulation();
+        capResourceCount();
+        handleNegativeResourceCount();
+
+        if (totalResources.hasZeroResources())
+            degradeBuildings();
+
+    }
+
+    private void degradeBuildings() {
+        ArrayList<Building> toDestroy = new ArrayList<Building>();
+        for (Building building: world.getBuildings()) {
             building.degrade();
             if (building.getLife() <= 0) {
                 toDestroy.add(building);
             }
         }
         world.getBuilder().destroyBuildings(toDestroy);
-        feedPopulation();
-        capResourceCount();
-        handleNegativeResourceCount();
-
-//        System.out.println("Before plague: ----");
-//        System.out.println("Total population: " + totalResources.people);
-//        System.out.println("Unemployed: " + (totalResources.people - totalWorkers));
-//        System.out.println("Workers: " + totalWorkers);
-
-//        System.out.println("After plague: ----");
-//        System.out.println("Total population: " + totalResources.people);
-//        System.out.println("Unemployed: " + (totalResources.people - totalWorkers));
-//        System.out.println("Workers: " + totalWorkers);
-
     }
 }
