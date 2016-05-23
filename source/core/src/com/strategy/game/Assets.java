@@ -126,9 +126,9 @@ public class Assets {
         if (actor != null && actor.hasParent()) {
             final Actor parent = actor.getParent();
             float offsetX = 0;
-            if (centerX) offsetX = actor.getWidth() / 2;
+            if (centerX) offsetX = actor.getWidth() / 2f;
             float offsetY = 0;
-            if (centerY) offsetY = actor.getHeight() / 2;
+            if (centerY) offsetY = actor.getHeight() / 2f;
             actor.setPosition(parent.getWidth() * x - offsetX, parent.getHeight() * y - offsetY);
         }
     }

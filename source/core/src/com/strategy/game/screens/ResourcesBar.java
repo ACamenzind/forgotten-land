@@ -126,7 +126,7 @@ public class ResourcesBar extends Table implements Display {
         setPosition(0, stage.getHeight() * 0.95f);
 
         Assets.setPositionRelative(resources, 0.5f, 0.5f, true, true);
-        Assets.setSizeRelative(pause, 0.075f, 0.6f);
+        Assets.setSizeRelative(pause, 0.064f, 1f);
         Assets.setPositionRelative(pause, 0.0125f, 0.5f, false, true);
     }
 

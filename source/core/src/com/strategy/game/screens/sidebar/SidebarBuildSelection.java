@@ -26,6 +26,9 @@ public class SidebarBuildSelection extends Table implements Display {
     private static final float TITLE_POSITION_X = 0.5f;
     private static final float TITLE_POSITION_Y = 0.9f;
 
+    private static final float BUTTON_BOTTOM_WIDTH = 0.16f;
+    private static final float BUTTON_BOTTOM_HEIGHT = 0.069f;
+
     public SidebarBuildSelection() {
         Assets.setBackground(this, Assets.sidebarDisplayMiddleBackground);
 
@@ -65,13 +68,13 @@ public class SidebarBuildSelection extends Table implements Display {
             }
         }
 
-        Assets.setSizeRelative(rotate, BUTTON_WIDTH, BUTTON_HEIGHT);
+        Assets.setSizeRelative(rotate, BUTTON_BOTTOM_WIDTH, BUTTON_BOTTOM_HEIGHT);
         Assets.setPositionRelative(rotate, MARGIN, 0.1f, false, true);
 
-        Assets.setSizeRelative(cancel, BUTTON_WIDTH, BUTTON_HEIGHT);
+        Assets.setSizeRelative(cancel, BUTTON_BOTTOM_WIDTH, BUTTON_BOTTOM_HEIGHT);
         Assets.setPositionRelative(cancel, MARGIN * 2 + BUTTON_WIDTH, 0.1f, false, true);
 
-        Assets.setSizeRelative(back, BUTTON_WIDTH, BUTTON_HEIGHT);
+        Assets.setSizeRelative(back, BUTTON_BOTTOM_WIDTH, BUTTON_BOTTOM_HEIGHT);
         Assets.setPositionRelative(back, MARGIN * 3 + BUTTON_WIDTH * 2, 0.1f, false, true);
     }
 }

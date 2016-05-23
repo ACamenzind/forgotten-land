@@ -15,10 +15,9 @@ public class SidebarMenu extends Table implements Display {
     private GameButton buildingsButton;
     private GameButton mainMenuButton;
 
-    private static final int BUTTONS_NUMBER = 3;
-    private static final float MARGIN = 0;//.05f;
-    private static final float BUTTON_WIDTH = 1f / 3f;//(1f - (MARGIN * (BUTTONS_NUMBER + 1f))) / BUTTONS_NUMBER;
-    private static final float BUTTON_HEIGHT = 1f;//0.75f;
+    private static final float MARGIN = 0;
+    private static final float BUTTON_WIDTH = 1f / 3f;
+    private static final float BUTTON_HEIGHT = 1f;
 
 
     public SidebarMenu() {

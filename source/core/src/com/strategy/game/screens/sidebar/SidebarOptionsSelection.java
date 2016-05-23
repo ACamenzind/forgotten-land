@@ -21,8 +21,8 @@ public class SidebarOptionsSelection extends Table implements Display {
     private static final int BUTTONS_PER_ROW = 1;
 
     private static final float MARGIN = 0.1f;
-    private static final float BUTTON_WIDTH = (1f - (MARGIN * (BUTTONS_PER_ROW + 1f))) / BUTTONS_PER_ROW;//1f - MARGIN * 2f;
-    private static final float BUTTON_HEIGHT = 0.05f;
+    private static final float BUTTON_WIDTH = 0.97f;//(1f - (MARGIN * (BUTTONS_PER_ROW + 1f))) / BUTTONS_PER_ROW;
+    private static final float BUTTON_HEIGHT = 0.075f;//0.05f;
     private static final float TITLE_POSITION_X = 0.5f;
     private static final float TITLE_POSITION_Y = 0.9f;
 
@@ -43,12 +43,11 @@ public class SidebarOptionsSelection extends Table implements Display {
         title.setStyle(Assets.makeLabelStyle(Utils.FONT_BIG_BLACK));
 
         for (int y = 0; y < buttons.length; y++) {
-            final float POSITION_Y = 1f - BUTTON_HEIGHT * (y + 2) * 2;
+            final float POSITION_Y = 1f - BUTTON_HEIGHT * (y + 2) * 1.5f;
             for (int x = 0; x < buttons[y].length; x++) {
-                final float POSITION_X = MARGIN * (x + 1) + BUTTON_WIDTH * x;
                 if (buttons[y][x] != null) {
                     Assets.setSizeRelative(buttons[y][x], BUTTON_WIDTH, BUTTON_HEIGHT);
-                    Assets.setPositionRelative(buttons[y][x], POSITION_X, POSITION_Y, false, true);
+                    Assets.setPositionRelative(buttons[y][x], 0.5f, POSITION_Y, true, true);
                 }
             }
         }
