@@ -20,21 +20,21 @@ public class SidebarGameInfo extends Table implements Display {
 
     private static final float TITLE_POSITION_X = 0.5f;
     private static final float TITLE_POSITION_Y = 0.9f;
-    private static final Label title = Assets.makeLabel("Game Info", Utils.FONT_BIG_BLACK);
+    private static final Label title = Assets.makeLabel("Game Info", Utils.FONT_BIG_WHITE);
 
     private static final float TOTAL_POPULATION_POSITION_X = MARGIN;
     private static final float TOTAL_POPULATION_POSITION_Y = 0.8f;
-    private Label total_population = Assets.makeLabel("Population: 5", Utils.FONT_MEDIUM_BLACK);
+    private Label total_population = Assets.makeLabel("Population: 5", Utils.FONT_MEDIUM_WHITE);
 
     private static final float WORKERS_POSITION_X = MARGIN;
     private static final float WORKERS_POSITION_Y = 0.75f;
-    private Label workers = Assets.makeLabel("Workers: 0", Utils.FONT_MEDIUM_BLACK);
+    private Label workers = Assets.makeLabel("Workers: 0", Utils.FONT_MEDIUM_WHITE);
 
     private static final float UNEMPLYED_POSITION_X = MARGIN;
     private static final float UNEMPLYED_POSITION_Y = 0.7f;
-    private Label unemployed = Assets.makeLabel("Unemployed: 0", Utils.FONT_MEDIUM_BLACK);
+    private Label unemployed = Assets.makeLabel("Unemployed: 0", Utils.FONT_MEDIUM_WHITE);
 
-    private ResourcesTable resources = new ResourcesTable(3);
+    private ResourcesTable resources = new ResourcesTable(3, Utils.FONT_SMALL_WHITE);
     private static final float RESOURCES_WIDTH = 0.8f;
     private static final float RESOURCES_HEIGHT = 0.3f;
     private static final float RESOURCES_POSITION_X = 0.5f;
@@ -43,7 +43,7 @@ public class SidebarGameInfo extends Table implements Display {
     public SidebarGameInfo(World world) {
         this.world = world;
 
-        Assets.setBackground(this, Assets.sidebarDisplayMiddleBackground);
+        Assets.setBackground(this, Assets.sidebarBgInfo);
 
         addActor(title);
         addActor(total_population);
@@ -66,9 +66,9 @@ public class SidebarGameInfo extends Table implements Display {
         workers.setText("Workers: " + world.getResourceHandler().getTotalWorkers());
         unemployed.setText("Unemployed: " + world.getResourceHandler().getUnemployed());
 
-        total_population.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_BLACK));
-        workers.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_BLACK));
-        unemployed.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_BLACK));
+        total_population.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_WHITE));
+        workers.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_WHITE));
+        unemployed.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_WHITE));
 
         ResourceContainer[] resourceProfitContainer = { world.getResourceHandler().getTotalResources(),
                                                         world.getResourceHandler().getMaximumResources(),

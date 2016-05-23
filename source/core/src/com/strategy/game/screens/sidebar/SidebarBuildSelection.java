@@ -30,19 +30,19 @@ public class SidebarBuildSelection extends Table implements Display {
     private static final float BUTTON_BOTTOM_HEIGHT = 0.069f;
 
     public SidebarBuildSelection() {
-        Assets.setBackground(this, Assets.sidebarDisplayMiddleBackground);
+        Assets.setBackground(this, Assets.sidebarBg);
 
         buttons = new GameButton[BUTTONS_PER_COLUMN][BUTTONS_PER_ROW];
 
-        rotate = new GameButton("core/assets/textures/gameScreen/sidebar_build_rotate.png");
+        rotate = new GameButton(Assets.sidebarBuildRotate);
         rotate.addListenerBuildingRotate();
         addActor(rotate);
 
-        cancel = new GameButton("core/assets/textures/gameScreen/sidebar_build_cancel.png");
+        cancel = new GameButton(Assets.sidebarBuildCancel);
         cancel.addListenerBuilding(null);
         addActor(cancel);
 
-        back = new GameButton("core/assets/textures/gameScreen/sidebar_build_back.png");
+        back = new GameButton(Assets.sidebarBuildBack);
         back.addListenerLink(Sidebar.DisplayType.BUILD);
         addActor(back);
     }

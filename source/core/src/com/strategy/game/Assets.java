@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
@@ -24,12 +25,23 @@ public class Assets {
     // BUILDINGS
     public static Texture house1, castle, leftwall, middlewall, rightwall, emptyTile, redTile, cows, warehouse, wheat, lumberjack, mine;
     // SIDEBAR BACKGROUNDS
-    public static Texture sidebarBackground, sidebarDisplayMiddleBackground;
+    public static Texture sidebarBg, sidebarBgInfo, sidebarBgBuild, sidebarBgMenu, sidebarBuildInfoBg;
+    // SIDEBAR MENU
+    public static Texture sidebarMenuInfo, sidebarMenuBuild, sidebarMenuMenu, sidebarMenuInfoClicked,
+            sidebarMenuBuildClicked, sidebarMenuMenuClicked;
+    // SIDEBAR BUILD
+    public static Texture sidebarBuildManufacturers, sidebarBuildWarehouses, sidebarBuildDecorations, sidebarBuildOther,
+            sidebarBuildRotate, sidebarBuildBack, sidebarBuildCancel;
+    // SIDEBAR GAME MENU
+    public static Texture sidebarMenuNew, sidebarMenuLoad, sidebarMenuSave, sidebarMenuQuit, sidebarMenuCredits;
     // SIDEBAR BUILDING INFO
     public static Texture sidebarBuildInfoInfo, sidebarBuildInfoCost, sidebarBuildInfoProfit, sidebarBuildInfoCapacity,
             sidebarBuildInfoPlus, sidebarBuildInfoMinus, sidebarBuildInfoDestroy, sidebarBuildInfoRepair;
     // RESOURCES_BAR
-    public static Texture resourcesBarBackground, resourcesBarPause, resourcesBarResume;
+    public static Texture resourcesBarBg, resourcesBarPause, resourcesBarResume;
+    // RESOURCES
+    public static Texture resourcesFood, resourcesWood, resourcesRock, resourcesGold, resourcesPeople;
+    // SOUNDS
     public static Sound bgSound, hit;
     private static final String DEFAULT_FONT_PATH = "core/assets/fonts/san_francisco_regular.ttf";
 
@@ -51,8 +63,32 @@ public class Assets {
         emptyTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/empty.png"));
         redTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/red.png"));
         // SIDEBAR BACKGROUNDS
-        sidebarBackground = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar.png"));
-        sidebarDisplayMiddleBackground = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_displaymiddle_background.png"));
+        sidebarBg = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_bg.png"));
+        sidebarBgInfo = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_bg_info.png"));
+        sidebarBgBuild = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_bg_build.png"));
+        sidebarBgMenu = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_bg_menu.png"));
+        sidebarBuildInfoBg = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_building_info_bg.png"));
+        // SIDEBAR MENU
+        sidebarMenuInfo = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_info.png"));
+        sidebarMenuBuild = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_build.png"));
+        sidebarMenuMenu = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_menu.png"));
+        sidebarMenuInfoClicked = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_info_clicked.png"));
+        sidebarMenuBuildClicked = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_build_clicked.png"));
+        sidebarMenuMenuClicked = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_menu_clicked.png"));
+        // SIDEBAR BUILD
+        sidebarBuildManufacturers = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_build_manufacturers.png"));
+        sidebarBuildWarehouses = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_build_warehouses.png"));
+        sidebarBuildDecorations = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_build_decorations.png"));
+        sidebarBuildOther = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_build_other.png"));
+        sidebarBuildRotate = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_build_rotate.png"));;
+        sidebarBuildBack = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_build_back.png"));;
+        sidebarBuildCancel = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_build_cancel.png"));;
+        // SIDEBAR GAME MENU
+        sidebarMenuNew = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_new.png"));
+        sidebarMenuLoad = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_load.png"));
+        sidebarMenuSave = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_save.png"));
+        sidebarMenuQuit = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_quit.png"));
+        sidebarMenuCredits = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_credits.png"));;
         // SIDEBAR BUILDING INFO
         sidebarBuildInfoInfo = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_info.png"));
         sidebarBuildInfoCost = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_cost.png"));
@@ -63,9 +99,15 @@ public class Assets {
         sidebarBuildInfoDestroy = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_destroy.png"));
         sidebarBuildInfoRepair = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_repair.png"));
         // RESOURCES_BAR
-        resourcesBarBackground = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcesbar_bg.png"));
-        resourcesBarPause = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcesbar_pause.png"));
-        resourcesBarResume = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcesbar_resume.png"));
+        resourcesBarBg = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcesbar_bg.png"));
+        resourcesBarPause = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcebar_pause.png"));
+        resourcesBarResume = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcebar_resume.png"));
+        // RESOURCES
+        resourcesFood = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_food.png"));
+        resourcesWood = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_wood.png"));
+        resourcesRock = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_rock.png"));
+        resourcesGold = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_gold.png"));
+        resourcesPeople = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_people.png"));
 
 
         // http://opengameart.org/content/outdoor-ambiance CC3.0
@@ -90,10 +132,8 @@ public class Assets {
     }
 
     public static void setBackground(final Table table, Texture texture) {
-        if (table != null) {
-            SpriteDrawable buildingBg = new SpriteDrawable(new Sprite(texture));
-            table.setBackground(buildingBg);
-        }
+        if (table != null)
+            table.setBackground(new SpriteDrawable(new Sprite(texture)));
     }
 
     /**
@@ -186,5 +226,9 @@ public class Assets {
      */
     public static Label makeLabel(String text, BitmapFont font) {
         return new Label(text, new Label.LabelStyle(font, font.getColor()));
+    }
+
+    public static Image makeImage(Texture texture) {
+        return new Image(new SpriteDrawable(new Sprite(texture)));
     }
 }

@@ -13,24 +13,29 @@ import com.strategy.game.screens.GameScreen;
  * Utility class with useful constants and static methods
  */
 public class Utils {
+    // HDPI
+    public static final boolean HDPI = true;
+    // SIZE OPTIONS
     public static final int TILE_SIZE = 128;
     public static final float DEFAULT_RATIO = 1.1f;
     public static final int DEFAULT_WIDTH = (int) (1280 * DEFAULT_RATIO);
     public static final int DEFAULT_HEIGHT = (int) (720 * DEFAULT_RATIO);
     public static final int BASE_CAMERA_SPEED = 10;
     public static final int RENDER_OFFSET = 20;
-    // HDPI
-    public static final boolean HDPI = false;
+    // FONTS
     public static final int FONT_SIZE_SMALL = HDPI ? (int) (12 * DEFAULT_RATIO) * 2 : (int) (12 * DEFAULT_RATIO);
     public static final int FONT_SIZE_MEDIUM = HDPI ? (int) (14 * DEFAULT_RATIO) * 2 : (int) (14 * DEFAULT_RATIO);
     public static final int FONT_SIZE_BIG = HDPI ? (int) (20 * DEFAULT_RATIO) * 2 : (int) (20 * DEFAULT_RATIO);
     public static final int FONT_SIZE_HUGE = HDPI ? (int) (40 * DEFAULT_RATIO) * 2 : (int) (40 * DEFAULT_RATIO);
     public static BitmapFont FONT_SMALL_BLACK = Assets.makeFont(FONT_SIZE_SMALL, Color.BLACK);
+    public static BitmapFont FONT_SMALL_WHITE = Assets.makeFont(FONT_SIZE_SMALL, Color.WHITE);
     public static BitmapFont FONT_SMALL_RED = Assets.makeFont(FONT_SIZE_SMALL, Color.RED);
-    public static BitmapFont FONT_MEDIUM_BLACK = Assets.makeFont(FONT_SIZE_MEDIUM, Color.BLACK);;
-    public static BitmapFont FONT_MEDIUM_RED = Assets.makeFont(FONT_SIZE_MEDIUM, Color.RED);;
-    public static BitmapFont FONT_BIG_BLACK = Assets.makeFont(FONT_SIZE_BIG, Color.BLACK);;
-    public static BitmapFont FONT_HUGE_RED = Assets.makeFont(FONT_SIZE_HUGE, Color.RED);;
+    public static BitmapFont FONT_MEDIUM_BLACK = Assets.makeFont(FONT_SIZE_MEDIUM, Color.BLACK);
+    public static BitmapFont FONT_MEDIUM_WHITE = Assets.makeFont(FONT_SIZE_MEDIUM, Color.WHITE);
+    public static BitmapFont FONT_MEDIUM_RED = Assets.makeFont(FONT_SIZE_MEDIUM, Color.RED);
+    public static BitmapFont FONT_BIG_BLACK = Assets.makeFont(FONT_SIZE_BIG, Color.BLACK);
+    public static BitmapFont FONT_BIG_WHITE = Assets.makeFont(FONT_SIZE_BIG, Color.WHITE);
+    public static BitmapFont FONT_HUGE_RED = Assets.makeFont(FONT_SIZE_HUGE, Color.RED);
 
 
     public static Matrix4 isoTransformMatrix() {

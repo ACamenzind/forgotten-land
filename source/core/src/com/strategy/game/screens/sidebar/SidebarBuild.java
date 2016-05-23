@@ -10,24 +10,26 @@ import com.strategy.game.Utils;
  */
 public class SidebarBuild extends SidebarOptionsSelection {
 
-    private static final GameButton resourcesCollectors = new GameButton("core/assets/textures/gameScreen/sidebar_build_resources.png");
-    private static final GameButton support = new GameButton("core/assets/textures/gameScreen/sidebar_build_support.png");
-    private static final GameButton decorations = new GameButton("core/assets/textures/gameScreen/sidebar_build_decorations.png");
-    private static final GameButton other = new GameButton("core/assets/textures/gameScreen/sidebar_build_other.png");
+    private static final GameButton manufacturers = new GameButton(Assets.sidebarBuildManufacturers);
+    private static final GameButton warehouses = new GameButton(Assets.sidebarBuildWarehouses);
+    private static final GameButton decorations = new GameButton(Assets.sidebarBuildDecorations);
+    private static final GameButton other = new GameButton(Assets.sidebarBuildOther);
 
 
     public SidebarBuild() {
 
-        title = Assets.makeLabel("Buildings", Utils.FONT_BIG_BLACK);
+        Assets.setBackground(this, Assets.sidebarBgBuild);
+
+        title = Assets.makeLabel("Buildings", Utils.FONT_BIG_WHITE);
         addActor(title);
 
-        buttons[0][0] = resourcesCollectors;
-        resourcesCollectors.addListenerLink(Sidebar.DisplayType.BUILD_MANUFACTURERS);
-        addActor(resourcesCollectors);
+        buttons[0][0] = manufacturers;
+        manufacturers.addListenerLink(Sidebar.DisplayType.BUILD_MANUFACTURERS);
+        addActor(manufacturers);
 
-        buttons[1][0] = support;
-        support.addListenerLink(Sidebar.DisplayType.BUILD_WAREHOUSES);
-        addActor(support);
+        buttons[1][0] = warehouses;
+        warehouses.addListenerLink(Sidebar.DisplayType.BUILD_WAREHOUSES);
+        addActor(warehouses);
 
         buttons[2][0] = decorations;
         decorations.addListenerLink(Sidebar.DisplayType.BUILD_DECORATIONS);

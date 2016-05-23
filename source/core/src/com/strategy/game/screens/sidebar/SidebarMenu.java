@@ -11,9 +11,12 @@ import com.strategy.game.screens.Display;
  * Created by Amedeo on 02/05/16.
  */
 public class SidebarMenu extends Table implements Display {
-    private GameButton gameInfoButton;
-    private GameButton buildingsButton;
-    private GameButton mainMenuButton;
+
+    enum MenuButton { NONE, GAME_INFO_BUTTON, BUILD_BUTTON, MENU_BUTTON }
+
+    private GameButton gameInfoButton = new GameButton(Assets.sidebarMenuInfo, Assets.sidebarMenuInfoClicked, Assets.sidebarMenuInfoClicked);
+    private GameButton buildingsButton = new GameButton(Assets.sidebarMenuBuild, Assets.sidebarMenuBuildClicked, Assets.sidebarMenuBuildClicked);
+    private GameButton mainMenuButton = new GameButton(Assets.sidebarMenuMenu, Assets.sidebarMenuMenuClicked, Assets.sidebarMenuMenuClicked);
 
     private static final float MARGIN = 0;
     private static final float BUTTON_WIDTH = 1f / 3f;
@@ -22,36 +25,38 @@ public class SidebarMenu extends Table implements Display {
 
     public SidebarMenu() {
 
-        gameInfoButton = new GameButton("core/assets/textures/gameScreen/sidebar_menu_info.png");
+        buildingsButton.setChecked(true);
+
+        gameInfoButton.setDisabled(true);
         gameInfoButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (hasParent()) {
                     Sidebar sidebar = (Sidebar) getParent();
-                    sidebar.setDisplayMiddle(Sidebar.DisplayType.GAME_INFO);
+                    sidebar.setMiddle(Sidebar.DisplayType.GAME_INFO);
                 }
                 return true;
             }
         });
         addActor(gameInfoButton);
 
-        buildingsButton = new GameButton("core/assets/textures/gameScreen/sidebar_menu_build.png");
+        buildingsButton.setDisabled(true);
         buildingsButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (hasParent()) {
                     Sidebar sidebar = (Sidebar) getParent();
-                    sidebar.setDisplayMiddle(Sidebar.DisplayType.BUILD);
+                    sidebar.setMiddle(Sidebar.DisplayType.BUILD);
                 }
                 return false;
             }
         });
         addActor(buildingsButton);
 
-        mainMenuButton = new GameButton("core/assets/textures/gameScreen/sidebar_menu_menu.png");
+        mainMenuButton.setDisabled(true);
         mainMenuButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (hasParent()) {
                     Sidebar sidebar = (Sidebar) getParent();
-                    sidebar.setDisplayMiddle(Sidebar.DisplayType.GAME_MENU);
+                    sidebar.setMiddle(Sidebar.DisplayType.GAME_MENU);
                 }
                 return false;
             }
@@ -77,5 +82,28 @@ public class SidebarMenu extends Table implements Display {
 
         Assets.setSizeRelative(mainMenuButton, BUTTON_WIDTH, BUTTON_HEIGHT);
         Assets.setPositionRelative(mainMenuButton, MARGIN + BUTTON_WIDTH + MARGIN + BUTTON_WIDTH + MARGIN, 0.5f, false, true);
+    }
+
+    public void setSelectedButton(MenuButton button) {
+        if (button == MenuButton.NONE) {
+            gameInfoButton.setChecked(false);
+            buildingsButton.setChecked(false);
+            mainMenuButton.setChecked(false);
+        }
+        else if (button == MenuButton.GAME_INFO_BUTTON) {
+            gameInfoButton.setChecked(true);
+            buildingsButton.setChecked(false);
+            mainMenuButton.setChecked(false);
+        }
+        else if (button == MenuButton.BUILD_BUTTON) {
+            gameInfoButton.setChecked(false);
+            buildingsButton.setChecked(true);
+            mainMenuButton.setChecked(false);
+        }
+        else if (button == MenuButton.MENU_BUTTON) {
+            gameInfoButton.setChecked(false);
+            buildingsButton.setChecked(false);
+            mainMenuButton.setChecked(true);
+        }
     }
 }

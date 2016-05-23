@@ -12,7 +12,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = Utils.DEFAULT_WIDTH;
 		config.height = Utils.DEFAULT_HEIGHT;
-        config.useHDPI = Utils.HDPI;
+        config.useHDPI = Utils.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
 		config.title = "A Strategy Game [Working title]";
 		config.vSyncEnabled = true;
 		config.resizable = false;

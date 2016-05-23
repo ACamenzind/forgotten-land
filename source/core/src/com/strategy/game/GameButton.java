@@ -113,7 +113,7 @@ public class GameButton extends Button {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (hasParent() && getParent().hasParent()) {
                     Sidebar sidebar = (Sidebar) getParent().getParent();
-                    sidebar.setDisplayMiddle(display);
+                    sidebar.setMiddle(display);
                 }
                 return true;
             }

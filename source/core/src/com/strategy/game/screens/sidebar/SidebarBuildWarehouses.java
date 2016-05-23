@@ -14,7 +14,7 @@ public class SidebarBuildWarehouses extends SidebarBuildSelection {
     public SidebarBuildWarehouses() {
         super();
 
-        title = Assets.makeLabel("Warehouses", Utils.FONT_BIG_BLACK);
+        title = Assets.makeLabel("Warehouses", Utils.FONT_BIG_WHITE);
         addActor(title);
 
         buttons[0][0] = new GameButton(Assets.house1);

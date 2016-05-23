@@ -15,9 +15,9 @@ public class Sidebar extends Table implements Display {
     Stage stage;
     GameScreen screen;
 
-    private Actor displayTop;
-    private Actor displayMiddle;
-    private Actor displayBottom;
+    private SidebarMenu menu;
+    private Actor middle;
+    private SidebarBuildingInfo buildingInfo;
 
     private static final float DISPLAY_TOP_HEIGHT = 0.05f;
 
@@ -29,57 +29,61 @@ public class Sidebar extends Table implements Display {
         this.stage.addActor(this);
         this.screen = screen;
 
-        Assets.setBackground(this, Assets.sidebarBackground);
+        menu = new SidebarMenu();
+        addActor(menu);
 
-        displayTop = new SidebarMenu();
-        addActor(displayTop);
+        middle = new SidebarBuild();
+        addActor(middle);
 
-        displayMiddle = new SidebarBuild();
-        addActor(displayMiddle);
-
-        displayBottom = new SidebarBuildingInfo();
-        addActor(displayBottom);
+        buildingInfo = new SidebarBuildingInfo();
+        addActor(buildingInfo);
 
         update();
         updatePosition();
     }
 
-    public void setDisplayMiddle(DisplayType display) {
-        if (displayMiddle != null) {
-            displayMiddle.remove();
+    public void setMiddle(DisplayType display) {
+        if (middle != null) {
+            middle.remove();
         }
         screen.getBuilder().untoggleSelectEntity();
 
         if (display == DisplayType.GAME_INFO) {
-            displayMiddle = new SidebarGameInfo(screen.getWorld());
+            middle = new SidebarGameInfo(screen.getWorld());
+            menu.setSelectedButton(SidebarMenu.MenuButton.GAME_INFO_BUTTON);
         }
         else if (display == DisplayType.BUILD) {
-            displayMiddle = new SidebarBuild();
+            middle = new SidebarBuild();
+            menu.setSelectedButton(SidebarMenu.MenuButton.BUILD_BUTTON);
         }
         else if (display == DisplayType.BUILD_MANUFACTURERS) {
-            displayMiddle = new SidebarBuildManufacturers();
+            middle = new SidebarBuildManufacturers();
+            menu.setSelectedButton(SidebarMenu.MenuButton.NONE);
         }
         else if (display == DisplayType.BUILD_WAREHOUSES) {
-            displayMiddle = new SidebarBuildWarehouses();
+            middle = new SidebarBuildWarehouses();
+            menu.setSelectedButton(SidebarMenu.MenuButton.NONE);
         }
         else if (display == DisplayType.BUILD_DECORATIONS) {
-            displayMiddle = new SidebarBuildDecorations();
+            middle = new SidebarBuildDecorations();
+            menu.setSelectedButton(SidebarMenu.MenuButton.NONE);
         }
         else if (display == DisplayType.GAME_MENU) {
-            displayMiddle = new SidebarGameMenu();
+            middle = new SidebarGameMenu();
+            menu.setSelectedButton(SidebarMenu.MenuButton.MENU_BUTTON);
         }
 
-        addActor(displayMiddle);
+        addActor(middle);
         update();
         updatePosition();
     }
 
     public void setBuilding(Building building, boolean preview) {
-        ((SidebarBuildingInfo) displayBottom).setBuilding(building, preview);
+        buildingInfo.setBuilding(building, preview);
     }
 
     public void setBuilding(Building building) {
-        ((SidebarBuildingInfo) displayBottom).setBuilding(building);
+        buildingInfo.setBuilding(building);
     }
 
     public GameScreen getScreen() {
@@ -88,9 +92,9 @@ public class Sidebar extends Table implements Display {
 
     @Override
     public void update() {
-        ((Display) displayTop).update();
-        ((Display) displayMiddle).update();
-        ((Display) displayBottom).update();
+        menu.update();
+        ((Display) middle).update();
+        buildingInfo.update();
     }
 
     @Override
@@ -98,17 +102,17 @@ public class Sidebar extends Table implements Display {
         setSize(stage.getWidth() * 0.15f, stage.getHeight());
         setPosition(stage.getWidth() - getWidth(), 0);
 
-        Assets.setSizeRelative(displayTop, 1f, DISPLAY_TOP_HEIGHT);
-        Assets.setPositionRelative(displayTop, 0, 1f - DISPLAY_TOP_HEIGHT);
+        Assets.setSizeRelative(menu, 1f, DISPLAY_TOP_HEIGHT);
+        Assets.setPositionRelative(menu, 0, 1f - DISPLAY_TOP_HEIGHT);
 
-        Assets.setSizeRelative(displayBottom, 1f, getWidth() / getHeight());
-        Assets.setPositionRelative(displayBottom, 0, 0);
+        Assets.setSizeRelative(buildingInfo, 1f, getWidth() / getHeight());
+        Assets.setPositionRelative(buildingInfo, 0, 0);
 
-        Assets.setSizeRelative(displayMiddle, 1f, 1f - DISPLAY_TOP_HEIGHT - (getWidth() / getHeight()));
-        Assets.setPositionRelative(displayMiddle, 0, displayBottom.getHeight() / getHeight());
+        Assets.setSizeRelative(middle, 1f, 1f - DISPLAY_TOP_HEIGHT - (getWidth() / getHeight()));
+        Assets.setPositionRelative(middle, 0, buildingInfo.getHeight() / getHeight());
 
-        ((Display) displayTop).updatePosition();
-        ((Display) displayMiddle).updatePosition();
-        ((Display) displayBottom).updatePosition();
+        menu.updatePosition();
+        ((Display) middle).updatePosition();
+        buildingInfo.updatePosition();
     }
 }

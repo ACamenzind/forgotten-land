@@ -14,7 +14,7 @@ public class SidebarBuildDecorations extends SidebarBuildSelection {
     public SidebarBuildDecorations() {
         super();
 
-        title = Assets.makeLabel("Decorations", Utils.FONT_BIG_BLACK);
+        title = Assets.makeLabel("Decorations", Utils.FONT_BIG_WHITE);
         addActor(title);
 
         buttons[0][0] = new GameButton(Assets.leftwall);

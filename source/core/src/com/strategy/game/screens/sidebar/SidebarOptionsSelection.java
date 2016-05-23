@@ -27,7 +27,6 @@ public class SidebarOptionsSelection extends Table implements Display {
     private static final float TITLE_POSITION_Y = 0.9f;
 
     public SidebarOptionsSelection() {
-        Assets.setBackground(this, Assets.sidebarDisplayMiddleBackground);
 
     }
 
@@ -40,7 +39,7 @@ public class SidebarOptionsSelection extends Table implements Display {
     public void updatePosition() {
         Assets.setPositionRelative(title, TITLE_POSITION_X, TITLE_POSITION_Y, true, true);
 
-        title.setStyle(Assets.makeLabelStyle(Utils.FONT_BIG_BLACK));
+        title.setStyle(Assets.makeLabelStyle(Utils.FONT_BIG_WHITE));
 
         for (int y = 0; y < buttons.length; y++) {
             final float POSITION_Y = 1f - BUTTON_HEIGHT * (y + 2) * 1.5f;

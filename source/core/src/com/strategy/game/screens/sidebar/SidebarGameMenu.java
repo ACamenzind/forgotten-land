@@ -10,27 +10,33 @@ import com.strategy.game.Utils;
  */
 public class SidebarGameMenu extends SidebarOptionsSelection {
 
-    private static final GameButton loadGame = new GameButton("core/assets/textures/gameScreen/sidebar_main_load_game.png");
-    private static final GameButton newGame = new GameButton("core/assets/textures/gameScreen/sidebar_main_new_game.png");
-    private static final GameButton saveGame = new GameButton("core/assets/textures/gameScreen/sidebar_main_save_game.png");
-    private static final GameButton quitGame = new GameButton("core/assets/textures/gameScreen/sidebar_main_quit_game.png");
+    private static final GameButton loadGame = new GameButton(Assets.sidebarMenuLoad);
+    private static final GameButton newGame = new GameButton(Assets.sidebarMenuNew);
+    private static final GameButton saveGame = new GameButton(Assets.sidebarMenuSave);
+    private static final GameButton quitGame = new GameButton(Assets.sidebarMenuQuit);
+    private static final GameButton credits = new GameButton(Assets.sidebarMenuCredits);
 
     public SidebarGameMenu() {
 
-        title = Assets.makeLabel("Menu", Utils.FONT_BIG_BLACK);
+        Assets.setBackground(this, Assets.sidebarBgMenu);
+
+        title = Assets.makeLabel("Menu", Utils.FONT_BIG_WHITE);
         addActor(title);
 
-        buttons[0][0] = loadGame;
-        addActor(loadGame);
-
-        buttons[1][0] = newGame;
+        buttons[0][0] = newGame;
         addActor(newGame);
+
+        buttons[1][0] = loadGame;
+        addActor(loadGame);
 
         buttons[2][0] = saveGame;
         addActor(saveGame);
 
         buttons[3][0] = quitGame;
         addActor(quitGame);
+
+        buttons[4][0] = credits;
+        addActor(credits);
 
         update();
         updatePosition();
