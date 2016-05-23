@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -102,9 +101,9 @@ public class GameScreen implements Screen {
 
         // Starting building
         // TODO: remove magic numbers (make it random?)
-        builder.toggleSelectEntity(new House());
+        builder.setSelectedEntity(new House());
         builder.placeSelectedEntity(25, 20, true);
-        builder.untoggleSelectEntity();
+        builder.removeSelectedEntity();
         camera.translate(25*128, 0);
 
     }

@@ -78,7 +78,7 @@ public class SidebarGameInfo extends Table implements Display {
 
     @Override
     public void updatePosition() {
-        Assets.setPositionRelative(title, TITLE_POSITION_X, TITLE_POSITION_Y, true, false);
+        Assets.setPositionRelative(title, TITLE_POSITION_X, TITLE_POSITION_Y, true, true);
         Assets.setPositionRelative(total_population, TOTAL_POPULATION_POSITION_X, TOTAL_POPULATION_POSITION_Y);
         Assets.setPositionRelative(workers, WORKERS_POSITION_X, WORKERS_POSITION_Y);
         Assets.setPositionRelative(unemployed, UNEMPLYED_POSITION_X, UNEMPLYED_POSITION_Y);

@@ -93,6 +93,10 @@ public abstract class MapEntity implements Disposable{
         return mainTexture;
     }
 
+    public boolean canRotate() {
+        return textures.size() > 1;
+    }
+
     public void setMainTexture(Texture mainTexture) {
         this.mainTexture = mainTexture;
         sliceTexture(mainTexture);
