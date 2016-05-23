@@ -42,7 +42,7 @@ public class SidebarOptionsSelection extends Table implements Display {
         title.setStyle(Assets.makeLabelStyle(Utils.FONT_BIG_WHITE));
 
         for (int y = 0; y < buttons.length; y++) {
-            final float POSITION_Y = 1f - BUTTON_HEIGHT * (y + 2) * 1.5f;
+            final float POSITION_Y = 1f - BUTTON_HEIGHT * (y + 2) * 1.25f;
             for (int x = 0; x < buttons[y].length; x++) {
                 if (buttons[y][x] != null) {
                     Assets.setSizeRelative(buttons[y][x], BUTTON_WIDTH, BUTTON_HEIGHT);
