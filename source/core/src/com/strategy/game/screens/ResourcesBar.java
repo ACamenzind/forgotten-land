@@ -76,15 +76,16 @@ public class ResourcesBar extends Table implements Display {
 
         update();
         updatePosition();
-        foodCell.width(getHeight() / 3f).padRight(cell_size() / 10f);
+
+        foodCell.width(getHeight() * 0.425f).padRight(cell_size() / 10f);
         foodCountCell.width(cell_size());
-        woodCell.width(getHeight() / 3f).padRight(cell_size() / 10f);
+        woodCell.width(getHeight() * 0.425f).padRight(cell_size() / 10f);
         woodCountCell.width(cell_size());
-        rockCell.width(getHeight() / 3f).padRight(cell_size() / 10f);
+        rockCell.width(getHeight() * 0.425f).padRight(cell_size() / 10f);
         rockCountCell.width(cell_size());
-        goldCell.width(getHeight() / 3f).padRight(cell_size() / 10f);
+        goldCell.width(getHeight() * 0.425f).padRight(cell_size() / 10f);
         goldCountCell.width(cell_size());
-        peopleCell.width(getHeight() / 3f).padRight(cell_size() / 10f);
+        peopleCell.width(getHeight() * 0.425f).padRight(cell_size() / 10f);
     }
 
     @Override
