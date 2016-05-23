@@ -1,5 +1,6 @@
 package com.strategy.game.world;
 
+import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.strategy.game.ExtendedStaticTiledMapTile;
@@ -9,6 +10,7 @@ import com.strategy.game.buildings.Collector;
 import com.strategy.game.buildings.MapEntity;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 /**
@@ -82,6 +84,34 @@ public class ResourceHandler {
     }
 
     /**
+     * Removes the specified amount of people, also removing
+     * a random worker accordingly.
+     *
+     */
+    public void removeOnePop() {
+        int totalPop = totalResources.people;
+        if (totalPop > 0){
+            removeFromTotal(new ResourceContainer(0, 0, 0, 0, 1));
+            int availablePop = totalPop - totalWorkers;
+            if (availablePop <= 0) {
+                // Remove a worker from a radom building.
+                ArrayList<Building> buildings = world.getBuildings();
+                boolean removed = false;
+                Random random = new Random();
+                while (!removed) {
+                    int randIndex = random.nextInt(buildings.size());
+                    Building currentBuilding = buildings.get(randIndex);
+                    if (currentBuilding != null && currentBuilding.getWorkers() > 0) {
+                        currentBuilding.changeWorker(-1);
+                        totalWorkers--;
+                        removed = true;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * Removes from the total count of resources
      * @param amount
      */
@@ -137,7 +167,9 @@ public class ResourceHandler {
         // for every 10 food negative 1 person dies
         if (food <= -10) {
             int factor = - totalResources.food / 10;
-            removeFromTotal(new ResourceContainer(0, 0, 0, 0, factor));
+            for (int i = 0; i < factor; i++) {
+                removeOnePop();
+            }
         }
 
         // If the people count goes negative, the game is lost.
@@ -244,8 +276,15 @@ public class ResourceHandler {
         capResourceCount();
         handleNegativeResourceCount();
 
+//        System.out.println("Before plague: ----");
 //        System.out.println("Total population: " + totalResources.people);
 //        System.out.println("Unemployed: " + (totalResources.people - totalWorkers));
 //        System.out.println("Workers: " + totalWorkers);
+
+//        System.out.println("After plague: ----");
+//        System.out.println("Total population: " + totalResources.people);
+//        System.out.println("Unemployed: " + (totalResources.people - totalWorkers));
+//        System.out.println("Workers: " + totalWorkers);
+
     }
 }

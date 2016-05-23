@@ -1,5 +1,6 @@
 package com.strategy.game.world;
 
+import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
@@ -12,6 +13,7 @@ import com.strategy.game.screens.GameScreen;
 //import com.sun.javafx.scene.control.skin.VirtualFlow;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Contains the world simulation.
@@ -29,11 +31,14 @@ public class World implements Disposable{
     private StaticEntityBuilder builder;
     private ResourceHandler resourceHandler;
     private int updateCounter;
+    private int eventsCounter;
     private PopulationHandler populationHandler;
+    private WorldEventsHandler worldEventsHandler;
     private int tick;
     private boolean isRunning;
     private static final int DEFAULT_TICK_DURATION = 300;
     private static final int FAST_TICK_DURATION = 10;
+    private static final int WORLD_EVENT_FREQUENCY = 50; // After how many ticks we have a chance for a random event
 
     public enum GameSpeed {
         NORMAL, FAST
@@ -53,7 +58,13 @@ public class World implements Disposable{
         this.tick = 0;
         this.isRunning = true;
         this.tickDuration = DEFAULT_TICK_DURATION;
+        this.worldEventsHandler = new WorldEventsHandler(this);
+        this.eventsCounter = 0;
         readResources();
+    }
+
+    public WorldEventsHandler getWorldEventsHandler() {
+        return worldEventsHandler;
     }
 
     public void setBuilder(StaticEntityBuilder builder) {
@@ -154,8 +165,19 @@ public class World implements Disposable{
             resourceHandler.update();
             updateCounter = 0;
             tick++;
-            builder.checkDeadBuildings();
 
+            // TODO: refactor
+            if (tick % WORLD_EVENT_FREQUENCY == 0) {
+                // Roll dice
+                int rand = new Random().nextInt(100);
+                if (rand > 50) { // 50% probability of having the plague
+                    System.out.println("Plague! Half the population dies");
+                    worldEventsHandler.startPlague();
+                }
+            }
+
+
+            builder.checkDeadBuildings();
             gameScreen.getResourcesBar().update();
         }
         updateCounter++;
