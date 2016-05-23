@@ -1,11 +1,15 @@
 package com.strategy.game.screens.sidebar;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
 import com.strategy.game.Utils;
+import com.strategy.game.buildings.Building;
+import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.screens.Display;
 
 /**
@@ -35,7 +39,16 @@ public class SidebarBuildSelection extends Table implements Display {
         buttons = new GameButton[BUTTONS_PER_COLUMN][BUTTONS_PER_ROW];
 
         rotate = new GameButton(Assets.sidebarBuildRotate);
-        rotate.addListenerBuildingRotate();
+        rotate.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                if (hasParent()) {
+                    Sidebar sidebar = (Sidebar) getParent();
+                    StaticEntityBuilder builder = sidebar.getScreen().getBuilder();
+                    builder.rotate();
+                }
+                return true;
+            }
+        });
         addActor(rotate);
 
         cancel = new GameButton(Assets.sidebarBuildCancel);
@@ -49,7 +62,11 @@ public class SidebarBuildSelection extends Table implements Display {
 
     @Override
     public void update() {
-
+        if (hasParent()) {
+            StaticEntityBuilder builder = ((Sidebar) getParent()).getScreen().getBuilder();
+            rotate.setVisible(builder.hasSelectedEntity() && builder.getSelectedEntity().canRotate());
+            cancel.setVisible(builder.hasSelectedEntity());
+        }
     }
 
     @Override
@@ -68,11 +85,11 @@ public class SidebarBuildSelection extends Table implements Display {
             }
         }
 
-        Assets.setSizeRelative(rotate, BUTTON_BOTTOM_WIDTH, BUTTON_BOTTOM_HEIGHT);
-        Assets.setPositionRelative(rotate, MARGIN, 0.1f, false, true);
-
         Assets.setSizeRelative(cancel, BUTTON_BOTTOM_WIDTH, BUTTON_BOTTOM_HEIGHT);
-        Assets.setPositionRelative(cancel, MARGIN * 2 + BUTTON_WIDTH, 0.1f, false, true);
+        Assets.setPositionRelative(cancel, MARGIN, 0.1f, false, true);
+
+        Assets.setSizeRelative(rotate, BUTTON_BOTTOM_WIDTH, BUTTON_BOTTOM_HEIGHT);
+        Assets.setPositionRelative(rotate, MARGIN * 2 + BUTTON_WIDTH, 0.1f, false, true);
 
         Assets.setSizeRelative(back, BUTTON_BOTTOM_WIDTH, BUTTON_BOTTOM_HEIGHT);
         Assets.setPositionRelative(back, MARGIN * 3 + BUTTON_WIDTH * 2, 0.1f, false, true);

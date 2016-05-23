@@ -93,28 +93,28 @@ public class GameInputProcessor implements InputProcessor{
     public boolean keyDown(int keycode) {
         switch (keycode) {
             case Input.Keys.NUM_1:
-                screen.getBuilder().toggleSelectEntity(new House());
+                screen.getBuilder().setSelectedEntity(new House());
                 break;
             case Input.Keys.NUM_2:
-                screen.getBuilder().toggleSelectEntity(new Castle());
+                screen.getBuilder().setSelectedEntity(new Castle());
                 break;
             case Input.Keys.NUM_3:
-                screen.getBuilder().toggleSelectEntity(new Wall());
+                screen.getBuilder().setSelectedEntity(new Wall());
                 break;
             case Input.Keys.NUM_4:
-                screen.getBuilder().toggleSelectEntity(new CollectorWood());
+                screen.getBuilder().setSelectedEntity(new CollectorWood());
                 break;
             case Input.Keys.NUM_5:
-                screen.getBuilder().toggleSelectEntity(new CollectorFood());
+                screen.getBuilder().setSelectedEntity(new CollectorFood());
                 break;
             case Input.Keys.NUM_6:
-                screen.getBuilder().toggleSelectEntity(new Warehouse());
+                screen.getBuilder().setSelectedEntity(new Warehouse());
                 break;
             case Input.Keys.NUM_7:
-                screen.getBuilder().toggleSelectEntity(new CollectorRock());
+                screen.getBuilder().setSelectedEntity(new CollectorRock());
                 break;
             case Input.Keys.ESCAPE:
-                screen.getBuilder().untoggleSelectEntity();
+                screen.getBuilder().removeSelectedEntity();
                 break;
             case Input.Keys.R:
                 screen.getBuilder().rotate();

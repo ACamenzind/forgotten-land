@@ -54,7 +54,7 @@ public class StaticEntityBuilder {
      * Toggles the selection
      * @param entity: the entity to be placed
      */
-    public void toggleSelectEntity(MapEntity entity) {
+    public void setSelectedEntity(MapEntity entity) {
         if (entity != null) {
             selectedEntity = entity;
             gridLayer.setVisible(true);
@@ -67,10 +67,14 @@ public class StaticEntityBuilder {
         }
     }
 
-    public void untoggleSelectEntity() {
+    public void removeSelectedEntity() {
         selectedEntity = null;
         gridLayer.setVisible(false);
         influenceLayer.setVisible(false);
+    }
+
+    public boolean hasSelectedEntity() {
+        return selectedEntity != null;
     }
 
     /**
