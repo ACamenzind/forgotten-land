@@ -25,7 +25,7 @@ public class Utils {
     // FONTS
     public static final int FONT_SIZE_SMALL = HDPI ? (int) (12 * DEFAULT_RATIO) * 2 : (int) (12 * DEFAULT_RATIO);
     public static final int FONT_SIZE_MEDIUM = HDPI ? (int) (14 * DEFAULT_RATIO) * 2 : (int) (14 * DEFAULT_RATIO);
-    public static final int FONT_SIZE_BIG = HDPI ? (int) (20 * DEFAULT_RATIO) * 2 : (int) (20 * DEFAULT_RATIO);
+    public static final int FONT_SIZE_BIG = HDPI ? (int) (25 * DEFAULT_RATIO) * 2 : (int) (25 * DEFAULT_RATIO);
     public static final int FONT_SIZE_HUGE = HDPI ? (int) (40 * DEFAULT_RATIO) * 2 : (int) (40 * DEFAULT_RATIO);
     public static BitmapFont FONT_SMALL_BLACK = Assets.makeFont(FONT_SIZE_SMALL, Color.BLACK);
     public static BitmapFont FONT_SMALL_WHITE = Assets.makeFont(FONT_SIZE_SMALL, Color.LIGHT_GRAY);
