@@ -28,7 +28,7 @@ public class SidebarBuildSelection extends Table implements Display {
     private static final float MARGIN = 0.1f;
     private static final float BUTTON_WIDTH = (1f - (MARGIN * (BUTTONS_PER_ROW + 1f))) / BUTTONS_PER_ROW;
     private static final float TITLE_POSITION_X = 0.5f;
-    private static final float TITLE_POSITION_Y = 0.9f;
+    private static final float TITLE_POSITION_Y = 0.92f;
 
     private static final float BUTTON_BOTTOM_WIDTH = 0.16f;
     private static final float BUTTON_BOTTOM_HEIGHT = 0.069f;

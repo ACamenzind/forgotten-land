@@ -19,7 +19,7 @@ public class SidebarGameInfo extends Table implements Display {
     private static final float MARGIN = 0.1f;
 
     private static final float TITLE_POSITION_X = 0.5f;
-    private static final float TITLE_POSITION_Y = 0.9f;
+    private static final float TITLE_POSITION_Y = 0.92f;
     private static final Label title = Assets.makeLabel("Game Info", Utils.FONT_BIG_WHITE);
 
     private static final float TOTAL_POPULATION_POSITION_X = MARGIN;
