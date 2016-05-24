@@ -35,7 +35,7 @@ public class Assets {
     // SIDEBAR GAME MENU
     public static Texture sidebarMenuNew, sidebarMenuLoad, sidebarMenuSave, sidebarMenuQuit, sidebarMenuCredits;
     // SIDEBAR BUILDING INFO
-    public static Texture sidebarBuildInfoInfo, sidebarBuildInfoCost, sidebarBuildInfoProfit, sidebarBuildInfoCapacity,
+    public static Texture sidebarBuildInfoInfo, sidebarBuildInfoInfoLong, sidebarBuildInfoCost, sidebarBuildInfoCostLong, sidebarBuildInfoProfit, sidebarBuildInfoCapacity,
             sidebarBuildInfoPlus, sidebarBuildInfoMinus, sidebarBuildInfoDestroy, sidebarBuildInfoRepair;
     // RESOURCES_BAR
     public static Texture resourcesBarBg, resourcesBarPause, resourcesBarResume;
@@ -129,8 +129,12 @@ public class Assets {
         // SIDEBAR BUILDING INFO
         sidebarBuildInfoInfo = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_info.png"));
         sidebarBuildInfoInfo.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        sidebarBuildInfoInfoLong = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_info_long.png"));
+        sidebarBuildInfoInfoLong.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         sidebarBuildInfoCost = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_cost.png"));
         sidebarBuildInfoCost.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        sidebarBuildInfoCostLong= new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_cost_long.png"));
+        sidebarBuildInfoCostLong.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         sidebarBuildInfoProfit = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_profit.png"));
         sidebarBuildInfoProfit.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         sidebarBuildInfoCapacity = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_capacity.png"));

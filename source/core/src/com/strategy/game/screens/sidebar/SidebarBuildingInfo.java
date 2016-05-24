@@ -60,8 +60,8 @@ public class SidebarBuildingInfo extends Table implements Display {
     private static final float MENU2_HEIGHT = 0.125f;
     private static final float MENU2_BUTTON_WIDTH = MENU2_WIDTH / MENU2_ITEMS;
     private static final float MENU2_BUTTON_HEIGHT = 1f;
-    private GameButton menu2ButtonInfo = new GameButton(Assets.sidebarBuildInfoInfo);
-    private GameButton menu2ButtonCost = new GameButton(Assets.sidebarBuildInfoCost);
+    private GameButton menu2ButtonInfo = new GameButton(Assets.sidebarBuildInfoInfoLong);
+    private GameButton menu2ButtonCost = new GameButton(Assets.sidebarBuildInfoCostLong);
     private Table menu2 = new Table();
 
     // IMAGE
