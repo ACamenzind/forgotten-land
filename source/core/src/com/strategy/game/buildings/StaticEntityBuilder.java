@@ -263,8 +263,10 @@ public class StaticEntityBuilder {
             }
 
 //            int influenceRadius = selectedEntity.getInfluenceRadius();
-            int startX = x - (int)selectedEntity.getCollisionSize().x;
-            int startY = y - (int)selectedEntity.getCollisionSize().y;
+//            int startX = x - (int)selectedEntity.getCollisionSize().x;
+            int startX = x;
+            int startY = y;
+//            int startY = y - (int)selectedEntity.getCollisionSize().y;
             int endX = x + (int)selectedEntity.getCollisionSize().x;
             int endY = y + (int)selectedEntity.getCollisionSize().y;
 
