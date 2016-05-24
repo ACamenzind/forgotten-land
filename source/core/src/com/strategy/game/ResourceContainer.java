@@ -18,6 +18,14 @@ public class ResourceContainer {
         this.people = people;
     }
 
+    public ResourceContainer() {
+        this.wood = 0;
+        this.food = 0;
+        this.rock = 0;
+        this.gold = 0;
+        this.people = 0;
+    }
+
     /**
      * Returns a new ResourceContainer with the sum of the two.
      * @param rc

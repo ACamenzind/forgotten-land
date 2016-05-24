@@ -144,6 +144,27 @@ public class ResourceHandler {
         maximumResources = maximumResources.add(amount);
     }
 
+
+    /**
+     * Returns the amount of resources that will be added/consumed the next tick.
+     * To do that it sums up all the maintenance costs as well as all the productions.
+     * @return
+     */
+    public ResourceContainer getVariance() {
+        ResourceContainer totalCost = new ResourceContainer();
+        ResourceContainer totalProduction = new ResourceContainer();
+
+        for (Building building : world.getBuildings()) {
+            totalCost = totalCost.add(building.getMaintenanceCosts());
+            totalProduction = totalProduction.add(building.getProductionsPerTurn());
+        }
+
+        // Food consumption is handled separately
+        totalCost.food = totalResources.people;
+
+        return totalProduction.subtract(totalCost);
+    }
+
     /**
      * Checks whether there are enough resources to place a building
      * @param building the building that is being placed
@@ -215,7 +236,6 @@ public class ResourceHandler {
      */
     public void update() {
 
-
         for (Building building:
              world.getBuildings()) {
             ResourceContainer maintenance;
@@ -281,6 +301,7 @@ public class ResourceHandler {
         feedPopulation();
         capResourceCount();
         handleNegativeResourceCount();
+//        System.out.println(getVariance().toString());
 
         if (totalResources.hasZeroResources())
             degradeBuildings();
