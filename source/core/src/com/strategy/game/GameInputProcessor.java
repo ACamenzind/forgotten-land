@@ -131,6 +131,8 @@ public class GameInputProcessor implements InputProcessor{
             case Input.Keys.I:
                 screen.getWorld().getResourceHandler().removeOnePop();
                 break;
+//            case Input.Keys.M:
+//                Gdx.graphics.setWindowedMode(1920, 1080);
         }
         return false;
     }

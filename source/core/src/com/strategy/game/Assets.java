@@ -38,7 +38,7 @@ public class Assets {
     public static Texture sidebarBuildInfoInfo, sidebarBuildInfoInfoLong, sidebarBuildInfoCost, sidebarBuildInfoCostLong, sidebarBuildInfoProfit, sidebarBuildInfoCapacity,
             sidebarBuildInfoPlus, sidebarBuildInfoMinus, sidebarBuildInfoDestroy, sidebarBuildInfoRepair;
     // RESOURCES_BAR
-    public static Texture resourcesBarBg, resourcesBarPause, resourcesBarResume;
+    public static Texture resourcesBarBg, resourcesBarPause, resourcesBarResume, pausedOverlay;
     // RESOURCES
     public static Texture resourcesFood, resourcesWood, resourcesRock, resourcesGold, resourcesPeople;
     // SOUNDS
@@ -165,6 +165,9 @@ public class Assets {
         resourcesGold.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         resourcesPeople = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_people.png"));
         resourcesPeople.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        // OVERLAYS
+        pausedOverlay = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/paused_overlay.png"));
+        pausedOverlay.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
         // http://opengameart.org/content/outdoor-ambiance CC3.0
