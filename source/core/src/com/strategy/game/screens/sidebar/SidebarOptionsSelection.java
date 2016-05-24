@@ -24,7 +24,7 @@ public class SidebarOptionsSelection extends Table implements Display {
     private static final float BUTTON_WIDTH = 0.97f;//(1f - (MARGIN * (BUTTONS_PER_ROW + 1f))) / BUTTONS_PER_ROW;
     private static final float BUTTON_HEIGHT = 0.075f;//0.05f;
     private static final float TITLE_POSITION_X = 0.5f;
-    private static final float TITLE_POSITION_Y = 0.9f;
+    private static final float TITLE_POSITION_Y = 0.92f;
 
     public SidebarOptionsSelection() {
 

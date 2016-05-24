@@ -14,7 +14,7 @@ import com.strategy.game.screens.GameScreen;
  */
 public class Utils {
     // HDPI
-    public static final boolean HDPI = false;
+    public static final boolean HDPI = true;
     // SIZE OPTIONS
     public static final int TILE_SIZE = 128;
     public static final float DEFAULT_RATIO = 1f;
@@ -25,7 +25,7 @@ public class Utils {
     // FONTS
     public static final int FONT_SIZE_SMALL = HDPI ? (int) (12 * DEFAULT_RATIO) * 2 : (int) (12 * DEFAULT_RATIO);
     public static final int FONT_SIZE_MEDIUM = HDPI ? (int) (14 * DEFAULT_RATIO) * 2 : (int) (14 * DEFAULT_RATIO);
-    public static final int FONT_SIZE_BIG = HDPI ? (int) (25 * DEFAULT_RATIO) * 2 : (int) (25 * DEFAULT_RATIO);
+    public static final int FONT_SIZE_BIG = HDPI ? (int) (29 * DEFAULT_RATIO) * 2 : (int) (29 * DEFAULT_RATIO);
     public static final int FONT_SIZE_HUGE = HDPI ? (int) (40 * DEFAULT_RATIO) * 2 : (int) (40 * DEFAULT_RATIO);
     public static BitmapFont FONT_SMALL_BLACK = Assets.makeFont(FONT_SIZE_SMALL, Color.BLACK);
     public static BitmapFont FONT_SMALL_WHITE = Assets.makeFont(FONT_SIZE_SMALL, Color.LIGHT_GRAY);
@@ -34,7 +34,7 @@ public class Utils {
     public static BitmapFont FONT_MEDIUM_WHITE = Assets.makeFont(FONT_SIZE_MEDIUM, Color.LIGHT_GRAY);
     public static BitmapFont FONT_MEDIUM_RED = Assets.makeFont(FONT_SIZE_MEDIUM, Color.RED);
     public static BitmapFont FONT_BIG_BLACK = Assets.makeFont(FONT_SIZE_BIG, Color.BLACK);
-    public static BitmapFont FONT_BIG_WHITE = Assets.makeFont(FONT_SIZE_BIG, Color.LIGHT_GRAY);
+    public static BitmapFont FONT_BIG_WHITE = Assets.makeFontUltraLight(FONT_SIZE_BIG, Color.LIGHT_GRAY); // Ultralight
     public static BitmapFont FONT_HUGE_RED = Assets.makeFont(FONT_SIZE_HUGE, Color.RED);
 
 

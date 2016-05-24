@@ -35,15 +35,17 @@ public class Assets {
     // SIDEBAR GAME MENU
     public static Texture sidebarMenuNew, sidebarMenuLoad, sidebarMenuSave, sidebarMenuQuit, sidebarMenuCredits;
     // SIDEBAR BUILDING INFO
-    public static Texture sidebarBuildInfoInfo, sidebarBuildInfoCost, sidebarBuildInfoProfit, sidebarBuildInfoCapacity,
+    public static Texture sidebarBuildInfoInfo, sidebarBuildInfoInfoLong, sidebarBuildInfoCost, sidebarBuildInfoCostLong, sidebarBuildInfoProfit, sidebarBuildInfoCapacity,
             sidebarBuildInfoPlus, sidebarBuildInfoMinus, sidebarBuildInfoDestroy, sidebarBuildInfoRepair;
     // RESOURCES_BAR
-    public static Texture resourcesBarBg, resourcesBarPause, resourcesBarResume;
+    public static Texture resourcesBarBg, resourcesBarPause, resourcesBarResume, pausedOverlay;
     // RESOURCES
     public static Texture resourcesFood, resourcesWood, resourcesRock, resourcesGold, resourcesPeople;
     // SOUNDS
     public static Sound bgSound, hit;
     private static final String DEFAULT_FONT_PATH = "core/assets/fonts/san_francisco_regular.ttf";
+    // new Font
+    private static final String ULTRALIGHT_FONT_PATH = "core/assets/fonts/san_francisco_ultralight.ttf";
 
     public static void load() {
 //        map = new TmxMapLoader().load("core/assets/maps/big_map.tmx");
@@ -127,8 +129,12 @@ public class Assets {
         // SIDEBAR BUILDING INFO
         sidebarBuildInfoInfo = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_info.png"));
         sidebarBuildInfoInfo.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        sidebarBuildInfoInfoLong = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_info_long.png"));
+        sidebarBuildInfoInfoLong.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         sidebarBuildInfoCost = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_cost.png"));
         sidebarBuildInfoCost.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        sidebarBuildInfoCostLong= new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_cost_long.png"));
+        sidebarBuildInfoCostLong.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         sidebarBuildInfoProfit = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_profit.png"));
         sidebarBuildInfoProfit.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         sidebarBuildInfoCapacity = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_capacity.png"));
@@ -159,6 +165,9 @@ public class Assets {
         resourcesGold.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         resourcesPeople = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_people.png"));
         resourcesPeople.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        // OVERLAYS
+        pausedOverlay = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/paused_overlay.png"));
+        pausedOverlay.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
         // http://opengameart.org/content/outdoor-ambiance CC3.0
@@ -258,6 +267,10 @@ public class Assets {
 
     public static BitmapFont makeFont(int fontSize, final Color fontColor) {
         return makeFont(DEFAULT_FONT_PATH, fontSize, fontColor);
+    }
+
+    public static BitmapFont makeFontUltraLight(int fontSize, final Color fontColor) {
+        return makeFont(ULTRALIGHT_FONT_PATH, fontSize, fontColor);
     }
 
     /**
