@@ -17,7 +17,7 @@ import com.strategy.game.world.World;
 import java.util.ArrayList;
 
 /**
- * Handles the creation and placement of static entities (e.g. buildings)
+ * Handles the creation, placement and destruction of static entities (e.g. buildings)
  *
  */
 public class StaticEntityBuilder {
@@ -79,14 +79,9 @@ public class StaticEntityBuilder {
     /**
      * Iterates over all buildings placed in the map
      * and destroys those that have negative health.
-     *
+     * TODO: remove?
      */
     public void checkDeadBuildings() {
-//        for (Building e : world.getBuildings()) {
-//            if (e.getLife() <= 0) {
-//                destroy(e);
-//            }
-//        }
     }
 
 
@@ -287,11 +282,8 @@ public class StaticEntityBuilder {
             //TODO: do it in a different way possibly?
             if (forced) isInInfluenceRadius = true;
 
-//            Sound sound = Assets.hit;
 
             if (isSpaceFree && isInInfluenceRadius) {
-
-
                 // If the placed entity is a building, remove its cost from the total resources if possible
                 // Note: for now, all placeable entities are buildings, but in the future
                 // we may add a map editor
@@ -307,12 +299,12 @@ public class StaticEntityBuilder {
                     // Updates resources bar after placing building
                     world.getGameScreen().getResourcesBar().update();
                 } else {
+                    // Outside the influence area.
                     soundManager.playSound(SoundManager.SoundType.FAIL_TO_PLACE_BUILDING);
                 }
 
                 try {
                     // Makes a new instance of the proper subclass after placing it (for the next one)
-                    // TODO: check if this creates other problems.
                     Texture currentTex = selectedEntity.getMainTexture();
                     selectedEntity = selectedEntity.getClass().newInstance();
                     selectedEntity.setMainTexture(currentTex);
@@ -323,11 +315,15 @@ public class StaticEntityBuilder {
                     e.printStackTrace();
                 }
             } else {
+                // Collision
                 soundManager.playSound(SoundManager.SoundType.FAIL_TO_PLACE_BUILDING);
             }
         }
     }
 
+    /**
+     * Changes the texture of the entity (if applicable).
+     */
     public void rotate() {
         if (selectedEntity != null) {
             selectedEntity.changeTexture();

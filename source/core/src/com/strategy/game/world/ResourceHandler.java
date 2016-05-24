@@ -1,6 +1,5 @@
 package com.strategy.game.world;
 
-import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.strategy.game.ExtendedStaticTiledMapTile;
@@ -288,6 +287,9 @@ public class ResourceHandler {
 
     }
 
+    /**
+     * Degrades the buildings if such conditions are met (i.e. lack of resources)
+     */
     private void degradeBuildings() {
         ArrayList<Building> toDestroy = new ArrayList<Building>();
         for (Building building: world.getBuildings()) {
