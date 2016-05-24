@@ -44,6 +44,7 @@ public class Assets {
     // SOUNDS
     public static Sound bgSound, hit;
     private static final String DEFAULT_FONT_PATH = "core/assets/fonts/san_francisco_regular.ttf";
+    // new Font
     private static final String ULTRALIGHT_FONT_PATH = "core/assets/fonts/san_francisco_ultralight.ttf";
 
     public static void load() {
