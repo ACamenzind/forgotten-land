@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Sound;
  */
 public class SoundManager {
     private float masterVolume;
+    private boolean muted;
 
     public SoundManager() {
         this.masterVolume = 1.0f;
@@ -16,6 +17,14 @@ public class SoundManager {
     public enum SoundType {
         PLACE_BUILDING, FAIL_TO_PLACE_BUILDING,
         BACKGROUND
+    }
+
+    public boolean isMuted() {
+        return muted;
+    }
+
+    public void setMuted(boolean muted) {
+        this.muted = muted;
     }
 
     public float getMasterVolume() {

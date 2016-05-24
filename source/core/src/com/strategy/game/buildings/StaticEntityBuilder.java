@@ -9,10 +9,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.strategy.game.Assets;
-import com.strategy.game.ExtendedStaticTiledMapTile;
-import com.strategy.game.ResourceContainer;
-import com.strategy.game.Utils;
+import com.strategy.game.*;
 import com.strategy.game.screens.GameScreen;
 import com.strategy.game.world.Resource;
 import com.strategy.game.world.World;
@@ -31,6 +28,7 @@ public class StaticEntityBuilder {
     private MapEntity selectedEntity;
     private World world;
     private TiledMapTileLayer gridLayer;
+    private SoundManager soundManager;
 
 
     public StaticEntityBuilder(GameScreen gameScreen) {
@@ -44,6 +42,7 @@ public class StaticEntityBuilder {
         this.gridLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Grid");
         this.gridLayer.setVisible(false);
         this.gridLayer.setOpacity(0.2f);
+        this.soundManager = gameScreen.getGame().getSoundManager();
     }
 
     public MapEntity getSelectedEntity() {
@@ -262,16 +261,12 @@ public class StaticEntityBuilder {
                 }
             }
 
-//            int influenceRadius = selectedEntity.getInfluenceRadius();
-//            int startX = x - (int)selectedEntity.getCollisionSize().x;
             int startX = x;
             int startY = y;
-//            int startY = y - (int)selectedEntity.getCollisionSize().y;
             int endX = x + (int)selectedEntity.getCollisionSize().x;
             int endY = y + (int)selectedEntity.getCollisionSize().y;
 
             // Check whether it's in the area of influence of another building
-            // TODO: 14/05/2016 Add exceptions for specific buildings (e.g. walls)
             for (int i = startX; i < endX; i++) {
                 for (int j = startY; j < endY; j++) {
                     TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
@@ -292,17 +287,17 @@ public class StaticEntityBuilder {
             //TODO: do it in a different way possibly?
             if (forced) isInInfluenceRadius = true;
 
-            Sound sound = Assets.hit;
+//            Sound sound = Assets.hit;
 
             if (isSpaceFree && isInInfluenceRadius) {
-                long id = sound.play(0.5f);
-                sound.setPitch(id, 0.75f);
+
 
                 // If the placed entity is a building, remove its cost from the total resources if possible
                 // Note: for now, all placeable entities are buildings, but in the future
                 // we may add a map editor
                 boolean placeable = world.getResourceHandler().canPlaceBuilding((Building) selectedEntity);
                 if (selectedEntity instanceof Building && placeable) {
+                    soundManager.playSound(SoundManager.SoundType.PLACE_BUILDING);
                     // Places the selected entity on the buildings layer, and add it to the list
                     selectedEntity.placeOnLayer(buildingsLayer, x, y);
                     this.world.getBuildings().add((Building) selectedEntity);
@@ -311,6 +306,8 @@ public class StaticEntityBuilder {
                         this.world.getResourceHandler().addToMaximum(((Container) selectedEntity).getResourcesStored());
                     // Updates resources bar after placing building
                     world.getGameScreen().getResourcesBar().update();
+                } else {
+                    soundManager.playSound(SoundManager.SoundType.FAIL_TO_PLACE_BUILDING);
                 }
 
                 try {
@@ -326,8 +323,7 @@ public class StaticEntityBuilder {
                     e.printStackTrace();
                 }
             } else {
-                long id = sound.play(0.5f);
-                sound.setPitch(id, 5f);
+                soundManager.playSound(SoundManager.SoundType.FAIL_TO_PLACE_BUILDING);
             }
         }
     }

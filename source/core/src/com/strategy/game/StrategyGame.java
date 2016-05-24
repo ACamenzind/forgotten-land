@@ -15,6 +15,7 @@ public class StrategyGame extends Game {
 	private SpriteBatch batch;
 	Texture img;
 	private BitmapFont font;
+	private SoundManager soundManager;
 
 	
 	@Override
@@ -22,8 +23,13 @@ public class StrategyGame extends Game {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		this.setScreen(new MainMenuScreen(this));
+		soundManager = new SoundManager();
 //		img = new Texture("core/assets/badlogic.jpg");
 
+	}
+
+	public SoundManager getSoundManager() {
+		return soundManager;
 	}
 
 	@Override

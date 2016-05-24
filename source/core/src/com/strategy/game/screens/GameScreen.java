@@ -88,9 +88,7 @@ public class GameScreen implements Screen {
 
 
         // Looping background sound
-        Sound sound = Assets.bgSound;
-        long id = sound.play(0.3f);
-        sound.setLooping(id, true);
+        game.getSoundManager().playSound(SoundManager.SoundType.BACKGROUND);
 
         gameInputMultiplexer.addProcessor(stage);
         gameInputMultiplexer.addProcessor(gameInputProcessor);
@@ -106,6 +104,10 @@ public class GameScreen implements Screen {
         builder.removeSelectedEntity();
         camera.translate(25*128, 0);
 
+    }
+
+    public StrategyGame getGame() {
+        return game;
     }
 
     /**
