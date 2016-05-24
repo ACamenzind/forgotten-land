@@ -74,11 +74,19 @@ public class MainMenuScreen implements Screen{
             dispose();
             System.out.println("Pressed enter!");
         }
-        else if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
-            Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth() - 320, Gdx.graphics.getHeight() - 180);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
+            if(Utils.HDPI) {
+                Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth()/2 - 320, Gdx.graphics.getHeight()/2 - 180);
+            } else {
+                Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth() - 320, Gdx.graphics.getHeight() - 180);
+            }
         }
-        else if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
-            Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth() + 320, Gdx.graphics.getHeight() + 180);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
+            if (Utils.HDPI) {
+                Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth()/2 + 320, Gdx.graphics.getHeight()/2 + 180);
+            } else {
+                Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth() + 320, Gdx.graphics.getHeight() + 180);
+            }
         }
 
         backStage.act(delta);

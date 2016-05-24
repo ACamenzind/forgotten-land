@@ -166,8 +166,8 @@ public class Assets {
         resourcesPeople = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_people.png"));
         resourcesPeople.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         // OVERLAYS
-//        pausedOverlay = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/paused_overlay.png"));
-//        pausedOverlay.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        pausedOverlay = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/paused_overlay.png"));
+        pausedOverlay.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
         // http://opengameart.org/content/outdoor-ambiance CC3.0

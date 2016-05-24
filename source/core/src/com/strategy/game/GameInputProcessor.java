@@ -131,8 +131,18 @@ public class GameInputProcessor implements InputProcessor{
             case Input.Keys.I:
                 screen.getWorld().getResourceHandler().removeOnePop();
                 break;
-//            case Input.Keys.M:
-//                Gdx.graphics.setWindowedMode(1920, 1080);
+            case Input.Keys.M:
+                if(Utils.HDPI) {
+                    Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth()/2 - 320, Gdx.graphics.getHeight()/2 - 180);
+                } else {
+                    Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth() - 320, Gdx.graphics.getHeight() - 180);
+                } break;
+            case Input.Keys.N:
+                if (Utils.HDPI) {
+                    Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth()/2 + 320, Gdx.graphics.getHeight()/2 + 180);
+                } else {
+                    Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth() + 320, Gdx.graphics.getHeight() + 180);
+                } break;
         }
         return false;
     }
