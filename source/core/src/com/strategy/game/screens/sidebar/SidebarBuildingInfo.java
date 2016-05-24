@@ -33,6 +33,10 @@ public class SidebarBuildingInfo extends Table implements Display {
     private Table tableCost = new Table();
     private Table tableProfit = new Table();
     private Table tableCapacity = new Table();
+    private GameButton cancel = new GameButton(Assets.sidebarBuildInfoCancel);
+    private static final float CANCEL_SIZE = 0.1f;
+    private static final float CANCEL_POSITION_X = 0.8f;
+    private static final float CANCEL_POSITION_Y = 0.8f;
 
     // NAME
     private Label name = Assets.makeLabel("_", Utils.FONT_MEDIUM_BLACK);
@@ -132,6 +136,15 @@ public class SidebarBuildingInfo extends Table implements Display {
         // GENERAL
         this.building = null;
         Assets.setBackground(this, Assets.sidebarBuildInfoBg);
+
+        addActor(cancel);
+        cancel.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                updateMenu(Menu.NONE);
+                ((Sidebar) getParent()).getScreen().getBuilder().showInfluenceArea(null);
+                return false;
+            }
+        });
 
         //MENU3
         menu3ButtonInfo.addListener(new InputListener() {
@@ -306,6 +319,9 @@ public class SidebarBuildingInfo extends Table implements Display {
     @Override
     public void updatePosition() {
 
+        Assets.setSizeRelative(cancel, CANCEL_SIZE, CANCEL_SIZE);
+        Assets.setPositionRelative(cancel, CANCEL_POSITION_X, CANCEL_POSITION_Y);
+
         // TABLES
         Assets.setSizeRelative(menu3, MENU3_WIDTH, MENU3_HEIGHT);
         Assets.setSizeRelative(menu2, MENU2_WIDTH, MENU2_HEIGHT);
@@ -380,6 +396,7 @@ public class SidebarBuildingInfo extends Table implements Display {
             tableCost.setVisible(false);
             tableProfit.setVisible(false);
             tableCapacity.setVisible(false);
+            cancel.setVisible(false);
         }
         else {
             if (menu == Menu.INFO) {
@@ -407,6 +424,8 @@ public class SidebarBuildingInfo extends Table implements Display {
                 tableCapacity.setVisible(true);
             }
 
+            cancel.setVisible(true);
+
             boolean manufacturer = building.getType() == Building.BuildingType.MANUFACTURER;
             workers.setVisible(manufacturer);
             workersButtonAdd.setVisible(manufacturer && !preview);
@@ -430,31 +449,34 @@ public class SidebarBuildingInfo extends Table implements Display {
     }
 
     public void setBuilding(Building building, boolean preview) {
-        this.building = building;
-        this.preview = preview;
         if (building != null) {
-            name.setText(building.getName());
-            nameCost.setText(building.getName() + " - Cost");
-            nameProfit.setText(building.getName() + " - Profit");
-            nameCapacity.setText(building.getName() + " - Capacity");
-            image.setDrawable(new SpriteDrawable(new Sprite(building.getMainTexture())));
-            life.setText("Life:\n" + building.getLife() + " / " + building.getMaxLife());
-            workers.setText("Workers:\n" + building.getWorkers() + " / " + building.getMaxWorkers());
+            ((Sidebar) getParent()).getScreen().getBuilder().showInfluenceArea(building);
+            this.building = building;
+            this.preview = preview;
+            if (building != null) {
+                name.setText(building.getName());
+                nameCost.setText(building.getName() + " - Cost");
+                nameProfit.setText(building.getName() + " - Profit");
+                nameCapacity.setText(building.getName() + " - Capacity");
+                image.setDrawable(new SpriteDrawable(new Sprite(building.getMainTexture())));
+                life.setText("Life:\n" + building.getLife() + " / " + building.getMaxLife());
+                workers.setText("Workers:\n" + building.getWorkers() + " / " + building.getMaxWorkers());
 
-            ResourceContainer[] resourceCostContainer = {building.getCosts(), building.getMaintenanceCosts()};
-            resourcesCost.set(resourceCostContainer);
+                ResourceContainer[] resourceCostContainer = {building.getCosts(), building.getMaintenanceCosts()};
+                resourcesCost.set(resourceCostContainer);
 
-            ResourceContainer[] resourceProfitContainer = {building.getProductionsPerWorker(), building.getProductionsPerTurn()};
-            resourcesProfit.set(resourceProfitContainer);
+                ResourceContainer[] resourceProfitContainer = {building.getProductionsPerWorker(), building.getProductionsPerTurn()};
+                resourcesProfit.set(resourceProfitContainer);
 
-            ResourceContainer[] resourceCapacityContainer = { new ResourceContainer(0, 0, 0, 0, 0) };
-            if (building instanceof Container) {
-                Container container = (Container) building;
-                resourceCapacityContainer[0] = container.getResourcesStored();
+                ResourceContainer[] resourceCapacityContainer = {new ResourceContainer(0, 0, 0, 0, 0)};
+                if (building instanceof Container) {
+                    Container container = (Container) building;
+                    resourceCapacityContainer[0] = container.getResourcesStored();
+                }
+                resourcesCapacity.set(resourceCapacityContainer);
+
+                updateMenu(Menu.INFO);
             }
-            resourcesCapacity.set(resourceCapacityContainer);
-
-            updateMenu(Menu.INFO);
         }
     }
 }

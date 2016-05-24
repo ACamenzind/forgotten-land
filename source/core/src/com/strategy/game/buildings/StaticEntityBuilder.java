@@ -337,54 +337,54 @@ public class StaticEntityBuilder {
             }
         }
 
-        int clickX = (int)building.getCoords().x;
-        int clickY = (int)building.getCoords().y;
-        int influenceRadius = building.getInfluenceRadius();
-        Vector2 collisionSize = building.getCollisionSize();
+        if (building != null) {
+            int clickX = (int) building.getCoords().x;
+            int clickY = (int) building.getCoords().y;
+            int influenceRadius = building.getInfluenceRadius();
+            Vector2 collisionSize = building.getCollisionSize();
 
-        int startY = clickY - influenceRadius;
-        int startX = clickX - influenceRadius;
-        int endY = clickY + influenceRadius + (int) collisionSize.y;
-        int endX = clickX + influenceRadius + (int) collisionSize.x;
+            int startY = clickY - influenceRadius;
+            int startX = clickX - influenceRadius;
+            int endY = clickY + influenceRadius + (int) collisionSize.y;
+            int endX = clickX + influenceRadius + (int) collisionSize.x;
 
-        // TODO: 12/05/2016 Add also for upper limits
-        if (startX < 0) startX = 0;
-        if (startY < 0) startY = 0;
+            // TODO: 12/05/2016 Add also for upper limits
+            if (startX < 0) startX = 0;
+            if (startY < 0) startY = 0;
 
-        for (int y = startY; y < endY; y++) {
-            for (int x = startX; x < endX; x++) {
-                TiledMapTileLayer.Cell cell = layer.getCell(x, y);
+            for (int y = startY; y < endY; y++) {
+                for (int x = startX; x < endX; x++) {
+                    TiledMapTileLayer.Cell cell = layer.getCell(x, y);
 
-                if (cell == null) {
-                    cell = new TiledMapTileLayer.Cell();
-                }
-
-                TextureRegion texture;
-                TiledMapTile tile;
-                tile = cell.getTile();
-                if (layer.getName().equals("Local influence") && cell.getTile() != null) {
-                    texture = cell.getTile().getTextureRegion();
-                } else if (layer.getName().equals("Local influence") && cell.getTile() == null) {
-                    texture = new TextureRegion(Assets.redTile);
-                }
-                else if (cell.getTile() != null) {
-                    texture = cell.getTile().getTextureRegion();
-                } else {
-                    texture = new TextureRegion(Assets.emptyTile);
-                }
-
-                // Creates a new tile if needed
-                if (!(tile instanceof ExtendedStaticTiledMapTile)) {
-                    if (tile == null) {
-                        tile = new ExtendedStaticTiledMapTile(texture);
+                    if (cell == null) {
+                        cell = new TiledMapTileLayer.Cell();
                     }
-                    else {
-                        tile = new ExtendedStaticTiledMapTile((StaticTiledMapTile) tile);
-                    }
-                }
 
-                cell.setTile(tile);
-                layer.setCell(x, y, cell);
+                    TextureRegion texture;
+                    TiledMapTile tile;
+                    tile = cell.getTile();
+                    if (layer.getName().equals("Local influence") && cell.getTile() != null) {
+                        texture = cell.getTile().getTextureRegion();
+                    } else if (layer.getName().equals("Local influence") && cell.getTile() == null) {
+                        texture = new TextureRegion(Assets.redTile);
+                    } else if (cell.getTile() != null) {
+                        texture = cell.getTile().getTextureRegion();
+                    } else {
+                        texture = new TextureRegion(Assets.emptyTile);
+                    }
+
+                    // Creates a new tile if needed
+                    if (!(tile instanceof ExtendedStaticTiledMapTile)) {
+                        if (tile == null) {
+                            tile = new ExtendedStaticTiledMapTile(texture);
+                        } else {
+                            tile = new ExtendedStaticTiledMapTile((StaticTiledMapTile) tile);
+                        }
+                    }
+
+                    cell.setTile(tile);
+                    layer.setCell(x, y, cell);
+                }
             }
         }
     }

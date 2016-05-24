@@ -35,8 +35,9 @@ public class Assets {
     // SIDEBAR GAME MENU
     public static Texture sidebarMenuNew, sidebarMenuLoad, sidebarMenuSave, sidebarMenuQuit, sidebarMenuCredits;
     // SIDEBAR BUILDING INFO
-    public static Texture sidebarBuildInfoInfo, sidebarBuildInfoInfoLong, sidebarBuildInfoCost, sidebarBuildInfoCostLong, sidebarBuildInfoProfit, sidebarBuildInfoCapacity,
-            sidebarBuildInfoPlus, sidebarBuildInfoMinus, sidebarBuildInfoDestroy, sidebarBuildInfoRepair;
+    public static Texture sidebarBuildInfoInfo, sidebarBuildInfoInfoLong, sidebarBuildInfoCost,
+            sidebarBuildInfoCostLong, sidebarBuildInfoProfit, sidebarBuildInfoCapacity, sidebarBuildInfoPlus,
+            sidebarBuildInfoMinus, sidebarBuildInfoDestroy, sidebarBuildInfoRepair, sidebarBuildInfoCancel;
     // RESOURCES_BAR
     public static Texture resourcesBarBg, resourcesBarPause, resourcesBarResume, pausedOverlay;
     // RESOURCES
@@ -147,6 +148,8 @@ public class Assets {
         sidebarBuildInfoDestroy.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         sidebarBuildInfoRepair = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_repair.png"));
         sidebarBuildInfoRepair.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        sidebarBuildInfoCancel = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_cancel.png"));
+        sidebarBuildInfoCancel.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         // RESOURCES_BAR
         resourcesBarBg = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcesbar_bg.png"));
         resourcesBarBg.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
