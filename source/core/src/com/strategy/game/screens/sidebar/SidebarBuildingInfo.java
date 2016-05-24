@@ -35,12 +35,12 @@ public class SidebarBuildingInfo extends Table implements Display {
     private Table tableCapacity = new Table();
 
     // NAME
-    private Label name = Assets.makeLabel("", Utils.FONT_MEDIUM_BLACK);
+    private Label name = Assets.makeLabel("_", Utils.FONT_MEDIUM_BLACK);
     private Label nameCost = Assets.makeLabel(" - Cost", Utils.FONT_MEDIUM_BLACK);
     private Label nameProfit = Assets.makeLabel(" - Profit", Utils.FONT_MEDIUM_BLACK);
     private Label nameCapacity = Assets.makeLabel(" - Capacity", Utils.FONT_MEDIUM_BLACK);
-    private static final float NAME_POSITION_X = 0.075f;
-    private static final float NAME_POSITION_Y = 0.85f;
+    private static final float NAME_POSITION_X = 0.1f;
+    private static final float NAME_POSITION_Y = 0.8f;
 
     // MENU x3
     private static final int MENU3_ITEMS = 3;
@@ -87,16 +87,16 @@ public class SidebarBuildingInfo extends Table implements Display {
 
     // DESTROY
     private GameButton destroyButton = new GameButton(Assets.sidebarBuildInfoDestroy);
-    private static final float DESTROY_WIDTH = IMAGE_SIZE / 2f - 0.025f;
-    private static final float DESTROY_HEIGHT = 0.1f;
-    private static final float DESTROY_POSITION_X = NAME_POSITION_X;
+    private static final float DESTROY_WIDTH = 0.2f;
+    private static final float DESTROY_HEIGHT = 0.135f;
+    private static final float DESTROY_POSITION_X = (1f - (DESTROY_WIDTH * 2f + 0.05f)) / 2f;
     private static final float DESTROY_POSITION_Y = IMAGE_POSITION_Y - DESTROY_HEIGHT - 0.05f;
 
     // REPAIR
     private GameButton repairButton = new GameButton(Assets.sidebarBuildInfoRepair);
     private static final float REPAIR_WIDTH = DESTROY_WIDTH;
-    private static final float REPAIR_HEIGHT = 0.1f;
-    private static final float REPAIR_POSITION_X = NAME_POSITION_X + DESTROY_WIDTH + 0.05f;
+    private static final float REPAIR_HEIGHT = DESTROY_HEIGHT;
+    private static final float REPAIR_POSITION_X = DESTROY_POSITION_X + DESTROY_WIDTH + 0.05f;
     private static final float REPAIR_POSITION_Y = DESTROY_POSITION_Y;
 
     // RESOURCES_BALANCE
@@ -109,21 +109,21 @@ public class SidebarBuildingInfo extends Table implements Display {
     // COST
     private ResourcesTable resourcesCost = new ResourcesTable(2, Utils.FONT_SMALL_BLACK);
     private static final float RESOURCES_COST_WIDTH = 0.75f;
-    private static final float RESOURCES_COST_HEIGHT = 0.6f;
+    private static final float RESOURCES_COST_HEIGHT = 0.5f;
     private static final float RESOURCES_COST_POSITION_X = 0.5f;
     private static final float RESOURCES_COST_POSITION_Y = 0.5f;
 
     // PROFIT
     private ResourcesTable resourcesProfit = new ResourcesTable(2, Utils.FONT_SMALL_BLACK);
     private static final float RESOURCES_PROFIT_WIDTH = 0.75f;
-    private static final float RESOURCES_PROFIT_HEIGHT = 0.6f;
+    private static final float RESOURCES_PROFIT_HEIGHT = 0.5f;
     private static final float RESOURCES_PROFIT_POSITION_X = 0.5f;
     private static final float RESOURCES_PROFIT_POSITION_Y = 0.5f;
 
     // CAPACITY
     private ResourcesTable resourcesCapacity = new ResourcesTable(1, Utils.FONT_SMALL_BLACK);
-    private static final float RESOURCES_CAPACITY_WIDTH = 0.6f;
-    private static final float RESOURCES_CAPACITY_HEIGHT = 0.6f;
+    private static final float RESOURCES_CAPACITY_WIDTH = 0.4f;
+    private static final float RESOURCES_CAPACITY_HEIGHT = 0.5f;
     private static final float RESOURCES_CAPACITY_POSITION_X = 0.5f;
     private static final float RESOURCES_CAPACITY_POSITION_Y = 0.5f;
 
@@ -132,7 +132,6 @@ public class SidebarBuildingInfo extends Table implements Display {
         // GENERAL
         this.building = null;
         Assets.setBackground(this, Assets.sidebarBuildInfoBg);
-        tableInfo.addActor(name);
 
         //MENU3
         menu3ButtonInfo.addListener(new InputListener() {
@@ -182,6 +181,7 @@ public class SidebarBuildingInfo extends Table implements Display {
         menu2.addActor(menu2ButtonCost);
 
         // INFO
+        tableInfo.addActor(name);
         tableInfo.addActor(life);
         tableInfo.addActor(workers);
         tableInfo.addActor(image);

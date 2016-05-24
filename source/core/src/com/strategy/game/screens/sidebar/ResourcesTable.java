@@ -29,18 +29,25 @@ public class ResourcesTable extends Table {
         table[4][0] = Assets.makeImage(Assets.resourcesRock);
         table[5][0] = Assets.makeImage(Assets.resourcesPeople);
 
+        // This looks weird, but I need it to get the height of a Cell
+        Label test = Assets.makeLabel("TEST", font);
+        float size = test.getHeight();
+
         for (int y = 0; y < table.length; y++) {
             for (int x = 0; x < table[y].length; x++) {
                 if (x == 0) {
-                    add(table[y][x]);
+                    add(table[y][x]).width(size);
                 }
                 else {
-                    table[y][x] = Assets.makeLabel("", font);
+                    table[y][x] = Assets.makeLabel("-", font);
                     add(table[y][x]).uniform().expand();
                 }
 
             }
             row();
+        }
+        for (int y = 0; y < table.length; y++) {
+
         }
     }
 

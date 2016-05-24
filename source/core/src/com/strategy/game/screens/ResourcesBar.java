@@ -94,43 +94,45 @@ public class ResourcesBar extends Table implements Display {
         String newWoodCount = "" + world.getResourceHandler().getTotalResources().wood;
         String newRockCount = "" + world.getResourceHandler().getTotalResources().rock;
         String newGoldCount = "" + world.getResourceHandler().getTotalResources().gold;
-        String newPeopleCount = "" + world.getResourceHandler().getUnemployed();
+        String newPeopleCount = "" + world.getResourceHandler().getUnemployed() + " / " +
+                world.getResourceHandler().getTotalResources().people;
 
         ResourceHandler resourceHandler = world.getResourceHandler();
 
-        if (resourceHandler.getTotalResources().food < resourceHandler.getMaximumResources().food)
+        if (0 <= resourceHandler.getTotalResources().food &&
+                resourceHandler.getTotalResources().food < resourceHandler.getMaximumResources().food)
             foodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_WHITE));
         else
             foodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
         foodCount.setText(newFoodCount);
 
-        if (resourceHandler.getTotalResources().wood < resourceHandler.getMaximumResources().wood)
+        if (0 <= resourceHandler.getTotalResources().wood &&
+                resourceHandler.getTotalResources().wood< resourceHandler.getMaximumResources().wood)
             woodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_WHITE));
         else
             woodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
         woodCount.setText(newWoodCount);
 
-        if (resourceHandler.getTotalResources().rock < resourceHandler.getMaximumResources().rock)
+        if (0 <= resourceHandler.getTotalResources().rock &&
+                resourceHandler.getTotalResources().rock< resourceHandler.getMaximumResources().rock)
             rockCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_WHITE));
         else
             rockCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
         rockCount.setText(newRockCount);
 
-        if (resourceHandler.getTotalResources().gold < resourceHandler.getMaximumResources().gold)
+        if (0 <= resourceHandler.getTotalResources().gold &&
+                resourceHandler.getTotalResources().gold < resourceHandler.getMaximumResources().gold)
             goldCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_WHITE));
         else
             goldCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
         goldCount.setText(newGoldCount);
 
-        if (resourceHandler.getTotalResources().people < resourceHandler.getMaximumResources().people)
+        if (0 <= resourceHandler.getUnemployed() &&
+                resourceHandler.getUnemployed() < resourceHandler.getMaximumResources().people)
             peopleCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_WHITE));
         else
             peopleCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
         peopleCount.setText(newPeopleCount);
-
-//        Assets.setSizeRelative(pause, 0.075f, 0.6f);
-//        Assets.setPositionRelative(pause, 0.0125f, 0.5f, false, true);
-//        updatePosition();
     }
 
     @Override
