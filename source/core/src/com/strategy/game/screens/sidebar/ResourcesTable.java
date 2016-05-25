@@ -18,16 +18,25 @@ public class ResourcesTable extends Table {
     private BitmapFont default_font;
     private Actor[][] table;
 
-    public ResourcesTable(int columnsNumber, BitmapFont font) {
+    public ResourcesTable(int columnsNumber, BitmapFont font, boolean black) {
         this.default_font = font;
 
         table = new Actor[RESOURCES_NUMBER + 1][columnsNumber + 1];
 
-        table[1][0] = Assets.makeImage(Assets.resourcesFood);
-        table[2][0] = Assets.makeImage(Assets.resourcesWood);
-        table[3][0] = Assets.makeImage(Assets.resourcesGold);
-        table[4][0] = Assets.makeImage(Assets.resourcesRock);
-        table[5][0] = Assets.makeImage(Assets.resourcesPeople);
+        if (black) {
+            table[1][0] = Assets.makeImage(Assets.resourcesFoodBk);
+            table[2][0] = Assets.makeImage(Assets.resourcesWoodBk);
+            table[3][0] = Assets.makeImage(Assets.resourcesRockBk);
+            table[4][0] = Assets.makeImage(Assets.resourcesGoldBk);
+            table[5][0] = Assets.makeImage(Assets.resourcesPeopleBk);
+        }
+        else {
+            table[1][0] = Assets.makeImage(Assets.resourcesFood);
+            table[2][0] = Assets.makeImage(Assets.resourcesWood);
+            table[3][0] = Assets.makeImage(Assets.resourcesRock);
+            table[4][0] = Assets.makeImage(Assets.resourcesGold);
+            table[5][0] = Assets.makeImage(Assets.resourcesPeople);
+        }
 
         // This looks weird, but I need it to get the height of a Cell
         Label test = Assets.makeLabel("TEST", font);

@@ -19,8 +19,8 @@ public class MessageLog extends Table {
     public enum MessageType { NEW_GAME, QUIT, GAME_OVER }
 
     private Label message;
-    private GameButton ok = new GameButton(Assets.sidebarBuildInfoDestroy);
-    private GameButton cancel = new GameButton(Assets.sidebarBuildInfoRepair);
+    private GameButton ok = new GameButton(Assets.messageOk);
+    private GameButton cancel = new GameButton(Assets.messageCancel);
 
     public MessageLog(final GameScreen screen, MessageType type) {
 

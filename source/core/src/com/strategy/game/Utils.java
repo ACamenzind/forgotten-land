@@ -36,6 +36,7 @@ public class Utils {
     public static BitmapFont FONT_BIG_BLACK = Assets.makeFont(FONT_SIZE_BIG, Color.BLACK);
     public static BitmapFont FONT_BIG_WHITE = Assets.makeFontUltraLight(FONT_SIZE_BIG, Color.LIGHT_GRAY); // Ultralight
     public static BitmapFont FONT_HUGE_RED = Assets.makeFont(FONT_SIZE_HUGE, Color.RED);
+    public static BitmapFont FONT_HUGE_WHITE = Assets.makeFont(FONT_SIZE_HUGE, Color.LIGHT_GRAY);
 
 
     public static Matrix4 isoTransformMatrix() {

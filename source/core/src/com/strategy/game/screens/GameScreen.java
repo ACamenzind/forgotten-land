@@ -94,7 +94,7 @@ public class GameScreen implements Screen {
         gamePaused.setVisible(false);
         // Console message
         this.consoleMessage = new ConsoleMessage(stage);
-        stage.addActor(consoleMessage);
+        messages.addActor(consoleMessage);
 
 
         // Looping background sound

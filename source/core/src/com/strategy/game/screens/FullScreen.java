@@ -37,6 +37,5 @@ public class FullScreen extends Table {
                 return false;
             }
         });
-
     }
 }

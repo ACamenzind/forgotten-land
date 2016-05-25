@@ -33,7 +33,8 @@ public class Assets {
     public static Texture sidebarBuildManufacturers, sidebarBuildWarehouses, sidebarBuildDecorations, sidebarBuildOther,
             sidebarBuildRotate, sidebarBuildBack, sidebarBuildCancel;
     // SIDEBAR GAME MENU
-    public static Texture sidebarMenuNew, sidebarMenuLoad, sidebarMenuSave, sidebarMenuQuit, sidebarMenuCredits;
+    public static Texture sidebarMenuNew, sidebarMenuLoad, sidebarMenuSave, sidebarMenuQuit, sidebarMenuCredits,
+            sidebarMenuSettings, sidebarMenuInstructions;
     // SIDEBAR BUILDING INFO
     public static Texture sidebarBuildInfoInfo, sidebarBuildInfoInfoLong, sidebarBuildInfoCost,
             sidebarBuildInfoCostLong, sidebarBuildInfoProfit, sidebarBuildInfoCapacity, sidebarBuildInfoPlus,
@@ -41,11 +42,17 @@ public class Assets {
     // RESOURCES_BAR
     public static Texture resourcesBarBg, resourcesBarPause, resourcesBarResume, pausedOverlay;
     // RESOURCES
-    public static Texture resourcesFood, resourcesWood, resourcesRock, resourcesGold, resourcesPeople;
+    public static Texture resourcesFood, resourcesWood, resourcesRock, resourcesGold, resourcesPeople, resourcesFoodBk,
+            resourcesWoodBk, resourcesRockBk, resourcesGoldBk, resourcesPeopleBk;
     // FULLSCREEN
     public static Texture screenCredits, screenInstructions;
+    // MESSAGES
+    public static Texture messageOk, messageCancel;
     // RESOURCES IMAGES
     public static Texture tree, stone;
+    // SETTINGS
+    public static Texture settingsSliderBg, settingsSliderKnob, settingsSpeedNormal, settingsSpeedFast, settingsRes720p,
+            settingsRes1080p, settingsResFull;
     // SOUNDS
     public static Sound bgSound, hit;
     private static final String DEFAULT_FONT_PATH = "core/assets/fonts/san_francisco_regular.ttf";
@@ -134,8 +141,12 @@ public class Assets {
         sidebarMenuSave.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         sidebarMenuQuit = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_quit.png"));
         sidebarMenuQuit.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarMenuCredits = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_credits.png"));;
+        sidebarMenuCredits = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_credits.png"));
         sidebarMenuCredits.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        sidebarMenuSettings = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_settings.png"));
+        sidebarMenuSettings.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        sidebarMenuInstructions = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_instructions.png"));;
+        sidebarMenuInstructions.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         // SIDEBAR BUILDING INFO
         sidebarBuildInfoInfo = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_info.png"));
         sidebarBuildInfoInfo.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -177,6 +188,16 @@ public class Assets {
         resourcesGold.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         resourcesPeople = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_people.png"));
         resourcesPeople.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        resourcesFoodBk = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_food_bk.png"));
+        resourcesFoodBk.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        resourcesWoodBk = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_wood_bk.png"));
+        resourcesWoodBk.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        resourcesRockBk = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_rock_bk.png"));
+        resourcesRockBk.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        resourcesGoldBk = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_gold_bk.png"));
+        resourcesGoldBk.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        resourcesPeopleBk = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_people_bk.png"));
+        resourcesPeopleBk.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         // OVERLAYS
         pausedOverlay = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/paused_overlay.png"));
         pausedOverlay.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -185,11 +206,31 @@ public class Assets {
         screenCredits.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         screenInstructions = new Texture(Gdx.files.internal("core/assets/textures/screen_instructions.png"));
         screenInstructions.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        // MESSAGES
+        messageOk = new Texture(Gdx.files.internal("core/assets/textures/message_ok.png"));
+        messageOk.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        messageCancel = new Texture(Gdx.files.internal("core/assets/textures/message_cancel.png"));
+        messageCancel.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         // RESOURCES IMAGES
         tree = new Texture(Gdx.files.internal("core/assets/resources/pine-half06.png"));
         tree.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         stone = new Texture(Gdx.files.internal("core/assets/textures/buildings/rocks.png"));
         stone.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        // SETTINGS
+        settingsSliderBg = new Texture(Gdx.files.internal("core/assets/textures/settings/slider_bg.png"));
+        settingsSliderBg.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        settingsSliderKnob = new Texture(Gdx.files.internal("core/assets/textures/settings/slider_knob.png"));
+        settingsSliderKnob.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        settingsSpeedNormal = new Texture(Gdx.files.internal("core/assets/textures/settings/speed_normal.png"));
+        settingsSpeedNormal.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        settingsSpeedFast = new Texture(Gdx.files.internal("core/assets/textures/settings/speed_fast.png"));
+        settingsSpeedFast.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        settingsRes720p = new Texture(Gdx.files.internal("core/assets/textures/settings/res_720p.png"));
+        settingsRes720p.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        settingsRes1080p = new Texture(Gdx.files.internal("core/assets/textures/settings/res_1080p.png"));
+        settingsRes1080p.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        settingsResFull = new Texture(Gdx.files.internal("core/assets/textures/settings/res_full.png"));
+        settingsResFull.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         // http://opengameart.org/content/outdoor-ambiance CC3.0
         bgSound = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/Outdoor_ambiance.mp3"));
         hit = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/hit.wav"));

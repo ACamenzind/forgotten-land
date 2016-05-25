@@ -108,28 +108,28 @@ public class SidebarBuildingInfo extends Table implements Display {
     private static final float REPAIR_POSITION_Y = DESTROY_POSITION_Y;
 
     // RESOURCES_BALANCE
-    private ResourcesTable resourcesBalance = new ResourcesTable(1, Utils.FONT_SMALL_BLACK);
+    private ResourcesTable resourcesBalance = new ResourcesTable(1, Utils.FONT_SMALL_BLACK, true);
     private static final float RESOURCES_BALANCE_WIDTH = 0.1f;
     private static final float RESOURCES_BALANCE_HEIGHT = 0.1f;
     private static final float RESOURCES_BALANCE_POSITION_X = 0.1f;
     private static final float RESOURCES_BALANCE_POSITION_Y = 0.1f;
 
     // COST
-    private ResourcesTable resourcesCost = new ResourcesTable(2, Utils.FONT_SMALL_BLACK);
+    private ResourcesTable resourcesCost = new ResourcesTable(2, Utils.FONT_SMALL_BLACK, true);
     private static final float RESOURCES_COST_WIDTH = 0.75f;
     private static final float RESOURCES_COST_HEIGHT = 0.5f;
     private static final float RESOURCES_COST_POSITION_X = 0.5f;
     private static final float RESOURCES_COST_POSITION_Y = 0.5f;
 
     // PROFIT
-    private ResourcesTable resourcesProfit = new ResourcesTable(2, Utils.FONT_SMALL_BLACK);
+    private ResourcesTable resourcesProfit = new ResourcesTable(2, Utils.FONT_SMALL_BLACK, true);
     private static final float RESOURCES_PROFIT_WIDTH = 0.75f;
     private static final float RESOURCES_PROFIT_HEIGHT = 0.5f;
     private static final float RESOURCES_PROFIT_POSITION_X = 0.5f;
     private static final float RESOURCES_PROFIT_POSITION_Y = 0.5f;
 
     // CAPACITY
-    private ResourcesTable resourcesCapacity = new ResourcesTable(1, Utils.FONT_SMALL_BLACK);
+    private ResourcesTable resourcesCapacity = new ResourcesTable(1, Utils.FONT_SMALL_BLACK, true);
     private static final float RESOURCES_CAPACITY_WIDTH = 0.4f;
     private static final float RESOURCES_CAPACITY_HEIGHT = 0.5f;
     private static final float RESOURCES_CAPACITY_POSITION_X = 0.5f;

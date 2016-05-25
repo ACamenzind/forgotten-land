@@ -28,7 +28,6 @@ public class SidebarBuildings extends SidebarBuildSelection {
 
         buttons[0][0] = new GameButton(Assets.castle);
         buttons[0][0].addListenerBuilding(new Castle());
-//        buttons[0][0].setTooltip("Castle");
         addActor(buttons[0][0]);
 
         buttons[0][1] = new GameButton(Assets.cows);
@@ -43,17 +42,21 @@ public class SidebarBuildings extends SidebarBuildSelection {
         buttons[1][0].addListenerBuilding(new CollectorRock());
         addActor(buttons[1][0]);
 
-        buttons[1][1] = new GameButton(Assets.house1);
-        buttons[1][1].addListenerBuilding(new House());
+        buttons[1][1] = new GameButton(Assets.market);
+        buttons[1][1].addListenerBuilding(new CollectorGold());
         addActor(buttons[1][1]);
 
-        buttons[1][2] = new GameButton(Assets.warehouse);
-        buttons[1][2].addListenerBuilding(new Warehouse());
+        buttons[1][2] = new GameButton(Assets.house1);
+        buttons[1][2].addListenerBuilding(new House());
         addActor(buttons[1][2]);
 
-        buttons[2][0] = new GameButton(Assets.leftwall);
-        buttons[2][0].addListenerBuilding(new Wall());
+        buttons[2][0] = new GameButton(Assets.warehouse);
+        buttons[2][0].addListenerBuilding(new Warehouse());
         addActor(buttons[2][0]);
+
+        buttons[2][1] = new GameButton(Assets.leftwall);
+        buttons[2][1].addListenerBuilding(new Wall());
+        addActor(buttons[2][1]);
 
         back.setVisible(false);
 

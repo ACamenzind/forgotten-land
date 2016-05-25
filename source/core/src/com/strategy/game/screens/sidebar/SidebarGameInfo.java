@@ -37,7 +37,7 @@ public class SidebarGameInfo extends Table implements Display {
     private static final float RESOURCES_POSITION_Y = 0.6f;
     private Label resources = Assets.makeLabel("Resources", Utils.FONT_MEDIUM_WHITE);
 
-    private ResourcesTable resourcesTable = new ResourcesTable(3, Utils.FONT_SMALL_WHITE);
+    private ResourcesTable resourcesTable = new ResourcesTable(3, Utils.FONT_SMALL_WHITE, false);
     private static final float RESOURCES_TABLE_WIDTH = 0.8f;
     private static final float RESOURCES_TABLE_HEIGHT = 0.25f;
     private static final float RESOURCES_TABLE_POSITION_X = 0.525f;
