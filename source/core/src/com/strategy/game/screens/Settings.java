@@ -98,21 +98,23 @@ public class Settings extends Table {
         GameButton res720p = new GameButton(Assets.settingsRes720p);
         res720p.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-//                screen.getWorld().setGameSpeed(World.GameSpeed.NORMAL);
+                Gdx.graphics.setWindowedMode(1280, 720);
                 return false;
             }
         });
         GameButton res1080p = new GameButton(Assets.settingsRes1080p);
         res1080p.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-//                screen.getWorld().setGameSpeed(World.GameSpeed.FAST);
+                Gdx.graphics.setWindowedMode(1920, 1080);
                 return false;
             }
         });
         GameButton resFull = new GameButton(Assets.settingsResFull);
         resFull.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-//                screen.getWorld().setGameSpeed(World.GameSpeed.FAST);
+                Gdx.graphics.setWindowedMode((int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
+                        (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight());
+                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
                 return false;
             }
         });
