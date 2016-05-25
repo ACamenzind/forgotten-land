@@ -140,12 +140,12 @@ public class World implements Disposable{
                     String type = tile.getProperties().get("type", String.class);
                     if (type != null) {
                         if (type.equals("wood")) {
-                            Resource wood = new Resource("wood", 100);
+                            Resource wood = new Resource("Tree", 100);
                             wood.setCoords(new Vector2(x, y));
                             resources.add(wood);
                             tile.setObject(wood);
                         } else if (type.equals("rock")) {
-                            Resource rock = new Resource("rock", 100);
+                            Resource rock = new Resource("Stone", 100);
                             rock.setCoords(new Vector2(x, y));
                             resources.add(rock);
                             tile.setObject(rock);

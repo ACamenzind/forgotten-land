@@ -14,7 +14,9 @@ import com.strategy.game.ResourceContainer;
 import com.strategy.game.Utils;
 import com.strategy.game.buildings.Building;
 import com.strategy.game.buildings.Container;
+import com.strategy.game.buildings.MapEntity;
 import com.strategy.game.screens.Display;
+import com.strategy.game.world.Resource;
 import com.strategy.game.world.ResourceHandler;
 
 /**
@@ -25,7 +27,9 @@ public class SidebarBuildingInfo extends Table implements Display {
     public enum Menu { NONE, INFO, COST, PROFIT, CAPACITY }
 
     // BUILDING
+    private MapEntity entity;
     private Building building;
+    private Resource resource;
     private boolean preview = false;
 
     // TABLES
@@ -33,7 +37,7 @@ public class SidebarBuildingInfo extends Table implements Display {
     private Table tableCost = new Table();
     private Table tableProfit = new Table();
     private Table tableCapacity = new Table();
-    private GameButton cancel = new GameButton(Assets.sidebarBuildInfoCancel);
+    private GameButton cancel = new GameButton(Assets.sidebarBuildCancel);//GameButton(Assets.sidebarBuildInfoCancel);
     private static final float CANCEL_SIZE = 0.1f;
     private static final float CANCEL_POSITION_X = 0.8f;
     private static final float CANCEL_POSITION_Y = 0.8f;
@@ -86,7 +90,7 @@ public class SidebarBuildingInfo extends Table implements Display {
     private GameButton workersButtonAdd = new GameButton(Assets.sidebarBuildInfoPlus);
     private GameButton workersButtonRemove = new GameButton(Assets.sidebarBuildInfoMinus);
     private static final float WORKERS_BUTTON_SIZE = 0.075f;
-    private static final float WORKERS_BUTTON_POSITION_X = WORKERS_POSITION_X + 0.3f;
+    private static final float WORKERS_BUTTON_POSITION_X = WORKERS_POSITION_X + 0.175f;
     private static final float WORKERS_BUTTON_POSITION_Y = IMAGE_POSITION_Y;
 
     // DESTROY
@@ -134,6 +138,7 @@ public class SidebarBuildingInfo extends Table implements Display {
     public SidebarBuildingInfo() {
 
         // GENERAL
+        this.entity = null;
         this.building = null;
         Assets.setBackground(this, Assets.sidebarBuildInfoBg);
 
@@ -314,6 +319,9 @@ public class SidebarBuildingInfo extends Table implements Display {
             }
             resourcesCapacity.set(resourceCapacityContainer);
         }
+        else if (resource != null) {
+            life.setText("Life:\n" + resource.getLife());
+        }
     }
 
     @Override
@@ -389,7 +397,7 @@ public class SidebarBuildingInfo extends Table implements Display {
     }
 
     public void updateMenu(Menu menu) {
-        if (menu == Menu.NONE || building == null) {
+        if (menu == Menu.NONE || entity == null) {
             this.menu2.setVisible(false);
             this.menu3.setVisible(false);
             tableInfo.setVisible(false);
@@ -398,7 +406,7 @@ public class SidebarBuildingInfo extends Table implements Display {
             tableCapacity.setVisible(false);
             cancel.setVisible(false);
         }
-        else {
+        else if (building != null) {
             if (menu == Menu.INFO) {
                 tableInfo.setVisible(true);
                 tableCost.setVisible(false);
@@ -424,7 +432,10 @@ public class SidebarBuildingInfo extends Table implements Display {
                 tableCapacity.setVisible(true);
             }
 
-            cancel.setVisible(true);
+            if (!preview)
+                cancel.setVisible(true);
+            else
+                cancel.setVisible(false);
 
             boolean manufacturer = building.getType() == Building.BuildingType.MANUFACTURER;
             workers.setVisible(manufacturer);
@@ -442,41 +453,97 @@ public class SidebarBuildingInfo extends Table implements Display {
             destroyButton.setVisible(!preview);
             repairButton.setVisible(!preview);
         }
+        else if (resource != null) {
+            tableInfo.setVisible(true);
+            tableCost.setVisible(false);
+            tableProfit.setVisible(false);
+            tableCapacity.setVisible(false);
+
+            cancel.setVisible(true);
+
+            menu2.setVisible(false);
+            menu3.setVisible(false);
+
+            destroyButton.setVisible(false);
+            repairButton.setVisible(false);
+
+            workers.setVisible(false);
+            workersButtonAdd.setVisible(false);
+            workersButtonRemove.setVisible(false);
+        }
     }
 
-    public void setBuilding(Building building) {
+    private void setBuilding(Building building) {
         setBuilding(building, false);
     }
 
-    public void setBuilding(Building building, boolean preview) {
+    private void setBuilding(Building building, boolean preview) {
         if (building != null) {
             ((Sidebar) getParent()).getScreen().getBuilder().showInfluenceArea(building);
             this.building = building;
             this.preview = preview;
-            if (building != null) {
-                name.setText(building.getName());
-                nameCost.setText(building.getName() + " - Cost");
-                nameProfit.setText(building.getName() + " - Profit");
-                nameCapacity.setText(building.getName() + " - Capacity");
-                image.setDrawable(new SpriteDrawable(new Sprite(building.getMainTexture())));
-                life.setText("Life:\n" + building.getLife() + " / " + building.getMaxLife());
-                workers.setText("Workers:\n" + building.getWorkers() + " / " + building.getMaxWorkers());
 
-                ResourceContainer[] resourceCostContainer = {building.getCosts(), building.getMaintenanceCosts()};
-                resourcesCost.set(resourceCostContainer);
+            name.setText(building.getName());
+            nameCost.setText(building.getName() + " - Cost");
+            nameProfit.setText(building.getName() + " - Profit");
+            nameCapacity.setText(building.getName() + " - Capacity");
+            image.setDrawable(new SpriteDrawable(new Sprite(building.getMainTexture())));
+            life.setText("Life:\n" + building.getLife() + " / " + building.getMaxLife());
+            workers.setText("Workers:\n" + building.getWorkers() + " / " + building.getMaxWorkers());
 
-                ResourceContainer[] resourceProfitContainer = {building.getProductionsPerWorker(), building.getProductionsPerTurn()};
-                resourcesProfit.set(resourceProfitContainer);
+            ResourceContainer[] resourceCostContainer = {building.getCosts(), building.getMaintenanceCosts()};
+            resourcesCost.set(resourceCostContainer);
 
-                ResourceContainer[] resourceCapacityContainer = {new ResourceContainer(0, 0, 0, 0, 0)};
-                if (building instanceof Container) {
-                    Container container = (Container) building;
-                    resourceCapacityContainer[0] = container.getResourcesStored();
-                }
-                resourcesCapacity.set(resourceCapacityContainer);
+            ResourceContainer[] resourceProfitContainer = {building.getProductionsPerWorker(), building.getProductionsPerTurn()};
+            resourcesProfit.set(resourceProfitContainer);
 
-                updateMenu(Menu.INFO);
+            ResourceContainer[] resourceCapacityContainer = {new ResourceContainer(0, 0, 0, 0, 0)};
+            if (building instanceof Container) {
+                Container container = (Container) building;
+                resourceCapacityContainer[0] = container.getResourcesStored();
             }
+            resourcesCapacity.set(resourceCapacityContainer);
+
+            updateMenu(Menu.INFO);
+        }
+        else {
+            updateMenu(Menu.NONE);
+        }
+    }
+
+    private void setResource(Resource resource) {
+        if (resource != null) {
+            this.resource = resource;
+            name.setText(resource.getType());
+            if (resource.getMainTexture() != null)
+                image.setDrawable(new SpriteDrawable( new Sprite(resource.getMainTexture())));
+            else
+                image.setDrawable(null);
+            life.setText("Life:\n" + resource.getLife());
+            updateMenu(Menu.INFO);
+        }
+        else {
+            updateMenu(Menu.NONE);
+        }
+    }
+
+    public void setEntity(MapEntity entity, boolean preview) {
+        if (entity != null) {
+            this.entity = entity;
+            if (entity instanceof Building) {
+                this.resource = null;
+                setBuilding((Building) entity, preview);
+            }
+            else if (entity instanceof Resource) {
+                this.building = null;
+                setResource((Resource) entity);
+            }
+        }
+        else {
+            this.entity = null;
+            this.building = null;
+            this.resource = null;
+            updateMenu(Menu.NONE);
         }
     }
 }

@@ -181,14 +181,20 @@ public class GameInputProcessor implements InputProcessor{
             // TODO: show building info from here
 
             if (clickedEntity instanceof Building) {
-                screen.getSidebar().setBuilding((Building) clickedEntity);
+                screen.getSidebar().setEntity(clickedEntity, false);
                 screen.getBuilder().showInfluenceArea((Building) clickedEntity);
             }
             else if (clickedEntity instanceof Resource) {
+                screen.getSidebar().setEntity(clickedEntity, false);
+
                 // Debugging stuff
 //                screen.getBuilder().destroy(clickedEntity);
 //                System.out.println("Destroyed");
 //                System.out.println(clickedEntity.getLife());
+            }
+            else {
+                screen.getBuilder().showInfluenceArea(null);
+                screen.getSidebar().setEntity(null, false);
             }
         } else {
 //            if (clickedEntity instanceof Building) {

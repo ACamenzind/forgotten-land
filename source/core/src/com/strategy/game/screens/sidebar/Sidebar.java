@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
 import com.strategy.game.buildings.Building;
+import com.strategy.game.buildings.MapEntity;
 import com.strategy.game.screens.Display;
 import com.strategy.game.screens.GameScreen;
 
@@ -21,7 +22,7 @@ public class Sidebar extends Table implements Display {
 
     private static final float DISPLAY_TOP_HEIGHT = 0.05f;
 
-    public enum DisplayType { GAME_INFO, BUILD, BUILD_MANUFACTURERS, BUILD_WAREHOUSES, BUILD_DECORATIONS,  GAME_MENU }
+    public enum DisplayType { GAME_INFO, BUILDINGS, BUILD, BUILD_MANUFACTURERS, BUILD_WAREHOUSES, BUILD_DECORATIONS,  GAME_MENU }
 
 
     public Sidebar(final Stage stage, final GameScreen screen) {
@@ -32,7 +33,7 @@ public class Sidebar extends Table implements Display {
         menu = new SidebarMenu();
         addActor(menu);
 
-        middle = new SidebarBuild();
+        middle = new SidebarBuildings();
         addActor(middle);
 
         buildingInfo = new SidebarBuildingInfo();
@@ -51,6 +52,10 @@ public class Sidebar extends Table implements Display {
         if (display == DisplayType.GAME_INFO) {
             middle = new SidebarGameInfo(screen.getWorld());
             menu.setSelectedButton(SidebarMenu.MenuButton.GAME_INFO_BUTTON);
+        }
+        else if (display == DisplayType.BUILDINGS) {
+            middle = new SidebarBuildings();
+            menu.setSelectedButton(SidebarMenu.MenuButton.BUILD_BUTTON);
         }
         else if (display == DisplayType.BUILD) {
             middle = new SidebarBuild();
@@ -78,13 +83,13 @@ public class Sidebar extends Table implements Display {
         updatePosition();
     }
 
-    public void setBuilding(Building building, boolean preview) {
-        buildingInfo.setBuilding(building, preview);
+    public void setEntity(MapEntity entity, boolean preview) {
+        buildingInfo.setEntity(entity, preview);
     }
 
-    public void setBuilding(Building building) {
-        buildingInfo.setBuilding(building);
-    }
+//    public void setBuilding(Building building) {
+//        buildingInfo.setBuilding(building);
+//    }
 
     public GameScreen getScreen() {
         return screen;

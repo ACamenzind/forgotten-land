@@ -1,6 +1,5 @@
 package com.strategy.game.screens.sidebar;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
@@ -22,23 +21,27 @@ public class SidebarGameInfo extends Table implements Display {
     private static final float TITLE_POSITION_Y = 0.92f;
     private static final Label title = Assets.makeLabel("Game Info", Utils.FONT_BIG_WHITE);
 
-    private static final float TOTAL_POPULATION_POSITION_X = MARGIN;
+    private static final float TOTAL_POPULATION_POSITION_X = 0.5f;//MARGIN;
     private static final float TOTAL_POPULATION_POSITION_Y = 0.8f;
     private Label total_population = Assets.makeLabel("Population: 5", Utils.FONT_MEDIUM_WHITE);
 
-    private static final float WORKERS_POSITION_X = MARGIN;
+    private static final float WORKERS_POSITION_X = 0.5f;//MARGIN;
     private static final float WORKERS_POSITION_Y = 0.75f;
     private Label workers = Assets.makeLabel("Workers: 0", Utils.FONT_MEDIUM_WHITE);
 
-    private static final float UNEMPLYED_POSITION_X = MARGIN;
+    private static final float UNEMPLYED_POSITION_X = 0.5f;//MARGIN;
     private static final float UNEMPLYED_POSITION_Y = 0.7f;
     private Label unemployed = Assets.makeLabel("Unemployed: 0", Utils.FONT_MEDIUM_WHITE);
 
-    private ResourcesTable resources = new ResourcesTable(3, Utils.FONT_SMALL_WHITE);
-    private static final float RESOURCES_WIDTH = 0.8f;
-    private static final float RESOURCES_HEIGHT = 0.3f;
-    private static final float RESOURCES_POSITION_X = 0.5f;
-    private static final float RESOURCES_POSITION_Y = 0.25f;
+    private static final float RESOURCES_POSITION_X = 0.5f;//MARGIN;
+    private static final float RESOURCES_POSITION_Y = 0.6f;
+    private Label resources = Assets.makeLabel("Resources", Utils.FONT_MEDIUM_WHITE);
+
+    private ResourcesTable resourcesTable = new ResourcesTable(3, Utils.FONT_SMALL_WHITE);
+    private static final float RESOURCES_TABLE_WIDTH = 0.8f;
+    private static final float RESOURCES_TABLE_HEIGHT = 0.25f;
+    private static final float RESOURCES_TABLE_POSITION_X = 0.525f;
+    private static final float RESOURCES_TABLE_POSITION_Y = 0.33f;
 
     public SidebarGameInfo(World world) {
         this.world = world;
@@ -50,11 +53,12 @@ public class SidebarGameInfo extends Table implements Display {
         addActor(workers);
         addActor(unemployed);
 
-        //addActor(nameCapacity);
-        String[] resourcesCapacityTitles = { "Total", "Max", "Variance" };
-        int[][] resourcesCapacityValues = { { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } };
-        resources.set(resourcesCapacityTitles, resourcesCapacityValues);
         addActor(resources);
+
+        String[] resourcesTableTitles = { "Total", "Max", "Var." };
+        int[][] resourcesTableValues = { { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } };
+        resourcesTable.set(resourcesTableTitles, resourcesTableValues);
+        addActor(resourcesTable);
 
         update();
         updatePosition();
@@ -72,17 +76,18 @@ public class SidebarGameInfo extends Table implements Display {
 
         ResourceContainer[] resourceProfitContainer = { world.getResourceHandler().getTotalResources(),
                                                         world.getResourceHandler().getMaximumResources(),
-                                                        world.getResourceHandler().getTotalResources() };
-        resources.set(resourceProfitContainer);
+                                                        world.getResourceHandler().getVariance() };
+        resourcesTable.set(resourceProfitContainer);
     }
 
     @Override
     public void updatePosition() {
         Assets.setPositionRelative(title, TITLE_POSITION_X, TITLE_POSITION_Y, true, true);
-        Assets.setPositionRelative(total_population, TOTAL_POPULATION_POSITION_X, TOTAL_POPULATION_POSITION_Y);
-        Assets.setPositionRelative(workers, WORKERS_POSITION_X, WORKERS_POSITION_Y);
-        Assets.setPositionRelative(unemployed, UNEMPLYED_POSITION_X, UNEMPLYED_POSITION_Y);
-        Assets.setSizeRelative(resources, RESOURCES_WIDTH, RESOURCES_HEIGHT);
+        Assets.setPositionRelative(total_population, TOTAL_POPULATION_POSITION_X, TOTAL_POPULATION_POSITION_Y, true, false);
+        Assets.setPositionRelative(workers, WORKERS_POSITION_X, WORKERS_POSITION_Y, true, false);
+        Assets.setPositionRelative(unemployed, UNEMPLYED_POSITION_X, UNEMPLYED_POSITION_Y, true, false);
         Assets.setPositionRelative(resources, RESOURCES_POSITION_X, RESOURCES_POSITION_Y, true, false);
+        Assets.setSizeRelative(resourcesTable, RESOURCES_TABLE_WIDTH, RESOURCES_TABLE_HEIGHT);
+        Assets.setPositionRelative(resourcesTable, RESOURCES_TABLE_POSITION_X, RESOURCES_TABLE_POSITION_Y, true, false);
     }
 }

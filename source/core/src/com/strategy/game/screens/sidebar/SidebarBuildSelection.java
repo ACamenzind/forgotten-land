@@ -19,9 +19,9 @@ public class SidebarBuildSelection extends Table implements Display {
 
     protected Label title;
     protected GameButton[][] buttons;
-    protected GameButton rotate;
-    protected GameButton cancel;
-    protected GameButton back;
+    protected GameButton rotate = new GameButton(Assets.sidebarBuildRotate);
+    protected GameButton cancel = new GameButton(Assets.sidebarBuildCancel);
+    protected GameButton back = new GameButton(Assets.sidebarBuildBack);
 
     private static final int BUTTONS_PER_COLUMN = 6;
     private static final int BUTTONS_PER_ROW = 3;
@@ -38,7 +38,6 @@ public class SidebarBuildSelection extends Table implements Display {
 
         buttons = new GameButton[BUTTONS_PER_COLUMN][BUTTONS_PER_ROW];
 
-        rotate = new GameButton(Assets.sidebarBuildRotate);
         rotate.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if (hasParent()) {
@@ -51,11 +50,9 @@ public class SidebarBuildSelection extends Table implements Display {
         });
         addActor(rotate);
 
-        cancel = new GameButton(Assets.sidebarBuildCancel);
         cancel.addListenerBuilding(null);
         addActor(cancel);
 
-        back = new GameButton(Assets.sidebarBuildBack);
         back.addListenerLink(Sidebar.DisplayType.BUILD);
         addActor(back);
     }

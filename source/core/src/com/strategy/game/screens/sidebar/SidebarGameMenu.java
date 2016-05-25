@@ -1,9 +1,13 @@
 package com.strategy.game.screens.sidebar;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
 import com.strategy.game.Utils;
+import com.strategy.game.screens.FullScreen;
 
 /**
  * Created by Amedeo on 07/05/16.
@@ -36,6 +40,13 @@ public class SidebarGameMenu extends SidebarOptionsSelection {
         addActor(quitGame);
 
         buttons[4][0] = credits;
+        credits.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                Stage stage = ((Sidebar) getParent()).getScreen().getStage();
+                stage.addActor(new FullScreen(stage, Assets.screenCredits));
+                return false;
+            }
+        });
         addActor(credits);
 
         update();

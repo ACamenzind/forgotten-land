@@ -1,23 +1,21 @@
 package com.strategy.game.screens.sidebar;
 
-import com.badlogic.gdx.graphics.Color;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
 import com.strategy.game.Utils;
-import com.strategy.game.buildings.Castle;
-import com.strategy.game.buildings.CollectorFood;
-import com.strategy.game.buildings.CollectorRock;
-import com.strategy.game.buildings.CollectorWood;
+import com.strategy.game.buildings.*;
 
 /**
- * Created by Amedeo on 08/05/16.
+ * Created by Amedeo on 24/05/16.
  */
-public class SidebarBuildManufacturers extends SidebarBuildSelection {
+public class SidebarBuildings extends SidebarBuildSelection {
 
-    public SidebarBuildManufacturers() {
+    public SidebarBuildings() {
         super();
 
-        title = Assets.makeLabel("Manufacturers", Utils.FONT_BIG_WHITE);
+        Assets.setBackground(this, Assets.sidebarBgBuild);
+
+        title = Assets.makeLabel("Buildings", Utils.FONT_BIG_WHITE);
         addActor(title);
 
         buttons[0][0] = new GameButton(Assets.castle);
@@ -35,6 +33,20 @@ public class SidebarBuildManufacturers extends SidebarBuildSelection {
         buttons[1][0] = new GameButton(Assets.mine);
         buttons[1][0].addListenerBuilding(new CollectorRock());
         addActor(buttons[1][0]);
+
+        buttons[1][1] = new GameButton(Assets.house1);
+        buttons[1][1].addListenerBuilding(new House());
+        addActor(buttons[1][1]);
+
+        buttons[1][2] = new GameButton(Assets.warehouse);
+        buttons[1][2].addListenerBuilding(new Warehouse());
+        addActor(buttons[1][2]);
+
+        buttons[2][0] = new GameButton(Assets.leftwall);
+        buttons[2][0].addListenerBuilding(new Wall());
+        addActor(buttons[2][0]);
+
+        back.setVisible(false);
 
         update();
         updatePosition();

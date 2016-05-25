@@ -42,6 +42,8 @@ public class Assets {
     public static Texture resourcesBarBg, resourcesBarPause, resourcesBarResume, pausedOverlay;
     // RESOURCES
     public static Texture resourcesFood, resourcesWood, resourcesRock, resourcesGold, resourcesPeople;
+    // FULLSCREEN
+    public static Texture screenCredits, screenInstructions;
     // SOUNDS
     public static Sound bgSound, hit;
     private static final String DEFAULT_FONT_PATH = "core/assets/fonts/san_francisco_regular.ttf";
@@ -171,7 +173,11 @@ public class Assets {
         // OVERLAYS
         pausedOverlay = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/paused_overlay.png"));
         pausedOverlay.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
+        // FULLSCREEN
+        screenCredits = new Texture(Gdx.files.internal("core/assets/textures/screen_credits.png"));
+        screenCredits.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        screenInstructions = new Texture(Gdx.files.internal("core/assets/textures/screen_instructions.png"));
+        screenInstructions.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         // http://opengameart.org/content/outdoor-ambiance CC3.0
         bgSound = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/Outdoor_ambiance.mp3"));

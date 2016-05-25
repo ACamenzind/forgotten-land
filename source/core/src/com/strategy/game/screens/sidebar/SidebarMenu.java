@@ -44,7 +44,8 @@ public class SidebarMenu extends Table implements Display {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (hasParent()) {
                     Sidebar sidebar = (Sidebar) getParent();
-                    sidebar.setMiddle(Sidebar.DisplayType.BUILD);
+//                    sidebar.setMiddle(Sidebar.DisplayType.BUILD);
+                    sidebar.setMiddle(Sidebar.DisplayType.BUILDINGS);
                 }
                 return false;
             }

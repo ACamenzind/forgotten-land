@@ -127,6 +127,14 @@ public class GameScreen implements Screen {
         }
     }
 
+    public Stage getStage() {
+        return stage;
+    }
+
+    public InputMultiplexer getGameInputMultiplexer() {
+        return gameInputMultiplexer;
+    }
+
     public boolean isSelecting() {
         return isSelecting;
     }
