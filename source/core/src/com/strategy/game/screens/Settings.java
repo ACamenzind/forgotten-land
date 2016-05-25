@@ -10,9 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
+import com.strategy.game.StrategyGame;
 import com.strategy.game.Utils;
 import com.strategy.game.screens.sidebar.Sidebar;
 import com.strategy.game.world.World;
@@ -63,10 +65,20 @@ public class Settings extends Table {
         Label volumeLabel = Assets.makeLabel("Volume:", Utils.FONT_BIG_WHITE);
         container.add(volumeLabel).expand().uniform().right();
 
-        Slider volumeSlider = new Slider(0, 10, 1, false, new Slider.SliderStyle(
-                        new SpriteDrawable(new Sprite(Assets.settingsSliderBg)),
-                        new SpriteDrawable(new Sprite(Assets.settingsSliderKnob))));
-        container.add(volumeSlider).expand().uniform();
+        final Slider volumeSlider = new Slider(0, 1f, 0.1f, false, new Slider.SliderStyle(
+                new SpriteDrawable(new Sprite(Assets.settingsSliderBg)),
+                new SpriteDrawable(new Sprite(Assets.settingsSliderKnob))));
+
+        volumeSlider.getStyle().knob.setMinHeight(container.getHeight() / 8f);
+        volumeSlider.getStyle().knob.setMinWidth(volumeSlider.getStyle().knob.getMinHeight());
+        volumeSlider.getStyle().background.setMinHeight(container.getHeight() * 0.1f);
+
+        container.add(volumeSlider).expand().uniform().width(container.getWidth() / 3f);
+        volumeSlider.addListener(new ChangeListener() {
+            public void changed (ChangeEvent event, Actor actor) {
+                screen.getGame().getSoundManager().setMasterVolume(volumeSlider.getValue());
+            }
+        });
 
         container.row();
 
@@ -105,12 +117,12 @@ public class Settings extends Table {
         resolutionButtons.add(res720p).padRight(padding).size(resolutionButtonWidth, resolutionButtonHeight);
         resolutionButtons.add(res1080p).padRight(padding).size(resolutionButtonWidth, resolutionButtonHeight);;
         resolutionButtons.add(resFull).size(resolutionButtonWidth, resolutionButtonHeight);;
-        container.add(resolutionButtons).expand();
+        container.add(resolutionButtons).expand().uniform();
 
 
     }
 
-    public Settings(Game game) {
+    public Settings(final StrategyGame game) {
         final MainMenuScreen screen = (MainMenuScreen) game.getScreen();
 
         Assets.setBackground(this, Assets.resourcesBarBg);
@@ -151,10 +163,20 @@ public class Settings extends Table {
         Label volumeLabel = Assets.makeLabel("Volume:", Utils.FONT_BIG_WHITE);
         container.add(volumeLabel).expand().uniform().right();
 
-        Slider volumeSlider = new Slider(0, 10, 1, false, new Slider.SliderStyle(
+        final Slider volumeSlider = new Slider(0, 1f, 0.1f, false, new Slider.SliderStyle(
                 new SpriteDrawable(new Sprite(Assets.settingsSliderBg)),
                 new SpriteDrawable(new Sprite(Assets.settingsSliderKnob))));
-        container.add(volumeSlider).expand().uniform();
+
+        volumeSlider.getStyle().knob.setMinHeight(container.getHeight() / 8f);
+        volumeSlider.getStyle().knob.setMinWidth(volumeSlider.getStyle().knob.getMinHeight());
+        volumeSlider.getStyle().background.setMinHeight(container.getHeight() * 0.1f);
+
+        container.add(volumeSlider).expand().uniform().width(container.getWidth() / 3f);
+        volumeSlider.addListener(new ChangeListener() {
+            public void changed (ChangeEvent event, Actor actor) {
+                game.getSoundManager().setMasterVolume(volumeSlider.getValue());
+            }
+        });
 
         container.row();
 

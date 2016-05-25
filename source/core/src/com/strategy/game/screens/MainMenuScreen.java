@@ -73,7 +73,6 @@ public class MainMenuScreen implements Screen{
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             game.setScreen(new GameScreen(game));
             dispose();
-            System.out.println("Pressed enter!");
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
             if(Utils.HDPI) {
