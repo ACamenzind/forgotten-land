@@ -68,6 +68,7 @@ public class StaticEntityBuilder {
     }
 
     public void removeSelectedEntity() {
+        gameScreen.getSidebar().setEntity(null, false);
         selectedEntity = null;
         gridLayer.setVisible(false);
         influenceLayer.setVisible(false);

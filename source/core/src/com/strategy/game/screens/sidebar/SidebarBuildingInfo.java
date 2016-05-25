@@ -146,7 +146,7 @@ public class SidebarBuildingInfo extends Table implements Display {
         cancel.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 updateMenu(Menu.NONE);
-                ((Sidebar) getParent()).getScreen().getBuilder().showInfluenceArea(null);
+//                ((Sidebar) getParent()).getScreen().getBuilder().showInfluenceArea(null);
                 return false;
             }
         });
@@ -405,8 +405,10 @@ public class SidebarBuildingInfo extends Table implements Display {
             tableProfit.setVisible(false);
             tableCapacity.setVisible(false);
             cancel.setVisible(false);
+            showInfluenceArea(null);
         }
         else if (building != null) {
+            showInfluenceArea(building);
             if (menu == Menu.INFO) {
                 tableInfo.setVisible(true);
                 tableCost.setVisible(false);
@@ -454,6 +456,7 @@ public class SidebarBuildingInfo extends Table implements Display {
             repairButton.setVisible(!preview);
         }
         else if (resource != null) {
+            showInfluenceArea(null);
             tableInfo.setVisible(true);
             tableCost.setVisible(false);
             tableProfit.setVisible(false);
@@ -473,13 +476,16 @@ public class SidebarBuildingInfo extends Table implements Display {
         }
     }
 
-    private void setBuilding(Building building) {
-        setBuilding(building, false);
+    private void showInfluenceArea(Building building) {
+        if (hasParent() &&
+                ((Sidebar) getParent()).getScreen() != null &&
+                ((Sidebar) getParent()).getScreen().getBuilder() != null) {
+            ((Sidebar) getParent()).getScreen().getBuilder().showInfluenceArea(null);
+        }
     }
 
     private void setBuilding(Building building, boolean preview) {
         if (building != null) {
-            ((Sidebar) getParent()).getScreen().getBuilder().showInfluenceArea(building);
             this.building = building;
             this.preview = preview;
 
