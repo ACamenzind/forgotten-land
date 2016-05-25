@@ -16,6 +16,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.strategy.game.*;
 import com.strategy.game.buildings.House;
@@ -46,6 +47,7 @@ public class GameScreen implements Screen {
 
     private Sidebar sidebar;
     private ResourcesBar resourcesBar;
+    private Table messages;
     private Image gamePaused;
 
     private Vector2 touchDownCoords;
@@ -79,9 +81,12 @@ public class GameScreen implements Screen {
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         this.sidebar = new Sidebar(stage, this);
         this.resourcesBar = new ResourcesBar(stage, world);
+        this.messages = new Table();
+        messages.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        stage.addActor(messages);
         // Make method for readability?
         this.gamePaused =  Assets.makeImage(Assets.pausedOverlay);
-        stage.addActor(gamePaused);
+        messages.addActor(gamePaused);
         gamePaused.setSize(Gdx.graphics.getWidth() / 3f, Gdx.graphics.getWidth() * 0.25f / 3f);
         gamePaused.setPosition((Gdx.graphics.getWidth() - sidebar.getWidth() - gamePaused.getWidth()) / 2f, Gdx.graphics.getHeight() * 0.5f);
         gamePaused.setVisible(false);
@@ -130,6 +135,10 @@ public class GameScreen implements Screen {
 
     public Stage getStage() {
         return stage;
+    }
+
+    public Table getMessages() {
+        return messages;
     }
 
     public InputMultiplexer getGameInputMultiplexer() {

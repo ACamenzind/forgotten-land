@@ -15,14 +15,14 @@ import com.strategy.game.GameButton;
  */
 public class FullScreen extends Table {
 
-    public FullScreen(final Stage stage, Texture texture) {
+    public FullScreen(final GameScreen screen, Texture texture) {
         Assets.setBackground(this, texture);
         setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        for (Actor actor : stage.getActors()) {
+        for (Actor actor : screen.getStage().getActors()) {
             actor.setVisible(false);
         }
-        setVisible(true);
+        screen.getWorld().toggleRunning();
 
         GameButton button = new GameButton(Assets.sidebarBuildBack);
         addActor(button);
@@ -30,9 +30,10 @@ public class FullScreen extends Table {
         button.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
-                for (Actor actor : stage.getActors()) {
+                for (Actor actor : screen.getStage().getActors()) {
                     actor.setVisible(true);
                 }
+                screen.getWorld().toggleRunning();
                 return false;
             }
         });

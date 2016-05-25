@@ -8,6 +8,8 @@ import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
 import com.strategy.game.Utils;
 import com.strategy.game.screens.FullScreen;
+import com.strategy.game.screens.GameScreen;
+import com.strategy.game.screens.MessageLog;
 
 /**
  * Created by Amedeo on 07/05/16.
@@ -28,22 +30,48 @@ public class SidebarGameMenu extends SidebarOptionsSelection {
         addActor(title);
 
         buttons[0][0] = newGame;
+        newGame.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                Sidebar sidebar = (Sidebar) getParent();
+                if (sidebar != null) {
+                    GameScreen screen = sidebar.getScreen();
+                    Stage stage = screen.getStage();
+                    sidebar.getScreen().getMessages().addActor(new MessageLog(stage, MessageLog.MessageType.NEW_GAME));
+                }
+                return false;
+            }
+        });
         addActor(newGame);
 
-        buttons[1][0] = loadGame;
-        addActor(loadGame);
+//        buttons[1][0] = loadGame;
+//        addActor(loadGame);
+//
+//        buttons[2][0] = saveGame;
+//        addActor(saveGame);
 
-        buttons[2][0] = saveGame;
-        addActor(saveGame);
-
-        buttons[3][0] = quitGame;
+        buttons[1][0] = quitGame;
+        quitGame.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                Sidebar sidebar = (Sidebar) getParent();
+                if (sidebar != null) {
+                    GameScreen screen = sidebar.getScreen();
+                    Stage stage = screen.getStage();
+                    sidebar.getScreen().getMessages().addActor(new MessageLog(stage, MessageLog.MessageType.QUIT));
+                }
+                return false;
+            }
+        });
         addActor(quitGame);
 
-        buttons[4][0] = credits;
+        buttons[2][0] = credits;
         credits.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                Stage stage = ((Sidebar) getParent()).getScreen().getStage();
-                stage.addActor(new FullScreen(stage, Assets.screenCredits));
+                Sidebar sidebar = (Sidebar) getParent();
+                if (sidebar != null) {
+                    GameScreen screen = sidebar.getScreen();
+                    Stage stage = screen.getStage();
+                    stage.addActor(new FullScreen(screen, Assets.screenCredits));
+                }
                 return false;
             }
         });
