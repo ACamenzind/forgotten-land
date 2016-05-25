@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.strategy.game.*;
 import com.strategy.game.buildings.House;
 import com.strategy.game.buildings.StaticEntityBuilder;
+import com.strategy.game.screens.sidebar.ConsoleMessage;
 import com.strategy.game.screens.sidebar.Sidebar;
 import com.strategy.game.world.World;
 
@@ -49,6 +50,7 @@ public class GameScreen implements Screen {
     private ResourcesBar resourcesBar;
     private Table messages;
     private Image gamePaused;
+    private ConsoleMessage consoleMessage;
 
     private Vector2 touchDownCoords;
     private Vector2 touchUpCoords;
@@ -90,7 +92,9 @@ public class GameScreen implements Screen {
         gamePaused.setSize(Gdx.graphics.getWidth() / 3f, Gdx.graphics.getWidth() * 0.25f / 3f);
         gamePaused.setPosition((Gdx.graphics.getWidth() - sidebar.getWidth() - gamePaused.getWidth()) / 2f, Gdx.graphics.getHeight() * 0.5f);
         gamePaused.setVisible(false);
-
+        // Console message
+        this.consoleMessage = new ConsoleMessage(stage);
+        stage.addActor(consoleMessage);
 
 
         // Looping background sound
@@ -139,6 +143,10 @@ public class GameScreen implements Screen {
 
     public Table getMessages() {
         return messages;
+    }
+
+    public void setConsoleMessage(String text) {
+        consoleMessage.setMessage(text);
     }
 
     public InputMultiplexer getGameInputMultiplexer() {
@@ -227,6 +235,8 @@ public class GameScreen implements Screen {
         batch.begin();
         font.draw(batch, "FPS: "+ Gdx.graphics.getFramesPerSecond(), 0, Gdx.graphics.getHeight());
         batch.end();
+
+        consoleMessage.update(delta);
 
         // Draw stage
         stage.act(delta);
