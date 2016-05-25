@@ -1,5 +1,6 @@
 package com.strategy.game.world;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -10,6 +11,7 @@ import com.strategy.game.ExtendedStaticTiledMapTile;
 import com.strategy.game.buildings.Building;
 import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.screens.GameScreen;
+import com.strategy.game.screens.MessageLog;
 //import com.sun.javafx.scene.control.skin.VirtualFlow;
 
 import java.util.ArrayList;
@@ -122,6 +124,7 @@ public class World implements Disposable{
      */
     public void handleGameLost() {
         isRunning = false;
+        gameScreen.getMessages().addActor(new MessageLog(gameScreen, MessageLog.MessageType.GAME_OVER));
         //TODO: add a message or something else
     }
 
@@ -141,11 +144,13 @@ public class World implements Disposable{
                     if (type != null) {
                         if (type.equals("wood")) {
                             Resource wood = new Resource("Tree", 100);
+                            wood.setMainTextureSimple(tile.getTextureRegion().getTexture());
                             wood.setCoords(new Vector2(x, y));
                             resources.add(wood);
                             tile.setObject(wood);
                         } else if (type.equals("rock")) {
                             Resource rock = new Resource("Stone", 100);
+                            rock.setMainTextureSimple(tile.getTextureRegion().getTexture());
                             rock.setCoords(new Vector2(x, y));
                             resources.add(rock);
                             tile.setObject(rock);

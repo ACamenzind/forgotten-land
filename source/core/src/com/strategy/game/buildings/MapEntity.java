@@ -102,6 +102,10 @@ public abstract class MapEntity implements Disposable{
         sliceTexture(mainTexture);
     }
 
+    public void setMainTextureSimple(Texture mainTexture) {
+        this.mainTexture = mainTexture;
+    }
+
     /**
      * Switch to alternative textures, if they exist.
      */
