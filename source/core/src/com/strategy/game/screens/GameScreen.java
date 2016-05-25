@@ -267,5 +267,6 @@ public class GameScreen implements Screen {
         Assets.dispose();
         world.dispose();
         stage.dispose();
+        game.getSoundManager().dispose();
     }
 }

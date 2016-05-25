@@ -1,16 +1,21 @@
 package com.strategy.game;
 
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.utils.Disposable;
+
+import java.util.ArrayList;
 
 /**
  * Handles all the sounds
  */
-public class SoundManager {
+public class SoundManager implements Disposable{
     private float masterVolume;
     private boolean muted;
+    private ArrayList<Sound> loopingSounds;
 
     public SoundManager() {
         this.masterVolume = 1.0f;
+        this.loopingSounds = new ArrayList<Sound>();
     }
 
     /**
@@ -67,5 +72,15 @@ public class SoundManager {
         long id = sound.play(volume * masterVolume);
         sound.setPitch(id, pitch);
         sound.setLooping(id, looping);
+        if (looping)
+            loopingSounds.add(sound);
+    }
+
+    @Override
+    public void dispose() {
+        // Dispose all the looping sounds
+        for (Sound sound : loopingSounds) {
+            sound.dispose();
+        }
     }
 }
