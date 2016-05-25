@@ -40,7 +40,9 @@ public class Assets {
             sidebarBuildInfoCostLong, sidebarBuildInfoProfit, sidebarBuildInfoCapacity, sidebarBuildInfoPlus,
             sidebarBuildInfoMinus, sidebarBuildInfoDestroy, sidebarBuildInfoRepair, sidebarBuildInfoCancel;
     // RESOURCES_BAR
-    public static Texture resourcesBarBg, resourcesBarPause, resourcesBarResume, pausedOverlay;
+    public static Texture resourcesBarBg, resourcesBarPause, resourcesBarResume;
+    // OVERLAYS
+    public static Texture pausedOverlay, bottomBarBg;
     // RESOURCES
     public static Texture resourcesFood, resourcesWood, resourcesRock, resourcesGold, resourcesPeople, resourcesFoodBk,
             resourcesWoodBk, resourcesRockBk, resourcesGoldBk, resourcesPeopleBk;
@@ -201,6 +203,8 @@ public class Assets {
         // OVERLAYS
         pausedOverlay = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/paused_overlay.png"));
         pausedOverlay.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        bottomBarBg = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/bottombar_bg.png"));
+        bottomBarBg.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         // FULLSCREEN
         screenCredits = new Texture(Gdx.files.internal("core/assets/textures/screen_credits.png"));
         screenCredits.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
