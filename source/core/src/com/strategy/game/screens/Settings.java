@@ -55,6 +55,9 @@ public class Settings extends Table {
 
         // CONTAINER TABLE
         Table container = new Table();
+        addActor(container);
+        Assets.setSizeRelative(container, 0.3f, 0.2f);
+        Assets.setPositionRelative(container, 0.5f, 0.5f, true, true);
 
         // VOLUME
         Label volumeLabel = Assets.makeLabel("Volume:", Utils.FONT_BIG_WHITE);
@@ -95,15 +98,16 @@ public class Settings extends Table {
                 return false;
             }
         });
-        resolutionButtons.add(res720p).padRight(10);
-        resolutionButtons.add(res1080p).padRight(10);
-        resolutionButtons.add(resFull);
+
+        float resolutionButtonWidth = container.getWidth() * 0.125f;
+        float resolutionButtonHeight = container.getHeight() * 0.2f;
+        float padding = container.getWidth() * 0.025f;
+        resolutionButtons.add(res720p).padRight(padding).size(resolutionButtonWidth, resolutionButtonHeight);
+        resolutionButtons.add(res1080p).padRight(padding).size(resolutionButtonWidth, resolutionButtonHeight);;
+        resolutionButtons.add(resFull).size(resolutionButtonWidth, resolutionButtonHeight);;
         container.add(resolutionButtons).expand();
 
 
-        addActor(container);
-        Assets.setSizeRelative(container, 0.3f, 0.2f);
-        Assets.setPositionRelative(container, 0.5f, 0.5f, true, true);
     }
 
     public Settings(Game game) {
@@ -139,6 +143,9 @@ public class Settings extends Table {
 
         // CONTAINER TABLE
         Table container = new Table();
+        addActor(container);
+        Assets.setSizeRelative(container, 0.3f, 0.2f);
+        Assets.setPositionRelative(container, 0.5f, 0.5f, true, true);
 
         // VOLUME
         Label volumeLabel = Assets.makeLabel("Volume:", Utils.FONT_BIG_WHITE);
@@ -179,14 +186,13 @@ public class Settings extends Table {
                 return false;
             }
         });
-        resolutionButtons.add(res720p).padRight(10);
-        resolutionButtons.add(res1080p).padRight(10);
-        resolutionButtons.add(resFull);
+
+        float resolutionButtonWidth = container.getWidth() * 0.125f;
+        float resolutionButtonHeight = container.getHeight() * 0.2f;
+        float padding = container.getWidth() * 0.025f;
+        resolutionButtons.add(res720p).padRight(padding).size(resolutionButtonWidth, resolutionButtonHeight);
+        resolutionButtons.add(res1080p).padRight(padding).size(resolutionButtonWidth, resolutionButtonHeight);;
+        resolutionButtons.add(resFull).size(resolutionButtonWidth, resolutionButtonHeight);;
         container.add(resolutionButtons).expand();
-
-
-        addActor(container);
-        Assets.setSizeRelative(container, 0.3f, 0.2f);
-        Assets.setPositionRelative(container, 0.5f, 0.5f, true, true);
     }
 }

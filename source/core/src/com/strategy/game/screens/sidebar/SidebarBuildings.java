@@ -27,36 +27,36 @@ public class SidebarBuildings extends SidebarBuildSelection {
         addActor(title);
 
         buttons[0][0] = new GameButton(Assets.castle);
-        buttons[0][0].addListenerBuilding(new Castle());
         addActor(buttons[0][0]);
+        buttons[0][0].addListenerBuilding(new Castle());
 
-        buttons[0][1] = new GameButton(Assets.cows);
-        buttons[0][1].addListenerBuilding(new CollectorFood());
+        buttons[0][1] = new GameButton(Assets.lumberjack);
         addActor(buttons[0][1]);
+        buttons[0][1].addListenerBuilding(new CollectorWood());
 
-        buttons[0][2] = new GameButton(Assets.lumberjack);
-        buttons[0][2].addListenerBuilding(new CollectorWood());
+        buttons[0][2] = new GameButton(Assets.cows);
         addActor(buttons[0][2]);
+        buttons[0][2].addListenerBuilding(new CollectorFood());
 
         buttons[1][0] = new GameButton(Assets.mine);
-        buttons[1][0].addListenerBuilding(new CollectorRock());
         addActor(buttons[1][0]);
+        buttons[1][0].addListenerBuilding(new CollectorRock());
 
         buttons[1][1] = new GameButton(Assets.market);
-        buttons[1][1].addListenerBuilding(new CollectorGold());
         addActor(buttons[1][1]);
+        buttons[1][1].addListenerBuilding(new CollectorGold());
 
         buttons[1][2] = new GameButton(Assets.house1);
-        buttons[1][2].addListenerBuilding(new House());
         addActor(buttons[1][2]);
+        buttons[1][2].addListenerBuilding(new House());
 
         buttons[2][0] = new GameButton(Assets.warehouse);
-        buttons[2][0].addListenerBuilding(new Warehouse());
         addActor(buttons[2][0]);
+        buttons[2][0].addListenerBuilding(new Warehouse());
 
         buttons[2][1] = new GameButton(Assets.leftwall);
-        buttons[2][1].addListenerBuilding(new Wall());
         addActor(buttons[2][1]);
+        buttons[2][1].addListenerBuilding(new Wall());
 
         back.setVisible(false);
 

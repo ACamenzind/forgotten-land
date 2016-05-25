@@ -45,7 +45,7 @@ public class ResourcesTable extends Table {
         for (int y = 0; y < table.length; y++) {
             for (int x = 0; x < table[y].length; x++) {
                 if (x == 0) {
-                    add(table[y][x]).width(size);
+                    add(table[y][x]).size(size);
                 }
                 else {
                     table[y][x] = Assets.makeLabel("-", font);

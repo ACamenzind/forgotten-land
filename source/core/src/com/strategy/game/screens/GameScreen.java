@@ -229,7 +229,7 @@ public class GameScreen implements Screen {
 
         // Draw FPS counter on the top left
         batch.begin();
-        font.draw(batch, "FPS: "+ Gdx.graphics.getFramesPerSecond(), 0, Gdx.graphics.getHeight());
+//        font.draw(batch, "FPS: "+ Gdx.graphics.getFramesPerSecond(), 0, Gdx.graphics.getHeight());
         batch.end();
 
         consoleMessage.update(delta);

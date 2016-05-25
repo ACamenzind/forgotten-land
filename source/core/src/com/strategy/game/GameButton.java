@@ -43,23 +43,21 @@ public class GameButton extends Button {
                 Cursor cursorHand = Gdx.graphics.newCursor(cursorHandPixmap, 0, 0);
                 Gdx.graphics.setCursor(cursorHand);
                 cursorHand.dispose();
-//                Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
             }
         });
         this.addListener(new InputListener() {
             public void exit (InputEvent event, float x, float y, int pointer, Actor toActor) {
                 Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
-                if (tooltip != null)
-                    tooltip.remove();
+                if (tooltip != null) {
+                    tooltip.setVisible(false);
+                }
             }
         });
         this.addListener(new InputListener() {
             public boolean mouseMoved(InputEvent event, float x, float y) {
-                if (tooltip != null && hasParent() && getParent().hasParent()) {
-                    Sidebar sidebar = (Sidebar) getParent().getParent();
-                    Stage stage = sidebar.getScreen().getStage();
-                    stage.addActor(tooltip);
-                    tooltip.setPosition(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
+                if (tooltip != null) {
+                    tooltip.setVisible(true);
+                    tooltip.setPosition(0, getHeight() * 0.66f);
                 }
                 return true;
             }
@@ -171,5 +169,9 @@ public class GameButton extends Button {
         tooltip.add(tooltipLabel);
         tooltip.setSize(tooltipLabel.getWidth(), tooltipLabel.getHeight());
         Assets.setBackground(tooltip, Assets.resourcesBarBg);
+
+        addActor(tooltip);
+
+        tooltip.setVisible(false);
     }
 }
