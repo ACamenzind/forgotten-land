@@ -1,5 +1,13 @@
 package com.strategy.game.screens.sidebar;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Tooltip;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
 import com.strategy.game.Utils;
@@ -20,6 +28,7 @@ public class SidebarBuildings extends SidebarBuildSelection {
 
         buttons[0][0] = new GameButton(Assets.castle);
         buttons[0][0].addListenerBuilding(new Castle());
+//        buttons[0][0].setTooltip("Castle");
         addActor(buttons[0][0]);
 
         buttons[0][1] = new GameButton(Assets.cows);

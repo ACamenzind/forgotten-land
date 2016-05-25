@@ -8,7 +8,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.strategy.game.buildings.Building;
 import com.strategy.game.buildings.StaticEntityBuilder;
@@ -18,6 +21,8 @@ import com.strategy.game.screens.sidebar.Sidebar;
  * Created by Amedeo on 02/05/16.
  */
 public class GameButton extends Button {
+
+    Table tooltip = null;
 
     public GameButton(String texturePath) {
         this(new Texture(Gdx.files.internal(texturePath)));
@@ -44,6 +49,19 @@ public class GameButton extends Button {
         this.addListener(new InputListener() {
             public void exit (InputEvent event, float x, float y, int pointer, Actor toActor) {
                 Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
+                if (tooltip != null)
+                    tooltip.remove();
+            }
+        });
+        this.addListener(new InputListener() {
+            public boolean mouseMoved(InputEvent event, float x, float y) {
+                if (tooltip != null && hasParent() && getParent().hasParent()) {
+                    Sidebar sidebar = (Sidebar) getParent().getParent();
+                    Stage stage = sidebar.getScreen().getStage();
+                    stage.addActor(tooltip);
+                    tooltip.setPosition(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
+                }
+                return true;
             }
         });
     }
@@ -121,6 +139,8 @@ public class GameButton extends Button {
     }
 
     public void addListenerBuilding(final Building building) {
+        if (building != null)
+            setTooltip(building.getName());
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 try {
@@ -141,5 +161,13 @@ public class GameButton extends Button {
                 return true;
             }
         });
+    }
+
+    public void setTooltip(String text) {
+        tooltip = new Table();
+        Label tooltipLabel = Assets.makeLabel(text, Utils.FONT_SMALL_WHITE);
+        tooltip.add(tooltipLabel);
+        tooltip.setSize(tooltipLabel.getWidth(), tooltipLabel.getHeight());
+        Assets.setBackground(tooltip, Assets.resourcesBarBg);
     }
 }
