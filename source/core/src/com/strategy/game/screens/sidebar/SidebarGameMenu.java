@@ -36,7 +36,7 @@ public class SidebarGameMenu extends SidebarOptionsSelection {
                 if (sidebar != null) {
                     GameScreen screen = sidebar.getScreen();
                     Stage stage = screen.getStage();
-                    sidebar.getScreen().getMessages().addActor(new MessageLog(stage, MessageLog.MessageType.NEW_GAME));
+                    sidebar.getScreen().getMessages().addActor(new MessageLog(screen, MessageLog.MessageType.NEW_GAME));
                 }
                 return false;
             }
@@ -56,7 +56,7 @@ public class SidebarGameMenu extends SidebarOptionsSelection {
                 if (sidebar != null) {
                     GameScreen screen = sidebar.getScreen();
                     Stage stage = screen.getStage();
-                    sidebar.getScreen().getMessages().addActor(new MessageLog(stage, MessageLog.MessageType.QUIT));
+                    sidebar.getScreen().getMessages().addActor(new MessageLog(screen, MessageLog.MessageType.QUIT));
                 }
                 return false;
             }

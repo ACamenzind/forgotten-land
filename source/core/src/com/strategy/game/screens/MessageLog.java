@@ -22,7 +22,7 @@ public class MessageLog extends Table {
     private GameButton ok = new GameButton(Assets.sidebarBuildInfoDestroy);
     private GameButton cancel = new GameButton(Assets.sidebarBuildInfoRepair);
 
-    public MessageLog(final Stage stage, MessageType type) {
+    public MessageLog(final GameScreen screen, MessageType type) {
 
         Assets.setBackground(this, Assets.resourcesBarBg);
         setSize(Gdx.graphics.getWidth() / 4f, Gdx.graphics.getHeight() / 5f);
@@ -32,8 +32,8 @@ public class MessageLog extends Table {
             message = Assets.makeLabel("Are you sure you want to start a new game?", Utils.FONT_MEDIUM_WHITE);
             ok.addListener(new InputListener() {
                 public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-//                    game.setScreen(new GameScreen(game));
-//                    dispose();
+                    screen.dispose();
+                    screen.getGame().setScreen(new GameScreen(screen.getGame()));
                     return false;
                 }
             });
@@ -42,8 +42,8 @@ public class MessageLog extends Table {
             message = Assets.makeLabel("Are you sure you want to quit the game?", Utils.FONT_MEDIUM_WHITE);
             ok.addListener(new InputListener() {
                 public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-//                    game.setScreen(new GameScreen(game));
-//                    dispose();
+                    screen.dispose();
+                    screen.getGame().setScreen(new MainMenuScreen(screen.getGame()));
                     return false;
                 }
             });
@@ -51,9 +51,6 @@ public class MessageLog extends Table {
         cancel.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
-                for (Actor actor : stage.getActors()) {
-                    actor.setVisible(true);
-                }
                 return false;
             }
         });
