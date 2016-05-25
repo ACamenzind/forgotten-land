@@ -1,4 +1,4 @@
-package com.strategy.game.screens.sidebar;
+package com.strategy.game.screens;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
