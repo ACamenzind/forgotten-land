@@ -16,8 +16,8 @@ public class CollectorGold extends Building{
     private static final int MAX_LIFE = 100;
     private static final int MAX_WORKERS = 5;
     private static final int INFLUENCE_RADIUS = 5;
-    private static final Texture TEXTURE = Assets.cows;
-    private static final Vector2 COLLISION = new Vector2(3,3);
+    private static final Texture TEXTURE = Assets.market;
+    private static final Vector2 COLLISION = new Vector2(5,5);
 
     public CollectorGold() {
         super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION, Building.BuildingType.MANUFACTURER);

@@ -23,7 +23,7 @@ public class Assets {
 
     public static TiledMap map;
     // BUILDINGS
-    public static Texture house1, castle, leftwall, middlewall, rightwall, emptyTile, redTile, cows, warehouse, wheat, lumberjack, mine;
+    public static Texture house1, castle, leftwall, middlewall, rightwall, emptyTile, redTile, cows, warehouse, wheat, lumberjack, mine, market;
     // SIDEBAR BACKGROUNDS
     public static Texture sidebarBg, sidebarBgInfo, sidebarBgBuild, sidebarBgMenu, sidebarBuildInfoBg;
     // SIDEBAR MENU
@@ -81,6 +81,11 @@ public class Assets {
         emptyTile.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         redTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/red.png"));
         redTile.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        market = new Texture(Gdx.files.internal("core/assets/textures/buildings/market.png"));
+        market.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
         // SIDEBAR BACKGROUNDS
         sidebarBg = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_bg.png"));
         sidebarBg.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
