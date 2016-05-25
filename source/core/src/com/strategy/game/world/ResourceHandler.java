@@ -26,7 +26,7 @@ public class ResourceHandler {
     public ResourceHandler(World world, int woodCounter, int goldCounter, int foodCounter, int rockCounter, int people) {
         this.world = world;
         this.totalResources = new ResourceContainer(woodCounter, goldCounter, foodCounter, rockCounter, people);
-        this.maximumResources = new ResourceContainer(300, 300, 300, 300, 5);
+        this.maximumResources = new ResourceContainer(300, 300, 300, 300, 10);
         this.totalWorkers = 0;
     }
 
@@ -250,7 +250,7 @@ public class ResourceHandler {
                 int endX = (int) (coords.x + building.getCollisionSize().x + building.getInfluenceRadius());
 
                 int startY = (int)coords.y - building.getInfluenceRadius();
-                int endY = (int) (coords.x + building.getCollisionSize().y + building.getInfluenceRadius());
+                int endY = (int) (coords.y + building.getCollisionSize().y + building.getInfluenceRadius());
 
                 // Goes through the tiles inside the building's influence area and removes resources from the first
                 // resource (either rock or wood) it finds.
