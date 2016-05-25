@@ -279,7 +279,7 @@ public class ResourceHandler {
                                 if (available - amount > 0) {
                                     object.removeLife(amount);
                                 } else {
-                                    System.out.println("Resource empty");
+//                                    System.out.println("Resource empty");
                                     world.getBuilder().destroy(object);
                                 }
                                 foundAResource = true;

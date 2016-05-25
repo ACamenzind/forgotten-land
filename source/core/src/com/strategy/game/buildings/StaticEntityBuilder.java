@@ -284,6 +284,12 @@ public class StaticEntityBuilder {
             //TODO: do it in a different way possibly?
             if (forced) isInInfluenceRadius = true;
 
+            if (!isSpaceFree) {
+                gameScreen.setConsoleMessage("That place is already occupied!");
+            } else if (!isInInfluenceRadius) {
+                gameScreen.setConsoleMessage("You must place the building inside the colored influence area!");
+            }
+
 
             if (isSpaceFree && isInInfluenceRadius) {
                 // If the placed entity is a building, remove its cost from the total resources if possible
@@ -302,6 +308,7 @@ public class StaticEntityBuilder {
                     world.getGameScreen().getResourcesBar().update();
                 } else {
                     // Outside the influence area.
+                    gameScreen.setConsoleMessage("Not enough resources to build this!");
                     soundManager.playSound(SoundManager.SoundType.FAIL_TO_PLACE_BUILDING);
                 }
 
@@ -318,6 +325,7 @@ public class StaticEntityBuilder {
                 }
             } else {
                 // Collision
+//                gameScreen.setConsoleMessage("That place is already occupied!");
                 soundManager.playSound(SoundManager.SoundType.FAIL_TO_PLACE_BUILDING);
             }
         }
