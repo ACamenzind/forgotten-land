@@ -29,7 +29,7 @@ public class MessageLog extends Table {
         setPosition((Gdx.graphics.getWidth() - getWidth()) / 2f, Gdx.graphics.getHeight() * 0.5f - getHeight() / 2f);
 
         if (type == MessageType.GAME_OVER) {
-            message = Assets.makeLabel("You lost. Do you want to start a new game?", Utils.FONT_MEDIUM_WHITE);
+            message = Assets.makeLabel("You lost. Press 'OK' to start a new game.", Utils.FONT_MEDIUM_WHITE);
             ok.addListener(new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     screen.dispose();

@@ -18,6 +18,7 @@ import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
 import com.strategy.game.StrategyGame;
 import com.strategy.game.Utils;
+import com.strategy.game.screens.sidebar.Sidebar;
 
 /**
  * The main menu screen
@@ -39,7 +40,7 @@ public class MainMenuScreen implements Screen{
         this.font = game.getFont();
         menubk.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         camera.setToOrtho(false, 2*Utils.DEFAULT_WIDTH, 2*Utils.DEFAULT_HEIGHT);
-
+        Assets.load();
         setupStage();
     }
 
@@ -129,7 +130,7 @@ public class MainMenuScreen implements Screen{
 
     private void setupStage() {
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        this.backStage = new Stage(new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        this.backStage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         Group group = new Group();
 
         Gdx.input.setInputProcessor(stage);
@@ -162,21 +163,19 @@ public class MainMenuScreen implements Screen{
         Assets.setSizeRelative(newGameButton, 1f, 0.25f);
         Assets.setPositionRelative(newGameButton, 0f, 0.8f, false, true);
 
-        //LOAD GAME BUTTON
-        Texture loadGameButtonT = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/loadgame.png"));
-        loadGameButtonT.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        GameButton loadGameButton = new GameButton(loadGameButtonT);
-        loadGameButton.addListener(new InputListener() {
+        // INSTRUCTIONS BUTTON
+        Texture instructionsButtonT = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/loadgame.png"));
+        instructionsButtonT.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        GameButton instructionsButton = new GameButton(instructionsButtonT);
+        instructionsButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-//                Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
-//                game.setScreen(new GameScreen(game));
-//                dispose();
+                stage.addActor(new FullScreen(game, Assets.screenInstructions));
                 return false;
             }
         });
-        buttons.addActor(loadGameButton);
-        Assets.setSizeRelative(loadGameButton, 1f, 0.25f);
-        Assets.setPositionRelative(loadGameButton, 0f, 0.5f, false, true);
+        buttons.addActor(instructionsButton);
+        Assets.setSizeRelative(instructionsButton, 1f, 0.25f);
+        Assets.setPositionRelative(instructionsButton, 0f, 0.5f, false, true);
 
         // SETTINGS BUTTON
         Texture settingsButtonT = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/settings.png"));
@@ -184,15 +183,21 @@ public class MainMenuScreen implements Screen{
         GameButton settingsButton = new GameButton(settingsButtonT);
         settingsButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-//                Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
-//                game.setScreen(new GameScreen(game));
-//                dispose();
+                stage.addActor(new Settings(game));
                 return false;
             }
         });
         buttons.addActor(settingsButton);
         Assets.setSizeRelative(settingsButton, 1f, 0.25f);
         Assets.setPositionRelative(settingsButton, 0f, 0.2f, false, true);
+    }
+
+    public StrategyGame getGame() {
+        return game;
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 
 }

@@ -113,6 +113,18 @@ public class World implements Disposable{
     }
 
     /**
+     * Changes the simulation speed.
+     */
+    public void toggleGameSpeed() {
+        if (tickDuration == DEFAULT_TICK_DURATION) {
+            tickDuration = FAST_TICK_DURATION;
+        }
+        else {
+            tickDuration = DEFAULT_TICK_DURATION;
+        }
+    }
+
+    /**
      * Toggles between running and pausing the game.
      */
     public void toggleRunning() {

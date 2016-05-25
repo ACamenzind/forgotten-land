@@ -1,5 +1,6 @@
 package com.strategy.game.screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -16,8 +17,11 @@ import com.strategy.game.GameButton;
 public class FullScreen extends Table {
 
     public FullScreen(final GameScreen screen, Texture texture) {
+
         Assets.setBackground(this, texture);
-        setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        Stage stage = screen.getStage();
+        setSize(stage.getWidth(), stage.getHeight());
 
         for (Actor actor : screen.getStage().getActors()) {
             actor.setVisible(false);
@@ -26,7 +30,7 @@ public class FullScreen extends Table {
 
         GameButton button = new GameButton(Assets.sidebarBuildBack);
         addActor(button);
-        Assets.setSizeRelative(button, 0.05f, 0.05f);
+        Assets.setSizeRelative(button, 0.05f, 0.05f * getWidth() / getHeight());
         button.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
@@ -34,6 +38,32 @@ public class FullScreen extends Table {
                     actor.setVisible(true);
                 }
                 screen.getWorld().toggleRunning();
+                return false;
+            }
+        });
+    }
+
+    public FullScreen(Game game, Texture texture) {
+        final MainMenuScreen screen = (MainMenuScreen) game.getScreen();
+
+        Assets.setBackground(this, texture);
+
+        Stage stage = screen.getStage();
+        setSize(stage.getWidth(), stage.getHeight());
+
+        for (Actor actor : screen.getStage().getActors()) {
+            actor.setVisible(false);
+        }
+//
+        GameButton button = new GameButton(Assets.sidebarBuildBack);
+        addActor(button);
+        Assets.setSizeRelative(button, 0.05f, 0.05f * getWidth() / getHeight());
+        button.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                remove();
+                for (Actor actor : screen.getStage().getActors()) {
+                    actor.setVisible(true);
+                }
                 return false;
             }
         });

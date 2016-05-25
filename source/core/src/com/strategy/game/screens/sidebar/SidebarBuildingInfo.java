@@ -39,8 +39,8 @@ public class SidebarBuildingInfo extends Table implements Display {
     private Table tableCapacity = new Table();
     private GameButton cancel = new GameButton(Assets.sidebarBuildCancel);//GameButton(Assets.sidebarBuildInfoCancel);
     private static final float CANCEL_SIZE = 0.1f;
-    private static final float CANCEL_POSITION_X = 0.8f;
-    private static final float CANCEL_POSITION_Y = 0.8f;
+    private static final float CANCEL_POSITION_X = 0.825f;
+    private static final float CANCEL_POSITION_Y = 0.825f;
 
     // NAME
     private Label name = Assets.makeLabel("_", Utils.FONT_MEDIUM_BLACK);

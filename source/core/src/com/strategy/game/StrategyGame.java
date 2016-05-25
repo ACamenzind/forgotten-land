@@ -17,7 +17,7 @@ public class StrategyGame extends Game {
 	private BitmapFont font;
 	private SoundManager soundManager;
 
-	
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();

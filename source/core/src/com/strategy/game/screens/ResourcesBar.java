@@ -24,14 +24,6 @@ public class ResourcesBar extends Table implements Display {
     private World world;
     private Table resources = new Table();
 
-    private static final float CELL_SIZE = 75; //TODO: make it proportional
-
-//    private static final Label food = Assets.makeLabel("Food: ", Utils.FONT_MEDIUM_WHITE);
-//    private static final Label wood = Assets.makeLabel("Wood: ", Utils.FONT_MEDIUM_WHITE);
-//    private static final Label gold = Assets.makeLabel("Gold: ", Utils.FONT_MEDIUM_WHITE);
-//    private static final Label rock = Assets.makeLabel("Minerals: ", Utils.FONT_MEDIUM_WHITE);
-//    private static final Label people = Assets.makeLabel("People: ", Utils.FONT_MEDIUM_WHITE);
-
     private static final Image food = Assets.makeImage(Assets.resourcesFood);
     private static final Image wood = Assets.makeImage(Assets.resourcesWood);
     private static final Image rock= Assets.makeImage(Assets.resourcesRock);
@@ -45,6 +37,7 @@ public class ResourcesBar extends Table implements Display {
     private Label peopleCount = Assets.makeLabel("", Utils.FONT_MEDIUM_WHITE);
 
     private GameButton pause = new GameButton(Assets.resourcesBarPause, Assets.resourcesBarResume, Assets.resourcesBarResume);
+    private GameButton speed = new GameButton(Assets.resourcesBarSpeedNormal, Assets.resourcesBarSpeedFast, Assets.resourcesBarSpeedFast);
 
     public ResourcesBar(final Stage stage, final World world) {
         this.stage = stage;
@@ -74,6 +67,14 @@ public class ResourcesBar extends Table implements Display {
             }
         });
         addActor(pause);
+
+        speed.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                world.toggleGameSpeed();
+                return false;
+            }
+        });
+        addActor(speed);
 
         update();
         updatePosition();
@@ -144,6 +145,8 @@ public class ResourcesBar extends Table implements Display {
         Assets.setPositionRelative(resources, 0.5f, 0.5f, true, true);
         Assets.setSizeRelative(pause, 0.064f, 1f);
         Assets.setPositionRelative(pause, 0.0125f, 0.5f, false, true);
+        Assets.setSizeRelative(speed, 0.064f, 1f);
+        Assets.setPositionRelative(speed, 0.09f, 0.5f, false, true);
     }
 
     private float cell_size() {

@@ -1,5 +1,6 @@
 package com.strategy.game.screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -22,8 +23,10 @@ import com.strategy.game.world.World;
 public class Settings extends Table {
 
     public Settings(final GameScreen screen) {
+
         Assets.setBackground(this, Assets.resourcesBarBg);
-        setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Stage stage = screen.getStage();
+        setSize(stage.getWidth(), stage.getHeight());
 
         for (Actor actor : screen.getStage().getActors()) {
             actor.setVisible(false);
@@ -38,7 +41,7 @@ public class Settings extends Table {
         // BUTTON BACK
         GameButton button = new GameButton(Assets.sidebarBuildBack);
         addActor(button);
-        Assets.setSizeRelative(button, 0.05f, 0.05f);
+        Assets.setSizeRelative(button, 0.05f, 0.05f * getWidth() / getHeight());
         button.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
@@ -64,29 +67,87 @@ public class Settings extends Table {
 
         container.row();
 
-        // GAME SPEED
-        Label speedLabel = Assets.makeLabel("Game speed:", Utils.FONT_BIG_WHITE);
-        container.add(speedLabel).expand().right();
+        // RESOLUTION
+        Label resolutionLabel = Assets.makeLabel("Resolution:", Utils.FONT_BIG_WHITE);
+        container.add(resolutionLabel).expand().right();
 
-        Table speedButtons = new Table();
-        GameButton speedNormal = new GameButton(Assets.settingsSpeedNormal);
-        speedNormal.addListener(new InputListener() {
+        Table resolutionButtons = new Table();
+        GameButton res720p = new GameButton(Assets.settingsRes720p);
+        res720p.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                screen.getWorld().setGameSpeed(World.GameSpeed.NORMAL);
+                Gdx.graphics.setWindowedMode(1280, 720);
                 return false;
             }
         });
-        GameButton speedFast = new GameButton(Assets.settingsSpeedFast);
-        speedFast.addListener(new InputListener() {
+        GameButton res1080p = new GameButton(Assets.settingsRes1080p);
+        res1080p.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                screen.getWorld().setGameSpeed(World.GameSpeed.FAST);
+                Gdx.graphics.setWindowedMode(1920, 1080);
                 return false;
             }
         });
-        speedButtons.add(speedNormal).padRight(10);
-        speedButtons.add(speedFast);
-        container.add(speedButtons).expand();
-        Assets.setSizeRelative(speedButtons, 0.3f, 0.5f);
+        GameButton resFull = new GameButton(Assets.settingsResFull);
+        resFull.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.graphics.setWindowedMode((int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
+                        (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight());
+                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+                return false;
+            }
+        });
+        resolutionButtons.add(res720p).padRight(10);
+        resolutionButtons.add(res1080p).padRight(10);
+        resolutionButtons.add(resFull);
+        container.add(resolutionButtons).expand();
+
+
+        addActor(container);
+        Assets.setSizeRelative(container, 0.3f, 0.2f);
+        Assets.setPositionRelative(container, 0.5f, 0.5f, true, true);
+    }
+
+    public Settings(Game game) {
+        final MainMenuScreen screen = (MainMenuScreen) game.getScreen();
+
+        Assets.setBackground(this, Assets.resourcesBarBg);
+
+        Stage stage = screen.getStage();
+        setSize(stage.getWidth(), stage.getHeight());
+
+        for (Actor actor : screen.getStage().getActors()) {
+            actor.setVisible(false);
+        }
+
+        // TITLE
+        Label title = Assets.makeLabel("Settings", Utils.FONT_HUGE_WHITE);
+        addActor(title);
+        Assets.setPositionRelative(title, 0.5f, 0.7f, true, true);
+
+        // BUTTON BACK
+        GameButton button = new GameButton(Assets.sidebarBuildBack);
+        addActor(button);
+        Assets.setSizeRelative(button, 0.05f, 0.05f * getWidth() / getHeight());
+        button.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                remove();
+                for (Actor actor : screen.getStage().getActors()) {
+                    actor.setVisible(true);
+                }
+                return false;
+            }
+        });
+
+        // CONTAINER TABLE
+        Table container = new Table();
+
+        // VOLUME
+        Label volumeLabel = Assets.makeLabel("Volume:", Utils.FONT_BIG_WHITE);
+        container.add(volumeLabel).expand().uniform().right();
+
+        Slider volumeSlider = new Slider(0, 10, 1, false, new Slider.SliderStyle(
+                new SpriteDrawable(new Sprite(Assets.settingsSliderBg)),
+                new SpriteDrawable(new Sprite(Assets.settingsSliderKnob))));
+        container.add(volumeSlider).expand().uniform();
 
         container.row();
 

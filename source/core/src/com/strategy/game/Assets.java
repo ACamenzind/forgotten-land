@@ -40,7 +40,8 @@ public class Assets {
             sidebarBuildInfoCostLong, sidebarBuildInfoProfit, sidebarBuildInfoCapacity, sidebarBuildInfoPlus,
             sidebarBuildInfoMinus, sidebarBuildInfoDestroy, sidebarBuildInfoRepair, sidebarBuildInfoCancel;
     // RESOURCES_BAR
-    public static Texture resourcesBarBg, resourcesBarPause, resourcesBarResume;
+    public static Texture resourcesBarBg, resourcesBarPause, resourcesBarResume, resourcesBarSpeedNormal,
+            resourcesBarSpeedFast;
     // OVERLAYS
     public static Texture pausedOverlay, bottomBarBg;
     // RESOURCES
@@ -53,7 +54,7 @@ public class Assets {
     // RESOURCES IMAGES
     public static Texture tree, stone;
     // SETTINGS
-    public static Texture settingsSliderBg, settingsSliderKnob, settingsSpeedNormal, settingsSpeedFast, settingsRes720p,
+    public static Texture settingsSliderBg, settingsSliderKnob, settingsRes720p,
             settingsRes1080p, settingsResFull;
     // SOUNDS
     public static Sound bgSound, hit;
@@ -65,6 +66,7 @@ public class Assets {
 //        map = new TmxMapLoader().load("core/assets/maps/big_map.tmx");
         //TODO: add credit for CC3.0 sprites
         map = new TmxMapLoader().load("core/assets/maps/default.tmx");
+
         // BUILDINGS
         house1 = new Texture(Gdx.files.internal("core/assets/textures/buildings/house1.png"));
         house1.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -93,9 +95,6 @@ public class Assets {
         emptyTile.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         influenceTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/influence_tile.png"));
         influenceTile.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-
 
         // SIDEBAR BACKGROUNDS
         sidebarBg = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_bg.png"));
@@ -181,6 +180,10 @@ public class Assets {
         resourcesBarPause.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         resourcesBarResume = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcebar_resume.png"));
         resourcesBarResume.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        resourcesBarSpeedNormal = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcesbar_speed_normal.png"));
+        resourcesBarSpeedNormal.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        resourcesBarSpeedFast = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcesbar_speed_fast.png"));
+        resourcesBarSpeedFast.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         // RESOURCES
         resourcesFood = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_food.png"));
         resourcesFood.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -227,10 +230,6 @@ public class Assets {
         settingsSliderBg.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         settingsSliderKnob = new Texture(Gdx.files.internal("core/assets/textures/settings/slider_knob.png"));
         settingsSliderKnob.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        settingsSpeedNormal = new Texture(Gdx.files.internal("core/assets/textures/settings/speed_normal.png"));
-        settingsSpeedNormal.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        settingsSpeedFast = new Texture(Gdx.files.internal("core/assets/textures/settings/speed_fast.png"));
-        settingsSpeedFast.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         settingsRes720p = new Texture(Gdx.files.internal("core/assets/textures/settings/res_720p.png"));
         settingsRes720p.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         settingsRes1080p = new Texture(Gdx.files.internal("core/assets/textures/settings/res_1080p.png"));
