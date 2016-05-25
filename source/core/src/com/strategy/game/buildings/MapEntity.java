@@ -10,7 +10,6 @@ import com.badlogic.gdx.utils.Disposable;
 import com.strategy.game.Assets;
 import com.strategy.game.ExtendedStaticTiledMapTile;
 import com.strategy.game.Utils;
-import com.strategy.game.world.World;
 
 import java.util.ArrayList;
 
@@ -209,7 +208,7 @@ public abstract class MapEntity implements Disposable{
                 if (layer.getName().equals("Selection") && cell.getTile() != null) {
                     texture = cell.getTile().getTextureRegion();
                 } else if (layer.getName().equals("Selection") && cell.getTile() == null) {
-                    texture = new TextureRegion(Assets.redTile);
+                    texture = new TextureRegion(Assets.influenceTile);
                 }
                 else if (cell.getTile() != null) {
                     texture = cell.getTile().getTextureRegion();

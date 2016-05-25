@@ -1,7 +1,6 @@
 package com.strategy.game.buildings;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -39,7 +38,7 @@ public class StaticEntityBuilder {
         this.selectionLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Selection");
         this.influenceLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Influence");
         this.selectionLayer.setOpacity(0.5f);
-        this.influenceLayer.setOpacity(0.2f);
+        this.influenceLayer.setOpacity(0.5f);
         this.gridLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Grid");
         this.gridLayer.setVisible(false);
         this.gridLayer.setOpacity(0.2f);
@@ -101,7 +100,7 @@ public class StaticEntityBuilder {
                     TiledMapTile buildingTile = buildingsCell.getTile();
                     if (buildingTile instanceof ExtendedStaticTiledMapTile) {
                         if (((ExtendedStaticTiledMapTile) buildingTile).getBuildingsNearby() > 0) {
-                            ExtendedStaticTiledMapTile influenceTile = new ExtendedStaticTiledMapTile(new TextureRegion(Assets.redTile));
+                            ExtendedStaticTiledMapTile influenceTile = new ExtendedStaticTiledMapTile(new TextureRegion(Assets.influenceTile));
                             influenceCell.setTile(influenceTile);
                             influenceLayer.setCell(i, j, influenceCell);
                         } else {
@@ -337,7 +336,7 @@ public class StaticEntityBuilder {
      */
     public void showInfluenceArea(Building building) {
         TiledMapTileLayer layer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Local influence");
-        layer.setOpacity(0.3f);
+        layer.setOpacity(0.5f);
 
         // Reset the layer
         for (int i = 0; i < layer.getWidth(); i++) {
@@ -375,7 +374,7 @@ public class StaticEntityBuilder {
                     if (layer.getName().equals("Local influence") && cell.getTile() != null) {
                         texture = cell.getTile().getTextureRegion();
                     } else if (layer.getName().equals("Local influence") && cell.getTile() == null) {
-                        texture = new TextureRegion(Assets.redTile);
+                        texture = new TextureRegion(Assets.influenceTile);
                     } else if (cell.getTile() != null) {
                         texture = cell.getTile().getTextureRegion();
                     } else {

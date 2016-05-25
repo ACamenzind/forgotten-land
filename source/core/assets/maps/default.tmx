@@ -583,6 +583,16 @@
    eJztw8EJAAAMA6H7ZP+VC51DwVVTVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/AWtAw1E=
   </data>
  </layer>
+ <layer name="Influence" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
+ <layer name="Local influence" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
  <layer name="Buildings" width="100" height="100">
   <data encoding="base64" compression="zlib">
    eJztm1GO4jAMhn0WLjKPvGyFeFv1Btz/AqtIWPvXuE2cBkgy/yeNgNSlxXYcx+6IEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEkG+yZN7jGIkT0e/dnHuF9+vz9dbovn4jZ/SrssleP875i3CuJGrjSUS/+B1XeF3hGOdJ3N9r9LuCzArn/ZhXPEbK/b1Gv+n97XlM7XWVrS0Fjl3itz8FtfGkRL9qv/T+Iv/tY+fBXjxU2/82Sv0d9Y6yJfpVu153Pif+yta+M1K6VkfjyWrGS/Sr88vadW+O6jXsGjcqubU6/f6b1Pm7PM/FeObp9w7v9fiPuRc7D0uuPTqla3XO3++ObIl+0S7qA4u82iBd44/MaYfoWh2JJ3fZ5sMR/R7NA3tstnwrkpvWxpMS/aLt0rGLbH3D+46rMzYDJWv1Xba+mPN3q1/9Hn0t1a/e09XILc9ricwRu87kpqqj1ZHLxZOcfq/yem8JtasXG/XcGeySiOamEX8/0q+Ir8OHbH1f5yfmGXjNGevAZ3L/SDyxeZc4n3HMoufrfPDm26h14JrcH/0df/ORv+t5Hiqf9PsQX5d6TVzT9Bw9PlMdGPeF0dw05++efTDOefrd4zfWgUtzf5wnF0f2rzNWysM59yHbeTBzHTiSm3prc8Tfvb1nzl5nckEd73nOlNYQe8z9a+qUPROtIYocr9Vom1J/z/HIfJ61Dhzpbx/lpp9g1jpwtIbonXtmrY5i4+mMdeCaGmI0N21BLram+9zzmdHqwKM9P4D+o3bA+9Y4NlIdOJo32pj26bwxElt7zAUjjJI37sVWXDcwh8rVbT4RZ2vpOW/Ea5c+O1RSp+yNEfJG7H2p3m1svcFxD42tn8wFz3CmhvhJcJ3wYqvukbCX9Y1csCW9PT+Qq+fjmtJDbG1Bq/72u0j3dxRb956NFHm11cj0lDfqOo7riRdbsW4wyp58j5r+duJdMTm3R/Lmg92DrGb823vZM/SUN3o5lV2vNXZ5Pd6R8e4f67tHfRI73lL+aI9kYys+zzLCntzDu199vsb6of5G7/ma6P9RHckfreMLjKtNrM3sbxot380R6ZO0kr9LvraudsG6zgh78gjoY+iPIsd9kmhfJSKPa4TOE8xD7HN6Oh8u8jpXRib6fE1Lec2TdG5gnNI/tc3NjCdmi1FKzf9FtZL37HWR19ikciOv40fU9klQfm0kj7q282Mxr/jdiRnnSLRP0lLe9gRxn2fXdlzH8XtnJNonaSlv7YOfMf9Kdhiltl5DtE9i5ZeG8l6cO6qtj1bbjRDtk7SSt/bSGNdT3+zbRPskaczW8qLyahfdh++tG2ls9NpuCdE+ieZD75Df2+uL+PZNjFzbjRDtk9TKW3+w9cNv982+RbRPgrp+h3xPfbMe8Gp3R7W8s/JRf1B63BP+A2xqZTc=
@@ -599,14 +609,4 @@
   </data>
  </layer>
  <objectgroup color="#ff0000" name="Object Layer 1"/>
- <layer name="Influence" width="100" height="100">
-  <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
-  </data>
- </layer>
- <layer name="Local influence" width="100" height="100">
-  <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
-  </data>
- </layer>
 </map>

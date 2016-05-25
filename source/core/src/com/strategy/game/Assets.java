@@ -23,7 +23,7 @@ public class Assets {
 
     public static TiledMap map;
     // BUILDINGS
-    public static Texture house1, castle, leftwall, middlewall, rightwall, emptyTile, redTile, cows, warehouse, wheat, lumberjack, mine, market;
+    public static Texture house1, castle, leftwall, middlewall, rightwall, emptyTile, influenceTile, cows, warehouse, wheat, lumberjack, mine, market;
     // SIDEBAR BACKGROUNDS
     public static Texture sidebarBg, sidebarBgInfo, sidebarBgBuild, sidebarBgMenu, sidebarBuildInfoBg;
     // SIDEBAR MENU
@@ -86,13 +86,15 @@ public class Assets {
         middlewall.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         rightwall = new Texture(Gdx.files.internal("core/assets/textures/buildings/wall/Wall_R.png"));
         rightwall.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        emptyTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/empty.png"));
-        emptyTile.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        redTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/red.png"));
-        redTile.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
         market = new Texture(Gdx.files.internal("core/assets/textures/buildings/market.png"));
         market.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        emptyTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/empty.png"));
+        emptyTile.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        influenceTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/influence_tile.png"));
+        influenceTile.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
 
 
         // SIDEBAR BACKGROUNDS
