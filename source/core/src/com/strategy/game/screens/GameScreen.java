@@ -46,7 +46,7 @@ public class GameScreen implements Screen {
 
     private Sidebar sidebar;
     private ResourcesBar resourcesBar;
-    private Label gamePaused;
+    private Image gamePaused;
 
     private Vector2 touchDownCoords;
     private Vector2 touchUpCoords;
@@ -80,9 +80,10 @@ public class GameScreen implements Screen {
         this.sidebar = new Sidebar(stage, this);
         this.resourcesBar = new ResourcesBar(stage, world);
         // Make method for readability?
-        this.gamePaused = Assets.makeLabel("GAME PAUSED", Utils.FONT_HUGE_RED);
+        this.gamePaused =  Assets.makeImage(Assets.pausedOverlay);
         stage.addActor(gamePaused);
-        gamePaused.setPosition((Gdx.graphics.getWidth() - sidebar.getWidth() - gamePaused.getWidth()) / 2f, Gdx.graphics.getHeight() * 0.75f);
+        gamePaused.setSize(Gdx.graphics.getWidth() / 3f, Gdx.graphics.getWidth() * 0.25f / 3f);
+        gamePaused.setPosition((Gdx.graphics.getWidth() - sidebar.getWidth() - gamePaused.getWidth()) / 2f, Gdx.graphics.getHeight() * 0.5f);
         gamePaused.setVisible(false);
 
 

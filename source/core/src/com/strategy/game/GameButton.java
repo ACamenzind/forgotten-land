@@ -123,11 +123,20 @@ public class GameButton extends Button {
     public void addListenerBuilding(final Building building) {
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (hasParent() && getParent().hasParent()) {
-                    Sidebar sidebar = (Sidebar) getParent().getParent();
-                    StaticEntityBuilder builder = sidebar.getScreen().getBuilder();
-                    builder.setSelectedEntity(building);
-                    sidebar.setEntity(building, true);
+                try {
+                    Building newBuilding = building.getClass().newInstance();
+                    if (hasParent() && getParent().hasParent()) {
+                        Sidebar sidebar = (Sidebar) getParent().getParent();
+                        StaticEntityBuilder builder = sidebar.getScreen().getBuilder();
+                        builder.setSelectedEntity(newBuilding);
+                        sidebar.setEntity(newBuilding, true);
+                    }
+                }
+                catch (InstantiationException e) {
+                    e.printStackTrace();
+                }
+                catch (IllegalAccessException e) {
+                    e.printStackTrace();
                 }
                 return true;
             }
