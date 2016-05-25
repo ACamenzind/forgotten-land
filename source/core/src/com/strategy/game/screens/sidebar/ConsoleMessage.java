@@ -38,7 +38,6 @@ public class ConsoleMessage extends Table {
     }
 
     public void update(float delta) {
-        System.out.println(delta);
         if (active) {
             time += delta;
             if (time > MAX_TIME) {
