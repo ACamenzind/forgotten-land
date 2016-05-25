@@ -40,17 +40,28 @@ public class SidebarBuildSelection extends Table implements Display {
 
         rotate.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (hasParent()) {
-                    Sidebar sidebar = (Sidebar) getParent();
-                    StaticEntityBuilder builder = sidebar.getScreen().getBuilder();
-                    builder.rotate();
-                }
-                return true;
+            if (hasParent()) {
+                Sidebar sidebar = (Sidebar) getParent();
+                StaticEntityBuilder builder = sidebar.getScreen().getBuilder();
+                builder.rotate();
+            }
+            return true;
             }
         });
         addActor(rotate);
 
-        cancel.addListenerBuilding(null);
+//        cancel.addListenerBuilding(null);
+        cancel.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            if (hasParent()) {
+                Sidebar sidebar = (Sidebar) getParent();
+                StaticEntityBuilder builder = sidebar.getScreen().getBuilder();
+                builder.setSelectedEntity(null);
+                sidebar.setEntity(null, true);
+            }
+            return true;
+            }
+        });
         addActor(cancel);
 
         back.addListenerLink(Sidebar.DisplayType.BUILD);
