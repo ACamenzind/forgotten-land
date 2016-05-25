@@ -14,7 +14,7 @@ import com.strategy.game.screens.GameScreen;
  */
 public class Utils {
     // HDPI
-    public static final boolean HDPI = false;
+    public static final boolean HDPI = true;
     // SIZE OPTIONS
     public static final int TILE_SIZE = 128;
     public static final float DEFAULT_RATIO = 1f;
