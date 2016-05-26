@@ -18,6 +18,7 @@ import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
 import com.strategy.game.StrategyGame;
 import com.strategy.game.Utils;
+import com.strategy.game.desktop.DesktopLauncher;
 import com.strategy.game.screens.sidebar.Sidebar;
 
 /**
@@ -75,14 +76,14 @@ public class MainMenuScreen implements Screen{
             dispose();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
-            if(Utils.HDPI) {
+            if(DesktopLauncher.HDPI) {
                 Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth()/2 - 320, Gdx.graphics.getHeight()/2 - 180);
             } else {
                 Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth() - 320, Gdx.graphics.getHeight() - 180);
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
-            if (Utils.HDPI) {
+            if (DesktopLauncher.HDPI) {
                 Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth()/2 + 320, Gdx.graphics.getHeight()/2 + 180);
             } else {
                 Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth() + 320, Gdx.graphics.getHeight() + 180);

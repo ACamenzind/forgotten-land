@@ -2,20 +2,17 @@ package com.strategy.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.strategy.game.NewGame;
 import com.strategy.game.StrategyGame;
 import com.strategy.game.Utils;
 
 // TODO: add texture packing which generates texture atlases
 
 public class DesktopLauncher {
+	public static boolean HDPI;
 	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = Utils.DEFAULT_WIDTH;
-		config.height = Utils.DEFAULT_HEIGHT;
-        config.useHDPI = Utils.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
-		config.title = "A Strategy Game [Working title]";
-		config.vSyncEnabled = true;
-		config.resizable = false;
-		new LwjglApplication(new StrategyGame(), config);
+		NewGame frame = new NewGame("Resolution");
+		frame.setSize( 250, 100 );
+		frame.setVisible( true );
 	}
 }
