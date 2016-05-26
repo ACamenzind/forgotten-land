@@ -12,9 +12,12 @@ public class SoundManager implements Disposable{
     private float masterVolume;
     private boolean muted;
     private ArrayList<Sound> loopingSounds;
+    private long loopingID;
+    private static final float BASE_EFFECT_VOLUME = 0.5f;
+    private static final float BASE_BACKG_VOLUME = 0.3f;
 
     public SoundManager() {
-        this.masterVolume = 1.0f;
+        this.masterVolume = 0.5f;
         this.loopingSounds = new ArrayList<Sound>();
     }
 
@@ -40,6 +43,9 @@ public class SoundManager implements Disposable{
 
     public void setMasterVolume(float masterVolume) {
         this.masterVolume = masterVolume;
+        for (Sound sound : loopingSounds) {
+            sound.setVolume(loopingID, BASE_BACKG_VOLUME * masterVolume);
+        }
     }
 
     /**
@@ -49,13 +55,13 @@ public class SoundManager implements Disposable{
     public void playSound(SoundType type) {
         switch (type) {
             case PLACE_BUILDING:
-                play(Assets.hit, 0.5f, 0.75f, false);
+                play(Assets.hit, BASE_EFFECT_VOLUME, 0.75f, false);
                 break;
             case FAIL_TO_PLACE_BUILDING:
-                play(Assets.hit, 0.5f, 5f, false);
+                play(Assets.hit, BASE_EFFECT_VOLUME, 5f, false);
                 break;
             case BACKGROUND:
-                play(Assets.bgSound, 0.3f, 1f, true);
+                play(Assets.bgSound, BASE_BACKG_VOLUME, 1f, true);
                 break;
         }
     }
@@ -72,8 +78,10 @@ public class SoundManager implements Disposable{
         long id = sound.play(volume * masterVolume);
         sound.setPitch(id, pitch);
         sound.setLooping(id, looping);
-        if (looping)
+        if (looping) {
             loopingSounds.add(sound);
+            loopingID = id;
+        }
     }
 
     @Override
