@@ -11,7 +11,7 @@ import com.strategy.game.ResourceContainer;
 public class House extends Container {
     //TODO: maybe put buildings properties into a single object.
     private static final String NAME = "House";
-    private static final ResourceContainer COST = new ResourceContainer(50, 50, 100, 100, 0);
+    private static final ResourceContainer COST = new ResourceContainer(50, 50, 50, 50, 0);
     private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 0, 0, 0, 0);
     private static final ResourceContainer MAINTENANCE = new ResourceContainer(1, 0, 1, 1, 0);
     private static final ResourceContainer RESOURCE_STORED = new ResourceContainer(0, 0, 0, 0, 5);

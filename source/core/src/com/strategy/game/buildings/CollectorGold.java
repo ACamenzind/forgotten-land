@@ -10,8 +10,8 @@ import com.strategy.game.ResourceContainer;
  */
 public class CollectorGold extends Building{
     private static final String NAME = "Market";
-    private static final ResourceContainer COST = new ResourceContainer(40, 0, 10, 5, 0);
-    private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 0, 0, 3, 0);
+    private static final ResourceContainer COST = new ResourceContainer(50, 0, 50, 0, 0);
+    private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 0, 0, 5, 0);
     private static final ResourceContainer MAINTENANCE = new ResourceContainer(1, 0, 1, 0, 0);
     private static final int MAX_LIFE = 100;
     private static final int MAX_WORKERS = 5;

@@ -10,8 +10,8 @@ import com.strategy.game.ResourceContainer;
  */
 public class CollectorRock extends Collector {
     private static final String NAME = "Mine";
-    private static final ResourceContainer COST = new ResourceContainer(40, 0, 10, 5, 0);
-    private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 0, 10, 0, 0);
+    private static final ResourceContainer COST = new ResourceContainer(40, 0, 0, 10, 0);
+    private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 0, 5, 0, 0);
     private static final ResourceContainer MAINTENANCE = new ResourceContainer(0, 0, 0, 1, 0);
     private static final int MAX_LIFE = 100;
     private static final int MAX_WORKERS = 5;

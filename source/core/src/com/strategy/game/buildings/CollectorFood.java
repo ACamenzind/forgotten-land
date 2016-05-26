@@ -10,7 +10,7 @@ import com.strategy.game.ResourceContainer;
  */
 public class CollectorFood extends Building {
     private static final String NAME = "Farm";
-    private static final ResourceContainer COST = new ResourceContainer(40, 0, 10, 5, 0);
+    private static final ResourceContainer COST = new ResourceContainer(30, 0, 10, 10, 0);
     private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 5, 0, 0, 0);
     private static final ResourceContainer MAINTENANCE = new ResourceContainer(5, 0, 1, 1, 0);
     private static final int MAX_LIFE = 100;
