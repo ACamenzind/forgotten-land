@@ -1,0 +1,37 @@
+GAME LOGIC
+
+Objective:
+The aim of the game is to gather as many resources as possible, and make the total population grow.
+
+Build:
+In order to build a building, you have to place it in the influence area of you current village (the blue area).
+
+Collecting resources:
+To collect resources you have to build the Castle for people, the Lumber camp for wood, the Farm for food, the Mine for minerals and the Market for gold, and putting worker into the building. Moreover, the Lumber camp and the Mine have to have trees and stones respectively in their influence area in order to be effectives, and they will progressively consume them. Once no resource is left in the influence area, the building is useless.
+
+Maximum resources:
+The maximum resources you can gather depends on how many Houses (for people) and Warehouses (for other resources) you have.
+
+Population:
+You have a total population, divided in workers and unemployed. Unemployed are those you can put in a building, while workers are those who are currently gathering resources. Each turn, the total population consumes an amount of food proportional to its size.
+
+Maintenance cost:
+Each building has a maintenance cost, that is each turn it will consume a certain amount of resources. If the tribute is not satisfied, it will start degrading by losing life, and eventually it will collapse (with all the workers in it).
+
+Catastrophies:
+Each turn you have a certain chance of been victim of a natural catastrophe, that could destroy building, kill people or reduce resources.
+
+MENUS
+
+Building info:
+You can modify the number of workers in a building by clicking on it, and selecting the '-/+' buttons in the bottom left display. In the building info menu you can also see its statistics and its life, and you can choose to destroy it (and gaining half of the resources that it costed to build) or repair it.
+
+Game info:
+You can see you population level, the resources you have, the maximum resources you can have and how resources will variate the next turn.
+
+Buildings:
+Here you can choose wich building you want to build. In the case of the Wall, you can also chose to rotate the building, changing its image.
+
+Game menu:
+Here you can access to Setting, Credits and Instructions. Moreover, you can chose to quit the game, or to start a new one. 
+
