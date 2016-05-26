@@ -17,7 +17,7 @@ public class SoundManager implements Disposable{
     private static final float BASE_BACKG_VOLUME = 0.3f;
 
     public SoundManager() {
-        this.masterVolume = 0.5f;
+        this.masterVolume = 0.6f;
         this.loopingSounds = new ArrayList<Sound>();
     }
 
@@ -26,7 +26,7 @@ public class SoundManager implements Disposable{
      */
     public enum SoundType {
         PLACE_BUILDING, FAIL_TO_PLACE_BUILDING,
-        BACKGROUND
+        BACKGROUND, BUILDING_DEMOLITION
     }
 
     public boolean isMuted() {
@@ -62,6 +62,9 @@ public class SoundManager implements Disposable{
                 break;
             case BACKGROUND:
                 play(Assets.bgSound, BASE_BACKG_VOLUME, 1f, true);
+                break;
+            case BUILDING_DEMOLITION:
+                play(Assets.demolition, 0.6f, 1f, false);
                 break;
         }
     }

@@ -156,7 +156,6 @@ public class StaticEntityBuilder {
 
         if (available.subtract(cost).noNegativeResources()) {
             building.addLife(amountToRepair);
-            // TODO: 21/05/2016 Add UI refresh (buildings health doesn't update except when closing and reopening the menu).
         }
     }
 
@@ -177,6 +176,7 @@ public class StaticEntityBuilder {
                 world.getResourceHandler().removeAllWorkers((Building) entity);
                 // Updates resources bar
                 world.getGameScreen().getResourcesBar().update();
+                gameScreen.getGame().getSoundManager().playSound(SoundManager.SoundType.BUILDING_DEMOLITION);
             }
 
 

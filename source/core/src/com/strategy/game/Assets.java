@@ -57,7 +57,7 @@ public class Assets {
     public static Texture settingsSliderBg, settingsSliderKnob, settingsRes720p,
             settingsRes1080p, settingsResFull;
     // SOUNDS
-    public static Sound bgSound, hit;
+    public static Sound bgSound, hit, demolition;
     private static final String DEFAULT_FONT_PATH = "core/assets/fonts/san_francisco_regular.ttf";
     // new Font
     private static final String ULTRALIGHT_FONT_PATH = "core/assets/fonts/san_francisco_ultralight.ttf";
@@ -239,6 +239,7 @@ public class Assets {
         // http://opengameart.org/content/outdoor-ambiance CC3.0
         bgSound = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/Outdoor_ambiance.mp3"));
         hit = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/hit.wav"));
+        demolition = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/demolition.wav"));
     }
 
     public static void dispose() {
