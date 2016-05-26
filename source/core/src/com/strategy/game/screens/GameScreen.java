@@ -63,6 +63,7 @@ public class GameScreen implements Screen {
         this.font = game.getFont();
         this.shapeRenderer = new ShapeRenderer();
 
+        Assets.loadMap();
         this.map = Assets.map;
         this.convertMap(map);
 

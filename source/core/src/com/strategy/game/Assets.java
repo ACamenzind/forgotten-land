@@ -62,10 +62,15 @@ public class Assets {
     // new Font
     private static final String ULTRALIGHT_FONT_PATH = "core/assets/fonts/san_francisco_ultralight.ttf";
 
+
+    public static void loadMap() {
+        map = new TmxMapLoader().load("core/assets/maps/default.tmx");
+    }
+
     public static void load() {
 //        map = new TmxMapLoader().load("core/assets/maps/big_map.tmx");
         //TODO: add credit for CC3.0 sprites
-        map = new TmxMapLoader().load("core/assets/maps/default.tmx");
+//        map = new TmxMapLoader().load("core/assets/maps/default.tmx");
 
         // BUILDINGS
         house1 = new Texture(Gdx.files.internal("core/assets/textures/buildings/house1.png"));
