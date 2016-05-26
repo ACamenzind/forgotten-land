@@ -3,6 +3,7 @@ package com.strategy.game.screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.glutils.HdpiUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -18,6 +19,8 @@ import com.strategy.game.StrategyGame;
 import com.strategy.game.Utils;
 import com.strategy.game.screens.sidebar.Sidebar;
 import com.strategy.game.world.World;
+
+import java.awt.*;
 
 /**
  * Created by Amedeo on 25/05/16.
@@ -104,9 +107,9 @@ public class Settings extends Table {
         GameButton resFull = new GameButton(Assets.settingsResFull);
         resFull.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.graphics.setWindowedMode((int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
-                        (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight());
-                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+                Gdx.graphics.setWindowedMode((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
+                        (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()*9/16);
+//                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
                 return false;
             }
         });
@@ -202,9 +205,9 @@ public class Settings extends Table {
         GameButton resFull = new GameButton(Assets.settingsResFull);
         resFull.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.graphics.setWindowedMode((int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
-                        (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight());
-                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+                Gdx.graphics.setWindowedMode((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
+                        (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()*9/16);
+//                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
                 return false;
             }
         });
