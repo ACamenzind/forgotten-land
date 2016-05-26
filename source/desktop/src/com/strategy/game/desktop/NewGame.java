@@ -1,8 +1,10 @@
-package com.strategy.game;
+package com.strategy.game.desktop;
 //import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 //import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.strategy.game.StrategyGame;
+import com.strategy.game.Utils;
 import com.strategy.game.desktop.DesktopLauncher;
 
 import java.awt.*;
