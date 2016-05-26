@@ -7,10 +7,12 @@ import java.awt.*;
 public class DesktopLauncher {
 	public static boolean HDPI;
 	public static void main (String[] arg) {
+		int width = 250;
+		int height = 100;
 		NewGame frame = new NewGame("Resolution");
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
-		frame.setSize( 250, 100 );
+		frame.setLocation(dim.width/2-frame.getSize().width/2 - width/2, dim.height/2-frame.getSize().height/2 - height/2);
+		frame.setSize( width, height );
 		frame.setVisible( true );
 	}
 }
