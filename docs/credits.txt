@@ -12,6 +12,6 @@ building placement - by dklon, opengameart.org/content/body-hitting-ground
 building destruction - by spookymodem, opengameart.org/content/wall-impact
 
 - Textures:
-Trees - by rubberduck, opengameart.org/content/free-isometric-plants-pack
+Trees - by Bleed - http://remusprites.carbonmade.com/, opengameart.org/content/tree-collection-v26-bleeds-game-art
 Models for lumber camp, market, mine, rocks, warehouse, farm obtained from github.com/unknown-horizons/gfx
 House, castle - by feudalwars, opengameart.org/content/isometric-25d-medieval-set
