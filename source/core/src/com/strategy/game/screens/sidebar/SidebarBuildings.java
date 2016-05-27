@@ -58,6 +58,10 @@ public class SidebarBuildings extends SidebarBuildSelection {
         addActor(buttons[2][1]);
         buttons[2][1].addListenerBuilding(new Wall());
 
+        buttons[2][2] = new GameButton(Assets.road);
+        addActor(buttons[2][2]);
+        buttons[2][2].addListenerBuilding(new Road());
+
         back.setVisible(false);
 
         update();
