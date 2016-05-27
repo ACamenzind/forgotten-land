@@ -9,6 +9,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.desktop.DesktopLauncher;
 import com.strategy.game.screens.GameScreen;
+import sun.security.krb5.internal.crypto.Des;
+
+import java.awt.*;
 
 /**
  * Utility class with useful constants and static methods
@@ -16,10 +19,8 @@ import com.strategy.game.screens.GameScreen;
 public class Utils {
     // SIZE OPTIONS
     public static final int TILE_SIZE = 128;
-    public static final float DEFAULT_RATIO = 1f;
-    public static final int DEFAULT_WIDTH = (int) (1280 * DEFAULT_RATIO);
-    public static final int DEFAULT_HEIGHT = (int) (720 * DEFAULT_RATIO);
-    public static final int BASE_CAMERA_SPEED = 10;
+    public static final float DEFAULT_RATIO = 1f; // can be removed
+    public static int BASE_CAMERA_SPEED = 10;
     public static final int RENDER_OFFSET = 20;
     // FONTS
     public static final int FONT_SIZE_SMALL = DesktopLauncher.HDPI ? (int) (12 * DEFAULT_RATIO) * 2 : (int) (12 * DEFAULT_RATIO);

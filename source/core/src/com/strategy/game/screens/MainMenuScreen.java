@@ -36,11 +36,11 @@ public class MainMenuScreen implements Screen{
 
     public MainMenuScreen(final StrategyGame game) {
         this.game = game;
-        this.camera = new OrthographicCamera(Utils.DEFAULT_WIDTH, Utils.DEFAULT_HEIGHT);
+        this.camera = new OrthographicCamera(DesktopLauncher.DEFAULT_WIDTH, DesktopLauncher.DEFAULT_HEIGHT);
         this.batch = game.getBatch();
         this.font = game.getFont();
         menubk.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        camera.setToOrtho(false, 2*Utils.DEFAULT_WIDTH, 2*Utils.DEFAULT_HEIGHT);
+        camera.setToOrtho(false, 2*DesktopLauncher.DEFAULT_WIDTH, 2*DesktopLauncher.DEFAULT_HEIGHT);
         Assets.load();
         setupStage();
     }
@@ -61,14 +61,14 @@ public class MainMenuScreen implements Screen{
         batch.begin();
 //        batch.draw(menubk, 0, 0);
         font.draw(batch, "Welcome to the game!",
-                Utils.DEFAULT_WIDTH/2,
-                Utils.DEFAULT_HEIGHT/2);
+                DesktopLauncher.DEFAULT_WIDTH/2,
+                DesktopLauncher.DEFAULT_HEIGHT/2);
         font.draw(batch, "fps:"+Gdx.graphics.getFramesPerSecond(),
                 20, 30);
 
         font.draw(batch, "Press ENTER to start the game.",
-                Utils.DEFAULT_WIDTH/2,
-                Utils.DEFAULT_HEIGHT/2+30);
+                DesktopLauncher.DEFAULT_WIDTH/2,
+                DesktopLauncher.DEFAULT_HEIGHT/2+30);
         batch.end();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {

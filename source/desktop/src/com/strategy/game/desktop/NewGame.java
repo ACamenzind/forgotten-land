@@ -18,6 +18,7 @@ import javax.swing.*;
 public class NewGame extends JFrame implements ActionListener{
 
     public NewGame(String title) {
+
         super( title );                     // invoke the JFrame constructor
         setLayout( new FlowLayout() );      // set the layout manager
 
@@ -27,8 +28,8 @@ public class NewGame extends JFrame implements ActionListener{
             public void actionPerformed(ActionEvent e) {
                 DesktopLauncher.HDPI = true;
                 LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-                config.width = Utils.DEFAULT_WIDTH;
-                config.height = Utils.DEFAULT_HEIGHT;
+                config.width = DesktopLauncher.DEFAULT_WIDTH;
+                config.height = DesktopLauncher.DEFAULT_HEIGHT;
                 config.useHDPI = DesktopLauncher.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
                 config.title = "A Strategy Game [Working title]";
                 config.vSyncEnabled = true;
@@ -43,8 +44,8 @@ public class NewGame extends JFrame implements ActionListener{
             public void actionPerformed(ActionEvent e) {
                 DesktopLauncher.HDPI = false;
                 LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-                config.width = Utils.DEFAULT_WIDTH;
-                config.height = Utils.DEFAULT_HEIGHT;
+                config.width = DesktopLauncher.DEFAULT_WIDTH;
+                config.height = DesktopLauncher.DEFAULT_HEIGHT;
                 config.useHDPI = DesktopLauncher.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
                 config.title = "A Strategy Game [Working title]";
                 config.vSyncEnabled = true;
