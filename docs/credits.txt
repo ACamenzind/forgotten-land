@@ -1,0 +1,17 @@
+The team:
+Amedeo Zucchetti
+Alexander Fischer
+Valerio Battaglia
+Francesco Sani
+Samuele Bischof
+
+External content:
+- Sounds:
+background - by vi1e8, opengameart.org/content/outdoor-ambiance
+building placement - by dklon, opengameart.org/content/body-hitting-ground
+building destruction - by spookymodem, opengameart.org/content/wall-impact
+
+- Textures:
+Trees - by rubberduck, opengameart.org/content/free-isometric-plants-pack
+Models for lumber camp, market, mine, rocks, warehouse, farm obtained from github.com/unknown-horizons/gfx
+House, castle - by feudalwars, opengameart.org/content/isometric-25d-medieval-set
