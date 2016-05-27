@@ -117,6 +117,9 @@ public class GameInputProcessor implements InputProcessor{
             case Input.Keys.NUM_8:
                 screen.getBuilder().setSelectedEntity(new CollectorGold());
                 break;
+            case Input.Keys.NUM_9:
+                screen.getBuilder().setSelectedEntity(new Road());
+                break;
             case Input.Keys.ESCAPE:
                 screen.getBuilder().removeSelectedEntity();
                 break;

@@ -21,7 +21,7 @@ public class Utils {
     public static final int TILE_SIZE = 128;
     public static final float DEFAULT_RATIO = 1f; // can be removed
     public static int BASE_CAMERA_SPEED = 10;
-    public static final int RENDER_OFFSET = 20;
+    public static final int RENDER_OFFSET = 5;
     // FONTS
     public static final int FONT_SIZE_SMALL = DesktopLauncher.HDPI ? (int) (12 * DEFAULT_RATIO) * 2 : (int) (12 * DEFAULT_RATIO);
     public static final int FONT_SIZE_MEDIUM = DesktopLauncher.HDPI ? (int) (14 * DEFAULT_RATIO) * 2 : (int) (14 * DEFAULT_RATIO);
