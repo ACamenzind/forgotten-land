@@ -30,7 +30,7 @@ public class NewGame extends JFrame implements ActionListener{
                 NewUtils.HDPI = true;
                 LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
                 config.width = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-                config.height = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+                config.height = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 9/16);
                 config.useHDPI = NewUtils.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
                 config.title = "A Strategy Game [Working title]";
                 config.vSyncEnabled = true;
