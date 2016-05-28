@@ -54,28 +54,6 @@ public class GameInputProcessor implements InputProcessor{
         float mouseX = Gdx.input.getX();
         float mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
 
-        // Moves the camera accordingly if the cursor is near an edge.
-        // The speed also depends on the current zoom.
-//        if ((mouseX > camera.viewportWidth - EDGE_THRESHOLD_WIDTH) &&
-//                (mouseY > (camera.viewportHeight / 4)) &&
-//                (mouseY < (camera.viewportHeight* 3/4)))
-//            camera.translate(camera.zoom*Utils.BASE_CAMERA_SPEED, 0);
-//
-//        if ((mouseX < EDGE_THRESHOLD_WIDTH) &&
-//                (mouseY > (camera.viewportHeight / 4)) &&
-//                (mouseY < (camera.viewportHeight * 3/4)))
-//            camera.translate(camera.zoom*(-Utils.BASE_CAMERA_SPEED), 0);
-//
-//        if ((mouseY > camera.viewportHeight - EDGE_THRESHOLD_WIDTH) &&
-//                (mouseX > (camera.viewportWidth / 4)) &&
-//                (mouseX < (camera.viewportWidth * 3/4)))
-//            camera.translate(0, camera.zoom*Utils.BASE_CAMERA_SPEED);
-//
-//        if ((mouseY < EDGE_THRESHOLD_WIDTH) &&
-//                (mouseX > (camera.viewportWidth / 4)) &&
-//                (mouseX < (camera.viewportWidth * 3/4)))
-//            camera.translate(0, camera.zoom*(-Utils.BASE_CAMERA_SPEED));
-
 
         // Move the camera when clicking and dragging.
         // TODO: make it so that you have to press it for a certain amount of time to start dragging
@@ -137,18 +115,18 @@ public class GameInputProcessor implements InputProcessor{
             case Input.Keys.I:
                 screen.getWorld().getResourceHandler().removeOnePop();
                 break;
-            case Input.Keys.M:
-                if(NewUtils.HDPI) {
-                    Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth()/2 - 320, Gdx.graphics.getHeight()/2 - 180);
-                } else {
-                    Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth() - 320, Gdx.graphics.getHeight() - 180);
-                } break;
-            case Input.Keys.N:
-                if (NewUtils.HDPI) {
-                    Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth()/2 + 320, Gdx.graphics.getHeight()/2 + 180);
-                } else {
-                    Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth() + 320, Gdx.graphics.getHeight() + 180);
-                } break;
+//            case Input.Keys.M:
+//                if(NewUtils.HDPI) {
+//                    Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth()/2 - 320, Gdx.graphics.getHeight()/2 - 180);
+//                } else {
+//                    Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth() - 320, Gdx.graphics.getHeight() - 180);
+//                } break;
+//            case Input.Keys.N:
+//                if (NewUtils.HDPI) {
+//                    Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth()/2 + 320, Gdx.graphics.getHeight()/2 + 180);
+//                } else {
+//                    Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth() + 320, Gdx.graphics.getHeight() + 180);
+//                } break;
         }
         return false;
     }

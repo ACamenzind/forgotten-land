@@ -29,8 +29,8 @@ public class NewGame extends JFrame implements ActionListener{
             public void actionPerformed(ActionEvent e) {
                 NewUtils.HDPI = true;
                 LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-                config.width = DesktopLauncher.DEFAULT_WIDTH;
-                config.height = DesktopLauncher.DEFAULT_HEIGHT;
+                config.width = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+                config.height = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
                 config.useHDPI = NewUtils.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
                 config.title = "A Strategy Game [Working title]";
                 config.vSyncEnabled = true;
@@ -45,8 +45,8 @@ public class NewGame extends JFrame implements ActionListener{
             public void actionPerformed(ActionEvent e) {
                 NewUtils.HDPI = false;
                 LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-                config.width = DesktopLauncher.DEFAULT_WIDTH;
-                config.height = DesktopLauncher.DEFAULT_HEIGHT;
+                config.width = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+                config.height = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
                 config.useHDPI = NewUtils.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
                 config.title = "A Strategy Game [Working title]";
                 config.vSyncEnabled = true;

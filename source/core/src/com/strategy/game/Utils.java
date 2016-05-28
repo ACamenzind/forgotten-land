@@ -7,7 +7,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.strategy.game.desktop.DesktopLauncher;
 import com.strategy.game.screens.GameScreen;
 import sun.security.krb5.internal.crypto.Des;
 
@@ -18,6 +17,10 @@ import java.awt.*;
  */
 public class Utils {
     // SIZE OPTIONS
+    public static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    public static final int DEFAULT_WIDTH = ((9/16 * screenSize.getWidth()) > screenSize.getHeight()) ?
+            (int) (16/9 * screenSize.getHeight()) : (int) (screenSize.getWidth());
+    public static final int DEFAULT_HEIGHT = (int) (DEFAULT_WIDTH * 9/16);
     public static final int TILE_SIZE = 128;
     public static final float DEFAULT_RATIO = 1f; // can be removed
     public static int BASE_CAMERA_SPEED = 10;
