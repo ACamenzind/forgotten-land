@@ -3,6 +3,7 @@ package com.strategy.game.desktop;
 //import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.strategy.game.NewUtils;
 import com.strategy.game.StrategyGame;
 import com.strategy.game.Utils;
 import com.strategy.game.desktop.DesktopLauncher;
@@ -26,11 +27,11 @@ public class NewGame extends JFrame implements ActionListener{
         add( RetinaButton );                     // add the button to the JFrame
         RetinaButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DesktopLauncher.HDPI = true;
+                NewUtils.HDPI = true;
                 LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
                 config.width = DesktopLauncher.DEFAULT_WIDTH;
                 config.height = DesktopLauncher.DEFAULT_HEIGHT;
-                config.useHDPI = DesktopLauncher.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
+                config.useHDPI = NewUtils.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
                 config.title = "A Strategy Game [Working title]";
                 config.vSyncEnabled = true;
                 config.resizable = false;
@@ -42,11 +43,11 @@ public class NewGame extends JFrame implements ActionListener{
         add( NormalButton );                     // add the button to the JFrame
         NormalButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DesktopLauncher.HDPI = false;
+                NewUtils.HDPI = false;
                 LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
                 config.width = DesktopLauncher.DEFAULT_WIDTH;
                 config.height = DesktopLauncher.DEFAULT_HEIGHT;
-                config.useHDPI = DesktopLauncher.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
+                config.useHDPI = NewUtils.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
                 config.title = "A Strategy Game [Working title]";
                 config.vSyncEnabled = true;
                 config.resizable = false;

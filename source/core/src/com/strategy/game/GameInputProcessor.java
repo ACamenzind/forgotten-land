@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.buildings.*;
-import com.strategy.game.desktop.DesktopLauncher;
 import com.strategy.game.screens.GameScreen;
 import com.strategy.game.world.Resource;
 import com.strategy.game.world.World;
@@ -139,13 +138,13 @@ public class GameInputProcessor implements InputProcessor{
                 screen.getWorld().getResourceHandler().removeOnePop();
                 break;
             case Input.Keys.M:
-                if(DesktopLauncher.HDPI) {
+                if(NewUtils.HDPI) {
                     Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth()/2 - 320, Gdx.graphics.getHeight()/2 - 180);
                 } else {
                     Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth() - 320, Gdx.graphics.getHeight() - 180);
                 } break;
             case Input.Keys.N:
-                if (DesktopLauncher.HDPI) {
+                if (NewUtils.HDPI) {
                     Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth()/2 + 320, Gdx.graphics.getHeight()/2 + 180);
                 } else {
                     Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth() + 320, Gdx.graphics.getHeight() + 180);

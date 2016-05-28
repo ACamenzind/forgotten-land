@@ -22,11 +22,12 @@ public class Utils {
     public static final float DEFAULT_RATIO = 1f; // can be removed
     public static int BASE_CAMERA_SPEED = 10;
     public static final int RENDER_OFFSET = 5;
+//    public static boolean HDPI = false;
     // FONTS
-    public static final int FONT_SIZE_SMALL = DesktopLauncher.HDPI ? (int) (12 * DEFAULT_RATIO) * 2 : (int) (12 * DEFAULT_RATIO);
-    public static final int FONT_SIZE_MEDIUM = DesktopLauncher.HDPI ? (int) (14 * DEFAULT_RATIO) * 2 : (int) (14 * DEFAULT_RATIO);
-    public static final int FONT_SIZE_BIG = DesktopLauncher.HDPI ? (int) (29 * DEFAULT_RATIO) * 2 : (int) (29 * DEFAULT_RATIO);
-    public static final int FONT_SIZE_HUGE = DesktopLauncher.HDPI ? (int) (40 * DEFAULT_RATIO) * 2 : (int) (40 * DEFAULT_RATIO);
+    public static final int FONT_SIZE_SMALL = NewUtils.HDPI ? (int) (12 * DEFAULT_RATIO) * 2 : (int) (12 * DEFAULT_RATIO);
+    public static final int FONT_SIZE_MEDIUM = NewUtils.HDPI ? (int) (14 * DEFAULT_RATIO) * 2 : (int) (14 * DEFAULT_RATIO);
+    public static final int FONT_SIZE_BIG = NewUtils.HDPI ? (int) (29 * DEFAULT_RATIO) * 2 : (int) (29 * DEFAULT_RATIO);
+    public static final int FONT_SIZE_HUGE = NewUtils.HDPI ? (int) (40 * DEFAULT_RATIO) * 2 : (int) (40 * DEFAULT_RATIO);
     public static BitmapFont FONT_SMALL_BLACK = Assets.makeFont(FONT_SIZE_SMALL, Color.BLACK);
     public static BitmapFont FONT_SMALL_WHITE = Assets.makeFont(FONT_SIZE_SMALL, Color.LIGHT_GRAY);
     public static BitmapFont FONT_SMALL_RED = Assets.makeFont(FONT_SIZE_SMALL, Color.RED);
