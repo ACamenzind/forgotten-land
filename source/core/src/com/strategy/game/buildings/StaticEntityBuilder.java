@@ -189,6 +189,7 @@ public class StaticEntityBuilder {
                     ExtendedStaticTiledMapTile buildingTile = (ExtendedStaticTiledMapTile) buildingsCell.getTile();
                     buildingTile.setTextureRegion(new TextureRegion(Assets.emptyTile));
                     buildingTile.setObject(null);
+                    buildingTile.setObstacle(false);
                     buildingsCell.setTile(buildingTile);
                     buildingsLayer.setCell(i, j, buildingsCell);
                 }
@@ -248,8 +249,11 @@ public class StaticEntityBuilder {
                         TiledMapTile tile = cell.getTile();
                         boolean hasObject = tile instanceof ExtendedStaticTiledMapTile
                                 && ((ExtendedStaticTiledMapTile) tile).getObject() != null;
-                        boolean hasProperty = tile.getProperties().get("obstacle", Boolean.class) != null;
-                        if (hasObject || hasProperty) {
+//                        Boolean obstacle = (Boolean) ;
+                        System.out.println(tile.getProperties().get("obstacle"));
+//                        if (obstacle != null)
+//                        boolean hasProperty = tile.getProperties().get("obstacle", Boolean.class) != null;
+                        if (hasObject) {
                             isSpaceFree = false;
                             break;
                         }
