@@ -26,10 +26,10 @@ public class Utils {
     public static int BASE_CAMERA_SPEED = 10;
     public static final int RENDER_OFFSET = 5;
     // FONTS
-    public static final int FONT_SIZE_SMALL = NewUtils.HDPI ? (int) (12 * DEFAULT_RATIO) * 2 : (int) (12 * DEFAULT_RATIO);
-    public static final int FONT_SIZE_MEDIUM = NewUtils.HDPI ? (int) (14 * DEFAULT_RATIO) * 2 : (int) (14 * DEFAULT_RATIO);
-    public static final int FONT_SIZE_BIG = NewUtils.HDPI ? (int) (29 * DEFAULT_RATIO) * 2 : (int) (29 * DEFAULT_RATIO);
-    public static final int FONT_SIZE_HUGE = NewUtils.HDPI ? (int) (40 * DEFAULT_RATIO) * 2 : (int) (40 * DEFAULT_RATIO);
+    public static final int FONT_SIZE_SMALL = NewUtils.HDPI ? (int) (16 * DEFAULT_RATIO) * 2 : (int) (16 * DEFAULT_RATIO);
+    public static final int FONT_SIZE_MEDIUM = NewUtils.HDPI ? (int) (20 * DEFAULT_RATIO) * 2 : (int) (20 * DEFAULT_RATIO);
+    public static final int FONT_SIZE_BIG = NewUtils.HDPI ? (int) (50 * DEFAULT_RATIO) * 2 : (int) (50 * DEFAULT_RATIO);
+    public static final int FONT_SIZE_HUGE = NewUtils.HDPI ? (int) (60 * DEFAULT_RATIO) * 2 : (int) (60 * DEFAULT_RATIO);
     public static BitmapFont FONT_SMALL_BLACK = Assets.makeFont(FONT_SIZE_SMALL, Color.BLACK);
     public static BitmapFont FONT_SMALL_WHITE = Assets.makeFont(FONT_SIZE_SMALL, Color.LIGHT_GRAY);
     public static BitmapFont FONT_SMALL_RED = Assets.makeFont(FONT_SIZE_SMALL, Color.RED);
