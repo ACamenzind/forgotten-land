@@ -30,9 +30,9 @@ public class NewGame extends JFrame implements ActionListener{
                 NewUtils.HDPI = true;
                 LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                int width = ((9/16 * screenSize.getWidth()) > (screenSize.getHeight() -40)) ?
-                        (int) (16/9 * (screenSize.getHeight() -40)) : (int) (screenSize.getWidth());
-                config.width = width;
+                int width = ((9/16 * screenSize.getWidth()) > (screenSize.getHeight()) ?
+                        (int) (16/9 * (screenSize.getHeight())) : (int) (screenSize.getWidth()));
+                config.width = width - (40* 16/9);
                 config.height = (width * 9/16);
                 config.useHDPI = NewUtils.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
                 config.title = "A Strategy Game [Working title]";
@@ -49,10 +49,10 @@ public class NewGame extends JFrame implements ActionListener{
                 NewUtils.HDPI = false;
                 LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                int width = ((9/16 * screenSize.getWidth()) > (screenSize.getHeight() -40)) ?
-                        (int) (16/9 * (screenSize.getHeight() -40)) : (int) (screenSize.getWidth());
-                config.width = width;
-                config.height = (width * 9/16);
+                int width = ((9/16 * screenSize.getWidth()) > (screenSize.getHeight())) ?
+                        (int) (16/9 * (screenSize.getHeight())) : (int) (screenSize.getWidth());
+                config.width = width - (40* 16/9);
+                config.height = (width * 9/16) -40;
                 config.useHDPI = NewUtils.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
                 config.title = "A Strategy Game [Working title]";
                 config.vSyncEnabled = true;
