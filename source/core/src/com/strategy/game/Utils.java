@@ -18,8 +18,8 @@ import java.awt.*;
 public class Utils {
     // SIZE OPTIONS
     public static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    public static final int DEFAULT_WIDTH = ((9/16 * screenSize.getWidth()) > screenSize.getHeight()) ?
-            (int) (16/9 * screenSize.getHeight()) : (int) (screenSize.getWidth());
+    public static final int DEFAULT_WIDTH = ((9/16 * screenSize.getWidth()) > (screenSize.getHeight() -40)) ?
+            (int) (16/9 * (screenSize.getHeight() -40)) : (int) (screenSize.getWidth());
     public static final int DEFAULT_HEIGHT = (int) (DEFAULT_WIDTH * 9/16);
     public static final int TILE_SIZE = 128;
     public static final float DEFAULT_RATIO = 1f; // can be removed
