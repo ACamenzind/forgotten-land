@@ -7,10 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
 import com.strategy.game.Utils;
-import com.strategy.game.screens.FullScreen;
-import com.strategy.game.screens.GameScreen;
-import com.strategy.game.screens.MessageLog;
-import com.strategy.game.screens.Settings;
+import com.strategy.game.screens.*;
 
 /**
  * Created by Amedeo on 07/05/16.
@@ -67,7 +64,7 @@ public class SidebarGameMenu extends SidebarOptionsSelection {
                 if (sidebar != null) {
                     GameScreen screen = sidebar.getScreen();
                     Stage stage = screen.getStage();
-                    stage.addActor(new FullScreen(screen, Assets.screenInstructions));
+                    stage.addActor(new Instructions(screen));
                 }
                 return false;
             }

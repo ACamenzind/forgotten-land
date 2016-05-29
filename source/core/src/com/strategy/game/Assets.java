@@ -58,6 +58,9 @@ public class Assets {
     // SETTINGS
     public static Texture settingsSliderBg, settingsSliderKnob, settingsRes720p,
             settingsRes1080p, settingsResFull, goBack;
+    // INSTRUCTIONS
+    public static Texture screenInstructions1, screenInstructions2, screenInstructions3, screenInstructions4,
+            screenInstructions5, screenInstructionsBack, screenInstructionsNext;
     // SOUNDS
     public static Sound bgSound, hit, demolition;
     private static final String DEFAULT_FONT_PATH = "core/assets/fonts/san_francisco_regular.ttf";
@@ -257,6 +260,21 @@ public class Assets {
         settingsResFull.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         goBack = new Texture(Gdx.files.internal("core/assets/textures/settings/go_back.png"));
         goBack.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        // INSTRUCTIONS
+        screenInstructions1 = new Texture(Gdx.files.internal("core/assets/textures/instructions/instructions_01.png"));
+        screenInstructions1.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        screenInstructions2 = new Texture(Gdx.files.internal("core/assets/textures/instructions/instructions_02.png"));
+        screenInstructions2.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        screenInstructions3 = new Texture(Gdx.files.internal("core/assets/textures/instructions/instructions_03.png"));
+        screenInstructions3.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        screenInstructions4 = new Texture(Gdx.files.internal("core/assets/textures/instructions/instructions_04.png"));
+        screenInstructions4.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        screenInstructions5 = new Texture(Gdx.files.internal("core/assets/textures/instructions/instructions_05.png"));
+        screenInstructions5.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        screenInstructionsBack = new Texture(Gdx.files.internal("core/assets/textures/instructions/instructions_back.png"));
+        screenInstructionsBack.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        screenInstructionsNext = new Texture(Gdx.files.internal("core/assets/textures/instructions/instructions_next.png"));
+        screenInstructionsNext.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         // http://opengameart.org/content/outdoor-ambiance CC3.0
         bgSound = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/Outdoor_ambiance.mp3"));
         hit = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/hit.wav"));

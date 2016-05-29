@@ -162,7 +162,7 @@ public class MainMenuScreen implements Screen{
         GameButton instructionsButton = new GameButton(Assets.mainMenuInstructions);
         instructionsButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                stage.addActor(new FullScreen(game, Assets.screenInstructions));
+                stage.addActor(new Instructions(game));
                 return false;
             }
         });
