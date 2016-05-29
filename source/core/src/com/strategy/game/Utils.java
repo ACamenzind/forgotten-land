@@ -52,7 +52,7 @@ public class Utils {
         return isoTransform;
     }
 
-    // When multiplied with a vector, it trasforms it into isometric oordinates.
+    // When multiplied with a vector, it trasforms it into isometric coordinates.
     public static Matrix4 invIsoTransformMatrix() {
         return Utils.isoTransformMatrix().inv();
     }

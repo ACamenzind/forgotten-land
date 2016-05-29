@@ -87,10 +87,6 @@ public class Sidebar extends Table implements Display {
         buildingInfo.setEntity(entity, preview);
     }
 
-//    public void setBuilding(Building building) {
-//        buildingInfo.setBuilding(building);
-//    }
-
     public GameScreen getScreen() {
         return screen;
     }

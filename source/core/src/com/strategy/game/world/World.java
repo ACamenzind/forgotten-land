@@ -136,7 +136,7 @@ public class World implements Disposable{
      */
     public void handleGameLost() {
         isRunning = false;
-        gameScreen.getMessages().addActor(new MessageLog(gameScreen, MessageLog.MessageType.GAME_OVER));
+        gameScreen.toggleGameOver();
         //TODO: add a message or something else
     }
 
