@@ -28,10 +28,10 @@ public class FullScreen extends Table {
         }
         screen.getWorld().toggleRunning();
 
-        GameButton button = new GameButton(Assets.sidebarBuildBack);
-        addActor(button);
-        Assets.setSizeRelative(button, 0.05f, 0.05f * getWidth() / getHeight());
-        button.addListener(new InputListener() {
+        GameButton back = new GameButton(Assets.sidebarBuildBack);
+        addActor(back);
+        Assets.setSizeRelative(back, 0.03f, 0.03f * getWidth() / getHeight());
+        back.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
                 for (Actor actor : screen.getStage().getActors()) {
@@ -55,10 +55,10 @@ public class FullScreen extends Table {
             actor.setVisible(false);
         }
 //
-        GameButton button = new GameButton(Assets.sidebarBuildBack);
-        addActor(button);
-        Assets.setSizeRelative(button, 0.05f, 0.05f * getWidth() / getHeight());
-        button.addListener(new InputListener() {
+        GameButton back = new GameButton(Assets.sidebarBuildBack);
+        addActor(back);
+        Assets.setSizeRelative(back, 0.03f, 0.03f * getWidth() / getHeight());
+        back.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
                 for (Actor actor : screen.getStage().getActors()) {

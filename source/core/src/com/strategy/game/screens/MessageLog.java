@@ -25,7 +25,7 @@ public class MessageLog extends Table {
     public MessageLog(final GameScreen screen, MessageType type) {
 
         Assets.setBackground(this, Assets.resourcesBarBg);
-        setSize(Gdx.graphics.getWidth() / 3.8f, Gdx.graphics.getHeight() / 5f);
+        setSize(Gdx.graphics.getWidth() / 3.6f, Gdx.graphics.getHeight() / 5f);
         setPosition((Gdx.graphics.getWidth() - getWidth()) / 2f, (Gdx.graphics.getHeight() - getHeight()) / 2f);
 
         if (type == MessageType.GAME_OVER) {
@@ -38,7 +38,7 @@ public class MessageLog extends Table {
                 }
             });
             addActor(ok);
-            Assets.setSizeRelative(ok, 0.2f, 0.2f);
+            Assets.setSizeRelative(ok, 0.175f, 0.2f);
             Assets.setPositionRelative(ok, 0.5f, 0.2f, true, false);
         }
         else {
@@ -68,11 +68,11 @@ public class MessageLog extends Table {
                 }
             });
             addActor(ok);
-            Assets.setSizeRelative(ok, 0.2f, 0.2f);
+            Assets.setSizeRelative(ok, 0.175f, 0.2f);
             Assets.setPositionRelative(ok, 0.2f, 0.2f);
 
             addActor(cancel);
-            Assets.setSizeRelative(cancel, 0.2f, 0.2f);
+            Assets.setSizeRelative(cancel, 0.175f, 0.2f);
             Assets.setPositionRelative(cancel, 0.6f, 0.2f);
         }
 

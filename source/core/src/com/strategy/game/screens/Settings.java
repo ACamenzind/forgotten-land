@@ -44,10 +44,10 @@ public class Settings extends Table {
         Assets.setPositionRelative(title, 0.5f, 0.7f, true, true);
 
         // BUTTON BACK
-        GameButton button = new GameButton(Assets.sidebarBuildBack);
-        addActor(button);
-        Assets.setSizeRelative(button, 0.05f, 0.05f * getWidth() / getHeight());
-        button.addListener(new InputListener() {
+        GameButton back = new GameButton(Assets.sidebarBuildBack);
+        addActor(back);
+        Assets.setSizeRelative(back, 0.03f, 0.03f * getWidth() / getHeight());
+        back.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
                 for (Actor actor : screen.getStage().getActors()) {
@@ -68,9 +68,10 @@ public class Settings extends Table {
         Label volumeLabel = Assets.makeLabel("Volume:", Utils.FONT_BIG_WHITE);
         container.add(volumeLabel).expand().uniform().right();
 
-        final Slider volumeSlider = new Slider(0, 1f, 0.1f, false, new Slider.SliderStyle(
+        final Slider volumeSlider = new Slider(0f, 1f, 0.1f, false, new Slider.SliderStyle(
                 new SpriteDrawable(new Sprite(Assets.settingsSliderBg)),
                 new SpriteDrawable(new Sprite(Assets.settingsSliderKnob))));
+        volumeSlider.setValue(0.5f);
 
         volumeSlider.getStyle().knob.setMinHeight(container.getHeight() / 8f);
         volumeSlider.getStyle().knob.setMinWidth(volumeSlider.getStyle().knob.getMinHeight());
@@ -143,10 +144,10 @@ public class Settings extends Table {
         Assets.setPositionRelative(title, 0.5f, 0.7f, true, true);
 
         // BUTTON BACK
-        GameButton button = new GameButton(Assets.sidebarBuildBack);
-        addActor(button);
-        Assets.setSizeRelative(button, 0.05f, 0.05f * getWidth() / getHeight());
-        button.addListener(new InputListener() {
+        GameButton back = new GameButton(Assets.sidebarBuildBack);
+        addActor(back);
+        Assets.setSizeRelative(back, 0.03f, 0.03f * getWidth() / getHeight());
+        back.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
                 for (Actor actor : screen.getStage().getActors()) {
@@ -166,9 +167,10 @@ public class Settings extends Table {
         Label volumeLabel = Assets.makeLabel("Volume:", Utils.FONT_BIG_WHITE);
         container.add(volumeLabel).expand().uniform().right();
 
-        final Slider volumeSlider = new Slider(0, 1f, 0.1f, false, new Slider.SliderStyle(
+        final Slider volumeSlider = new Slider(0f, 1f, 0.1f, false, new Slider.SliderStyle(
                 new SpriteDrawable(new Sprite(Assets.settingsSliderBg)),
                 new SpriteDrawable(new Sprite(Assets.settingsSliderKnob))));
+        volumeSlider.setValue(0.5f);
 
         volumeSlider.getStyle().knob.setMinHeight(container.getHeight() / 8f);
         volumeSlider.getStyle().knob.setMinWidth(volumeSlider.getStyle().knob.getMinHeight());
