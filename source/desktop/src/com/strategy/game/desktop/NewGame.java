@@ -33,16 +33,17 @@ public class NewGame extends JFrame implements ActionListener{
                 int width = ((9/16 * screenSize.getWidth()) > (screenSize.getHeight()) ?
                         (int) (16/9 * (screenSize.getHeight())) : (int) (screenSize.getWidth()));
                 config.width = width - (40* 16/9);
-                config.height = (width * 9/16);
+                config.height = (width * 9/16) - 40;
                 config.useHDPI = NewUtils.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
                 config.title = "A Strategy Game [Working title]";
                 config.vSyncEnabled = true;
                 config.resizable = false;
                 new LwjglApplication(new StrategyGame(), config);
+                NewGame.super.dispose();
             }
         } );
 
-        JButton NormalButton = new JButton("Normal Dispay"); // construct a JButton
+        JButton NormalButton = new JButton("Normal Display"); // construct a JButton
         add( NormalButton );                     // add the button to the JFrame
         NormalButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -58,6 +59,7 @@ public class NewGame extends JFrame implements ActionListener{
                 config.vSyncEnabled = true;
                 config.resizable = false;
                 new LwjglApplication(new StrategyGame(), config);
+                NewGame.super.dispose();
             }
         } );
     }
