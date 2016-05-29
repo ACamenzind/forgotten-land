@@ -127,26 +127,25 @@ public class MainMenuScreen implements Screen{
     private void setupStage() {
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         this.backStage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        Group group = new Group();
 
         Gdx.input.setInputProcessor(stage);
         Image background = new Image(menubk);
-
-//        group.addActor(background);
-//        backStage.addActor(background);
 
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         backStage.addActor(background);
 
         Table buttons = new Table();
         stage.addActor(buttons);
-        buttons.setSize(Gdx.graphics.getWidth() * 0.25f, Gdx.graphics.getHeight() * 0.5f);
+        buttons.setSize(Gdx.graphics.getWidth() * 0.25f, Gdx.graphics.getHeight() * 0.55f);
         buttons.setPosition(Gdx.graphics.getWidth() * 0.7f, Gdx.graphics.getHeight() * 0.05f);
 
+        float buttonWidth = Gdx.graphics.getWidth() * 0.25f;
+        float buttonHeight = Gdx.graphics.getHeight() * 0.125f;
+        float buttonHeightRelative = buttonHeight / buttons.getHeight();
+        float padding = (1f - buttonHeightRelative * 4f) / 3;
+
         // NEW GAME BUTTON
-        Texture newGameButtonT = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/newgame.png"));
-        newGameButtonT.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        GameButton newGameButton = new GameButton(newGameButtonT);
+        GameButton newGameButton = new GameButton(Assets.mainMenuNewGame);
         newGameButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 game.setScreen(new GameScreen(game));
@@ -156,13 +155,11 @@ public class MainMenuScreen implements Screen{
             }
         });
         buttons.addActor(newGameButton);
-        Assets.setSizeRelative(newGameButton, 1f, 0.25f);
-        Assets.setPositionRelative(newGameButton, 0f, 0.8f, false, true);
+        newGameButton.setSize(buttonWidth, buttonHeight);
+        Assets.setPositionRelative(newGameButton, 0f, 1f - buttonHeightRelative);
 
         // INSTRUCTIONS BUTTON
-        Texture instructionsButtonT = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/loadgame.png"));
-        instructionsButtonT.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        GameButton instructionsButton = new GameButton(instructionsButtonT);
+        GameButton instructionsButton = new GameButton(Assets.mainMenuInstructions);
         instructionsButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 stage.addActor(new FullScreen(game, Assets.screenInstructions));
@@ -170,13 +167,11 @@ public class MainMenuScreen implements Screen{
             }
         });
         buttons.addActor(instructionsButton);
-        Assets.setSizeRelative(instructionsButton, 1f, 0.25f);
-        Assets.setPositionRelative(instructionsButton, 0f, 0.5f, false, true);
+        instructionsButton.setSize(buttonWidth, buttonHeight);
+        Assets.setPositionRelative(instructionsButton, 0f, (buttonHeightRelative + padding) * 2);
 
         // SETTINGS BUTTON
-        Texture settingsButtonT = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/settings.png"));
-        settingsButtonT.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        GameButton settingsButton = new GameButton(settingsButtonT);
+        GameButton settingsButton = new GameButton(Assets.mainMenuSettings);
         settingsButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 stage.addActor(new Settings(game));
@@ -184,8 +179,20 @@ public class MainMenuScreen implements Screen{
             }
         });
         buttons.addActor(settingsButton);
-        Assets.setSizeRelative(settingsButton, 1f, 0.25f);
-        Assets.setPositionRelative(settingsButton, 0f, 0.2f, false, true);
+        settingsButton.setSize(buttonWidth, buttonHeight);
+        Assets.setPositionRelative(settingsButton, 0f, buttonHeightRelative + padding);
+
+        // CREDITS BUTTON
+        GameButton creditsButton = new GameButton(Assets.mainMenuCredits);
+        creditsButton.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                stage.addActor(new FullScreen(game, Assets.screenCredits));
+                return false;
+            }
+        });
+        buttons.addActor(creditsButton);
+        creditsButton.setSize(buttonWidth, buttonHeight);
+//        Assets.setPositionRelative(creditsButton, 0f, 0f);
     }
 
     public StrategyGame getGame() {

@@ -22,6 +22,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 public class Assets {
 
     public static TiledMap map;
+    // MAIN MENU
+    public static Texture mainMenuNewGame, mainMenuCredits, mainMenuSettings, mainMenuInstructions;
     // BUILDINGS
     public static Texture house1, castle, leftwall, middlewall, rightwall, road, emptyTile, influenceTile, cows, warehouse, wheat, lumberjack, mine, market;
     // SIDEBAR BACKGROUNDS
@@ -72,6 +74,15 @@ public class Assets {
         //TODO: add credit for CC3.0 sprites
 //        map = new TmxMapLoader().load("core/assets/maps/default.tmx");
 
+        // MAIN MENU
+        mainMenuNewGame = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/newgame.png"));
+        mainMenuNewGame.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        mainMenuCredits = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/credits.png"));
+        mainMenuCredits.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        mainMenuSettings = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/settings.png"));
+        mainMenuSettings.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        mainMenuInstructions = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/instructions.png"));
+        mainMenuInstructions.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         // BUILDINGS
         house1 = new Texture(Gdx.files.internal("core/assets/textures/buildings/house1.png"));
         house1.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
