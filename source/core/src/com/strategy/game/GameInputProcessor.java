@@ -216,7 +216,7 @@ public class GameInputProcessor implements InputProcessor{
         final float FACTOR = 7.5f;
 
         final float MAX_ZOOM = 0.4f;
-        final float MIN_ZOOM = 100f;
+        final float MIN_ZOOM = 5f;
 
         if(camera.zoom + amount / FACTOR > MAX_ZOOM && camera.zoom + amount / FACTOR < MIN_ZOOM) {
             camera.zoom += amount / FACTOR;
