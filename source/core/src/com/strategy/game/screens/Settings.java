@@ -44,10 +44,10 @@ public class Settings extends Table {
         Assets.setPositionRelative(title, 0.5f, 0.7f, true, true);
 
         // BUTTON BACK
-        GameButton back = new GameButton(Assets.sidebarBuildBack);
-        addActor(back);
-        Assets.setSizeRelative(back, 0.03f, 0.03f * getWidth() / getHeight());
-        back.addListener(new InputListener() {
+        GameButton button = new GameButton(Assets.sidebarBuildBack);
+        addActor(button);
+        Assets.setSizeRelative(button, 0.0465f, 0.051f * getWidth() / getHeight());
+        button.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
                 for (Actor actor : screen.getStage().getActors()) {
@@ -115,10 +115,11 @@ public class Settings extends Table {
             }
         });
 
-        float resolutionButtonWidth = container.getWidth() * 0.125f;
-        float resolutionButtonHeight = container.getHeight() * 0.2f;
-        float padding = container.getWidth() * 0.025f;
-        resolutionButtons.add(res720p).padRight(padding).size(resolutionButtonWidth, resolutionButtonHeight);
+        float resolutionButtonWidth = container.getWidth() * 0.2f;
+        float resolutionButtonHeight = container.getHeight() * 0.27f;
+        float padding = container.getWidth() * 0.023f;
+        float paddingLeft = container.getWidth() * 0.32f;
+        resolutionButtons.add(res720p).padRight(padding).padLeft(paddingLeft).size(resolutionButtonWidth, resolutionButtonHeight);
         resolutionButtons.add(res1080p).padRight(padding).size(resolutionButtonWidth, resolutionButtonHeight);;
         resolutionButtons.add(resFull).size(resolutionButtonWidth, resolutionButtonHeight);;
         container.add(resolutionButtons).expand().uniform();
@@ -144,10 +145,10 @@ public class Settings extends Table {
         Assets.setPositionRelative(title, 0.5f, 0.7f, true, true);
 
         // BUTTON BACK
-        GameButton back = new GameButton(Assets.sidebarBuildBack);
-        addActor(back);
-        Assets.setSizeRelative(back, 0.03f, 0.03f * getWidth() / getHeight());
-        back.addListener(new InputListener() {
+        GameButton button = new GameButton(Assets.sidebarBuildBack);
+        addActor(button);
+        Assets.setSizeRelative(button, 0.0465f, 0.051f * getWidth() / getHeight());
+        button.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
                 for (Actor actor : screen.getStage().getActors()) {
@@ -214,12 +215,13 @@ public class Settings extends Table {
             }
         });
 
-        float resolutionButtonWidth = container.getWidth() * 0.125f;
-        float resolutionButtonHeight = container.getHeight() * 0.2f;
-        float padding = container.getWidth() * 0.025f;
-        resolutionButtons.add(res720p).padRight(padding).size(resolutionButtonWidth, resolutionButtonHeight);
+        float resolutionButtonWidth = container.getWidth() * 0.2f;
+        float resolutionButtonHeight = container.getHeight() * 0.27f;
+        float padding = container.getWidth() * 0.023f;
+        float paddingLeft = container.getWidth() * 0.32f;
+        resolutionButtons.add(res720p).padRight(padding).padLeft(paddingLeft).size(resolutionButtonWidth, resolutionButtonHeight);
         resolutionButtons.add(res1080p).padRight(padding).size(resolutionButtonWidth, resolutionButtonHeight);;
         resolutionButtons.add(resFull).size(resolutionButtonWidth, resolutionButtonHeight);;
-        container.add(resolutionButtons).expand();
+        container.add(resolutionButtons).expand().uniform();
     }
 }
