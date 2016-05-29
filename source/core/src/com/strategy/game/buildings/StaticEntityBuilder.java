@@ -156,6 +156,9 @@ public class StaticEntityBuilder {
 
         if (available.subtract(cost).noNegativeResources()) {
             building.addLife(amountToRepair);
+            world.getResourceHandler().removeFromTotal(cost);
+            // Updates resources bar
+            world.getGameScreen().getResourcesBar().update();
         }
     }
 

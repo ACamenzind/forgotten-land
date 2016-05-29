@@ -71,7 +71,7 @@ public class ResourceContainer {
      * @return
      */
     public boolean noNegativeResources() {
-        return wood >= 0 && food >= 0 && rock >= 0 && gold >= 0;
+        return wood > 0 && rock > 0 && gold > 0;
     }
 
     /**
