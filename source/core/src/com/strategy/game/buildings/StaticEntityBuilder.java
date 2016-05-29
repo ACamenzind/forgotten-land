@@ -250,7 +250,7 @@ public class StaticEntityBuilder {
                         boolean hasObject = tile instanceof ExtendedStaticTiledMapTile
                                 && ((ExtendedStaticTiledMapTile) tile).getObject() != null;
 //                        Boolean obstacle = (Boolean) ;
-                        System.out.println(tile.getProperties().get("obstacle"));
+//                        System.out.println(tile.getProperties().get("obstacle"));
 //                        if (obstacle != null)
 //                        boolean hasProperty = tile.getProperties().get("obstacle", Boolean.class) != null;
                         if (hasObject) {
