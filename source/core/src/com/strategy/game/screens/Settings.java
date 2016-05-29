@@ -44,10 +44,10 @@ public class Settings extends Table {
         Assets.setPositionRelative(title, 0.5f, 0.7f, true, true);
 
         // BUTTON BACK
-        GameButton button = new GameButton(Assets.sidebarBuildBack);
-        addActor(button);
-        Assets.setSizeRelative(button, 0.0465f, 0.051f * getWidth() / getHeight());
-        button.addListener(new InputListener() {
+        GameButton back = new GameButton(Assets.sidebarBuildBack);
+        addActor(back);
+        Assets.setSizeRelative(back, 0.03f, 0.03f * getWidth() / getHeight());
+        back.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
                 for (Actor actor : screen.getStage().getActors()) {
@@ -145,10 +145,10 @@ public class Settings extends Table {
         Assets.setPositionRelative(title, 0.5f, 0.7f, true, true);
 
         // BUTTON BACK
-        GameButton button = new GameButton(Assets.sidebarBuildBack);
-        addActor(button);
-        Assets.setSizeRelative(button, 0.0465f, 0.051f * getWidth() / getHeight());
-        button.addListener(new InputListener() {
+        GameButton back = new GameButton(Assets.sidebarBuildBack);
+        addActor(back);
+        Assets.setSizeRelative(back, 0.03f, 0.03f * getWidth() / getHeight());
+        back.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
                 for (Actor actor : screen.getStage().getActors()) {
