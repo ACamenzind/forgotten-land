@@ -32,8 +32,8 @@ public class NewGame extends JFrame implements ActionListener{
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 int width = ((9/16 * screenSize.getWidth()) > (screenSize.getHeight()) ?
                         (int) (16/9 * (screenSize.getHeight())) : (int) (screenSize.getWidth()));
-                config.width = width - (40* 16/9);
-                config.height = (width * 9/16) - 40;
+                config.width = width - (80* 16/9);
+                config.height = (width * 9/16) - 80;
                 config.useHDPI = NewUtils.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
                 config.title = "The forgotten land";
                 config.vSyncEnabled = true;
@@ -52,8 +52,8 @@ public class NewGame extends JFrame implements ActionListener{
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 int width = ((9/16 * screenSize.getWidth()) > (screenSize.getHeight())) ?
                         (int) (16/9 * (screenSize.getHeight())) : (int) (screenSize.getWidth());
-                config.width = width - (40* 16/9);
-                config.height = (width * 9/16) -40;
+                config.width = width - (80* 16/9);
+                config.height = (width * 9/16) -80;
                 config.useHDPI = NewUtils.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
                 config.title = "The forgotten land";
                 config.vSyncEnabled = true;
