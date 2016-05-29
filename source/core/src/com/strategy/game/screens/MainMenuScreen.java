@@ -136,7 +136,7 @@ public class MainMenuScreen implements Screen{
 
         Table buttons = new Table();
         stage.addActor(buttons);
-        buttons.setSize(Gdx.graphics.getWidth() * 0.25f, Gdx.graphics.getHeight() * 0.55f);
+        buttons.setSize(Gdx.graphics.getWidth() * 0.25f, Gdx.graphics.getHeight() * 0.525f);
         buttons.setPosition(Gdx.graphics.getWidth() * 0.7f, Gdx.graphics.getHeight() * 0.05f);
 
         float buttonWidth = Gdx.graphics.getWidth() * 0.25f;
