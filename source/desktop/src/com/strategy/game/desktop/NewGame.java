@@ -35,7 +35,7 @@ public class NewGame extends JFrame implements ActionListener{
                 config.width = width - (40* 16/9);
                 config.height = (width * 9/16) - 40;
                 config.useHDPI = NewUtils.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
-                config.title = "A Strategy Game [Working title]";
+                config.title = "The forgotten land";
                 config.vSyncEnabled = true;
                 config.resizable = false;
                 new LwjglApplication(new StrategyGame(), config);
@@ -55,7 +55,7 @@ public class NewGame extends JFrame implements ActionListener{
                 config.width = width - (40* 16/9);
                 config.height = (width * 9/16) -40;
                 config.useHDPI = NewUtils.HDPI; // Change only this variable in Utils to turn on/off HDPI, don't touch the others.
-                config.title = "A Strategy Game [Working title]";
+                config.title = "The forgotten land";
                 config.vSyncEnabled = true;
                 config.resizable = false;
                 new LwjglApplication(new StrategyGame(), config);
