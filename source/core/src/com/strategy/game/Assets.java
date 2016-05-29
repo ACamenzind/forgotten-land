@@ -55,7 +55,7 @@ public class Assets {
     public static Texture tree, stone;
     // SETTINGS
     public static Texture settingsSliderBg, settingsSliderKnob, settingsRes720p,
-            settingsRes1080p, settingsResFull;
+            settingsRes1080p, settingsResFull, goBack;
     // SOUNDS
     public static Sound bgSound, hit, demolition;
     private static final String DEFAULT_FONT_PATH = "core/assets/fonts/san_francisco_regular.ttf";
@@ -244,6 +244,8 @@ public class Assets {
         settingsRes1080p.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         settingsResFull = new Texture(Gdx.files.internal("core/assets/textures/settings/res_full.png"));
         settingsResFull.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        goBack = new Texture(Gdx.files.internal("core/assets/textures/settings/go_back.png"));
+        goBack.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         // http://opengameart.org/content/outdoor-ambiance CC3.0
         bgSound = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/Outdoor_ambiance.mp3"));
         hit = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/hit.wav"));
