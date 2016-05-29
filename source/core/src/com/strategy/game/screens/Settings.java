@@ -46,7 +46,7 @@ public class Settings extends Table {
         // BUTTON BACK
         GameButton button = new GameButton(Assets.goBack);
         addActor(button);
-        Assets.setSizeRelative(button, 0.0465f, 0.051f * getWidth() / getHeight());
+        Assets.setSizeRelative(button, 0.040f, 0.040f * getWidth() / getHeight());
         button.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
@@ -147,7 +147,7 @@ public class Settings extends Table {
         // BUTTON BACK
         GameButton button = new GameButton(Assets.goBack);
         addActor(button);
-        Assets.setSizeRelative(button, 0.0465f, 0.051f * getWidth() / getHeight());
+        Assets.setSizeRelative(button, 0.04f, 0.04f * getWidth() / getHeight());
         button.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
