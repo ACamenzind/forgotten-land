@@ -37,9 +37,7 @@ public class SidebarGameMenu extends SidebarOptionsSelection {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 Sidebar sidebar = (Sidebar) getParent();
                 if (sidebar != null) {
-                    GameScreen screen = sidebar.getScreen();
-                    Stage stage = screen.getStage();
-                    sidebar.getScreen().getMessages().addActor(new MessageLog(screen, MessageLog.MessageType.NEW_GAME));
+                    sidebar.getScreen().toggleNewGame();
                 }
                 return false;
             }
@@ -55,9 +53,7 @@ public class SidebarGameMenu extends SidebarOptionsSelection {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 Sidebar sidebar = (Sidebar) getParent();
                 if (sidebar != null) {
-                    GameScreen screen = sidebar.getScreen();
-                    Stage stage = screen.getStage();
-                    sidebar.getScreen().getMessages().addActor(new MessageLog(screen, MessageLog.MessageType.QUIT));
+                    sidebar.getScreen().toggleQuitGame();
                 }
                 return false;
             }

@@ -46,9 +46,13 @@ public class GameScreen implements Screen {
 
     private Sidebar sidebar;
     private ResourcesBar resourcesBar;
+
     private Table messages;
     private Image gamePaused;
     private ConsoleMessage consoleMessage;
+    private MessageLog newGame;
+    private MessageLog quitGame;
+    private MessageLog gameOver;
 
     private Vector2 touchDownCoords;
     private Vector2 touchUpCoords;
@@ -81,19 +85,8 @@ public class GameScreen implements Screen {
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         this.sidebar = new Sidebar(stage, this);
         this.resourcesBar = new ResourcesBar(stage, world);
-        this.messages = new Table();
-        messages.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        stage.addActor(messages);
-        // Make method for readability?
-        this.gamePaused =  Assets.makeImage(Assets.pausedOverlay);
-        messages.addActor(gamePaused);
-        gamePaused.setSize(Gdx.graphics.getWidth() / 3f, Gdx.graphics.getWidth() * 0.25f / 3f);
-        gamePaused.setPosition((Gdx.graphics.getWidth() - sidebar.getWidth() - gamePaused.getWidth()) / 2f, Gdx.graphics.getHeight() * 0.5f);
-        gamePaused.setVisible(false);
-        // Console message
-        this.consoleMessage = new ConsoleMessage(stage);
-        messages.addActor(consoleMessage);
 
+        setMessages();
 
         // Looping background sound
         game.getSoundManager().playSound(SoundManager.SoundType.BACKGROUND);
@@ -112,6 +105,45 @@ public class GameScreen implements Screen {
         builder.removeSelectedEntity();
         camera.translate(25*128, 0);
 
+    }
+
+    public void setMessages() {
+        this.messages = new Table();
+        messages.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        stage.addActor(messages);
+        // Console message
+        this.consoleMessage = new ConsoleMessage(stage);
+        messages.addActor(consoleMessage);
+        // Game Over
+        this.gameOver = new MessageLog(this, MessageLog.MessageType.GAME_OVER);
+        gameOver.setVisible(false);
+        messages.addActor(gameOver);
+        // New Game
+        this.newGame = new MessageLog(this, MessageLog.MessageType.NEW_GAME);
+        newGame.setVisible(false);
+        messages.addActor(newGame);
+        // Game Over
+        this.quitGame = new MessageLog(this, MessageLog.MessageType.QUIT);
+        quitGame.setVisible(false);
+        messages.addActor(quitGame);
+        // Game Paused
+        this.gamePaused =  Assets.makeImage(Assets.pausedOverlay);
+        messages.addActor(gamePaused);
+        gamePaused.setSize(Gdx.graphics.getWidth() / 3f, Gdx.graphics.getWidth() * 0.25f / 3f);
+        gamePaused.setPosition((Gdx.graphics.getWidth() - sidebar.getWidth() - gamePaused.getWidth()) / 2f, Gdx.graphics.getHeight() * 0.5f);
+        gamePaused.setVisible(false);
+    }
+
+    public void toggleGameOver() {
+        gameOver.setVisible(!gameOver.isVisible());
+    }
+
+    public void toggleNewGame() {
+        newGame.setVisible(!newGame.isVisible());
+    }
+
+    public void toggleQuitGame() {
+        quitGame.setVisible(!quitGame.isVisible());
     }
 
     public StrategyGame getGame() {

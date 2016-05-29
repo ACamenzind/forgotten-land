@@ -25,8 +25,8 @@ public class MessageLog extends Table {
     public MessageLog(final GameScreen screen, MessageType type) {
 
         Assets.setBackground(this, Assets.resourcesBarBg);
-        setSize(Gdx.graphics.getWidth() / 4f, Gdx.graphics.getHeight() / 5f);
-        setPosition((Gdx.graphics.getWidth() - getWidth()) / 2f, Gdx.graphics.getHeight() * 0.5f - getHeight() / 2f);
+        setSize(Gdx.graphics.getWidth() / 3.8f, Gdx.graphics.getHeight() / 5f);
+        setPosition((Gdx.graphics.getWidth() - getWidth()) / 2f, (Gdx.graphics.getHeight() - getHeight()) / 2f);
 
         if (type == MessageType.GAME_OVER) {
             message = Assets.makeLabel("You lost. Press 'OK' to start a new game.", Utils.FONT_MEDIUM_WHITE);
@@ -63,7 +63,7 @@ public class MessageLog extends Table {
             }
             cancel.addListener(new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    remove();
+                    setVisible(false);
                     return false;
                 }
             });
@@ -77,7 +77,6 @@ public class MessageLog extends Table {
         }
 
         addActor(message);
-//        Assets.setSizeRelative(message, 0.8f, 0.2f);
         Assets.setPositionRelative(message, 0.5f, 0.65f, true, true);
     }
 }
