@@ -69,6 +69,7 @@ public class GameScreen implements Screen {
         this.shapeRenderer = new ShapeRenderer();
 
         Assets.loadMap();
+        Assets.loadSounds();
         this.map = Assets.map;
         this.convertMap(map);
 

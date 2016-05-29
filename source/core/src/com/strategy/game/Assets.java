@@ -250,6 +250,12 @@ public class Assets {
         demolition = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/demolition.wav"));
     }
 
+    public static void loadSounds() {
+        bgSound = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/Outdoor_ambiance.mp3"));
+        hit = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/hit.wav"));
+        demolition = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/demolition.wav"));
+    }
+
     public static void dispose() {
         map.dispose();
     }
