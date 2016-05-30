@@ -87,4 +87,8 @@ public class ResourceContainer {
     public String toString() {
         return "W: " + wood + " F: " + food + " R: " + rock + " G: " + gold + " P: " + people;
     }
+
+    public boolean hasNegativeResources(ResourceContainer rc) {
+        return rc.wood < 0 || rc.rock < 0 || rc.gold < 0;
+    }
 }
