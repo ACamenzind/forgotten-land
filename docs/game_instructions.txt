@@ -18,7 +18,7 @@ You have a total population, divided in workers and unemployed. Unemployed are t
 Maintenance cost:
 Each building has a maintenance cost, that is each turn it will consume a certain amount of resources. If the tribute is not satisfied, it will start degrading by losing life, and eventually it will collapse (with all the workers in it).
 
-Catastrophies:
+Catastrophes:
 Each turn you have a certain chance of been victim of a natural catastrophe, that could destroy building, kill people or reduce resources.
 
 MENUS
@@ -30,7 +30,7 @@ Game info:
 You can see you population level, the resources you have, the maximum resources you can have and how resources will variate the next turn.
 
 Buildings:
-Here you can choose wich building you want to build. In the case of the Wall, you can also chose to rotate the building, changing its image.
+Here you can choose which building you want to build. In the case of the Wall, you can also chose to rotate the building, changing its image.
 
 Game menu:
 Here you can access to Setting, Credits and Instructions. Moreover, you can chose to quit the game, or to start a new one. 
