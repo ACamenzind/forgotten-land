@@ -69,11 +69,11 @@ public class MessageLog extends Table {
             });
             addActor(ok);
             Assets.setSizeRelative(ok, 0.175f, 0.2f);
-            Assets.setPositionRelative(ok, 0.2f, 0.2f);
+            Assets.setPositionRelative(ok, 0.3f, 0.2f, true, false);
 
             addActor(cancel);
             Assets.setSizeRelative(cancel, 0.175f, 0.2f);
-            Assets.setPositionRelative(cancel, 0.6f, 0.2f);
+            Assets.setPositionRelative(cancel, 0.7f, 0.2f, true, false);
         }
 
         addActor(message);
