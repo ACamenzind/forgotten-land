@@ -11,7 +11,7 @@ import com.strategy.game.ResourceContainer;
 public class Warehouse extends Container {
     private static final String NAME = "Warehouse";
     private static final ResourceContainer COST = new ResourceContainer(40, 0, 10, 0, 0);
-    private static final ResourceContainer PRODUCTION = new ResourceContainer(10, 0, 0, 1, 0);
+    private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 0, 0, 0, 0);
     private static final ResourceContainer MAINTENANCE = new ResourceContainer(1, 0, 0, 1, 0);
     private static final ResourceContainer RESOURCE_STORED = new ResourceContainer(100, 100, 100, 100, 0);
     private static final int MAX_LIFE = 100;
