@@ -1,37 +1,42 @@
 GAME LOGIC
 
 Objective:
-The aim of the game is to gather as many resources as possible, and make the total population grow.
+The aim of the game is to gather as many _resources_ as possible, and make the total _population_ grow.
+You will _lose_ when there are no people left.
 
 Build:
-In order to build a building, you have to place it in the influence area of you current village (the blue area).
+In order to build a building, you have to place it inside the _blue influence area_.
 
 Collecting resources:
-To collect resources you have to build the Castle for people, the Lumber camp for wood, the Farm for food, the Mine for minerals and the Market for gold, and putting worker into the building. Moreover, the Lumber camp and the Mine have to have trees and stones respectively in their influence area in order to be effectives, and they will progressively consume them. Once no resource is left in the influence area, the building is useless.
+Resource generators: market -> gold, castle -> people, farm -> food
+Resource collectors: lumber camp -> wood, mine -> rock (they need to be place nearby their respective resource on the map, and will consume them)
 
 Maximum resources:
-The maximum resources you can gather depends on how many Houses (for people) and Warehouses (for other resources) you have.
+The maximum count is related to the number of _houses_ (for people) and _warehouses_ that you have.
 
 Population:
-You have a total population, divided in workers and unemployed. Unemployed are those you can put in a building, while workers are those who are currently gathering resources. Each turn, the total population consumes an amount of food proportional to its size.
+You have a total population, divided in _workers_ and _unemployed_.
+Unemployed are those you can put in a building, while workers are those who are currently gathering resources.
+The food consumption depends on the total population.
 
 Maintenance cost:
-Each building has a maintenance cost, that is each turn it will consume a certain amount of resources. If the tribute is not satisfied, it will start degrading by losing life, and eventually it will collapse (with all the workers in it).
+Each building has a _maintenance_ cost, that is each turn it will consume a certain amount of resources.
+If there aren't enough resources, it will start _degrading_ and eventually _collapse_ if not repaired.
 
-Catastrophies:
-Each turn you have a certain chance of been victim of a natural catastrophe, that could destroy building, kill people or reduce resources.
+World events:
+Sometimes during the game a _random even_t can happen, that could _damage_ buildings or _kill_ some of the population.
 
 MENUS
 
 Building info:
-You can modify the number of workers in a building by clicking on it, and selecting the '-/+' buttons in the bottom left display. In the building info menu you can also see its statistics and its life, and you can choose to destroy it (and gaining half of the resources that it costed to build) or repair it.
+You can modify the number of _workers_ in a building by clicking on it, and selecting the '-/+' buttons in the bottom right display.
+In the building info menu you can also see its _statistics_ and its _life_, and you can _destroy_ it (it will refund some resources) or _repair_ it.
 
-Game info:
-You can see you population level, the resources you have, the maximum resources you can have and how resources will variate the next turn.
+Game info (INFO tab):
+Here you can see additional _details_ about the game (population details, the maximum resources and the current resource balance)
 
-Buildings:
-Here you can choose wich building you want to build. In the case of the Wall, you can also chose to rotate the building, changing its image.
+Buildings (BUILD tab):
+Here you can choose which building you want to build.
 
-Game menu:
-Here you can access to Setting, Credits and Instructions. Moreover, you can chose to quit the game, or to start a new one. 
-
+Game menu (MENU tab):
+You can access the settings, credits, instructions, as well as start a new game or quit to the main menu.

@@ -71,20 +71,6 @@ public class MainMenuScreen implements Screen{
             game.setScreen(new GameScreen(game));
             dispose();
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
-            if(NewUtils.HDPI) {
-                Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth()/2 - 320, Gdx.graphics.getHeight()/2 - 180);
-            } else {
-                Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth() - 320, Gdx.graphics.getHeight() - 180);
-            }
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
-            if (NewUtils.HDPI) {
-                Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth()/2 + 320, Gdx.graphics.getHeight()/2 + 180);
-            } else {
-                Gdx.graphics.setWindowedMode(Gdx.graphics.getWidth() + 320, Gdx.graphics.getHeight() + 180);
-            }
-        }
 
         backStage.act(delta);
         stage.act(delta);

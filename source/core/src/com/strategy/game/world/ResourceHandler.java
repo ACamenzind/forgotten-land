@@ -172,7 +172,8 @@ public class ResourceHandler {
      */
     public boolean canPlaceBuilding(Building building) {
         ResourceContainer result = totalResources.subtract(building.getCosts());
-        return result.noNegativeResources();
+
+        return !result.hasNegativeResources(result);
     }
 
 
