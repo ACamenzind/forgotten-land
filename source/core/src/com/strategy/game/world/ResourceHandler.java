@@ -289,7 +289,7 @@ public class ResourceHandler {
                         }
                     }
                 }
-                if (!foundAResource) world.getGameScreen().setConsoleMessage("One of your buildings has no resources around him. Destroy it!");
+                if (!foundAResource) world.getGameScreen().setConsoleMessage("One of your buildings has no resources around it. Destroy it!");
             } else { // normal buildings
                 ResourceContainer production = building.getProductionsPerTurn();
                 totalResources = totalResources.add(production);
