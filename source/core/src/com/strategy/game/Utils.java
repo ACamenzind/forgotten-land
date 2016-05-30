@@ -23,7 +23,7 @@ public class Utils {
             (int) (16/9 * (screenSize.getHeight() -40)) : (int) (screenSize.getWidth());
     public static final int DEFAULT_HEIGHT = (int) (DEFAULT_WIDTH * 9/16);
     public static final int TILE_SIZE = 128;
-    public static float DEFAULT_RATIO = NewUtils.HDPI ? 2.5f * Gdx.graphics.getDensity() : 2.5f * Gdx.graphics.getDensity();
+    public static float DEFAULT_RATIO = NewUtils.HDPI ? 2.5f * Gdx.graphics.getDensity() : 1.0f;
     public static int BASE_CAMERA_SPEED = 10;
     public static final int RENDER_OFFSET = 5;
     // FONTS
