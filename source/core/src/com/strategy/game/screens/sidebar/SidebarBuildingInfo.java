@@ -1,6 +1,5 @@
 package com.strategy.game.screens.sidebar;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -37,7 +36,7 @@ public class SidebarBuildingInfo extends Table implements Display {
     private Table tableCost = new Table();
     private Table tableProfit = new Table();
     private Table tableCapacity = new Table();
-    private GameButton cancel = new GameButton(Assets.sidebarBuildCancel);//GameButton(Assets.sidebarBuildInfoCancel);
+    private GameButton cancel = new GameButton(Assets.sidebarBuildInfoCancel);//GameButton(Assets.sidebarBuildInfoCancel);
     private static final float CANCEL_SIZE = 0.1f;
     private static final float CANCEL_POSITION_X = 0.825f;
     private static final float CANCEL_POSITION_Y = 0.825f;
@@ -95,7 +94,7 @@ public class SidebarBuildingInfo extends Table implements Display {
 
     // DESTROY
     private GameButton destroyButton = new GameButton(Assets.sidebarBuildInfoDestroy);
-    private static final float DESTROY_WIDTH = 0.2f;
+    private static final float DESTROY_WIDTH = 0.3f;
     private static final float DESTROY_HEIGHT = 0.135f;
     private static final float DESTROY_POSITION_X = (1f - (DESTROY_WIDTH * 2f + 0.05f)) / 2f;
     private static final float DESTROY_POSITION_Y = IMAGE_POSITION_Y - DESTROY_HEIGHT - 0.05f;
