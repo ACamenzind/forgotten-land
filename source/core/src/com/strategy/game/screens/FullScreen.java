@@ -40,6 +40,7 @@ public class FullScreen extends Table {
                 return false;
             }
         });
+        back.setPosition(getWidth() - back.getWidth(), getHeight() - back.getHeight());
     }
 
     public FullScreen(Game game, Texture texture) {
@@ -66,5 +67,6 @@ public class FullScreen extends Table {
                 return false;
             }
         });
+        back.setPosition(getWidth() - back.getWidth(), getHeight() - back.getHeight());
     }
 }
