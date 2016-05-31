@@ -1,14 +1,11 @@
 package com.strategy.game.screens.sidebar;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
-import com.strategy.game.Utils;
-import com.strategy.game.buildings.Building;
 import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.screens.Display;
 
@@ -83,7 +80,7 @@ public class SidebarBuildSelection extends Table implements Display {
 
         final float BUTTON_HEIGHT = getWidth() * BUTTON_WIDTH / getHeight();
         for (int y = 0; y < buttons.length; y++) {
-            final float POSITION_Y = TITLE_POSITION_Y - MARGIN - (BUTTON_HEIGHT + 0.025f) * y;
+            final float POSITION_Y = TITLE_POSITION_Y - MARGIN - 0.03f - (BUTTON_HEIGHT + 0.025f) * y;
             for (int x = 0; x < buttons[y].length;  x++) {
                 final float POSITION_X = MARGIN * (x + 1) + BUTTON_WIDTH * x;
                 if(buttons[y][x] != null) {
