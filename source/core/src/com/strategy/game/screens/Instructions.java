@@ -1,8 +1,6 @@
 package com.strategy.game.screens;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -49,8 +47,8 @@ public class Instructions extends FullScreen {
             }
         });
         addActor(back);
-        Assets.setSizeRelative(back, 0.03f, 0.03f * getWidth() / getHeight());
-        Assets.setPositionRelative(back, 0.94f, 0f);
+        Assets.setSizeRelative(back, 0.025f, 0.025f * getWidth() / getHeight());
+        Assets.setPositionRelative(back, 0.945f, 0.005f);
         back.setVisible(false);
 
         next.addListener(new InputListener() {
@@ -77,8 +75,8 @@ public class Instructions extends FullScreen {
             }
         });
         addActor(next);
-        Assets.setSizeRelative(next, 0.03f, 0.03f * getWidth() / getHeight());
-        Assets.setPositionRelative(next, 0.97f, 0f);
+        Assets.setSizeRelative(next, 0.025f, 0.025f * getWidth() / getHeight());
+        Assets.setPositionRelative(next, 0.97f, 0.005f);
     }
 
     public Instructions(Game game) {
@@ -110,8 +108,8 @@ public class Instructions extends FullScreen {
             }
         });
         addActor(back);
-        Assets.setSizeRelative(back, 0.03f, 0.03f * getWidth() / getHeight());
-        Assets.setPositionRelative(back, 0.94f, 0f);
+        Assets.setSizeRelative(back, 0.025f, 0.025f * getWidth() / getHeight());
+        Assets.setPositionRelative(back, 0.945f, 0.005f);
         back.setVisible(false);
 
         next.addListener(new InputListener() {
@@ -138,7 +136,7 @@ public class Instructions extends FullScreen {
             }
         });
         addActor(next);
-        Assets.setSizeRelative(next, 0.03f, 0.03f * getWidth() / getHeight());
-        Assets.setPositionRelative(next, 0.97f, 0f);
+        Assets.setSizeRelative(next, 0.025f, 0.025f * getWidth() / getHeight());
+        Assets.setPositionRelative(next, 0.97f, 0.005f);
     }
 }
