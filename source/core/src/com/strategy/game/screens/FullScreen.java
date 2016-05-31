@@ -29,7 +29,7 @@ public class FullScreen extends Table {
 
         GameButton back = new GameButton(Assets.goBack);
         addActor(back);
-        Assets.setSizeRelative(back, 0.03f, 0.03f * getWidth() / getHeight());
+        Assets.setSizeRelative(back, 0.02f, 0.02f * getWidth() / getHeight());
         back.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
@@ -40,7 +40,7 @@ public class FullScreen extends Table {
                 return false;
             }
         });
-        back.setPosition(getWidth() - back.getWidth(), getHeight() - back.getHeight());
+        back.setPosition(getWidth() - back.getWidth() -10, getHeight() - back.getHeight() -10);
     }
 
     public FullScreen(Game game, Texture texture) {
@@ -57,7 +57,7 @@ public class FullScreen extends Table {
 //
         GameButton back = new GameButton(Assets.goBack);
         addActor(back);
-        Assets.setSizeRelative(back, 0.03f, 0.03f * getWidth() / getHeight());
+        Assets.setSizeRelative(back, 0.02f, 0.02f * getWidth() / getHeight());
         back.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
@@ -67,6 +67,6 @@ public class FullScreen extends Table {
                 return false;
             }
         });
-        back.setPosition(getWidth() - back.getWidth(), getHeight() - back.getHeight());
+        back.setPosition(getWidth() - back.getWidth() -10, getHeight() - back.getHeight() -10);
     }
 }
