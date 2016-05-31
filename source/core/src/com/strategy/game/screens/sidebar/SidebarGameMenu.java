@@ -41,23 +41,7 @@ public class SidebarGameMenu extends SidebarOptionsSelection {
         });
         addActor(newGame);
 
-//        buttons[1][0] = loadGame;
-//        addActor(loadGame);
-//
-
-        buttons[1][0] = quitGame;
-        quitGame.addListener(new InputListener() {
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                Sidebar sidebar = (Sidebar) getParent();
-                if (sidebar != null) {
-                    sidebar.getScreen().toggleQuitGame();
-                }
-                return false;
-            }
-        });
-        addActor(quitGame);
-
-        buttons[2][0] = instructions;
+        buttons[1][0] = instructions;
         instructions.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 Sidebar sidebar = (Sidebar) getParent();
@@ -71,7 +55,7 @@ public class SidebarGameMenu extends SidebarOptionsSelection {
         });
         addActor(instructions);
 
-        buttons[3][0] = settings;
+        buttons[2][0] = settings;
         settings.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 Sidebar sidebar = (Sidebar) getParent();
@@ -85,7 +69,7 @@ public class SidebarGameMenu extends SidebarOptionsSelection {
         });
         addActor(settings);
 
-        buttons[4][0] = credits;
+        buttons[3][0] = credits;
         credits.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 Sidebar sidebar = (Sidebar) getParent();
@@ -98,6 +82,18 @@ public class SidebarGameMenu extends SidebarOptionsSelection {
             }
         });
         addActor(credits);
+
+        buttons[4][0] = quitGame;
+        quitGame.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                Sidebar sidebar = (Sidebar) getParent();
+                if (sidebar != null) {
+                    sidebar.getScreen().toggleQuitGame();
+                }
+                return false;
+            }
+        });
+        addActor(quitGame);
 
         update();
         updatePosition();

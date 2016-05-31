@@ -139,7 +139,7 @@ public class SidebarBuildingInfo extends Table implements Display {
         // GENERAL
         this.entity = null;
         this.building = null;
-        Assets.setBackground(this, Assets.sidebarBuildInfoBg);
+        Assets.setBackground(this, Assets.sidebarBuildInfoBg2);
 
         addActor(cancel);
         cancel.addListener(new InputListener() {
@@ -397,6 +397,7 @@ public class SidebarBuildingInfo extends Table implements Display {
 
     public void updateMenu(Menu menu) {
         if (menu == Menu.NONE || entity == null) {
+            Assets.setBackground(this, Assets.sidebarBuildInfoBg2);
             this.menu2.setVisible(false);
             this.menu3.setVisible(false);
             tableInfo.setVisible(false);
@@ -407,6 +408,7 @@ public class SidebarBuildingInfo extends Table implements Display {
             showInfluenceArea(null);
         }
         else if (building != null) {
+            Assets.setBackground(this, Assets.sidebarBuildInfoBg);
             showInfluenceArea(building);
             if (menu == Menu.INFO) {
                 tableInfo.setVisible(true);
@@ -455,6 +457,7 @@ public class SidebarBuildingInfo extends Table implements Display {
             repairButton.setVisible(!preview);
         }
         else if (resource != null) {
+            Assets.setBackground(this, Assets.sidebarBuildInfoBg);
             showInfluenceArea(null);
             tableInfo.setVisible(true);
             tableCost.setVisible(false);
