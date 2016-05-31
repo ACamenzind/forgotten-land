@@ -1,9 +1,7 @@
 package com.strategy.game.screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.glutils.HdpiUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -17,8 +15,6 @@ import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
 import com.strategy.game.StrategyGame;
 import com.strategy.game.Utils;
-import com.strategy.game.screens.sidebar.Sidebar;
-import com.strategy.game.world.World;
 
 import java.awt.*;
 
@@ -46,7 +42,7 @@ public class Settings extends Table {
         // BUTTON BACK
         GameButton button = new GameButton(Assets.goBack);
         addActor(button);
-        Assets.setSizeRelative(button, 0.040f, 0.040f * getWidth() / getHeight());
+        Assets.setSizeRelative(button, 0.03f, 0.03f * getWidth() / getHeight());
         button.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
@@ -147,7 +143,7 @@ public class Settings extends Table {
         // BUTTON BACK
         GameButton button = new GameButton(Assets.goBack);
         addActor(button);
-        Assets.setSizeRelative(button, 0.04f, 0.04f * getWidth() / getHeight());
+        Assets.setSizeRelative(button, 0.03f, 0.03f * getWidth() / getHeight());
         button.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();

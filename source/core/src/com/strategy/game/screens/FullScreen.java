@@ -1,7 +1,6 @@
 package com.strategy.game.screens;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -30,7 +29,7 @@ public class FullScreen extends Table {
 
         GameButton back = new GameButton(Assets.goBack);
         addActor(back);
-        Assets.setSizeRelative(back, 0.0465f, 0.051f * getWidth() / getHeight());
+        Assets.setSizeRelative(back, 0.03f, 0.03f * getWidth() / getHeight());
         back.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
@@ -57,7 +56,7 @@ public class FullScreen extends Table {
 //
         GameButton back = new GameButton(Assets.goBack);
         addActor(back);
-        Assets.setSizeRelative(back, 0.0465f, 0.051f * getWidth() / getHeight());
+        Assets.setSizeRelative(back, 0.03f, 0.03f * getWidth() / getHeight());
         back.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 remove();
