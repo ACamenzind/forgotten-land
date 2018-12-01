@@ -1,7 +1,5 @@
 package com.strategy.game.desktop;
 
-import com.strategy.game.Utils;
-
 import java.awt.*;
 
 // TODO: add texture packing which generates texture atlases

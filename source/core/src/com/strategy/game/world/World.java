@@ -34,7 +34,6 @@ public class World implements Disposable{
     private ResourceHandler resourceHandler;
     private int updateCounter;
     private int eventsCounter;
-    private PopulationHandler populationHandler;
     private WorldEventsHandler worldEventsHandler;
     private int tick;
     private boolean isRunning;
@@ -56,7 +55,6 @@ public class World implements Disposable{
         this.movableEntities = new ArrayList<MovableEntity>();
         this.resourceHandler = new ResourceHandler(this, 300, 300, 300, 300, 5);
         this.updateCounter = 0;
-        this.populationHandler = new PopulationHandler(5, 200, 20);
         this.tick = 0;
         this.isRunning = true;
         this.tickDuration = DEFAULT_TICK_DURATION;
@@ -91,10 +89,6 @@ public class World implements Disposable{
 
     public ResourceHandler getResourceHandler() {
         return resourceHandler;
-    }
-
-    public PopulationHandler getPopulationHandler() {
-        return populationHandler;
     }
 
     /**
