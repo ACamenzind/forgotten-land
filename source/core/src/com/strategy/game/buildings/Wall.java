@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.strategy.game.Assets;
 import com.strategy.game.ResourceContainer;
+import com.strategy.game.world.ResourceContainerBuilder;
 
 /**
  * Created on 01/05/2016.
@@ -11,9 +12,10 @@ import com.strategy.game.ResourceContainer;
 public class Wall extends Building {
     //TODO: maybe put buildings properties into a single object.
     private static final String NAME = "Wall";
-    private static final ResourceContainer COST = new ResourceContainer(0, 0, 1, 0, 0);
-    private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 0, 0, 0, 0);
-    private static final ResourceContainer MAINTENANCE = new ResourceContainer(0, 0, 1, 0, 0);
+    
+    private static final ResourceContainer COST = new ResourceContainerBuilder().rock(1).build();
+    private static final ResourceContainer PRODUCTION = new ResourceContainerBuilder().build();
+    private static final ResourceContainer MAINTENANCE = new ResourceContainerBuilder().rock(1).build();
 
     private static final int MAX_LIFE = 100;
     private static final int MAX_WORKERS = 0;
