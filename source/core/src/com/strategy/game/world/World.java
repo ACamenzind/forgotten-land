@@ -28,7 +28,6 @@ public class World implements Disposable{
     private GameScreen gameScreen;
     private ArrayList<Building> buildings; // Resources and Buildings
     private ArrayList<Resource> resources;
-    private ArrayList<MovableEntity> movableEntities;
     private TiledMap map;
     private StaticEntityBuilder builder;
     private ResourceHandler resourceHandler;
@@ -52,7 +51,6 @@ public class World implements Disposable{
         this.map = gameScreen.getMap();
         this.buildings = new ArrayList<Building>();
         this.resources = new ArrayList<Resource>();
-        this.movableEntities = new ArrayList<MovableEntity>();
         this.resourceHandler = new ResourceHandler(this, 300, 300, 300, 300, 5);
         this.updateCounter = 0;
         this.tick = 0;
@@ -131,7 +129,6 @@ public class World implements Disposable{
     public void handleGameLost() {
         isRunning = false;
         gameScreen.toggleGameOver();
-        //TODO: add a message or something else
     }
 
     /**
