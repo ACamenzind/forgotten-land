@@ -23,7 +23,7 @@ public class StrategyGame extends Game {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		this.setScreen(new MainMenuScreen(this));
-		soundManager = new SoundManager();
+		soundManager = SoundManager.instance();
 //		img = new Texture("core/assets/badlogic.jpg");
 
 	}

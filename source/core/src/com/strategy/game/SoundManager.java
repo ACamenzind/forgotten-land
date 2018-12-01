@@ -16,7 +16,15 @@ public class SoundManager implements Disposable{
     private static final float BASE_EFFECT_VOLUME = 0.5f;
     private static final float BASE_BACKG_VOLUME = 0.3f;
 
-    public SoundManager() {
+    private static SoundManager instance = null;
+    public static SoundManager instance() {
+        if (instance == null) {
+            instance = new SoundManager();
+        }
+        return instance;
+    }
+
+    private SoundManager() {
         this.masterVolume = 0.6f;
         this.loopingSounds = new ArrayList<Sound>();
     }
