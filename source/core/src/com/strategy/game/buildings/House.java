@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.strategy.game.Assets;
 import com.strategy.game.ResourceContainer;
+import com.strategy.game.world.ResourceContainerBuilder;
 
 /**
  * A type of MapEntity
@@ -11,10 +12,10 @@ import com.strategy.game.ResourceContainer;
 public class House extends Container {
     //TODO: maybe put buildings properties into a single object.
     private static final String NAME = "House";
-    private static final ResourceContainer COST = new ResourceContainer(50, 50, 50, 50, 0);
-    private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 0, 0, 0, 0);
-    private static final ResourceContainer MAINTENANCE = new ResourceContainer(1, 0, 1, 1, 0);
-    private static final ResourceContainer RESOURCE_STORED = new ResourceContainer(0, 0, 0, 0, 5);
+    private static final ResourceContainer COST = new ResourceContainerBuilder().wood(50).food(50).rock(50).gold(50).build();
+    private static final ResourceContainer PRODUCTION = new ResourceContainerBuilder().build();
+    private static final ResourceContainer MAINTENANCE = new ResourceContainerBuilder().wood(1).rock(1).gold(1).build();
+    private static final ResourceContainer RESOURCE_STORED = new ResourceContainerBuilder().people(5).build();
 
 
     private static final int MAX_LIFE = 100;

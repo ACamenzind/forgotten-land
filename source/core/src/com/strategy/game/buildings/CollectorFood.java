@@ -12,8 +12,8 @@ import com.strategy.game.world.ResourceContainerBuilder;
 public class CollectorFood extends Building {
     private static final String NAME = "Farm";
     private static final ResourceContainer COST = new ResourceContainerBuilder().wood(30).rock(10).gold(10).build();
-    private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 5, 0, 0, 0);
-    private static final ResourceContainer MAINTENANCE = new ResourceContainer(5, 0, 1, 1, 0);
+    private static final ResourceContainer PRODUCTION = new ResourceContainerBuilder().food(5).build();
+    private static final ResourceContainer MAINTENANCE = new ResourceContainerBuilder().wood(5).rock(1).gold(1).build();
     private static final int MAX_LIFE = 100;
     private static final int MAX_WORKERS = 5;
     private static final int INFLUENCE_RADIUS = 5;
