@@ -40,7 +40,7 @@ public class NewGame extends JFrame implements ActionListener{
                 config.title = "The forgotten land";
                 config.vSyncEnabled = true;
                 config.resizable = false;
-                new LwjglApplication(new StrategyGame(), config);
+                new LwjglApplication(StrategyGame.instance(), config);
                 NewGame.super.dispose();
             }
         } );
@@ -60,7 +60,7 @@ public class NewGame extends JFrame implements ActionListener{
                 config.title = "The forgotten land";
                 config.vSyncEnabled = true;
                 config.resizable = false;
-                new LwjglApplication(new StrategyGame(), config);
+                new LwjglApplication(StrategyGame.instance(), config);
                 NewGame.super.dispose();
             }
         } );

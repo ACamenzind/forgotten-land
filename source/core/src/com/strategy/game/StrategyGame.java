@@ -17,6 +17,17 @@ public class StrategyGame extends Game {
 	private BitmapFont font;
 	private SoundManager soundManager;
 
+	private static StrategyGame instance = null;
+	public static StrategyGame instance() {
+		if (instance == null) {
+			instance = new StrategyGame();
+		}
+		return instance;
+	}
+
+	private StrategyGame() {
+	}
+
 
 	@Override
 	public void create () {
