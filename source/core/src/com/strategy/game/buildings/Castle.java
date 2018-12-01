@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.strategy.game.Assets;
 import com.strategy.game.ResourceContainer;
+import com.strategy.game.world.ResourceContainerBuilder;
 
 /**
  * A type of Building
@@ -11,9 +12,9 @@ import com.strategy.game.ResourceContainer;
 public class Castle extends Building {
     //TODO: maybe put buildings properties into a single object.
     private static final String NAME = "Castle";
-    private static final ResourceContainer COST = new ResourceContainer(100, 100, 100, 100, 0);
-    private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 0, 0, 0, 1);
-    private static final ResourceContainer MAINTENANCE = new ResourceContainer(1,0,1,1,0);
+    private static final ResourceContainer COST = new ResourceContainerBuilder().wood(100).food(100).rock(100).gold(100).build();
+    private static final ResourceContainer PRODUCTION = new ResourceContainerBuilder().people(1).build();
+    private static final ResourceContainer MAINTENANCE = new ResourceContainerBuilder().wood(1).rock(1).gold(1).build();
 
     private static final int MAX_LIFE = 100;
     private static final int MAX_WORKERS = 1;

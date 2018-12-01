@@ -4,13 +4,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.strategy.game.Assets;
 import com.strategy.game.ResourceContainer;
+import com.strategy.game.world.ResourceContainerBuilder;
 
 /**
  * Created by francescosani on 12/05/16.
  */
 public class CollectorFood extends Building {
     private static final String NAME = "Farm";
-    private static final ResourceContainer COST = new ResourceContainer(30, 0, 10, 10, 0);
+    private static final ResourceContainer COST = new ResourceContainerBuilder().wood(30).rock(10).gold(10).build();
     private static final ResourceContainer PRODUCTION = new ResourceContainer(0, 5, 0, 0, 0);
     private static final ResourceContainer MAINTENANCE = new ResourceContainer(5, 0, 1, 1, 0);
     private static final int MAX_LIFE = 100;

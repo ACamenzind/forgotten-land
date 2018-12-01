@@ -111,20 +111,6 @@ public abstract class Building extends MapEntity {
     }
 
     /**
-     * Collect returns the collected resources for one single turn.
-     * @return Collected resources per turn.
-     */
-    public ResourceContainer work() {
-        final int wood = productions.wood * workers;
-        final int food = productions.food * workers;
-        final int rock = productions.rock * workers;
-        final int gold = productions.gold * workers;
-        final int people = productions.people * workers;
-
-        return new ResourceContainer(wood, food, rock, gold, people);
-    }
-
-    /**
      * Change the actual workers in the building. Can be negative to remove instead of add.
      * @param n
      */

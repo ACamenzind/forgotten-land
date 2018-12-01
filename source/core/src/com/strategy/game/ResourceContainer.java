@@ -4,11 +4,31 @@ package com.strategy.game;
  * Data structure that contains all the types of resources
  */
 public class ResourceContainer {
-    public int wood;
-    public int food;
-    public int rock;
-    public int gold;
-    public int people;
+    private int wood;
+    private int food;
+    private int rock;
+    private int gold;
+    private int people;
+
+    public int getWood() {
+        return wood;
+    }
+
+    public int getFood() {
+        return food;
+    }
+
+    public int getRock() {
+        return rock;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public int getPeople() {
+        return people;
+    }
 
     public ResourceContainer(int wood, int food, int rock, int gold, int people) {
         this.wood = wood;
