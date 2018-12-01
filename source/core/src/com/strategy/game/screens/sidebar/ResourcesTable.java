@@ -77,35 +77,35 @@ public class ResourcesTable extends Table {
 
     public void set(ResourceContainer[] resourceContainers) {
         for (int i = 0; i < resourceContainers.length; i++) {
-            if (resourceContainers[i].food < 0)
+            if (resourceContainers[i].getFood() < 0)
                 ((Label) table[1][i+1]).setStyle(Assets.makeLabelStyle(Utils.FONT_SMALL_RED));
             else
                 ((Label) table[1][i+1]).setStyle(Assets.makeLabelStyle(default_font));
-            ((Label) table[1][i+1]).setText(Integer.toString(resourceContainers[i].food));
+            ((Label) table[1][i+1]).setText(Integer.toString(resourceContainers[i].getFood()));
 
-            if (resourceContainers[i].wood < 0)
+            if (resourceContainers[i].getWood() < 0)
                 ((Label) table[2][i+1]).setStyle(Assets.makeLabelStyle(Utils.FONT_SMALL_RED));
             else
                 ((Label) table[2][i+1]).setStyle(Assets.makeLabelStyle(default_font));
-            ((Label) table[2][i+1]).setText(Integer.toString(resourceContainers[i].wood));
+            ((Label) table[2][i+1]).setText(Integer.toString(resourceContainers[i].getWood()));
 
-            if (resourceContainers[i].rock < 0)
+            if (resourceContainers[i].getRock() < 0)
                 ((Label) table[3][i+1]).setStyle(Assets.makeLabelStyle(Utils.FONT_SMALL_RED));
             else
                 ((Label) table[3][i+1]).setStyle(Assets.makeLabelStyle(default_font));
-            ((Label) table[3][i+1]).setText(Integer.toString(resourceContainers[i].rock));
+            ((Label) table[3][i+1]).setText(Integer.toString(resourceContainers[i].getRock()));
 
-            if (resourceContainers[i].gold < 0)
+            if (resourceContainers[i].getGold() < 0)
                 ((Label) table[4][i+1]).setStyle(Assets.makeLabelStyle(Utils.FONT_SMALL_RED));
             else
                 ((Label) table[4][i+1]).setStyle(Assets.makeLabelStyle(default_font));
-            ((Label) table[4][i+1]).setText(Integer.toString(resourceContainers[i].gold));
+            ((Label) table[4][i+1]).setText(Integer.toString(resourceContainers[i].getGold()));
 
-            if (resourceContainers[i].people < 0)
+            if (resourceContainers[i].getPeople() < 0)
                 ((Label) table[5][i+1]).setStyle(Assets.makeLabelStyle(Utils.FONT_SMALL_RED));
             else
                 ((Label) table[5][i+1]).setStyle(Assets.makeLabelStyle(default_font));
-            ((Label) table[5][i+1]).setText(Integer.toString(resourceContainers[i].people));
+            ((Label) table[5][i+1]).setText(Integer.toString(resourceContainers[i].getPeople()));
         }
     }
 }

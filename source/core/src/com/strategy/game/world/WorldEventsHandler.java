@@ -61,7 +61,7 @@ public class WorldEventsHandler {
     public void startPlague() {
 //        System.out.println("A plague has spread throughout your village! Half the population is now dead!");
         world.getGameScreen().setConsoleMessage("A plague has spread throughout your village! Half the population is now dead!");
-        int halfPop = resourceHandler.getTotalResources().people / 2;
+        int halfPop = resourceHandler.getTotalResources().getPeople() / 2;
         resourceHandler.removePop(halfPop);
     }
 }

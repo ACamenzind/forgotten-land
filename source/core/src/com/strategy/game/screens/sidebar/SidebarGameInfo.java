@@ -66,7 +66,7 @@ public class SidebarGameInfo extends Table implements Display {
 
     @Override
     public void update() {
-        total_population.setText("Population: " + world.getResourceHandler().getTotalResources().people);
+        total_population.setText("Population: " + world.getResourceHandler().getTotalResources().getPeople());
         workers.setText("Workers: " + world.getResourceHandler().getTotalWorkers());
         unemployed.setText("Unemployed: " + world.getResourceHandler().getUnemployed());
 
