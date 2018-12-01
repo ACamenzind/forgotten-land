@@ -17,7 +17,6 @@ public class House extends Container {
     private static final ResourceContainer MAINTENANCE = new ResourceContainerBuilder().wood(1).rock(1).gold(1).build();
     private static final ResourceContainer RESOURCE_STORED = new ResourceContainerBuilder().people(5).build();
 
-
     private static final int MAX_LIFE = 100;
     private static final int MAX_WORKERS = 5;
     private static final int INFLUENCE_RADIUS = 5;

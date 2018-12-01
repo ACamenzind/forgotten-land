@@ -10,6 +10,10 @@ public class ResourceContainer {
     private int gold;
     private int people;
 
+    public void setFood(int food) {
+        this.food = food;
+    }
+
     public int getWood() {
         return wood;
     }

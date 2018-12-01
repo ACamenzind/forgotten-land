@@ -43,7 +43,7 @@ public class ResourceHandler {
     }
 
     public int getUnemployed() {
-        return totalResources.people - totalWorkers;
+        return totalResources.getPeople() - totalWorkers;
     }
 
     public void setTotalWorkers(int totalWorkers) {
@@ -55,7 +55,7 @@ public class ResourceHandler {
      * @param building
      */
     public void addWorker(Building building) {
-        if (totalWorkers < totalResources.people) {
+        if (totalWorkers < totalResources.getPeople()) {
             building.changeWorker(1);
             totalWorkers++;
         }
@@ -88,7 +88,7 @@ public class ResourceHandler {
      *
      */
     public void removeOnePop() {
-        int totalPop = totalResources.people;
+        int totalPop = totalResources.getPeople();
         if (totalPop > 0){
             removeFromTotal(new ResourceContainer(0, 0, 0, 0, 1));
             int availablePop = totalPop - totalWorkers;
@@ -160,7 +160,7 @@ public class ResourceHandler {
         }
 
         // Food consumption is handled separately
-        totalCost.food = totalResources.people;
+        totalCost.setFood(totalResources.getPeople());
 
         return totalProduction.subtract(totalCost);
     }
@@ -181,11 +181,11 @@ public class ResourceHandler {
      * Limits the resource count
      */
     private void capResourceCount() {
-        int wood = Math.min(totalResources.wood, maximumResources.wood);
-        int food = Math.min(totalResources.food, maximumResources.food);
-        int rock = Math.min(totalResources.rock, maximumResources.rock);
-        int gold = Math.min(totalResources.gold, maximumResources.gold);
-        int people = Math.min(totalResources.people, maximumResources.people);
+        int wood = Math.min(totalResources.getWood(), maximumResources.getWood());
+        int food = Math.min(totalResources.getFood(), maximumResources.getFood());
+        int rock = Math.min(totalResources.getRock(), maximumResources.getRock());
+        int gold = Math.min(totalResources.getGold(), maximumResources.getGold());
+        int people = Math.min(totalResources.getPeople(), maximumResources.getPeople());
 
         totalResources = new ResourceContainer(wood, food, rock, gold, people);
     }
@@ -194,25 +194,25 @@ public class ResourceHandler {
      * Handles what happens when resources go negative.
      */
     private void handleNegativeResourceCount() {
-        int food = totalResources.food;
+        int food = totalResources.getFood();
         // for every 10 food negative 1 person dies
         if (food <= -10) {
-            int factor = - totalResources.food / 10;
+            int factor = - totalResources.getFood() / 10;
             for (int i = 0; i < factor; i++) {
                 removeOnePop();
             }
         }
 
         // If the people count goes negative, the game is lost.
-        int people = totalResources.people;
+        int people = totalResources.getPeople();
         if (people <= 0) {
             world.handleGameLost();
         }
 
         // The other resources just don't go below zero.
-        int wood = Math.max(totalResources.wood, 0);
-        int rock = Math.max(totalResources.rock, 0);
-        int gold = Math.max(totalResources.gold, 0);
+        int wood = Math.max(totalResources.getWood(), 0);
+        int rock = Math.max(totalResources.getRock(), 0);
+        int gold = Math.max(totalResources.getGold(), 0);
 
         totalResources = new ResourceContainer(wood, food, rock, gold, people);
     }
@@ -221,11 +221,11 @@ public class ResourceHandler {
      * Reduce 1 unit of food for each citizen per turn.
      */
     public void feedPopulation() {
-        int wood = totalResources.wood;
-        int food = totalResources.food - totalResources.people;
-        int rock = totalResources.rock;
-        int gold = totalResources.gold;
-        int people = totalResources.people;
+        int wood = totalResources.getWood();
+        int food = totalResources.getFood() - totalResources.getPeople();
+        int rock = totalResources.getRock();
+        int gold = totalResources.getGold();
+        int people = totalResources.getPeople();
         totalResources = new ResourceContainer(wood, food, rock, gold, people);
     }
 
@@ -272,9 +272,9 @@ public class ResourceHandler {
                                 int available = object.getLife();
                                 int amount = 0;
                                 if (resourceType.equals("wood")) {
-                                    amount = resourceProduction.wood;
+                                    amount = resourceProduction.getWood();
                                 } else if (resourceType.equals("rock")) {
-                                    amount = resourceProduction.rock;
+                                    amount = resourceProduction.getRock();
                                 }
 
                                 if (available - amount > 0) {
