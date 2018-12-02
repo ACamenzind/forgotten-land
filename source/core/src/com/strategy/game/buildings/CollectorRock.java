@@ -12,7 +12,7 @@ import com.strategy.game.world.ResourceContainerBuilder;
 public class CollectorRock extends Collector {
     private static final String NAME = "Mine";
     private static final ResourceContainer COST = new ResourceContainerBuilder().wood(40).gold(10).build();
-    private static final ResourceContainer PRODUCTION = new ResourceContainerBuilder().wood(5).build();
+    private static final ResourceContainer PRODUCTION = new ResourceContainerBuilder().rock(5).build();
     private static final ResourceContainer MAINTENANCE = new ResourceContainerBuilder().gold(1).build();
     private static final int MAX_LIFE = 100;
     private static final int MAX_WORKERS = 5;

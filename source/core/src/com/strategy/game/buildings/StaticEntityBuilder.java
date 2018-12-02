@@ -83,6 +83,14 @@ public class StaticEntityBuilder implements Observable {
         return selectedEntity != null;
     }
 
+    private Resource createNewResource(String type, ExtendedStaticTiledMapTile tile, int x, int y) {
+        Resource res = new Resource(type, 100);
+        res.setMainTextureSimple(tile.getTextureRegion().getTexture());
+        res.setCoords(new Vector2(x, y));
+        tile.setObject(res);
+        return res;
+    }
+
     /**
      * Searches the map file for tiles that are of type resource, and adds them to the resource list
      * to keep track of them.
@@ -99,17 +107,11 @@ public class StaticEntityBuilder implements Observable {
                     String type = tile.getProperties().get("type", String.class);
                     if (type != null) {
                         if (type.equals("wood")) {
-                            Resource wood = new Resource("Tree", 100);
-                            wood.setMainTextureSimple(tile.getTextureRegion().getTexture());
-                            wood.setCoords(new Vector2(x, y));
+                            Resource wood = createNewResource("Tree", tile, x, y);
                             resources.add(wood);
-                            tile.setObject(wood);
                         } else if (type.equals("rock")) {
-                            Resource rock = new Resource("Stone", 100);
-                            rock.setMainTextureSimple(tile.getTextureRegion().getTexture());
-                            rock.setCoords(new Vector2(x, y));
-                            resources.add(rock);
-                            tile.setObject(rock);
+                            Resource stone = createNewResource("Stone", tile, x, y);
+                            resources.add(stone);
                         }
                     }
                 }
