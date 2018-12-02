@@ -202,10 +202,14 @@ public class StaticEntityBuilder implements Observable {
      */
     public void destroy(MapEntity entity) {
         if (entity != null && world.getBuildings().size() > 1) {
-            lastDestroyed = entity;
             if (entity instanceof Resource) {
+                world.getResources().remove(entity);
                 updateListeners(Events.RESOURCE_DEPLETED);
             } else {
+                world.getBuildings().remove(entity);
+                ResourceContainer refund = ((Building) entity).getCosts().multiply(0.5f);
+                world.getResourceHandler().addToTotal(refund);
+                world.getResourceHandler().removeAllWorkers((Building) entity);
                 // When destroying a building, you get half its costs back
                 updateListeners(Events.BUILDING_DESTROYED);
             }
@@ -329,7 +333,10 @@ public class StaticEntityBuilder implements Observable {
                 if (placeable) {
                     // Places the selected entity on the buildings layer, and add it to the list
                     selectedEntity.placeOnLayer(buildingsLayer, x, y);
-
+                    this.world.getBuildings().add((Building) selectedEntity);
+                    this.world.getResourceHandler().removeFromTotal(((Building) selectedEntity).getCosts());
+                    if (selectedEntity instanceof Container)
+                        this.world.getResourceHandler().addToMaximum(((Container) selectedEntity).getResourcesStored());
                     updateListeners(Events.BUILDING_PLACED);
                 } else {
                     updateListeners(Events.BUILDING_NOT_ENOUGH_RESOURCES);

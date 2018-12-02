@@ -25,7 +25,7 @@ import java.util.Random;
  * Contains the world simulation.
  *
  */
-public class World implements Disposable, EventListener {
+public class World implements Disposable {
 
     private int tickDuration;
     private Stage gameStage;
@@ -44,37 +44,9 @@ public class World implements Disposable, EventListener {
     private static final int FAST_TICK_DURATION = 10;
     private static final int WORLD_EVENT_FREQUENCY = 50; // After how many ticks we have a chance for a random event
 
-    @Override
-    public void update(Events eventType) {
-        Building selected;
-        switch (eventType) {
-            case BUILDING_PLACED:
-                selected = (Building) builder.getSelectedEntity();
-                this.buildings.add(selected);
-                this.resourceHandler.removeFromTotal(selected.getCosts());
-                if (selected instanceof Container)
-                    this.resourceHandler.addToMaximum(((Container)selected).getResourcesStored());
-                break;
-            case BUILDING_DESTROYED:
-                selected = (Building) builder.getLastDestroyed();
-                ResourceContainer refund = selected.getCosts().multiply(0.5f);
-                buildings.remove(selected);
-                resourceHandler.addToTotal(refund);
-                resourceHandler.removeAllWorkers(selected);
-                break;
-            case RESOURCE_DEPLETED:
-                Resource depleted = (Resource)builder.getLastDestroyed();
-                resources.remove(depleted);
-                break;
-        }
-    }
-
     public enum GameSpeed {
         NORMAL, FAST
     }
-
-
-
 
     public World(GameScreen gameScreen) {
         ResourceContainer initialResources = new ResourceContainerBuilder()

@@ -88,7 +88,6 @@ public class GameScreen implements Screen, EventListener {
         this.sidebar = new Sidebar(stage, this);
         this.resourcesBar = new ResourcesBar(stage, world);
         this.builder.addListener(this.resourcesBar);
-        this.builder.addListener(world);
         setMessages();
 
         // Looping background sound
