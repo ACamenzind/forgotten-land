@@ -23,9 +23,9 @@ public class ResourceHandler {
     private int totalWorkers;
 
 
-    public ResourceHandler(World world, int woodCounter, int goldCounter, int foodCounter, int rockCounter, int people) {
+    public ResourceHandler(World world, ResourceContainer initialResources) {
         this.world = world;
-        this.totalResources = new ResourceContainer(woodCounter, goldCounter, foodCounter, rockCounter, people);
+        this.totalResources = initialResources;
         this.maximumResources = new ResourceContainer(300, 300, 300, 300, 10);
         this.totalWorkers = 0;
     }
@@ -307,6 +307,15 @@ public class ResourceHandler {
         if (totalResources.hasZeroResources())
             degradeBuildings();
 
+    }
+
+    /**
+     * @param type
+     * @return returns true when totoalresources of that type is in bounds
+     */
+    public boolean isResourceInBounds(ResourceType type){
+        int value = totalResources.get(type);
+        return 0<= value && value < getMaximumResources().get(type);
     }
 
     /**

@@ -77,12 +77,14 @@ public class World implements Disposable, EventListener {
 
 
     public World(GameScreen gameScreen) {
+        ResourceContainer initialResources = new ResourceContainerBuilder()
+                .wood(300).gold(300).food(300).rock(300).people(5).build();
         this.gameStage = new Stage();
         this.gameScreen = gameScreen;
         this.map = gameScreen.getMap();
         this.buildings = new ArrayList<Building>();
         this.resources = new ArrayList<Resource>();
-        this.resourceHandler = new ResourceHandler(this, 300, 300, 300, 300, 5);
+        this.resourceHandler = new ResourceHandler(this, initialResources);
         this.updateCounter = 0;
         this.tick = 0;
         this.isRunning = true;

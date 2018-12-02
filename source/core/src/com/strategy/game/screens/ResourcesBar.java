@@ -31,14 +31,6 @@ public class ResourcesBar extends Table implements Display, EventListener {
     private Stage stage;
     private ResourceHandler resourceHandler;
     private Table resourcesTable = new Table();
-    static Map<ResourceType, Image> typeToImage = new HashMap<>();
-    static {
-        typeToImage.put(ResourceType.FOOD,  Assets.makeImage(Assets.resourcesFood));
-        typeToImage.put(ResourceType.WOOD,  Assets.makeImage(Assets.resourcesWood));
-        typeToImage.put(ResourceType.ROCK,  Assets.makeImage(Assets.resourcesRock));
-        typeToImage.put(ResourceType.GOLD,  Assets.makeImage(Assets.resourcesGold));
-        typeToImage.put(ResourceType.PEOPLE,  Assets.makeImage(Assets.resourcesPeople));
-    }
 
     Map<ResourceType, Label > resourceLabels;
 
@@ -77,6 +69,14 @@ public class ResourcesBar extends Table implements Display, EventListener {
     }
 
     private void setUpTable(){
+       Map<ResourceType, Image> typeToImage = new HashMap<>();
+
+       typeToImage.put(ResourceType.FOOD,  Assets.makeImage(Assets.resourcesFood));
+       typeToImage.put(ResourceType.WOOD,  Assets.makeImage(Assets.resourcesWood));
+       typeToImage.put(ResourceType.ROCK,  Assets.makeImage(Assets.resourcesRock));
+       typeToImage.put(ResourceType.GOLD,  Assets.makeImage(Assets.resourcesGold));
+       typeToImage.put(ResourceType.PEOPLE,  Assets.makeImage(Assets.resourcesPeople));
+
         //we need to resize the cells after all of them are in the table
         List<Cell> images = new ArrayList<>();
         List<Cell> labels = new ArrayList<>();
@@ -109,18 +109,17 @@ public class ResourcesBar extends Table implements Display, EventListener {
 
     @Override
     public void update() {
-        ResourceContainer maxResources = resourceHandler.getMaximumResources();
-        ResourceContainer totalResources = resourceHandler.getTotalResources();
 
         for(ResourceType type: ResourceType.values()){
             Label label = resourceLabels.get(type);
-            int value = totalResources.get(type);
-            if(0<= value && value < maxResources.get(type))
+            if(resourceHandler.isResourceInBounds(type)){
                 label.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_WHITE));
-            else
+            }else{
                 label.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
-            label.setText(value+"");
+            }
+            label.setText(resourceHandler.getTotalResources().get(type)+"");
         }
+
     }
 
     @Override
