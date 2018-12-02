@@ -83,6 +83,7 @@ public class GameScreen implements Screen, EventListener {
         this.world = new World(this);
         this.builder = new StaticEntityBuilder(this);
         world.setBuilder(builder);
+        world.readResources();
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         this.sidebar = new Sidebar(stage, this);
         this.resourcesBar = new ResourcesBar(stage, world);

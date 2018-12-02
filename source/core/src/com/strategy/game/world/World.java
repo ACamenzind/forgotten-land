@@ -91,7 +91,6 @@ public class World implements Disposable, EventListener {
         this.tickDuration = DEFAULT_TICK_DURATION;
         this.worldEventsHandler = new WorldEventsHandler(this);
         this.eventsCounter = 0;
-        readResources();
     }
 
     public WorldEventsHandler getWorldEventsHandler() {
@@ -169,32 +168,8 @@ public class World implements Disposable, EventListener {
      * to keep track of them.
      * TODO: refactor
      */
-    private void readResources() {
-        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("Buildings");
-        for (int x = 0; x < layer.getWidth(); x++) {
-            for (int y = 0; y < layer.getHeight(); y++) {
-                TiledMapTileLayer.Cell cell = layer.getCell(x,y);
-                if (cell != null && cell.getTile() != null) {
-                    ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
-                    String type = tile.getProperties().get("type", String.class);
-                    if (type != null) {
-                        if (type.equals("wood")) {
-                            Resource wood = new Resource("Tree", 100);
-                            wood.setMainTextureSimple(tile.getTextureRegion().getTexture());
-                            wood.setCoords(new Vector2(x, y));
-                            resources.add(wood);
-                            tile.setObject(wood);
-                        } else if (type.equals("rock")) {
-                            Resource rock = new Resource("Stone", 100);
-                            rock.setMainTextureSimple(tile.getTextureRegion().getTexture());
-                            rock.setCoords(new Vector2(x, y));
-                            resources.add(rock);
-                            tile.setObject(rock);
-                        }
-                    }
-                }
-            }
-        }
+    public void readResources() {
+        this.resources = this.builder.readResources();
     }
 
     /**
@@ -207,7 +182,6 @@ public class World implements Disposable, EventListener {
             updateCounter = 0;
             tick++;
 
-            // TODO: refactor
             if (tick % WORLD_EVENT_FREQUENCY == 0) {
                 // Roll dice
                 int rand = new Random().nextInt(100);
@@ -215,9 +189,6 @@ public class World implements Disposable, EventListener {
                     worldEventsHandler.randomEvent();
                 }
             }
-
-
-            builder.checkDeadBuildings();
             gameScreen.getResourcesBar().update();
         }
         updateCounter++;

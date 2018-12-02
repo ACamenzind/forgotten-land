@@ -45,7 +45,7 @@ public class StaticEntityBuilder implements Observable {
         this.gridLayer.setVisible(false);
         this.gridLayer.setOpacity(0.2f);
         this.soundManager = gameScreen.getGame().getSoundManager();
-        this.listeners = new ArrayList<EventListener>();
+        this.listeners = new ArrayList<>();
         this.addListener(this.gameScreen);
         this.addListener(this.soundManager);
 //        this.addListener(this.gameScreen.getResourcesBar());
@@ -54,9 +54,6 @@ public class StaticEntityBuilder implements Observable {
     public MapEntity getSelectedEntity() {
         return selectedEntity;
     }
-
-
-
 
     /**
      * Toggles the selection
@@ -87,13 +84,39 @@ public class StaticEntityBuilder implements Observable {
     }
 
     /**
-     * Iterates over all buildings placed in the map
-     * and destroys those that have negative health.
-     * TODO: remove?
+     * Searches the map file for tiles that are of type resource, and adds them to the resource list
+     * to keep track of them.
+     * TODO: refactor
      */
-    public void checkDeadBuildings() {
+    public ArrayList<Resource> readResources() {
+        TiledMapTileLayer layer = buildingsLayer;
+        ArrayList<Resource> resources = new ArrayList<>();
+        for (int x = 0; x < layer.getWidth(); x++) {
+            for (int y = 0; y < layer.getHeight(); y++) {
+                TiledMapTileLayer.Cell cell = layer.getCell(x,y);
+                if (cell != null && cell.getTile() != null) {
+                    ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
+                    String type = tile.getProperties().get("type", String.class);
+                    if (type != null) {
+                        if (type.equals("wood")) {
+                            Resource wood = new Resource("Tree", 100);
+                            wood.setMainTextureSimple(tile.getTextureRegion().getTexture());
+                            wood.setCoords(new Vector2(x, y));
+                            resources.add(wood);
+                            tile.setObject(wood);
+                        } else if (type.equals("rock")) {
+                            Resource rock = new Resource("Stone", 100);
+                            rock.setMainTextureSimple(tile.getTextureRegion().getTexture());
+                            rock.setCoords(new Vector2(x, y));
+                            resources.add(rock);
+                            tile.setObject(rock);
+                        }
+                    }
+                }
+            }
+        }
+        return resources;
     }
-
 
     /**
      * Draws the influence area of all placed buildings.
