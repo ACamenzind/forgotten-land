@@ -79,209 +79,124 @@ public final class Assets {
 //        map = new TmxMapLoader().load("core/assets/maps/default.tmx");
 
         // MAIN MENU
-        mainMenuNewGame = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/newgame.png"));
-        mainMenuNewGame.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        mainMenuCredits = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/credits.png"));
-        mainMenuCredits.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        mainMenuSettings = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/settings.png"));
-        mainMenuSettings.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        mainMenuInstructions = new Texture(Gdx.files.internal("core/assets/textures/mainMenuScreen/instructions.png"));
-        mainMenuInstructions.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        mainMenuNewGame = createTexture("core/assets/textures/mainMenuScreen/newgame.png");
+        mainMenuCredits = createTexture("core/assets/textures/mainMenuScreen/credits.png");
+        mainMenuSettings = createTexture("core/assets/textures/mainMenuScreen/settings.png");
+        mainMenuInstructions = createTexture("core/assets/textures/mainMenuScreen/instructions.png");
         // BUILDINGS
-        house1 = new Texture(Gdx.files.internal("core/assets/textures/buildings/house1.png"));
-        house1.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        castle = new Texture(Gdx.files.internal("core/assets/textures/buildings/castle.png"));
-        castle.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        cows = new Texture(Gdx.files.internal("core/assets/textures/buildings/cows.png"));
-        cows.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        warehouse = new Texture(Gdx.files.internal("core/assets/textures/buildings/warehouse.png"));
-        warehouse.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        wheat = new Texture(Gdx.files.internal("core/assets/textures/buildings/wheat.png"));
-        wheat.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        lumberjack = new Texture(Gdx.files.internal("core/assets/textures/buildings/lumberjack.png"));
-        lumberjack.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        mine = new Texture(Gdx.files.internal("core/assets/textures/buildings/mine.png"));
-        mine.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        leftwall = new Texture(Gdx.files.internal("core/assets/textures/buildings/wall/Wall_L.png"));
-        leftwall.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        middlewall = new Texture(Gdx.files.internal("core/assets/textures/buildings/wall/Wall_M.png"));
-        middlewall.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        rightwall = new Texture(Gdx.files.internal("core/assets/textures/buildings/wall/Wall_R.png"));
-        rightwall.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        road = new Texture(Gdx.files.internal("core/assets/textures/terrains/road.png"));
-        road.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        house1 = createTexture("core/assets/textures/buildings/house1.png");
+        castle = createTexture("core/assets/textures/buildings/castle.png");
+        cows = createTexture("core/assets/textures/buildings/cows.png");
+        warehouse = createTexture("core/assets/textures/buildings/warehouse.png");
+        wheat = createTexture("core/assets/textures/buildings/wheat.png");
+        lumberjack = createTexture("core/assets/textures/buildings/lumberjack.png");
+        mine = createTexture("core/assets/textures/buildings/mine.png");
+        leftwall = createTexture("core/assets/textures/buildings/wall/Wall_L.png");
+        middlewall = createTexture("core/assets/textures/buildings/wall/Wall_M.png");
+        rightwall = createTexture("core/assets/textures/buildings/wall/Wall_R.png");
+        road = createTexture("core/assets/textures/terrains/road.png");
 
-        market = new Texture(Gdx.files.internal("core/assets/textures/buildings/market.png"));
-        market.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        market = createTexture("core/assets/textures/buildings/market.png");
 
-        emptyTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/empty.png"));
-        emptyTile.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        influenceTile = new Texture(Gdx.files.internal("core/assets/textures/terrains/influence_tile.png"));
-        influenceTile.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        emptyTile = createTexture("core/assets/textures/terrains/empty.png");
+        influenceTile = createTexture("core/assets/textures/terrains/influence_tile.png");
 
         // SIDEBAR BACKGROUNDS
-        sidebarBg = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_bg.png"));
-        sidebarBg.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBgInfo = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_bg_info.png"));
-        sidebarBgInfo.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBgBuild = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_bg_build.png"));
-        sidebarBgBuild.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBgMenu = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_bg_menu.png"));
-        sidebarBgMenu.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildInfoBg = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_building_info_bg.png"));
-        sidebarBuildInfoBg.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        sidebarBg = createTexture("core/assets/textures/gameScreen/sidebar_bg.png");
+        sidebarBgInfo = createTexture("core/assets/textures/gameScreen/sidebar_bg_info.png");
+        sidebarBgBuild = createTexture("core/assets/textures/gameScreen/sidebar_bg_build.png");
+        sidebarBgMenu = createTexture("core/assets/textures/gameScreen/sidebar_bg_menu.png");
+        sidebarBuildInfoBg = createTexture("core/assets/textures/gameScreen/sidebar_building_info_bg.png");
         // SIDEBAR MENU
-        sidebarMenuInfo = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_info.png"));
-        sidebarMenuInfo.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarMenuBuild = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_build.png"));
-        sidebarMenuBuild.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarMenuMenu = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_menu.png"));
-        sidebarMenuMenu.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarMenuInfoClicked = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_info_clicked.png"));
-        sidebarMenuInfoClicked.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarMenuBuildClicked = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_build_clicked.png"));
-        sidebarMenuBuildClicked.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarMenuMenuClicked = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_menu_clicked.png"));
-        sidebarMenuMenuClicked.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        sidebarMenuInfo = createTexture("core/assets/textures/gameScreen/sidebar_menu_info.png");
+        sidebarMenuBuild = createTexture("core/assets/textures/gameScreen/sidebar_menu_build.png");
+        sidebarMenuMenu = createTexture("core/assets/textures/gameScreen/sidebar_menu_menu.png");
+        sidebarMenuInfoClicked = createTexture("core/assets/textures/gameScreen/sidebar_menu_info_clicked.png");
+        sidebarMenuBuildClicked = createTexture("core/assets/textures/gameScreen/sidebar_menu_build_clicked.png");
+        sidebarMenuMenuClicked = createTexture("core/assets/textures/gameScreen/sidebar_menu_menu_clicked.png");
         // SIDEBAR BUILD
-        sidebarBuildManufacturers = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_build_manufacturers.png"));
-        sidebarBuildManufacturers.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildWarehouses = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_build_warehouses.png"));
-        sidebarBuildWarehouses.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildDecorations = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_build_decorations.png"));
-        sidebarBuildDecorations.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildOther = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_build_other.png"));
-        sidebarBuildOther.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildRotate = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_build_rotate.png"));;
-        sidebarBuildRotate.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildBack = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_build_back.png"));;
-        sidebarBuildBack.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildCancel = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_build_cancel.png"));;
-        sidebarBuildCancel.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        sidebarBuildManufacturers = createTexture("core/assets/textures/gameScreen/sidebar_build_manufacturers.png");
+        sidebarBuildWarehouses = createTexture("core/assets/textures/gameScreen/sidebar_build_warehouses.png");
+        sidebarBuildDecorations = createTexture("core/assets/textures/gameScreen/sidebar_build_decorations.png");
+        sidebarBuildOther = createTexture("core/assets/textures/gameScreen/sidebar_build_other.png");
+        sidebarBuildRotate = createTexture("core/assets/textures/gameScreen/sidebar_build_rotate.png");
+        sidebarBuildBack = createTexture("core/assets/textures/gameScreen/sidebar_build_back.png");
+        sidebarBuildCancel = createTexture("core/assets/textures/gameScreen/sidebar_build_cancel.png");
         // SIDEBAR GAME MENU
-        sidebarMenuNew = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_new.png"));
-        sidebarMenuNew.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarMenuLoad = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_load.png"));
-        sidebarMenuLoad.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarMenuSave = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_save.png"));
-        sidebarMenuSave.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarMenuQuit = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_quit.png"));
-        sidebarMenuQuit.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarMenuCredits = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_credits.png"));
-        sidebarMenuCredits.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarMenuSettings = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_settings.png"));
-        sidebarMenuSettings.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarMenuInstructions = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_menu_instructions.png"));;
-        sidebarMenuInstructions.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        sidebarMenuNew = createTexture("core/assets/textures/gameScreen/sidebar_menu_new.png");
+        sidebarMenuLoad = createTexture("core/assets/textures/gameScreen/sidebar_menu_load.png");
+        sidebarMenuSave = createTexture("core/assets/textures/gameScreen/sidebar_menu_save.png");
+        sidebarMenuQuit = createTexture("core/assets/textures/gameScreen/sidebar_menu_quit.png");
+        sidebarMenuCredits = createTexture("core/assets/textures/gameScreen/sidebar_menu_credits.png");
+        sidebarMenuSettings = createTexture("core/assets/textures/gameScreen/sidebar_menu_settings.png");
+        sidebarMenuInstructions = createTexture("core/assets/textures/gameScreen/sidebar_menu_instructions.png");
         // SIDEBAR BUILDING INFO
-        sidebarBuildInfoBg2 = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_building_info_bg_bk.png"));
-        sidebarBuildInfoBg2.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildInfoInfo = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_info.png"));
-        sidebarBuildInfoInfo.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildInfoInfoLong = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_info_long.png"));
-        sidebarBuildInfoInfoLong.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildInfoCost = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_cost.png"));
-        sidebarBuildInfoCost.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildInfoCostLong= new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_cost_long.png"));
-        sidebarBuildInfoCostLong.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildInfoProfit = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_profit.png"));
-        sidebarBuildInfoProfit.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildInfoCapacity = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_capacity.png"));
-        sidebarBuildInfoCapacity.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildInfoPlus = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_plus.png"));
-        sidebarBuildInfoPlus.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildInfoMinus = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_minus.png"));
-        sidebarBuildInfoMinus.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildInfoDestroy = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_destroy.png"));
-        sidebarBuildInfoDestroy.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildInfoRepair = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_buildinfo_repair.png"));
-        sidebarBuildInfoRepair.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sidebarBuildInfoCancel = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/sidebar_bottom_cancel.png"));
-        sidebarBuildInfoCancel.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        sidebarBuildInfoBg2 = createTexture("core/assets/textures/gameScreen/sidebar_building_info_bg_bk.png");
+        sidebarBuildInfoInfo = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_info.png");
+        sidebarBuildInfoInfoLong = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_info_long.png");
+        sidebarBuildInfoCost = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_cost.png");
+        sidebarBuildInfoCostLong= createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_cost_long.png");
+        sidebarBuildInfoProfit = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_profit.png");
+        sidebarBuildInfoCapacity = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_capacity.png");
+        sidebarBuildInfoPlus = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_plus.png");
+        sidebarBuildInfoMinus = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_minus.png");
+        sidebarBuildInfoDestroy = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_destroy.png");
+        sidebarBuildInfoRepair = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_repair.png");
+        sidebarBuildInfoCancel = createTexture("core/assets/textures/gameScreen/sidebar_bottom_cancel.png");
         // RESOURCES_BAR
-        resourcesBarBg = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcesbar_bg.png"));
-        resourcesBarBg.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        resourcesBarPause = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcebar_pause.png"));
-        resourcesBarPause.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        resourcesBarResume = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcebar_resume.png"));
-        resourcesBarResume.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        resourcesBarSpeedNormal = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcesbar_speed_normal.png"));
-        resourcesBarSpeedNormal.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        resourcesBarSpeedFast = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resourcesbar_speed_fast.png"));
-        resourcesBarSpeedFast.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        resourcesBarBg = createTexture("core/assets/textures/gameScreen/resourcesbar_bg.png");
+        resourcesBarPause = createTexture("core/assets/textures/gameScreen/resourcebar_pause.png");
+        resourcesBarResume = createTexture("core/assets/textures/gameScreen/resourcebar_resume.png");
+        resourcesBarSpeedNormal = createTexture("core/assets/textures/gameScreen/resourcesbar_speed_normal.png");
+        resourcesBarSpeedFast = createTexture("core/assets/textures/gameScreen/resourcesbar_speed_fast.png");
         // RESOURCES
-        resourcesFood = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_food.png"));
-        resourcesFood.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        resourcesWood = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_wood.png"));
-        resourcesWood.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        resourcesRock = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_rock.png"));
-        resourcesRock.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        resourcesGold = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_gold.png"));
-        resourcesGold.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        resourcesPeople = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_people.png"));
-        resourcesPeople.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        resourcesFoodBk = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_food_bk.png"));
-        resourcesFoodBk.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        resourcesWoodBk = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_wood_bk.png"));
-        resourcesWoodBk.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        resourcesRockBk = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_rock_bk.png"));
-        resourcesRockBk.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        resourcesGoldBk = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_gold_bk.png"));
-        resourcesGoldBk.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        resourcesPeopleBk = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/resources_people_bk.png"));
-        resourcesPeopleBk.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        resourcesFood = createTexture("core/assets/textures/gameScreen/resources_food.png");
+        resourcesWood = createTexture("core/assets/textures/gameScreen/resources_wood.png");
+        resourcesRock = createTexture("core/assets/textures/gameScreen/resources_rock.png");
+        resourcesGold = createTexture("core/assets/textures/gameScreen/resources_gold.png");
+        resourcesPeople = createTexture("core/assets/textures/gameScreen/resources_people.png");
+        resourcesFoodBk = createTexture("core/assets/textures/gameScreen/resources_food_bk.png");
+        resourcesWoodBk = createTexture("core/assets/textures/gameScreen/resources_wood_bk.png");
+        resourcesRockBk = createTexture("core/assets/textures/gameScreen/resources_rock_bk.png");
+        resourcesGoldBk = createTexture("core/assets/textures/gameScreen/resources_gold_bk.png");
+        resourcesPeopleBk = createTexture("core/assets/textures/gameScreen/resources_people_bk.png");
         // OVERLAYS
-        pausedOverlay = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/paused_overlay.png"));
-        pausedOverlay.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        bottomBarBg = new Texture(Gdx.files.internal("core/assets/textures/gameScreen/bottombar_bg.png"));
-        bottomBarBg.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        pausedOverlay = createTexture("core/assets/textures/gameScreen/paused_overlay.png");
+        bottomBarBg = createTexture("core/assets/textures/gameScreen/bottombar_bg.png");
         // FULLSCREEN
-        screenCredits = new Texture(Gdx.files.internal("core/assets/textures/screen_credits.png"));
-        screenCredits.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        screenInstructions = new Texture(Gdx.files.internal("core/assets/textures/screen_instructions.png"));
-        screenInstructions.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        screenCredits = createTexture("core/assets/textures/screen_credits.png");
+        screenInstructions = createTexture("core/assets/textures/screen_instructions.png");
         // MESSAGES
-        messageOk = new Texture(Gdx.files.internal("core/assets/textures/message_ok.png"));
-        messageOk.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        messageCancel = new Texture(Gdx.files.internal("core/assets/textures/message_cancel.png"));
-        messageCancel.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        messageOk = createTexture("core/assets/textures/message_ok.png");
+        messageCancel = createTexture("core/assets/textures/message_cancel.png");
         // RESOURCES IMAGES
-        tree = new Texture(Gdx.files.internal("core/assets/resources/pine-half06.png"));
-        tree.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        stone = new Texture(Gdx.files.internal("core/assets/textures/buildings/rocks.png"));
-        stone.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        tree = createTexture("core/assets/resources/pine-half06.png");
+        stone = createTexture("core/assets/textures/buildings/rocks.png");
         // SETTINGS
-        settingsSliderBg = new Texture(Gdx.files.internal("core/assets/textures/settings/slider_bg.png"));
-        settingsSliderBg.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        settingsSliderKnob = new Texture(Gdx.files.internal("core/assets/textures/settings/slider_knob.png"));
-        settingsSliderKnob.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        settingsRes720p = new Texture(Gdx.files.internal("core/assets/textures/settings/res_720p.png"));
-        settingsRes720p.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        settingsRes1080p = new Texture(Gdx.files.internal("core/assets/textures/settings/res_1080p.png"));
-        settingsRes1080p.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        settingsResFull = new Texture(Gdx.files.internal("core/assets/textures/settings/res_full.png"));
-        settingsResFull.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        goBack = new Texture(Gdx.files.internal("core/assets/textures/settings/go_back.png"));
-        goBack.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        settingsSliderBg = createTexture("core/assets/textures/settings/slider_bg.png");
+        settingsSliderKnob = createTexture("core/assets/textures/settings/slider_knob.png");
+        settingsRes720p = createTexture("core/assets/textures/settings/res_720p.png");
+        settingsRes1080p = createTexture("core/assets/textures/settings/res_1080p.png");
+        settingsResFull = createTexture("core/assets/textures/settings/res_full.png");
+        goBack = createTexture("core/assets/textures/settings/go_back.png");
         // INSTRUCTIONS
-        screenInstructions1 = new Texture(Gdx.files.internal("core/assets/textures/instructions/instructions_01.png"));
-        screenInstructions1.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        screenInstructions2 = new Texture(Gdx.files.internal("core/assets/textures/instructions/instructions_02.png"));
-        screenInstructions2.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        screenInstructions3 = new Texture(Gdx.files.internal("core/assets/textures/instructions/instructions_03.png"));
-        screenInstructions3.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        screenInstructions4 = new Texture(Gdx.files.internal("core/assets/textures/instructions/instructions_04.png"));
-        screenInstructions4.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        screenInstructions5 = new Texture(Gdx.files.internal("core/assets/textures/instructions/instructions_05.png"));
-        screenInstructions5.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        screenInstructionsBack = new Texture(Gdx.files.internal("core/assets/textures/instructions/instructions_back.png"));
-        screenInstructionsBack.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        screenInstructionsNext = new Texture(Gdx.files.internal("core/assets/textures/instructions/instructions_next.png"));
-        screenInstructionsNext.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        screenInstructions1 = createTexture("core/assets/textures/instructions/instructions_01.png");
+        screenInstructions2 = createTexture("core/assets/textures/instructions/instructions_02.png");
+        screenInstructions3 = createTexture("core/assets/textures/instructions/instructions_03.png");
+        screenInstructions4 = createTexture("core/assets/textures/instructions/instructions_04.png");
+        screenInstructions5 = createTexture("core/assets/textures/instructions/instructions_05.png");
+        screenInstructionsBack = createTexture("core/assets/textures/instructions/instructions_back.png");
+        screenInstructionsNext = createTexture("core/assets/textures/instructions/instructions_next.png");
         // http://opengameart.org/content/outdoor-ambiance CC3.0
         bgSound = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/Outdoor_ambiance.mp3"));
         hit = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/hit.wav"));
         demolition = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/demolition.wav"));
+    }
+
+    private static Texture createTexture(String path) {
+        Texture texture = new Texture(Gdx.files.internal(path));
+        texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        return texture;
     }
 
     public static void loadSounds() {
@@ -301,7 +216,7 @@ public final class Assets {
      */
     public static void setBackground(final Table table, String backgroundPath) {
         if (table != null) {
-            SpriteDrawable buildingBg = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal(backgroundPath))));
+            SpriteDrawable buildingBg = new SpriteDrawable(new Sprite(createTexture(backgroundPath)));
             table.setBackground(buildingBg);
         }
     }
