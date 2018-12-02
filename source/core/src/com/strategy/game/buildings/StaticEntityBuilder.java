@@ -275,43 +275,13 @@ public class StaticEntityBuilder implements Observable {
             // - tile has object
 
             // Check if cells are occupied
-            for (int i = x; i < x + selectedEntity.getCollisionSize().x; i++) {
-                for (int j = y; j < y + selectedEntity.getCollisionSize().y; j++) {
-                    TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i,j);
-                    boolean condition = cell != null && cell.getTile() != null;
-                    if (condition) {
-                        TiledMapTile tile = cell.getTile();
-                        boolean hasObject = tile instanceof ExtendedStaticTiledMapTile
-                                && ((ExtendedStaticTiledMapTile) tile).getObject() != null;
-                        if (hasObject) {
-                            isSpaceFree = false;
-                            break;
-                        }
-                    }
-                }
-            }
+            isSpaceFree = isSpaceFree(x, y);
 
-            int startX = x;
-            int startY = y;
             int endX = x + (int)selectedEntity.getCollisionSize().x;
             int endY = y + (int)selectedEntity.getCollisionSize().y;
 
             // Check whether it's in the area of influence of another building
-            for (int i = startX; i < endX; i++) {
-                for (int j = startY; j < endY; j++) {
-                    TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
-                    boolean isExtended = cell != null
-                            && cell.getTile() instanceof ExtendedStaticTiledMapTile;
-                    if (isExtended) {
-                        boolean hasBuildingsNearby =
-                                ((ExtendedStaticTiledMapTile) cell.getTile()).getBuildingsNearby() > 0;
-                        if (hasBuildingsNearby) {
-                            isInInfluenceRadius = true;
-                            break;
-                        }
-                    }
-                }
-            }
+            isInInfluenceRadius = isInInfluenceRadius(x, y, endX, endY);
 
             // Used for placing buildings at the start
             //TODO: do it in a different way possibly?
@@ -355,6 +325,45 @@ public class StaticEntityBuilder implements Observable {
                 }
             }
         }
+    }
+
+    private boolean isInInfluenceRadius(int x, int y, int endX, int endY) {
+        boolean result = false;
+        for (int i = x; i < endX; i++) {
+            for (int j = y; j < endY; j++) {
+                TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
+                boolean isExtended = cell != null && cell.getTile() instanceof ExtendedStaticTiledMapTile;
+                if (isExtended) {
+                    boolean hasBuildingsNearby =
+                            ((ExtendedStaticTiledMapTile) cell.getTile()).getBuildingsNearby() > 0;
+                    if (hasBuildingsNearby) {
+                        result = true;
+                        break;
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    private boolean isSpaceFree(int x, int y) {
+        boolean result = true;
+        for (int i = x; i < x + selectedEntity.getCollisionSize().x; i++) {
+            for (int j = y; j < y + selectedEntity.getCollisionSize().y; j++) {
+                TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i,j);
+                boolean condition = cell != null && cell.getTile() != null;
+                if (condition) {
+                    TiledMapTile tile = cell.getTile();
+                    boolean hasObject = tile instanceof ExtendedStaticTiledMapTile
+                            && ((ExtendedStaticTiledMapTile) tile).getObject() != null;
+                    if (hasObject) {
+                        result = false;
+                        break;
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     /**
