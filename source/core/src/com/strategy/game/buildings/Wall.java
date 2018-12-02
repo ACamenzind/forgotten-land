@@ -21,14 +21,14 @@ public class Wall extends Structure {
     private static final int MAX_WORKERS = 0;
     private static final int INFLUENCE_RADIUS = 1;
 
-    private static final Texture TEXTURE = Assets.leftwall;
+    private static final Texture TEXTURE = Assets.getTexture("leftwall");
     private static final Vector2 COLLISION = new Vector2(1,1);
 
     public Wall() {
         super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION, BuildingType.DECORATION);
-        this.textures.add(Assets.leftwall);
-        this.textures.add(Assets.rightwall);
-        this.textures.add(Assets.middlewall);
+        this.textures.add(Assets.getTexture("leftwall"));
+        this.textures.add(Assets.getTexture("rightwall"));
+        this.textures.add(Assets.getTexture("middlewall"));
 //        sliceTexture(mainTexture);
     }
 }

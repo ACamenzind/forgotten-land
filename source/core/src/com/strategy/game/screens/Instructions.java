@@ -19,11 +19,11 @@ public class Instructions extends FullScreen {
 
     static private List<Texture> pages = new ArrayList<>();
     static{
-        pages.add(Assets.screenInstructions1);
-        pages.add(Assets.screenInstructions2);
-        pages.add(Assets.screenInstructions3);
-        pages.add(Assets.screenInstructions4);
-        pages.add(Assets.screenInstructions5);
+        pages.add(Assets.getTexture("screenInstructions1"));
+        pages.add(Assets.getTexture("screenInstructions2"));
+        pages.add(Assets.getTexture("screenInstructions3"));
+        pages.add(Assets.getTexture("screenInstructions4"));
+        pages.add(Assets.getTexture("screenInstructions5"));
     }
 
     private static final float BUTTON_DIAMETER = 0.025f;
@@ -34,12 +34,12 @@ public class Instructions extends FullScreen {
     private int currentPage = 0;
 
     public Instructions(final Stage screen,Runnable onClose) {
-        super(screen, Assets.screenInstructions1, onClose);
+        super(screen, Assets.getTexture("screenInstructions1"), onClose);
         init();
     }
 
     public Instructions(final Stage stage) {
-        super(stage, Assets.screenInstructions1,()->{});
+        super(stage, Assets.getTexture("screenInstructions1"),()->{});
         init();
 
     }
@@ -71,8 +71,8 @@ public class Instructions extends FullScreen {
     }
 
     private void init(){
-        back = new GameButton(Assets.screenInstructionsBack);
-        next = new GameButton(Assets.screenInstructionsNext);
+        back = new GameButton(Assets.getTexture("screenInstructionsBack"));
+        next = new GameButton(Assets.getTexture("screenInstructionsNext"));
 
         back.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {

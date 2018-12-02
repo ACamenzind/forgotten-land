@@ -19,7 +19,7 @@ public class ConsoleMessage extends Table {
     public ConsoleMessage(Stage stage) {
 
         setSize(stage.getWidth() * 0.85f, stage.getHeight() * 0.05f);
-        Assets.setBackground(this, Assets.bottomBarBg);
+        Assets.setBackground(this, Assets.getTexture("bottomBarBg"));
 
         message = Assets.makeLabel("", Utils.FONT_MEDIUM_RED);
         addActor(message);

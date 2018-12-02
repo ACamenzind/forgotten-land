@@ -173,7 +173,7 @@ public class TileMapManager implements Observable {
                     TiledMapTile buildingTile = buildingsCell.getTile();
                     if (buildingTile instanceof ExtendedStaticTiledMapTile) {
                         if (((ExtendedStaticTiledMapTile) buildingTile).getBuildingsNearby() > 0) {
-                            ExtendedStaticTiledMapTile influenceTile = new ExtendedStaticTiledMapTile(new TextureRegion(Assets.influenceTile));
+                            ExtendedStaticTiledMapTile influenceTile = new ExtendedStaticTiledMapTile(new TextureRegion(Assets.getTexture("influenceTile")));
                             influenceCell.setTile(influenceTile);
                             influenceLayer.setCell(i, j, influenceCell);
                         } else {
@@ -281,7 +281,7 @@ public class TileMapManager implements Observable {
             for (int j = (int) coords.y; j < (int) coords.y + entity.collisionSize.y; j++) {
                 TiledMapTileLayer.Cell buildingsCell = buildingsLayer.getCell(i, j);
                 ExtendedStaticTiledMapTile buildingTile = (ExtendedStaticTiledMapTile) buildingsCell.getTile();
-                buildingTile.setTextureRegion(new TextureRegion(Assets.emptyTile));
+                buildingTile.setTextureRegion(new TextureRegion(Assets.getTexture("emptyTile")));
                 buildingTile.setObject(null);
                 buildingTile.setObstacle(false);
                 buildingsCell.setTile(buildingTile);
@@ -455,11 +455,11 @@ public class TileMapManager implements Observable {
                     if (layer.getName().equals("Local influence") && cell.getTile() != null) {
                         texture = cell.getTile().getTextureRegion();
                     } else if (layer.getName().equals("Local influence") && cell.getTile() == null) {
-                        texture = new TextureRegion(Assets.influenceTile);
+                        texture = new TextureRegion(Assets.getTexture("influenceTile"));
                     } else if (cell.getTile() != null) {
                         texture = cell.getTile().getTextureRegion();
                     } else {
-                        texture = new TextureRegion(Assets.emptyTile);
+                        texture = new TextureRegion(Assets.getTexture("emptyTile"));
                     }
 
                     // Creates a new tile if needed

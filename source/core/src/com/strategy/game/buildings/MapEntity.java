@@ -208,12 +208,12 @@ public abstract class MapEntity implements Disposable{
                 if (layer.getName().equals("Selection") && cell.getTile() != null) {
                     texture = cell.getTile().getTextureRegion();
                 } else if (layer.getName().equals("Selection") && cell.getTile() == null) {
-                    texture = new TextureRegion(Assets.influenceTile);
+                    texture = new TextureRegion(Assets.getTexture("influenceTile"));
                 }
                 else if (cell.getTile() != null) {
                     texture = cell.getTile().getTextureRegion();
                 } else {
-                    texture = new TextureRegion(Assets.emptyTile);
+                    texture = new TextureRegion(Assets.getTexture("emptyTile"));
                 }
 
 

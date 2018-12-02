@@ -167,7 +167,7 @@ public class GameButton extends Button {
         Label tooltipLabel = Assets.makeLabel(text, Utils.FONT_SMALL_WHITE);
         tooltip.add(tooltipLabel);
         tooltip.setSize(tooltipLabel.getWidth(), tooltipLabel.getHeight());
-        Assets.setBackground(tooltip, Assets.resourcesBarBg);
+        Assets.setBackground(tooltip, Assets.getTexture("resourcesBarBg"));
 
         addActor(tooltip);
 

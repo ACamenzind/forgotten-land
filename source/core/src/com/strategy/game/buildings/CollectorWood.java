@@ -20,7 +20,7 @@ public class CollectorWood extends Collector {
     private static final int MAX_WORKERS = 5;
     private static final int INFLUENCE_RADIUS = 5;
 
-    private static final Texture TEXTURE = Assets.lumberjack;
+    private static final Texture TEXTURE = Assets.getTexture("lumberjack");
     private static final Vector2 COLLISION = new Vector2(2,2);
 
     public CollectorWood() {

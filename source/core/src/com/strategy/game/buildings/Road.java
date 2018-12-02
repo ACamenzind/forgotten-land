@@ -20,7 +20,7 @@ public class Road extends Structure {
     private static final int MAX_WORKERS = 0;
     private static final int INFLUENCE_RADIUS = 1;
 
-    private static final Texture TEXTURE = Assets.road;
+    private static final Texture TEXTURE = Assets.getTexture("road");
     private static final Vector2 COLLISION = new Vector2(1,1);
 
     public Road() {

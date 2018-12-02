@@ -15,6 +15,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
+import java.util.HashMap;
+
 /**
  * Loads the assets.
  * TODO: maybe add an AssetManager for better performance
@@ -23,51 +25,60 @@ public final class Assets {
     private Assets(){}
 
     public static TiledMap map;
-    // MAIN MENU
-    public static Texture mainMenuNewGame, mainMenuCredits, mainMenuSettings, mainMenuInstructions;
-    // BUILDINGS
-    public static Texture house1, castle, leftwall, middlewall, rightwall, road, emptyTile, influenceTile, cows, warehouse, wheat, lumberjack, mine, market;
-    // SIDEBAR BACKGROUNDS
-    public static Texture sidebarBg, sidebarBgInfo, sidebarBgBuild, sidebarBgMenu, sidebarBuildInfoBg;
-    // SIDEBAR MENU
-    public static Texture sidebarMenuInfo, sidebarMenuBuild, sidebarMenuMenu, sidebarMenuInfoClicked,
-            sidebarMenuBuildClicked, sidebarMenuMenuClicked;
-    // SIDEBAR BUILD
-    public static Texture sidebarBuildManufacturers, sidebarBuildWarehouses, sidebarBuildDecorations, sidebarBuildOther,
-            sidebarBuildRotate, sidebarBuildBack, sidebarBuildCancel;
-    // SIDEBAR GAME MENU
-    public static Texture sidebarMenuNew, sidebarMenuLoad, sidebarMenuSave, sidebarMenuQuit, sidebarMenuCredits,
-            sidebarMenuSettings, sidebarMenuInstructions;
-    // SIDEBAR BUILDING INFO
-    public static Texture sidebarBuildInfoInfo, sidebarBuildInfoBg2, sidebarBuildInfoInfoLong, sidebarBuildInfoCost,
-            sidebarBuildInfoCostLong, sidebarBuildInfoProfit, sidebarBuildInfoCapacity, sidebarBuildInfoPlus,
-            sidebarBuildInfoMinus, sidebarBuildInfoDestroy, sidebarBuildInfoRepair, sidebarBuildInfoCancel;
-    // RESOURCES_BAR
-    public static Texture resourcesBarBg, resourcesBarPause, resourcesBarResume, resourcesBarSpeedNormal,
-            resourcesBarSpeedFast;
-    // OVERLAYS
-    public static Texture pausedOverlay, bottomBarBg;
-    // RESOURCES
-    public static Texture resourcesFood, resourcesWood, resourcesRock, resourcesGold, resourcesPeople, resourcesFoodBk,
-            resourcesWoodBk, resourcesRockBk, resourcesGoldBk, resourcesPeopleBk;
-    // FULLSCREEN
-    public static Texture screenCredits, screenInstructions;
-    // MESSAGES
-    public static Texture messageOk, messageCancel;
-    // RESOURCES IMAGES
-    public static Texture tree, stone;
-    // SETTINGS
-    public static Texture settingsSliderBg, settingsSliderKnob, settingsRes720p,
-            settingsRes1080p, settingsResFull, goBack;
-    // INSTRUCTIONS
-    public static Texture screenInstructions1, screenInstructions2, screenInstructions3, screenInstructions4,
-            screenInstructions5, screenInstructionsBack, screenInstructionsNext;
+//    // MAIN MENU
+//    public static Texture mainMenuNewGame, mainMenuCredits, mainMenuSettings, mainMenuInstructions;
+//    // BUILDINGS
+//    public static Texture house1, castle, leftwall, middlewall, rightwall, road, emptyTile, influenceTile, cows, warehouse, wheat, lumberjack, mine, market;
+//    // SIDEBAR BACKGROUNDS
+//    public static Texture sidebarBg, sidebarBgInfo, sidebarBgBuild, sidebarBgMenu, sidebarBuildInfoBg;
+//    // SIDEBAR MENU
+//    public static Texture sidebarMenuInfo, sidebarMenuBuild, sidebarMenuMenu, sidebarMenuInfoClicked,
+//            sidebarMenuBuildClicked, sidebarMenuMenuClicked;
+//    // SIDEBAR BUILD
+//    public static Texture sidebarBuildManufacturers, sidebarBuildWarehouses, sidebarBuildDecorations, sidebarBuildOther,
+//            sidebarBuildRotate, sidebarBuildBack, sidebarBuildCancel;
+//    // SIDEBAR GAME MENU
+//    public static Texture sidebarMenuNew, sidebarMenuLoad, sidebarMenuSave, sidebarMenuQuit, sidebarMenuCredits,
+//            sidebarMenuSettings, sidebarMenuInstructions;
+//    // SIDEBAR BUILDING INFO
+//    public static Texture sidebarBuildInfoInfo, sidebarBuildInfoBg2, sidebarBuildInfoInfoLong, sidebarBuildInfoCost,
+//            sidebarBuildInfoCostLong, sidebarBuildInfoProfit, sidebarBuildInfoCapacity, sidebarBuildInfoPlus,
+//            sidebarBuildInfoMinus, sidebarBuildInfoDestroy, sidebarBuildInfoRepair, sidebarBuildInfoCancel;
+//    // RESOURCES_BAR
+//    public static Texture resourcesBarBg, resourcesBarPause, resourcesBarResume, resourcesBarSpeedNormal,
+//            resourcesBarSpeedFast;
+//    // OVERLAYS
+//    public static Texture pausedOverlay, bottomBarBg;
+//    // RESOURCES
+//    public static Texture resourcesFood, resourcesWood, resourcesRock, resourcesGold, resourcesPeople, resourcesFoodBk,
+//            resourcesWoodBk, resourcesRockBk, resourcesGoldBk, resourcesPeopleBk;
+//    // FULLSCREEN
+//    public static Texture screenCredits, screenInstructions;
+//    // MESSAGES
+//    public static Texture messageOk, messageCancel;
+//    // RESOURCES IMAGES
+//    public static Texture tree, stone;
+//    // SETTINGS
+//    public static Texture settingsSliderBg, settingsSliderKnob, settingsRes720p,
+//            settingsRes1080p, settingsResFull, goBack;
+//    // INSTRUCTIONS
+//    public static Texture screenInstructions1, screenInstructions2, screenInstructions3, screenInstructions4,
+//            screenInstructions5, screenInstructionsBack, screenInstructionsNext;
     // SOUNDS
     public static Sound bgSound, hit, demolition;
     private static final String DEFAULT_FONT_PATH = "core/assets/fonts/san_francisco_regular.ttf";
     // new Font
     private static final String ULTRALIGHT_FONT_PATH = "core/assets/fonts/san_francisco_ultralight.ttf";
 
+    private static HashMap<String, Texture> textures;
+
+    public static Texture getTexture(String name) {
+        return textures.get(name);
+    }
+
+    private static void addTexture(String name, String path) {
+        textures.put(name, createTexture(path));
+    }
 
     public static void loadMap() {
         map = new TmxMapLoader().load("core/assets/maps/default.tmx");
@@ -79,114 +90,114 @@ public final class Assets {
 //        map = new TmxMapLoader().load("core/assets/maps/default.tmx");
 
         // MAIN MENU
-        mainMenuNewGame = createTexture("core/assets/textures/mainMenuScreen/newgame.png");
-        mainMenuCredits = createTexture("core/assets/textures/mainMenuScreen/credits.png");
-        mainMenuSettings = createTexture("core/assets/textures/mainMenuScreen/settings.png");
-        mainMenuInstructions = createTexture("core/assets/textures/mainMenuScreen/instructions.png");
+        addTexture("mainMenuNewGame", "core/assets/textures/mainMenuScreen/newgame.png");
+        addTexture("mainMenuCredits", "core/assets/textures/mainMenuScreen/credits.png");
+        addTexture("mainMenuSettings", "core/assets/textures/mainMenuScreen/settings.png");
+        addTexture("mainMenuInstructions", "core/assets/textures/mainMenuScreen/instructions.png");
         // BUILDINGS
-        house1 = createTexture("core/assets/textures/buildings/house1.png");
-        castle = createTexture("core/assets/textures/buildings/castle.png");
-        cows = createTexture("core/assets/textures/buildings/cows.png");
-        warehouse = createTexture("core/assets/textures/buildings/warehouse.png");
-        wheat = createTexture("core/assets/textures/buildings/wheat.png");
-        lumberjack = createTexture("core/assets/textures/buildings/lumberjack.png");
-        mine = createTexture("core/assets/textures/buildings/mine.png");
-        leftwall = createTexture("core/assets/textures/buildings/wall/Wall_L.png");
-        middlewall = createTexture("core/assets/textures/buildings/wall/Wall_M.png");
-        rightwall = createTexture("core/assets/textures/buildings/wall/Wall_R.png");
-        road = createTexture("core/assets/textures/terrains/road.png");
+        addTexture("house1", "core/assets/textures/buildings/house1.png");
+        addTexture("castle", "core/assets/textures/buildings/castle.png");
+        addTexture("cows", "core/assets/textures/buildings/cows.png");
+        addTexture("warehouse", "core/assets/textures/buildings/warehouse.png");
+        addTexture("wheat", "core/assets/textures/buildings/wheat.png");
+        addTexture("lumberjack", "core/assets/textures/buildings/lumberjack.png");
+        addTexture("mine", "core/assets/textures/buildings/mine.png");
+        addTexture("leftwall", "core/assets/textures/buildings/wall/Wall_L.png");
+        addTexture("middlewall", "core/assets/textures/buildings/wall/Wall_M.png");
+        addTexture("rightwall", "core/assets/textures/buildings/wall/Wall_R.png");
+        addTexture("road", "core/assets/textures/terrains/road.png");
 
-        market = createTexture("core/assets/textures/buildings/market.png");
+        addTexture("market", "core/assets/textures/buildings/market.png");
 
-        emptyTile = createTexture("core/assets/textures/terrains/empty.png");
-        influenceTile = createTexture("core/assets/textures/terrains/influence_tile.png");
+        addTexture("emptyTile", "core/assets/textures/terrains/empty.png");
+        addTexture("influenceTile", "core/assets/textures/terrains/influence_tile.png");
 
         // SIDEBAR BACKGROUNDS
-        sidebarBg = createTexture("core/assets/textures/gameScreen/sidebar_bg.png");
-        sidebarBgInfo = createTexture("core/assets/textures/gameScreen/sidebar_bg_info.png");
-        sidebarBgBuild = createTexture("core/assets/textures/gameScreen/sidebar_bg_build.png");
-        sidebarBgMenu = createTexture("core/assets/textures/gameScreen/sidebar_bg_menu.png");
-        sidebarBuildInfoBg = createTexture("core/assets/textures/gameScreen/sidebar_building_info_bg.png");
+        addTexture("sidebarBg", "core/assets/textures/gameScreen/sidebar_bg.png");
+        addTexture("sidebarBgInfo", "core/assets/textures/gameScreen/sidebar_bg_info.png");
+        addTexture("sidebarBgBuild", "core/assets/textures/gameScreen/sidebar_bg_build.png");
+        addTexture("sidebarBgMenu", "core/assets/textures/gameScreen/sidebar_bg_menu.png");
+        addTexture("sidebarBuildInfoBg", "core/assets/textures/gameScreen/sidebar_building_info_bg.png");
         // SIDEBAR MENU
-        sidebarMenuInfo = createTexture("core/assets/textures/gameScreen/sidebar_menu_info.png");
-        sidebarMenuBuild = createTexture("core/assets/textures/gameScreen/sidebar_menu_build.png");
-        sidebarMenuMenu = createTexture("core/assets/textures/gameScreen/sidebar_menu_menu.png");
-        sidebarMenuInfoClicked = createTexture("core/assets/textures/gameScreen/sidebar_menu_info_clicked.png");
-        sidebarMenuBuildClicked = createTexture("core/assets/textures/gameScreen/sidebar_menu_build_clicked.png");
-        sidebarMenuMenuClicked = createTexture("core/assets/textures/gameScreen/sidebar_menu_menu_clicked.png");
+        addTexture("sidebarMenuInfo", "core/assets/textures/gameScreen/sidebar_menu_info.png");
+        addTexture("sidebarMenuBuild", "core/assets/textures/gameScreen/sidebar_menu_build.png");
+        addTexture("sidebarMenuMenu", "core/assets/textures/gameScreen/sidebar_menu_menu.png");
+        addTexture("sidebarMenuInfoClicked", "core/assets/textures/gameScreen/sidebar_menu_info_clicked.png");
+        addTexture("sidebarMenuBuildClicked", "core/assets/textures/gameScreen/sidebar_menu_build_clicked.png");
+        addTexture("sidebarMenuMenuClicked", "core/assets/textures/gameScreen/sidebar_menu_menu_clicked.png");
         // SIDEBAR BUILD
-        sidebarBuildManufacturers = createTexture("core/assets/textures/gameScreen/sidebar_build_manufacturers.png");
-        sidebarBuildWarehouses = createTexture("core/assets/textures/gameScreen/sidebar_build_warehouses.png");
-        sidebarBuildDecorations = createTexture("core/assets/textures/gameScreen/sidebar_build_decorations.png");
-        sidebarBuildOther = createTexture("core/assets/textures/gameScreen/sidebar_build_other.png");
-        sidebarBuildRotate = createTexture("core/assets/textures/gameScreen/sidebar_build_rotate.png");
-        sidebarBuildBack = createTexture("core/assets/textures/gameScreen/sidebar_build_back.png");
-        sidebarBuildCancel = createTexture("core/assets/textures/gameScreen/sidebar_build_cancel.png");
+        addTexture("sidebarBuildManufacturers", "core/assets/textures/gameScreen/sidebar_build_manufacturers.png");
+        addTexture("sidebarBuildWarehouses", "core/assets/textures/gameScreen/sidebar_build_warehouses.png");
+        addTexture("sidebarBuildDecorations", "core/assets/textures/gameScreen/sidebar_build_decorations.png");
+        addTexture("sidebarBuildOther", "core/assets/textures/gameScreen/sidebar_build_other.png");
+        addTexture("sidebarBuildRotate", "core/assets/textures/gameScreen/sidebar_build_rotate.png");
+        addTexture("sidebarBuildBack", "core/assets/textures/gameScreen/sidebar_build_back.png");
+        addTexture("sidebarBuildCancel", "core/assets/textures/gameScreen/sidebar_build_cancel.png");
         // SIDEBAR GAME MENU
-        sidebarMenuNew = createTexture("core/assets/textures/gameScreen/sidebar_menu_new.png");
-        sidebarMenuLoad = createTexture("core/assets/textures/gameScreen/sidebar_menu_load.png");
-        sidebarMenuSave = createTexture("core/assets/textures/gameScreen/sidebar_menu_save.png");
-        sidebarMenuQuit = createTexture("core/assets/textures/gameScreen/sidebar_menu_quit.png");
-        sidebarMenuCredits = createTexture("core/assets/textures/gameScreen/sidebar_menu_credits.png");
-        sidebarMenuSettings = createTexture("core/assets/textures/gameScreen/sidebar_menu_settings.png");
-        sidebarMenuInstructions = createTexture("core/assets/textures/gameScreen/sidebar_menu_instructions.png");
+        addTexture("sidebarMenuNew", "core/assets/textures/gameScreen/sidebar_menu_new.png");
+        addTexture("sidebarMenuLoad", "core/assets/textures/gameScreen/sidebar_menu_load.png");
+        addTexture("sidebarMenuSave", "core/assets/textures/gameScreen/sidebar_menu_save.png");
+        addTexture("sidebarMenuQuit", "core/assets/textures/gameScreen/sidebar_menu_quit.png");
+        addTexture("sidebarMenuCredits", "core/assets/textures/gameScreen/sidebar_menu_credits.png");
+        addTexture("sidebarMenuSettings", "core/assets/textures/gameScreen/sidebar_menu_settings.png");
+        addTexture("sidebarMenuInstructions", "core/assets/textures/gameScreen/sidebar_menu_instructions.png");
         // SIDEBAR BUILDING INFO
-        sidebarBuildInfoBg2 = createTexture("core/assets/textures/gameScreen/sidebar_building_info_bg_bk.png");
-        sidebarBuildInfoInfo = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_info.png");
-        sidebarBuildInfoInfoLong = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_info_long.png");
-        sidebarBuildInfoCost = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_cost.png");
-        sidebarBuildInfoCostLong= createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_cost_long.png");
-        sidebarBuildInfoProfit = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_profit.png");
-        sidebarBuildInfoCapacity = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_capacity.png");
-        sidebarBuildInfoPlus = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_plus.png");
-        sidebarBuildInfoMinus = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_minus.png");
-        sidebarBuildInfoDestroy = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_destroy.png");
-        sidebarBuildInfoRepair = createTexture("core/assets/textures/gameScreen/sidebar_buildinfo_repair.png");
-        sidebarBuildInfoCancel = createTexture("core/assets/textures/gameScreen/sidebar_bottom_cancel.png");
+        addTexture("sidebarBuildInfoBg2", "core/assets/textures/gameScreen/sidebar_building_info_bg_bk.png");
+        addTexture("sidebarBuildInfoInfo", "core/assets/textures/gameScreen/sidebar_buildinfo_info.png");
+        addTexture("sidebarBuildInfoInfoLong", "core/assets/textures/gameScreen/sidebar_buildinfo_info_long.png");
+        addTexture("sidebarBuildInfoCost", "core/assets/textures/gameScreen/sidebar_buildinfo_cost.png");
+        addTexture("sidebarBuildInfoCostLong", "core/assets/textures/gameScreen/sidebar_buildinfo_cost_long.png");
+        addTexture("sidebarBuildInfoProfit", "core/assets/textures/gameScreen/sidebar_buildinfo_profit.png");
+        addTexture("sidebarBuildInfoCapacity", "core/assets/textures/gameScreen/sidebar_buildinfo_capacity.png");
+        addTexture("sidebarBuildInfoPlus", "core/assets/textures/gameScreen/sidebar_buildinfo_plus.png");
+        addTexture("sidebarBuildInfoMinus", "core/assets/textures/gameScreen/sidebar_buildinfo_minus.png");
+        addTexture("sidebarBuildInfoDestroy", "core/assets/textures/gameScreen/sidebar_buildinfo_destroy.png");
+        addTexture("sidebarBuildInfoRepair", "core/assets/textures/gameScreen/sidebar_buildinfo_repair.png");
+        addTexture("sidebarBuildInfoCancel", "core/assets/textures/gameScreen/sidebar_bottom_cancel.png");
         // RESOURCES_BAR
-        resourcesBarBg = createTexture("core/assets/textures/gameScreen/resourcesbar_bg.png");
-        resourcesBarPause = createTexture("core/assets/textures/gameScreen/resourcebar_pause.png");
-        resourcesBarResume = createTexture("core/assets/textures/gameScreen/resourcebar_resume.png");
-        resourcesBarSpeedNormal = createTexture("core/assets/textures/gameScreen/resourcesbar_speed_normal.png");
-        resourcesBarSpeedFast = createTexture("core/assets/textures/gameScreen/resourcesbar_speed_fast.png");
+        addTexture("resourcesBarBg", "core/assets/textures/gameScreen/resourcesbar_bg.png");
+        addTexture("resourcesBarPause", "core/assets/textures/gameScreen/resourcebar_pause.png");
+        addTexture("resourcesBarResume", "core/assets/textures/gameScreen/resourcebar_resume.png");
+        addTexture("resourcesBarSpeedNormal", "core/assets/textures/gameScreen/resourcesbar_speed_normal.png");
+        addTexture("resourcesBarSpeedFast", "core/assets/textures/gameScreen/resourcesbar_speed_fast.png");
         // RESOURCES
-        resourcesFood = createTexture("core/assets/textures/gameScreen/resources_food.png");
-        resourcesWood = createTexture("core/assets/textures/gameScreen/resources_wood.png");
-        resourcesRock = createTexture("core/assets/textures/gameScreen/resources_rock.png");
-        resourcesGold = createTexture("core/assets/textures/gameScreen/resources_gold.png");
-        resourcesPeople = createTexture("core/assets/textures/gameScreen/resources_people.png");
-        resourcesFoodBk = createTexture("core/assets/textures/gameScreen/resources_food_bk.png");
-        resourcesWoodBk = createTexture("core/assets/textures/gameScreen/resources_wood_bk.png");
-        resourcesRockBk = createTexture("core/assets/textures/gameScreen/resources_rock_bk.png");
-        resourcesGoldBk = createTexture("core/assets/textures/gameScreen/resources_gold_bk.png");
-        resourcesPeopleBk = createTexture("core/assets/textures/gameScreen/resources_people_bk.png");
+        addTexture("resourcesFood", "core/assets/textures/gameScreen/resources_food.png");
+        addTexture("resourcesWood", "core/assets/textures/gameScreen/resources_wood.png");
+        addTexture("resourcesRock", "core/assets/textures/gameScreen/resources_rock.png");
+        addTexture("resourcesGold", "core/assets/textures/gameScreen/resources_gold.png");
+        addTexture("resourcesPeople", "core/assets/textures/gameScreen/resources_people.png");
+        addTexture("resourcesFoodBk", "core/assets/textures/gameScreen/resources_food_bk.png");
+        addTexture("resourcesWoodBk", "core/assets/textures/gameScreen/resources_wood_bk.png");
+        addTexture("resourcesRockBk", "core/assets/textures/gameScreen/resources_rock_bk.png");
+        addTexture("resourcesGoldBk", "core/assets/textures/gameScreen/resources_gold_bk.png");
+        addTexture("resourcesPeopleBk", "core/assets/textures/gameScreen/resources_people_bk.png");
         // OVERLAYS
-        pausedOverlay = createTexture("core/assets/textures/gameScreen/paused_overlay.png");
-        bottomBarBg = createTexture("core/assets/textures/gameScreen/bottombar_bg.png");
+        addTexture("pausedOverlay", "core/assets/textures/gameScreen/paused_overlay.png");
+        addTexture("bottomBarBg", "core/assets/textures/gameScreen/bottombar_bg.png");
         // FULLSCREEN
-        screenCredits = createTexture("core/assets/textures/screen_credits.png");
-        screenInstructions = createTexture("core/assets/textures/screen_instructions.png");
+        addTexture("screenCredits", "core/assets/textures/screen_credits.png");
+        addTexture("screenInstructions", "core/assets/textures/screen_instructions.png");
         // MESSAGES
-        messageOk = createTexture("core/assets/textures/message_ok.png");
-        messageCancel = createTexture("core/assets/textures/message_cancel.png");
+        addTexture("messageOk", "core/assets/textures/message_ok.png");
+        addTexture("messageCancel", "core/assets/textures/message_cancel.png");
         // RESOURCES IMAGES
-        tree = createTexture("core/assets/resources/pine-half06.png");
-        stone = createTexture("core/assets/textures/buildings/rocks.png");
+        addTexture("tree", "core/assets/resources/pine-half06.png");
+        addTexture("stone", "core/assets/textures/buildings/rocks.png");
         // SETTINGS
-        settingsSliderBg = createTexture("core/assets/textures/settings/slider_bg.png");
-        settingsSliderKnob = createTexture("core/assets/textures/settings/slider_knob.png");
-        settingsRes720p = createTexture("core/assets/textures/settings/res_720p.png");
-        settingsRes1080p = createTexture("core/assets/textures/settings/res_1080p.png");
-        settingsResFull = createTexture("core/assets/textures/settings/res_full.png");
-        goBack = createTexture("core/assets/textures/settings/go_back.png");
+        addTexture("settingsSliderBg", "core/assets/textures/settings/slider_bg.png");
+        addTexture("settingsSliderKnob", "core/assets/textures/settings/slider_knob.png");
+        addTexture("settingsRes720p", "core/assets/textures/settings/res_720p.png");
+        addTexture("settingsRes1080p", "core/assets/textures/settings/res_1080p.png");
+        addTexture("settingsResFull", "core/assets/textures/settings/res_full.png");
+        addTexture("goBack", "core/assets/textures/settings/go_back.png");
         // INSTRUCTIONS
-        screenInstructions1 = createTexture("core/assets/textures/instructions/instructions_01.png");
-        screenInstructions2 = createTexture("core/assets/textures/instructions/instructions_02.png");
-        screenInstructions3 = createTexture("core/assets/textures/instructions/instructions_03.png");
-        screenInstructions4 = createTexture("core/assets/textures/instructions/instructions_04.png");
-        screenInstructions5 = createTexture("core/assets/textures/instructions/instructions_05.png");
-        screenInstructionsBack = createTexture("core/assets/textures/instructions/instructions_back.png");
-        screenInstructionsNext = createTexture("core/assets/textures/instructions/instructions_next.png");
+        addTexture("screenInstructions1", "core/assets/textures/instructions/instructions_01.png");
+        addTexture("screenInstructions2", "core/assets/textures/instructions/instructions_02.png");
+        addTexture("screenInstructions3", "core/assets/textures/instructions/instructions_03.png");
+        addTexture("screenInstructions4", "core/assets/textures/instructions/instructions_04.png");
+        addTexture("screenInstructions5", "core/assets/textures/instructions/instructions_05.png");
+        addTexture("screenInstructionsBack", "core/assets/textures/instructions/instructions_back.png");
+        addTexture("screenInstructionsNext", "core/assets/textures/instructions/instructions_next.png");
         // http://opengameart.org/content/outdoor-ambiance CC3.0
         bgSound = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/Outdoor_ambiance.mp3"));
         hit = Gdx.audio.newSound(Gdx.files.internal("core/assets/sounds/hit.wav"));

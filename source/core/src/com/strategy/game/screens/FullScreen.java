@@ -28,7 +28,7 @@ public class FullScreen extends Table {
             actor.setVisible(false);
         }
 
-        GameButton back = new GameButton(Assets.goBack);
+        GameButton back = new GameButton(Assets.getTexture("goBack"));
         addActor(back);
         Assets.setSizeRelative(back, 0.02f, 0.02f * getWidth() / getHeight());
 
