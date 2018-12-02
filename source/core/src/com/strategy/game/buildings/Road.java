@@ -9,7 +9,7 @@ import com.strategy.game.world.ResourceContainerBuilder;
 /**
  * The road tile, allows to quickly expand the influence area and build buildings further away.
  */
-public class Road extends Building{
+public class Road extends Structure {
     //TODO: maybe put buildings properties into a single object.
     private static final String NAME = "Road";
     private static final ResourceContainer COST = new ResourceContainerBuilder().rock(1).build();
@@ -24,7 +24,7 @@ public class Road extends Building{
     private static final Vector2 COLLISION = new Vector2(1,1);
 
     public Road() {
-        super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION, Building.BuildingType.DECORATION);
+        super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION, Structure.BuildingType.DECORATION);
 //        sliceTexture(mainTexture);
     }
 }

@@ -11,7 +11,7 @@ import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
 import com.strategy.game.ResourceContainer;
 import com.strategy.game.Utils;
-import com.strategy.game.buildings.Building;
+import com.strategy.game.buildings.Structure;
 import com.strategy.game.buildings.Container;
 import com.strategy.game.buildings.MapEntity;
 import com.strategy.game.screens.Display;
@@ -27,7 +27,7 @@ public class SidebarBuildingInfo extends Table implements Display {
 
     // BUILDING
     private MapEntity entity;
-    private Building building;
+    private Structure building;
     private Resource resource;
     private boolean preview = false;
 
@@ -440,12 +440,12 @@ public class SidebarBuildingInfo extends Table implements Display {
             else
                 cancel.setVisible(false);
 
-            boolean manufacturer = building.getType() == Building.BuildingType.MANUFACTURER;
+            boolean manufacturer = building.getType() == Structure.BuildingType.MANUFACTURER;
             workers.setVisible(manufacturer);
             workersButtonAdd.setVisible(manufacturer && !preview);
             workersButtonRemove.setVisible(manufacturer && !preview);
 
-            boolean warehouse = building.getType() == Building.BuildingType.WAREHOUSE;
+            boolean warehouse = building.getType() == Structure.BuildingType.WAREHOUSE;
 
             menu3.setVisible(manufacturer || warehouse);
             menu2.setVisible(!(manufacturer || warehouse));
@@ -478,7 +478,7 @@ public class SidebarBuildingInfo extends Table implements Display {
         }
     }
 
-    private void showInfluenceArea(Building building) {
+    private void showInfluenceArea(Structure building) {
         if (hasParent() &&
                 ((Sidebar) getParent()).getScreen() != null &&
                 ((Sidebar) getParent()).getScreen().getBuilder() != null) {
@@ -486,7 +486,7 @@ public class SidebarBuildingInfo extends Table implements Display {
         }
     }
 
-    private void setBuilding(Building building, boolean preview) {
+    private void setBuilding(Structure building, boolean preview) {
         if (building != null) {
             this.building = building;
             this.preview = preview;
@@ -538,9 +538,9 @@ public class SidebarBuildingInfo extends Table implements Display {
     public void setEntity(MapEntity entity, boolean preview) {
         if (entity != null) {
             this.entity = entity;
-            if (entity instanceof Building) {
+            if (entity instanceof Structure) {
                 this.resource = null;
-                setBuilding((Building) entity, preview);
+                setBuilding((Structure) entity, preview);
             }
             else if (entity instanceof Resource) {
                 this.building = null;

@@ -1,21 +1,12 @@
 package com.strategy.game.world;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Disposable;
-import com.strategy.game.EventListener;
-import com.strategy.game.Events;
-import com.strategy.game.ExtendedStaticTiledMapTile;
 import com.strategy.game.ResourceContainer;
-import com.strategy.game.buildings.Building;
-import com.strategy.game.buildings.Container;
+import com.strategy.game.buildings.Structure;
 import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.screens.GameScreen;
-import com.strategy.game.screens.MessageLog;
 //import com.sun.javafx.scene.control.skin.VirtualFlow;
 
 import java.util.ArrayList;
@@ -30,7 +21,7 @@ public class World implements Disposable {
     private int tickDuration;
     private Stage gameStage;
     private GameScreen gameScreen;
-    private ArrayList<Building> buildings; // Resources and Buildings
+    private ArrayList<Structure> buildings; // Resources and Buildings
     private ArrayList<Resource> resources;
     private TiledMap map;
     private StaticEntityBuilder builder;
@@ -54,7 +45,7 @@ public class World implements Disposable {
         this.gameStage = new Stage();
         this.gameScreen = gameScreen;
         this.map = gameScreen.getMap();
-        this.buildings = new ArrayList<Building>();
+        this.buildings = new ArrayList<Structure>();
         this.resources = new ArrayList<Resource>();
         this.resourceHandler = new ResourceHandler(this, initialResources);
         this.updateCounter = 0;
@@ -81,7 +72,7 @@ public class World implements Disposable {
         return resources;
     }
 
-    public ArrayList<Building> getBuildings() {
+    public ArrayList<Structure> getBuildings() {
         return buildings;
     }
 

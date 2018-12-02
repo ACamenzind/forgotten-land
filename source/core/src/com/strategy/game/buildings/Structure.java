@@ -9,29 +9,27 @@ import com.strategy.game.world.World;
 /**
  * A building with its resources. Inherit from this to create new ones.
  */
-public abstract class Building extends MapEntity {
+public class Structure extends MapEntity {
     private final String name;
     private final ResourceContainer costs;
-//    private final int maxLife;
     private final int maxWorkers;
     protected ResourceContainer productions;
     private final ResourceContainer maintenanceCosts;
-//    private int life;
     protected int workers;
     private BuildingType type;
 
     public enum BuildingType { MANUFACTURER, WAREHOUSE, DECORATION, OTHER }
 
-    public Building(final String name,
-                    final ResourceContainer costs,
-                    final ResourceContainer productions,
-                    final ResourceContainer maintenanceCosts,
-                    final int maxLife,
-                    final int maxWorkers,
-                    final int influenceRadius,
-                    final Texture mainTexture,
-                    final Vector2 collisionSize,
-                    final BuildingType type) {
+    public Structure(final String name,
+                     final ResourceContainer costs,
+                     final ResourceContainer productions,
+                     final ResourceContainer maintenanceCosts,
+                     final int maxLife,
+                     final int maxWorkers,
+                     final int influenceRadius,
+                     final Texture mainTexture,
+                     final Vector2 collisionSize,
+                     final BuildingType type) {
         this.name = name;
         this.costs = costs;
         this.productions = productions;

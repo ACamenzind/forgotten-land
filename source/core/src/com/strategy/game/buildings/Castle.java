@@ -7,9 +7,9 @@ import com.strategy.game.ResourceContainer;
 import com.strategy.game.world.ResourceContainerBuilder;
 
 /**
- * A type of Building
+ * A type of Structure
  */
-public class Castle extends Building {
+public class Castle extends Structure {
     //TODO: maybe put buildings properties into a single object.
     private static final String NAME = "Castle";
     private static final ResourceContainer COST = new ResourceContainerBuilder().wood(100).food(100).rock(100).gold(100).build();

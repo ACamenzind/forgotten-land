@@ -9,7 +9,7 @@ import com.strategy.game.world.ResourceContainerBuilder;
 /**
  * Created by francescosani on 12/05/16.
  */
-public class CollectorFood extends Building {
+public class CollectorFood extends Structure {
     private static final String NAME = "Farm";
     private static final ResourceContainer COST = new ResourceContainerBuilder().wood(30).rock(10).gold(10).build();
     private static final ResourceContainer PRODUCTION = new ResourceContainerBuilder().food(5).build();

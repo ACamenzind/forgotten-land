@@ -7,7 +7,7 @@ import com.strategy.game.ResourceContainer;
 /**
  * Created on 20/05/2016.
  */
-public abstract class Collector extends Building {
+public abstract class Collector extends Structure {
     protected String resourceCollected;
 
     public String getResourceCollected() {

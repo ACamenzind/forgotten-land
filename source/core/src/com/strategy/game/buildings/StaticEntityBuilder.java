@@ -14,7 +14,6 @@ import com.strategy.game.screens.GameScreen;
 import com.strategy.game.world.Resource;
 import com.strategy.game.world.World;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.ArrayList;
 
 /**
@@ -168,8 +167,8 @@ public class StaticEntityBuilder implements Observable {
      * destroyed, and destroy them later.
      * @param buildingsToDestroy a list with buildings ready to be destroyed
      */
-    public void destroyBuildings(ArrayList<Building> buildingsToDestroy) {
-        for (Building building: buildingsToDestroy) {
+    public void destroyBuildings(ArrayList<Structure> buildingsToDestroy) {
+        for (Structure building: buildingsToDestroy) {
             destroy(building);
         }
     }
@@ -179,7 +178,7 @@ public class StaticEntityBuilder implements Observable {
      * and the repair is only done if there are enough resources available.
      * @param building the building to repair
      */
-    public void repairBuilding(Building building) {
+    public void repairBuilding(Structure building) {
         int currentLife = building.getLife();
         int maxLife = building.getMaxLife();
         int amountToRepair = maxLife - currentLife;
@@ -206,9 +205,9 @@ public class StaticEntityBuilder implements Observable {
                 updateListeners(Events.RESOURCE_DEPLETED);
             } else {
                 world.getBuildings().remove(entity);
-                ResourceContainer refund = ((Building) entity).getCosts().multiply(0.5f);
+                ResourceContainer refund = ((Structure) entity).getCosts().multiply(0.5f);
                 world.getResourceHandler().addToTotal(refund);
-                world.getResourceHandler().removeAllWorkers((Building) entity);
+                world.getResourceHandler().removeAllWorkers((Structure) entity);
                 // When destroying a building, you get half its costs back
                 updateListeners(Events.BUILDING_DESTROYED);
             }
@@ -229,7 +228,7 @@ public class StaticEntityBuilder implements Observable {
             if (startY < 0) startY = 0;
 
             // Resets the influence area
-            if (entity instanceof Building) {
+            if (entity instanceof Structure) {
                 resetInfluenceArea(startX, startY, endX, endY);
             }
             refreshInfluence(); // Redraws the influence area with the new data
@@ -306,12 +305,12 @@ public class StaticEntityBuilder implements Observable {
                 // If the placed entity is a building, remove its cost from the total resources if possible
                 // Note: for now, all placeable entities are buildings, but in the future
                 // we may add a map editor
-                boolean placeable = world.getResourceHandler().canPlaceBuilding((Building) selectedEntity);
+                boolean placeable = world.getResourceHandler().canPlaceBuilding((Structure) selectedEntity);
                 if (placeable) {
                     // Places the selected entity on the buildings layer, and add it to the list
                     selectedEntity.placeOnLayer(buildingsLayer, x, y);
-                    this.world.getBuildings().add((Building) selectedEntity);
-                    this.world.getResourceHandler().removeFromTotal(((Building) selectedEntity).getCosts());
+                    this.world.getBuildings().add((Structure) selectedEntity);
+                    this.world.getResourceHandler().removeFromTotal(((Structure) selectedEntity).getCosts());
                     if (selectedEntity instanceof Container)
                         this.world.getResourceHandler().addToMaximum(((Container) selectedEntity).getResourcesStored());
                     updateListeners(Events.BUILDING_PLACED);
@@ -375,7 +374,7 @@ public class StaticEntityBuilder implements Observable {
      * Displays the given building's influence area.
      * @param building
      */
-    public void showInfluenceArea(Building building) {
+    public void showInfluenceArea(Structure building) {
         TiledMapTileLayer layer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Local influence");
         layer.setOpacity(0.5f);
 

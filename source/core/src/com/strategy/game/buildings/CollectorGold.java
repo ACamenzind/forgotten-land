@@ -9,7 +9,7 @@ import com.strategy.game.world.ResourceContainerBuilder;
 /**
  * The market, which produces gold.
  */
-public class CollectorGold extends Building{
+public class CollectorGold extends Structure {
     private static final String NAME = "Market";
     private static final ResourceContainer COST = new ResourceContainerBuilder().wood(50).rock(50).build();
     private static final ResourceContainer PRODUCTION = new ResourceContainerBuilder().gold(5).build();
@@ -21,6 +21,6 @@ public class CollectorGold extends Building{
     private static final Vector2 COLLISION = new Vector2(5,5);
 
     public CollectorGold() {
-        super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION, Building.BuildingType.MANUFACTURER);
+        super(NAME, COST, PRODUCTION, MAINTENANCE, MAX_LIFE, MAX_WORKERS,INFLUENCE_RADIUS, TEXTURE, COLLISION, Structure.BuildingType.MANUFACTURER);
     }
 }

@@ -1,6 +1,6 @@
 package com.strategy.game.world;
 
-import com.strategy.game.buildings.Building;
+import com.strategy.game.buildings.Structure;
 
 import java.util.ArrayList;
 
@@ -48,8 +48,8 @@ public class WorldEventsHandler {
     private void startFire() {
 //        System.out.println("A fire suddenly damaged all your buildings!");
         world.getGameScreen().setConsoleMessage("A fire suddenly damaged all your buildings!");
-        ArrayList<Building> buildings = world.getBuildings();
-        for (Building building: buildings) {
+        ArrayList<Structure> buildings = world.getBuildings();
+        for (Structure building: buildings) {
             int halfLife = building.getLife() / 2;
             building.setLife(halfLife);
         }

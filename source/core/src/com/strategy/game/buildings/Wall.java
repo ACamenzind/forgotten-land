@@ -9,7 +9,7 @@ import com.strategy.game.world.ResourceContainerBuilder;
 /**
  * Created on 01/05/2016.
  */
-public class Wall extends Building {
+public class Wall extends Structure {
     //TODO: maybe put buildings properties into a single object.
     private static final String NAME = "Wall";
     

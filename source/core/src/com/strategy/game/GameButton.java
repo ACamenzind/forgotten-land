@@ -8,12 +8,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.strategy.game.buildings.Building;
+import com.strategy.game.buildings.Structure;
 import com.strategy.game.buildings.StaticEntityBuilder;
 import com.strategy.game.screens.sidebar.Sidebar;
 
@@ -136,14 +135,14 @@ public class GameButton extends Button {
         });
     }
 
-    public void addListenerBuilding(final Building building) {
+    public void addListenerBuilding(final Structure building) {
         if (building != null)
             setTooltip(building.getName());
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 try {
                     if (building != null) {
-                        Building newBuilding = building.getClass().newInstance();
+                        Structure newBuilding = building.getClass().newInstance();
                         if (hasParent() && getParent().hasParent()) {
                             Sidebar sidebar = (Sidebar) getParent().getParent();
                             StaticEntityBuilder builder = sidebar.getScreen().getBuilder();

@@ -4,7 +4,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.strategy.game.ExtendedStaticTiledMapTile;
 import com.strategy.game.ResourceContainer;
-import com.strategy.game.buildings.Building;
+import com.strategy.game.buildings.Structure;
 import com.strategy.game.buildings.Collector;
 import com.strategy.game.buildings.MapEntity;
 
@@ -54,7 +54,7 @@ public class ResourceHandler {
      * Moves a worker to the given building.
      * @param building
      */
-    public void addWorker(Building building) {
+    public void addWorker(Structure building) {
         if (totalWorkers < totalResources.getPeople()) {
             building.changeWorker(1);
             totalWorkers++;
@@ -65,7 +65,7 @@ public class ResourceHandler {
      * Removes a worker from the given building
      * @param building
      */
-    public void removeWorker(Building building) {
+    public void removeWorker(Structure building) {
         if (totalWorkers > 0) {
             building.changeWorker(-1);
             totalWorkers--;
@@ -76,7 +76,7 @@ public class ResourceHandler {
      * Removes all workers from the given building (used when destroying).
      * @param building
      */
-    public void removeAllWorkers(Building building) {
+    public void removeAllWorkers(Structure building) {
         int workers = building.getWorkers();
         building.changeWorker(-workers);
         totalWorkers -= workers;
@@ -94,12 +94,12 @@ public class ResourceHandler {
             int availablePop = totalPop - totalWorkers;
             if (availablePop <= 0) {
                 // Remove a worker from a radom building.
-                ArrayList<Building> buildings = world.getBuildings();
+                ArrayList<Structure> buildings = world.getBuildings();
                 boolean removed = false;
                 Random random = new Random();
                 while (!removed) {
                     int randIndex = random.nextInt(buildings.size());
-                    Building currentBuilding = buildings.get(randIndex);
+                    Structure currentBuilding = buildings.get(randIndex);
                     if (currentBuilding != null && currentBuilding.getWorkers() > 0) {
                         currentBuilding.changeWorker(-1);
                         totalWorkers--;
@@ -154,7 +154,7 @@ public class ResourceHandler {
         ResourceContainer totalCost = new ResourceContainer();
         ResourceContainer totalProduction = new ResourceContainer();
 
-        for (Building building : world.getBuildings()) {
+        for (Structure building : world.getBuildings()) {
             totalCost = totalCost.add(building.getMaintenanceCosts());
             totalProduction = totalProduction.add(building.getProductionsPerTurn());
         }
@@ -170,7 +170,7 @@ public class ResourceHandler {
      * @param building the building that is being placed
      * @return true if the building is placeable
      */
-    public boolean canPlaceBuilding(Building building) {
+    public boolean canPlaceBuilding(Structure building) {
         ResourceContainer result = totalResources.subtract(building.getCosts());
 
         return !result.hasNegativeResources(result);
@@ -237,7 +237,7 @@ public class ResourceHandler {
      */
     public void update() {
 
-        for (Building building:
+        for (Structure building:
              world.getBuildings()) {
             ResourceContainer maintenance;
 
@@ -322,8 +322,8 @@ public class ResourceHandler {
      * Degrades the buildings if such conditions are met (i.e. lack of resources)
      */
     private void degradeBuildings() {
-        ArrayList<Building> toDestroy = new ArrayList<Building>();
-        for (Building building: world.getBuildings()) {
+        ArrayList<Structure> toDestroy = new ArrayList<Structure>();
+        for (Structure building: world.getBuildings()) {
             building.degrade();
             if (building.getLife() <= 0) {
                 toDestroy.add(building);

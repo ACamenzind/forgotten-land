@@ -152,9 +152,9 @@ public class GameInputProcessor implements InputProcessor{
         else if (screen.getBuilder().getSelectedEntity() == null && button == Input.Buttons.LEFT)  {
             // TODO: show building info from here
 
-            if (clickedEntity instanceof Building) {
+            if (clickedEntity instanceof Structure) {
                 screen.getSidebar().setEntity(clickedEntity, false);
-                screen.getBuilder().showInfluenceArea((Building) clickedEntity);
+                screen.getBuilder().showInfluenceArea((Structure) clickedEntity);
             }
             else if (clickedEntity instanceof Resource) {
                 screen.getSidebar().setEntity(clickedEntity, false);
@@ -164,8 +164,8 @@ public class GameInputProcessor implements InputProcessor{
                 screen.getSidebar().setEntity(null, false);
             }
         } else {
-//            if (clickedEntity instanceof Building) {
-//                screen.getBuilder().repairBuilding((Building) clickedEntity);
+//            if (clickedEntity instanceof Structure) {
+//                screen.getBuilder().repairBuilding((Structure) clickedEntity);
 //            }
         }
         return true;
