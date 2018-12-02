@@ -1,0 +1,9 @@
+package com.strategy.game;
+
+public enum Events {
+    BUILDING_PLACED,
+    BUILDING_DESTROYED,
+    BUILDING_OVERLAP,
+    BUILDING_OUT_OF_INFLUENCE,
+    BUILDING_NOT_ENOUGH_RESOURCES
+}

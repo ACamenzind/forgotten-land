@@ -28,7 +28,7 @@ import com.strategy.game.world.World;
  * The main game screen, where the gameplay is rendered.
  *
  */
-public class GameScreen implements Screen {
+public class GameScreen implements Screen, EventListener {
 
     private Stage stage;
     private final StrategyGame game;
@@ -86,7 +86,8 @@ public class GameScreen implements Screen {
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         this.sidebar = new Sidebar(stage, this);
         this.resourcesBar = new ResourcesBar(stage, world);
-
+        this.builder.addListener(this.resourcesBar);
+        this.builder.addListener(world);
         setMessages();
 
         // Looping background sound
@@ -309,5 +310,20 @@ public class GameScreen implements Screen {
         world.dispose();
         stage.dispose();
         game.getSoundManager().dispose();
+    }
+
+    @Override
+    public void update(Events eventType) {
+        switch (eventType) {
+            case BUILDING_OVERLAP:
+                setConsoleMessage("That place is already occupied!");
+                break;
+            case BUILDING_OUT_OF_INFLUENCE:
+                setConsoleMessage("You must place the building inside the colored influence area!");
+                break;
+            case BUILDING_NOT_ENOUGH_RESOURCES:
+                setConsoleMessage("Not enough resources to build this!");
+                break;
+        }
     }
 }

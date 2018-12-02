@@ -13,6 +13,7 @@ import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
 import com.strategy.game.ResourceContainer;
 import com.strategy.game.Utils;
+import com.strategy.game.*;
 import com.strategy.game.world.ResourceHandler;
 import com.strategy.game.world.ResourceType;
 import com.strategy.game.world.World;
@@ -25,7 +26,7 @@ import java.util.Map;
 /**
  * Created by Amedeo on 17/05/16.
  */
-public class ResourcesBar extends Table implements Display {
+public class ResourcesBar extends Table implements Display, EventListener {
 
     private Stage stage;
     private ResourceHandler resourceHandler;
@@ -136,6 +137,15 @@ public class ResourcesBar extends Table implements Display {
 
     private float cell_size() {
         return getWidth() * 0.05f;
+    }
+
+    @Override
+    public void update(Events eventType) {
+        switch (eventType) {
+            case BUILDING_PLACED:
+            case BUILDING_DESTROYED:
+                update();
+        }
     }
 }
 

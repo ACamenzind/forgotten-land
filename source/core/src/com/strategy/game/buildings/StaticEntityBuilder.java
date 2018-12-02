@@ -14,13 +14,14 @@ import com.strategy.game.screens.GameScreen;
 import com.strategy.game.world.Resource;
 import com.strategy.game.world.World;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.ArrayList;
 
 /**
  * Handles the creation, placement and destruction of static entities (e.g. buildings)
  *
  */
-public class StaticEntityBuilder {
+public class StaticEntityBuilder implements Observable {
     private GameScreen gameScreen;
     private TiledMapTileLayer buildingsLayer; // the buildings layer
     private TiledMapTileLayer selectionLayer; // contains the selected building
@@ -29,7 +30,8 @@ public class StaticEntityBuilder {
     private World world;
     private TiledMapTileLayer gridLayer;
     private SoundManager soundManager;
-
+    private ArrayList<EventListener> listeners;
+    private MapEntity lastDestroyed;
 
     public StaticEntityBuilder(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
@@ -43,11 +45,18 @@ public class StaticEntityBuilder {
         this.gridLayer.setVisible(false);
         this.gridLayer.setOpacity(0.2f);
         this.soundManager = gameScreen.getGame().getSoundManager();
+        this.listeners = new ArrayList<EventListener>();
+        this.addListener(this.gameScreen);
+        this.addListener(this.soundManager);
+//        this.addListener(this.gameScreen.getResourcesBar());
     }
 
     public MapEntity getSelectedEntity() {
         return selectedEntity;
     }
+
+
+
 
     /**
      * Toggles the selection
@@ -168,18 +177,12 @@ public class StaticEntityBuilder {
      */
     public void destroy(MapEntity entity) {
         if (entity != null && world.getBuildings().size() > 1) {
-
+            lastDestroyed = entity;
             if (entity instanceof Resource) {
                 world.getResources().remove(entity);
             } else {
                 // When destroying a building, you get half its costs back
-                world.getBuildings().remove(entity);
-                ResourceContainer refund = ((Building) entity).getCosts().multiply(0.5f);
-                world.getResourceHandler().addToTotal(refund);
-                world.getResourceHandler().removeAllWorkers((Building) entity);
-                // Updates resources bar
-                world.getGameScreen().getResourcesBar().update();
-                gameScreen.getGame().getSoundManager().playSound(SoundManager.SoundType.BUILDING_DEMOLITION);
+                updateListeners(Events.BUILDING_DESTROYED);
             }
 
 
@@ -252,10 +255,6 @@ public class StaticEntityBuilder {
                         TiledMapTile tile = cell.getTile();
                         boolean hasObject = tile instanceof ExtendedStaticTiledMapTile
                                 && ((ExtendedStaticTiledMapTile) tile).getObject() != null;
-//                        Boolean obstacle = (Boolean) ;
-//                        System.out.println(tile.getProperties().get("obstacle"));
-//                        if (obstacle != null)
-//                        boolean hasProperty = tile.getProperties().get("obstacle", Boolean.class) != null;
                         if (hasObject) {
                             isSpaceFree = false;
                             break;
@@ -291,9 +290,10 @@ public class StaticEntityBuilder {
             if (forced) isInInfluenceRadius = true;
 
             if (!isSpaceFree) {
-                gameScreen.setConsoleMessage("That place is already occupied!");
-            } else if (!isInInfluenceRadius) {
-                gameScreen.setConsoleMessage("You must place the building inside the colored influence area!");
+                updateListeners(Events.BUILDING_OVERLAP);
+            }
+            if (!isInInfluenceRadius) {
+                updateListeners(Events.BUILDING_OUT_OF_INFLUENCE);
             }
 
 
@@ -302,20 +302,13 @@ public class StaticEntityBuilder {
                 // Note: for now, all placeable entities are buildings, but in the future
                 // we may add a map editor
                 boolean placeable = world.getResourceHandler().canPlaceBuilding((Building) selectedEntity);
-                if (selectedEntity instanceof Building && placeable) {
-                    soundManager.playSound(SoundManager.SoundType.PLACE_BUILDING);
+                if (placeable) {
                     // Places the selected entity on the buildings layer, and add it to the list
                     selectedEntity.placeOnLayer(buildingsLayer, x, y);
-                    this.world.getBuildings().add((Building) selectedEntity);
-                    this.world.getResourceHandler().removeFromTotal(((Building) selectedEntity).getCosts());
-                    if (selectedEntity instanceof Container)
-                        this.world.getResourceHandler().addToMaximum(((Container) selectedEntity).getResourcesStored());
-                    // Updates resources bar after placing building
-                    world.getGameScreen().getResourcesBar().update();
+
+                    updateListeners(Events.BUILDING_PLACED);
                 } else {
-                    // Outside the influence area.
-                    gameScreen.setConsoleMessage("Not enough resources to build this!");
-                    soundManager.playSound(SoundManager.SoundType.FAIL_TO_PLACE_BUILDING);
+                    updateListeners(Events.BUILDING_NOT_ENOUGH_RESOURCES);
                 }
 
                 try {
@@ -329,10 +322,6 @@ public class StaticEntityBuilder {
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
-            } else {
-                // Collision
-//                gameScreen.setConsoleMessage("That place is already occupied!");
-                soundManager.playSound(SoundManager.SoundType.FAIL_TO_PLACE_BUILDING);
             }
         }
     }
@@ -436,5 +425,26 @@ public class StaticEntityBuilder {
         if (selectedEntity != null) {
             selectedEntity.resetTiles();
         }
+    }
+
+    @Override
+    public void addListener(EventListener eventListener) {
+        listeners.add(eventListener);
+    }
+
+    @Override
+    public void removeListener(EventListener eventListener) {
+        listeners.remove(eventListener);
+    }
+
+    @Override
+    public void updateListeners(Events eventType) {
+        for (EventListener listener : this.listeners) {
+            listener.update(eventType);
+        }
+    }
+
+    public MapEntity getLastDestroyed() {
+        return lastDestroyed;
     }
 }

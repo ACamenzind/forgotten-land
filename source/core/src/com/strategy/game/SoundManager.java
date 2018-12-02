@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Handles all the sounds
  */
-public class SoundManager implements Disposable{
+public class SoundManager implements Disposable, EventListener{
     private float masterVolume;
     private boolean muted;
     private ArrayList<Sound> loopingSounds;
@@ -27,6 +27,23 @@ public class SoundManager implements Disposable{
     private SoundManager() {
         this.masterVolume = 0.6f;
         this.loopingSounds = new ArrayList<Sound>();
+    }
+
+    @Override
+    public void update(Events eventType) {
+        switch (eventType) {
+            case BUILDING_OVERLAP:
+            case BUILDING_OUT_OF_INFLUENCE:
+            case BUILDING_NOT_ENOUGH_RESOURCES:
+                playSound(SoundType.FAIL_TO_PLACE_BUILDING);
+                break;
+            case BUILDING_PLACED:
+                playSound(SoundType.PLACE_BUILDING);
+                break;
+            case BUILDING_DESTROYED:
+                playSound(SoundType.BUILDING_DEMOLITION);
+                break;
+        }
     }
 
     /**
