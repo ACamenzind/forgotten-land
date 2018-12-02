@@ -1,5 +1,7 @@
 package com.strategy.game;
 
+import com.strategy.game.world.ResourceType;
+
 /**
  * Data structure that contains all the types of resources
  */
@@ -105,6 +107,39 @@ public class ResourceContainer {
     public boolean hasZeroResources() {
         int result = wood * food * rock * gold;
         return result == 0;
+    }
+
+    public int get(ResourceType resourceType){
+        switch (resourceType) {
+            case WOOD:
+                return this.getWood();
+            case FOOD:
+                return this.getFood();
+            case ROCK:
+                return this.getRock();
+            case GOLD:
+                return this.getGold();
+            case PEOPLE:
+                return this.getPeople();
+        }
+        return -1;
+
+    }
+
+    public void set(ResourceType resourceType, int ammount){
+        switch (resourceType) {
+            case WOOD:
+                this.wood = ammount;
+            case FOOD:
+                this.food = ammount;
+            case ROCK:
+                this.rock = ammount;
+            case GOLD:
+                this.gold = ammount;
+            case PEOPLE:
+                this.people = ammount;
+        }
+
     }
 
     @Override

@@ -11,9 +11,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
+import com.strategy.game.ResourceContainer;
 import com.strategy.game.Utils;
 import com.strategy.game.world.ResourceHandler;
+import com.strategy.game.world.ResourceType;
 import com.strategy.game.world.World;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Amedeo on 17/05/16.
@@ -21,20 +28,18 @@ import com.strategy.game.world.World;
 public class ResourcesBar extends Table implements Display {
 
     private Stage stage;
-    private World world;
-    private Table resources = new Table();
+    private ResourceHandler resourceHandler;
+    private Table resourcesTable = new Table();
+    static Map<ResourceType, Image> typeToImage = new HashMap<>();
+    static {
+        typeToImage.put(ResourceType.FOOD,  Assets.makeImage(Assets.resourcesFood));
+        typeToImage.put(ResourceType.WOOD,  Assets.makeImage(Assets.resourcesWood));
+        typeToImage.put(ResourceType.ROCK,  Assets.makeImage(Assets.resourcesRock));
+        typeToImage.put(ResourceType.GOLD,  Assets.makeImage(Assets.resourcesGold));
+        typeToImage.put(ResourceType.PEOPLE,  Assets.makeImage(Assets.resourcesPeople));
+    }
 
-    private static final Image food = Assets.makeImage(Assets.resourcesFood);
-    private static final Image wood = Assets.makeImage(Assets.resourcesWood);
-    private static final Image rock= Assets.makeImage(Assets.resourcesRock);
-    private static final Image gold= Assets.makeImage(Assets.resourcesGold);
-    private static final Image people= Assets.makeImage(Assets.resourcesPeople);
-
-    private Label foodCount = Assets.makeLabel("", Utils.FONT_MEDIUM_WHITE);
-    private Label woodCount = Assets.makeLabel("", Utils.FONT_MEDIUM_WHITE);
-    private Label goldCount = Assets.makeLabel("", Utils.FONT_MEDIUM_WHITE);
-    private Label rockCount = Assets.makeLabel("", Utils.FONT_MEDIUM_WHITE);
-    private Label peopleCount = Assets.makeLabel("", Utils.FONT_MEDIUM_WHITE);
+    Map<ResourceType, Label > resourceLabels;
 
     private GameButton pause = new GameButton(Assets.resourcesBarPause, Assets.resourcesBarResume, Assets.resourcesBarResume);
     private GameButton speed = new GameButton(Assets.resourcesBarSpeedNormal, Assets.resourcesBarSpeedFast, Assets.resourcesBarSpeedFast);
@@ -42,22 +47,11 @@ public class ResourcesBar extends Table implements Display {
     public ResourcesBar(final Stage stage, final World world) {
         this.stage = stage;
         this.stage.addActor(this);
-        this.world = world;
+        resourceHandler = world.getResourceHandler();
+
+        resourceLabels = new HashMap<>();
 
         Assets.setBackground(this, Assets.resourcesBarBg);
-
-        Cell foodCell = resources.add(food);
-        Cell foodCountCell = resources.add(foodCount);
-        Cell woodCell = resources.add(wood);
-        Cell woodCountCell = resources.add(woodCount);
-        Cell rockCell = resources.add(rock);
-        Cell rockCountCell = resources.add(rockCount);
-        Cell goldCell = resources.add(gold);
-        Cell goldCountCell = resources.add(goldCount);
-        Cell peopleCell = resources.add(people);
-        resources.add(peopleCount);
-
-        addActor(resources);
 
         pause.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -76,65 +70,56 @@ public class ResourcesBar extends Table implements Display {
         });
         addActor(speed);
 
+        setUpTable();
+
+
+    }
+
+    private void setUpTable(){
+        //we need to resize the cells after all of them are in the table
+        List<Cell> images = new ArrayList<>();
+        List<Cell> labels = new ArrayList<>();
+
+        for(ResourceType type: ResourceType.values()){
+            Label label = Assets.makeLabel("", Utils.FONT_MEDIUM_WHITE);
+
+            resourceLabels.put(type, label);
+
+            Cell imageCell = resourcesTable.add(typeToImage.get(type));
+            Cell resourceCell = resourcesTable.add(label);
+
+            images.add(imageCell);
+            labels.add(resourceCell);
+        }
+        addActor(resourcesTable);
+
         update();
         updatePosition();
 
-        foodCell.width(getHeight() * 0.425f).padRight(cell_size() / 10f);
-        foodCountCell.width(cell_size());
-        woodCell.width(getHeight() * 0.425f).padRight(cell_size() / 10f);
-        woodCountCell.width(cell_size());
-        rockCell.width(getHeight() * 0.425f).padRight(cell_size() / 10f);
-        rockCountCell.width(cell_size());
-        goldCell.width(getHeight() * 0.425f).padRight(cell_size() / 10f);
-        goldCountCell.width(cell_size());
-        peopleCell.width(getHeight() * 0.425f).padRight(cell_size() / 10f);
+        for(Cell c: images){
+            c.width(getHeight() * 0.425f).padRight(cell_size() / 10f);
+        }
+        for(Cell c: labels){
+            c.width(cell_size());
+        }
+
+
     }
 
     @Override
     public void update() {
-        String newFoodCount = "" + world.getResourceHandler().getTotalResources().getWood();
-        String newWoodCount = "" + world.getResourceHandler().getTotalResources().getWood();
-        String newRockCount = "" + world.getResourceHandler().getTotalResources().getRock();
-        String newGoldCount = "" + world.getResourceHandler().getTotalResources().getGold();
-        String newPeopleCount = "" + world.getResourceHandler().getUnemployed() + " / " +
-                world.getResourceHandler().getTotalResources().getPeople();
+        ResourceContainer maxResources = resourceHandler.getMaximumResources();
+        ResourceContainer totalResources = resourceHandler.getTotalResources();
 
-        ResourceHandler resourceHandler = world.getResourceHandler();
-
-        if (0 <= resourceHandler.getTotalResources().getFood() &&
-                resourceHandler.getTotalResources().getFood() < resourceHandler.getMaximumResources().getFood())
-            foodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_WHITE));
-        else
-            foodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
-        foodCount.setText(newFoodCount);
-
-        if (0 <= resourceHandler.getTotalResources().getWood() &&
-                resourceHandler.getTotalResources().getWood()< resourceHandler.getMaximumResources().getWood())
-            woodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_WHITE));
-        else
-            woodCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
-        woodCount.setText(newWoodCount);
-
-        if (0 <= resourceHandler.getTotalResources().getRock() &&
-                resourceHandler.getTotalResources().getRock()< resourceHandler.getMaximumResources().getRock())
-            rockCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_WHITE));
-        else
-            rockCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
-        rockCount.setText(newRockCount);
-
-        if (0 <= resourceHandler.getTotalResources().getGold() &&
-                resourceHandler.getTotalResources().getGold() < resourceHandler.getMaximumResources().getGold())
-            goldCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_WHITE));
-        else
-            goldCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
-        goldCount.setText(newGoldCount);
-
-        if (0 <= resourceHandler.getUnemployed() &&
-                resourceHandler.getUnemployed() < resourceHandler.getMaximumResources().getPeople())
-            peopleCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_WHITE));
-        else
-            peopleCount.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
-        peopleCount.setText(newPeopleCount);
+        for(ResourceType type: ResourceType.values()){
+            Label label = resourceLabels.get(type);
+            int value = totalResources.get(type);
+            if(0<= value && value < maxResources.get(type))
+                label.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_WHITE));
+            else
+                label.setStyle(Assets.makeLabelStyle(Utils.FONT_MEDIUM_RED));
+            label.setText(value+"");
+        }
     }
 
     @Override
@@ -142,7 +127,7 @@ public class ResourcesBar extends Table implements Display {
         setSize(stage.getWidth() * 0.85f, stage.getHeight() * 0.05f);
         setPosition(0, stage.getHeight() * 0.95f);
 
-        Assets.setPositionRelative(resources, 0.5f, 0.5f, true, true);
+        Assets.setPositionRelative(resourcesTable, 0.5f, 0.5f, true, true);
         Assets.setSizeRelative(pause, 0.064f, 1f);
         Assets.setPositionRelative(pause, 0.0125f, 0.5f, false, true);
         Assets.setSizeRelative(speed, 0.064f, 1f);
@@ -153,3 +138,4 @@ public class ResourcesBar extends Table implements Display {
         return getWidth() * 0.05f;
     }
 }
+
