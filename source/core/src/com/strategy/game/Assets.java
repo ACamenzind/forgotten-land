@@ -19,7 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
  * Loads the assets.
  * TODO: maybe add an AssetManager for better performance
  */
-public class Assets {
+public final class Assets {
+    private Assets(){}
 
     public static TiledMap map;
     // MAIN MENU

@@ -16,7 +16,8 @@ import java.awt.*;
 /**
  * Utility class with useful constants and static methods
  */
-public class Utils {
+public final class Utils {
+    private Utils(){}
     // SIZE OPTIONS
     public static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     public static final int DEFAULT_WIDTH = ((9/16 * screenSize.getWidth()) > (screenSize.getHeight() -40)) ?

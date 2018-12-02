@@ -48,7 +48,9 @@ public class SidebarGameMenu extends SidebarOptionsSelection {
                 if (sidebar != null) {
                     GameScreen screen = sidebar.getScreen();
                     Stage stage = screen.getStage();
-                    stage.addActor(new Instructions(screen));
+                    screen.getWorld().toggleRunning();
+                    stage.addActor(new Instructions(screen.getStage(),()->screen.getWorld().toggleRunning())
+                    );
                 }
                 return false;
             }
@@ -76,7 +78,9 @@ public class SidebarGameMenu extends SidebarOptionsSelection {
                 if (sidebar != null) {
                     GameScreen screen = sidebar.getScreen();
                     Stage stage = screen.getStage();
-                    stage.addActor(new FullScreen(screen, Assets.screenCredits));
+                    stage.addActor(new FullScreen(screen.getStage(), Assets.screenCredits,()->{
+                        screen.getWorld().toggleRunning();
+                    }));
                 }
                 return false;
             }

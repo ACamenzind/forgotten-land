@@ -148,7 +148,7 @@ public class MainMenuScreen implements Screen{
         GameButton instructionsButton = new GameButton(Assets.mainMenuInstructions);
         instructionsButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                stage.addActor(new Instructions(game));
+                stage.addActor(new Instructions(getStage()));
                 return false;
             }
         });
@@ -172,7 +172,7 @@ public class MainMenuScreen implements Screen{
         GameButton creditsButton = new GameButton(Assets.mainMenuCredits);
         creditsButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                stage.addActor(new FullScreen(game, Assets.screenCredits));
+                stage.addActor(new FullScreen(stage, Assets.screenCredits,()->{}));
                 return false;
             }
         });
