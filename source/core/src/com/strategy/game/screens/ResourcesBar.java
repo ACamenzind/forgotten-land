@@ -34,8 +34,8 @@ public class ResourcesBar extends Table implements Display, EventListener {
 
     Map<ResourceType, Label > resourceLabels;
 
-    private GameButton pause = new GameButton(Assets.resourcesBarPause, Assets.resourcesBarResume, Assets.resourcesBarResume);
-    private GameButton speed = new GameButton(Assets.resourcesBarSpeedNormal, Assets.resourcesBarSpeedFast, Assets.resourcesBarSpeedFast);
+    private GameButton pause = new GameButton(Assets.getTexture("resourcesBarPause"), Assets.getTexture("resourcesBarResume"), Assets.getTexture("resourcesBarResume"));
+    private GameButton speed = new GameButton(Assets.getTexture("resourcesBarSpeedNormal"), Assets.getTexture("resourcesBarSpeedFast"), Assets.getTexture("resourcesBarSpeedFast"));
 
     public ResourcesBar(final Stage stage, final World world) {
         this.stage = stage;
@@ -44,7 +44,7 @@ public class ResourcesBar extends Table implements Display, EventListener {
 
         resourceLabels = new HashMap<>();
 
-        Assets.setBackground(this, Assets.resourcesBarBg);
+        Assets.setBackground(this, Assets.getTexture("resourcesBarBg"));
 
         pause.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -71,11 +71,11 @@ public class ResourcesBar extends Table implements Display, EventListener {
     private void setUpTable(){
        Map<ResourceType, Image> typeToImage = new HashMap<>();
 
-       typeToImage.put(ResourceType.FOOD,  Assets.makeImage(Assets.resourcesFood));
-       typeToImage.put(ResourceType.WOOD,  Assets.makeImage(Assets.resourcesWood));
-       typeToImage.put(ResourceType.ROCK,  Assets.makeImage(Assets.resourcesRock));
-       typeToImage.put(ResourceType.GOLD,  Assets.makeImage(Assets.resourcesGold));
-       typeToImage.put(ResourceType.PEOPLE,  Assets.makeImage(Assets.resourcesPeople));
+       typeToImage.put(ResourceType.FOOD,  Assets.makeImage(Assets.getTexture("resourcesFood")));
+       typeToImage.put(ResourceType.WOOD,  Assets.makeImage(Assets.getTexture("resourcesWood")));
+       typeToImage.put(ResourceType.ROCK,  Assets.makeImage(Assets.getTexture("resourcesRock")));
+       typeToImage.put(ResourceType.GOLD,  Assets.makeImage(Assets.getTexture("resourcesGold")));
+       typeToImage.put(ResourceType.PEOPLE,  Assets.makeImage(Assets.getTexture("resourcesPeople")));
 
         //we need to resize the cells after all of them are in the table
         List<Cell> images = new ArrayList<>();

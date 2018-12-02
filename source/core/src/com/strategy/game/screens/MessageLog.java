@@ -19,12 +19,12 @@ public class MessageLog extends Table {
     public enum MessageType { NEW_GAME, QUIT, GAME_OVER }
 
     private Label message;
-    private GameButton ok = new GameButton(Assets.messageOk);
-    private GameButton cancel = new GameButton(Assets.messageCancel);
+    private GameButton ok = new GameButton(Assets.getTexture("messageOk"));
+    private GameButton cancel = new GameButton(Assets.getTexture("messageCancel"));
 
     public MessageLog(final GameScreen screen, MessageType type) {
 
-        Assets.setBackground(this, Assets.resourcesBarBg);
+        Assets.setBackground(this, Assets.getTexture("resourcesBarBg"));
         setSize(Gdx.graphics.getWidth() / 3.6f, Gdx.graphics.getHeight() / 5f);
         setPosition((Gdx.graphics.getWidth() - getWidth()) / 2f, (Gdx.graphics.getHeight() - getHeight()) / 2f);
 

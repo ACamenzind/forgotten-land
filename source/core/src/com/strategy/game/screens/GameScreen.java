@@ -128,7 +128,7 @@ public class GameScreen implements Screen, EventListener {
         quitGame.setVisible(false);
         messages.addActor(quitGame);
         // Game Paused
-        this.gamePaused =  Assets.makeImage(Assets.pausedOverlay);
+        this.gamePaused =  Assets.makeImage(Assets.getTexture("pausedOverlay"));
         messages.addActor(gamePaused);
         gamePaused.setSize(Gdx.graphics.getWidth() / 3f, Gdx.graphics.getWidth() * 0.25f / 3f);
         gamePaused.setPosition((Gdx.graphics.getWidth() - sidebar.getWidth() - gamePaused.getWidth()) / 2f, Gdx.graphics.getHeight() * 0.5f);

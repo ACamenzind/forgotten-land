@@ -20,19 +20,19 @@ public class SidebarBuildManufacturers extends SidebarBuildSelection {
         title = Assets.makeLabel("Manufacturers", Utils.FONT_BIG_WHITE);
         addActor(title);
 
-        buttons[0][0] = new GameButton(Assets.castle);
+        buttons[0][0] = new GameButton(Assets.getTexture("castle"));
         buttons[0][0].addListenerBuilding(new Castle());
         addActor(buttons[0][0]);
 
-        buttons[0][1] = new GameButton(Assets.cows);
+        buttons[0][1] = new GameButton(Assets.getTexture("cows"));
         buttons[0][1].addListenerBuilding(new CollectorFood());
         addActor(buttons[0][1]);
 
-        buttons[0][2] = new GameButton(Assets.lumberjack);
+        buttons[0][2] = new GameButton(Assets.getTexture("lumberjack"));
         buttons[0][2].addListenerBuilding(new CollectorWood());
         addActor(buttons[0][2]);
 
-        buttons[1][0] = new GameButton(Assets.mine);
+        buttons[1][0] = new GameButton(Assets.getTexture("mine"));
         buttons[1][0].addListenerBuilding(new CollectorRock());
         addActor(buttons[1][0]);
 

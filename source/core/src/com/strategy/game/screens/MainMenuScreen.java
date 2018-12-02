@@ -131,7 +131,7 @@ public class MainMenuScreen implements Screen{
         float padding = (1f - buttonHeightRelative * 4f) / 3;
 
         // NEW GAME BUTTON
-        GameButton newGameButton = new GameButton(Assets.mainMenuNewGame);
+        GameButton newGameButton = new GameButton(Assets.getTexture("mainMenuNewGame"));
         newGameButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 game.setScreen(new GameScreen(game));
@@ -145,7 +145,7 @@ public class MainMenuScreen implements Screen{
         Assets.setPositionRelative(newGameButton, 0f, 1f - buttonHeightRelative);
 
         // INSTRUCTIONS BUTTON
-        GameButton instructionsButton = new GameButton(Assets.mainMenuInstructions);
+        GameButton instructionsButton = new GameButton(Assets.getTexture("mainMenuInstructions"));
         instructionsButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 stage.addActor(new Instructions(getStage()));
@@ -157,7 +157,7 @@ public class MainMenuScreen implements Screen{
         Assets.setPositionRelative(instructionsButton, 0f, (buttonHeightRelative + padding) * 2);
 
         // SETTINGS BUTTON
-        GameButton settingsButton = new GameButton(Assets.mainMenuSettings);
+        GameButton settingsButton = new GameButton(Assets.getTexture("mainMenuSettings"));
         settingsButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 stage.addActor(new Settings(game));
@@ -169,10 +169,10 @@ public class MainMenuScreen implements Screen{
         Assets.setPositionRelative(settingsButton, 0f, buttonHeightRelative + padding);
 
         // CREDITS BUTTON
-        GameButton creditsButton = new GameButton(Assets.mainMenuCredits);
+        GameButton creditsButton = new GameButton(Assets.getTexture("mainMenuCredits"));
         creditsButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                stage.addActor(new FullScreen(stage, Assets.screenCredits,()->{}));
+                stage.addActor(new FullScreen(stage, Assets.getTexture("screenCredits"),()->{}));
                 return false;
             }
         });

@@ -14,9 +14,9 @@ public class SidebarMenu extends Table implements Display {
 
     enum MenuButton { NONE, GAME_INFO_BUTTON, BUILD_BUTTON, MENU_BUTTON }
 
-    private GameButton gameInfoButton = new GameButton(Assets.sidebarMenuInfo, Assets.sidebarMenuInfoClicked, Assets.sidebarMenuInfoClicked);
-    private GameButton buildingsButton = new GameButton(Assets.sidebarMenuBuild, Assets.sidebarMenuBuildClicked, Assets.sidebarMenuBuildClicked);
-    private GameButton mainMenuButton = new GameButton(Assets.sidebarMenuMenu, Assets.sidebarMenuMenuClicked, Assets.sidebarMenuMenuClicked);
+    private GameButton gameInfoButton = new GameButton(Assets.getTexture("sidebarMenuInfo"), Assets.getTexture("sidebarMenuInfoClicked"), Assets.getTexture("sidebarMenuInfoClicked"));
+    private GameButton buildingsButton = new GameButton(Assets.getTexture("sidebarMenuBuild"), Assets.getTexture("sidebarMenuBuildClicked"), Assets.getTexture("sidebarMenuBuildClicked"));
+    private GameButton mainMenuButton = new GameButton(Assets.getTexture("sidebarMenuMenu"), Assets.getTexture("sidebarMenuMenuClicked"), Assets.getTexture("sidebarMenuMenuClicked"));
 
     private static final float MARGIN = 0;
     private static final float BUTTON_WIDTH = 1f / 3f;

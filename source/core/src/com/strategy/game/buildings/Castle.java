@@ -20,7 +20,7 @@ public class Castle extends Structure {
     private static final int MAX_WORKERS = 1;
     private static final int INFLUENCE_RADIUS = 10;
 
-    private static final Texture TEXTURE = Assets.castle;
+    private static final Texture TEXTURE = Assets.getTexture("castle");
     private static final Vector2 COLLISION = new Vector2(4,4);
 
     public Castle() {

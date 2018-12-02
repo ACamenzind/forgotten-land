@@ -10,15 +10,15 @@ import com.strategy.game.Utils;
  */
 public class SidebarBuild extends SidebarOptionsSelection {
 
-    private static final GameButton manufacturers = new GameButton(Assets.sidebarBuildManufacturers);
-    private static final GameButton warehouses = new GameButton(Assets.sidebarBuildWarehouses);
-    private static final GameButton decorations = new GameButton(Assets.sidebarBuildDecorations);
-    private static final GameButton other = new GameButton(Assets.sidebarBuildOther);
+    private static final GameButton manufacturers = new GameButton(Assets.getTexture("sidebarBuildManufacturers"));
+    private static final GameButton warehouses = new GameButton(Assets.getTexture("sidebarBuildWarehouses"));
+    private static final GameButton decorations = new GameButton(Assets.getTexture("sidebarBuildDecorations"));
+    private static final GameButton other = new GameButton(Assets.getTexture("sidebarBuildOther"));
 
 
     public SidebarBuild() {
 
-        Assets.setBackground(this, Assets.sidebarBgBuild);
+        Assets.setBackground(this, Assets.getTexture("sidebarBgBuild"));
 
         title = Assets.makeLabel("Buildings", Utils.FONT_BIG_WHITE);
         addActor(title);

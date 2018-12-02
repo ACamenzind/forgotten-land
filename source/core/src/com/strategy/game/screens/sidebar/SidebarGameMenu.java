@@ -14,17 +14,17 @@ import com.strategy.game.screens.*;
  */
 public class SidebarGameMenu extends SidebarOptionsSelection {
 
-    private static final GameButton loadGame = new GameButton(Assets.sidebarMenuLoad);
-    private static final GameButton newGame = new GameButton(Assets.sidebarMenuNew);
-    private static final GameButton saveGame = new GameButton(Assets.sidebarMenuSave);
-    private static final GameButton quitGame = new GameButton(Assets.sidebarMenuQuit);
-    private static final GameButton credits = new GameButton(Assets.sidebarMenuCredits);
-    private static final GameButton settings = new GameButton(Assets.sidebarMenuSettings);
-    private static final GameButton instructions = new GameButton(Assets.sidebarMenuInstructions);
+    private static final GameButton loadGame = new GameButton(Assets.getTexture("sidebarMenuLoad"));
+    private static final GameButton newGame = new GameButton(Assets.getTexture("sidebarMenuNew"));
+    private static final GameButton saveGame = new GameButton(Assets.getTexture("sidebarMenuSave"));
+    private static final GameButton quitGame = new GameButton(Assets.getTexture("sidebarMenuQuit"));
+    private static final GameButton credits = new GameButton(Assets.getTexture("sidebarMenuCredits"));
+    private static final GameButton settings = new GameButton(Assets.getTexture("sidebarMenuSettings"));
+    private static final GameButton instructions = new GameButton(Assets.getTexture("sidebarMenuInstructions"));
 
     public SidebarGameMenu() {
 
-        Assets.setBackground(this, Assets.sidebarBgMenu);
+        Assets.setBackground(this, Assets.getTexture("sidebarBgMenu"));
 
         title = Assets.makeLabel("Menu", Utils.FONT_BIG_WHITE);
         addActor(title);
@@ -78,7 +78,7 @@ public class SidebarGameMenu extends SidebarOptionsSelection {
                 if (sidebar != null) {
                     GameScreen screen = sidebar.getScreen();
                     Stage stage = screen.getStage();
-                    stage.addActor(new FullScreen(screen.getStage(), Assets.screenCredits,()->{
+                    stage.addActor(new FullScreen(screen.getStage(), Assets.getTexture("screenCredits"),()->{
                         screen.getWorld().toggleRunning();
                     }));
                 }

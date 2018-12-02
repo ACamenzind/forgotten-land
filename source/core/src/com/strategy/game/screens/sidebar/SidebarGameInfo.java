@@ -46,7 +46,7 @@ public class SidebarGameInfo extends Table implements Display {
     public SidebarGameInfo(World world) {
         this.world = world;
 
-        Assets.setBackground(this, Assets.sidebarBgInfo);
+        Assets.setBackground(this, Assets.getTexture("sidebarBgInfo"));
 
         addActor(title);
         addActor(total_population);

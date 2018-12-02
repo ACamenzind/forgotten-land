@@ -36,7 +36,7 @@ public class SidebarBuildingInfo extends Table implements Display {
     private Table tableCost = new Table();
     private Table tableProfit = new Table();
     private Table tableCapacity = new Table();
-    private GameButton cancel = new GameButton(Assets.sidebarBuildInfoCancel);//GameButton(Assets.sidebarBuildInfoCancel);
+    private GameButton cancel = new GameButton(Assets.getTexture("sidebarBuildInfoCancel"));//GameButton(Assets.sidebarBuildInfoCancel);
     private static final float CANCEL_SIZE = 0.1f;
     private static final float CANCEL_POSITION_X = 0.825f;
     private static final float CANCEL_POSITION_Y = 0.825f;
@@ -55,10 +55,10 @@ public class SidebarBuildingInfo extends Table implements Display {
     private static final float MENU3_HEIGHT = 0.125f;
     private static final float MENU3_BUTTON_WIDTH = MENU3_WIDTH / MENU3_ITEMS;
     private static final float MENU3_BUTTON_HEIGHT = 1f;
-    private GameButton menu3ButtonInfo = new GameButton(Assets.sidebarBuildInfoInfo);
-    private GameButton menu3ButtonCost = new GameButton(Assets.sidebarBuildInfoCost);
-    private GameButton menu3ButtonProfit = new GameButton(Assets.sidebarBuildInfoProfit);
-    private GameButton menu3ButtonCapacity = new GameButton(Assets.sidebarBuildInfoCapacity);
+    private GameButton menu3ButtonInfo = new GameButton(Assets.getTexture("sidebarBuildInfoInfo"));
+    private GameButton menu3ButtonCost = new GameButton(Assets.getTexture("sidebarBuildInfoCost"));
+    private GameButton menu3ButtonProfit = new GameButton(Assets.getTexture("sidebarBuildInfoProfit"));
+    private GameButton menu3ButtonCapacity = new GameButton(Assets.getTexture("sidebarBuildInfoCapacity"));
     private Table menu3 = new Table();
 
     // MENU x2
@@ -67,8 +67,8 @@ public class SidebarBuildingInfo extends Table implements Display {
     private static final float MENU2_HEIGHT = 0.125f;
     private static final float MENU2_BUTTON_WIDTH = MENU2_WIDTH / MENU2_ITEMS;
     private static final float MENU2_BUTTON_HEIGHT = 1f;
-    private GameButton menu2ButtonInfo = new GameButton(Assets.sidebarBuildInfoInfoLong);
-    private GameButton menu2ButtonCost = new GameButton(Assets.sidebarBuildInfoCostLong);
+    private GameButton menu2ButtonInfo = new GameButton(Assets.getTexture("sidebarBuildInfoInfoLong"));
+    private GameButton menu2ButtonCost = new GameButton(Assets.getTexture("sidebarBuildInfoCostLong"));
     private Table menu2 = new Table();
 
     // IMAGE
@@ -86,21 +86,21 @@ public class SidebarBuildingInfo extends Table implements Display {
     private Label workers = Assets.makeLabel("Workers:\n100 / 100", Utils.FONT_SMALL_BLACK);
     private static final float WORKERS_POSITION_X = IMAGE_POSITION_X + IMAGE_SIZE + 0.05f;
     private static final float WORKERS_POSITION_Y = IMAGE_POSITION_Y;
-    private GameButton workersButtonAdd = new GameButton(Assets.sidebarBuildInfoPlus);
-    private GameButton workersButtonRemove = new GameButton(Assets.sidebarBuildInfoMinus);
+    private GameButton workersButtonAdd = new GameButton(Assets.getTexture("sidebarBuildInfoPlus"));
+    private GameButton workersButtonRemove = new GameButton(Assets.getTexture("sidebarBuildInfoMinus"));
     private static final float WORKERS_BUTTON_SIZE = 0.075f;
     private static final float WORKERS_BUTTON_POSITION_X = WORKERS_POSITION_X + 0.175f;
     private static final float WORKERS_BUTTON_POSITION_Y = IMAGE_POSITION_Y;
 
     // DESTROY
-    private GameButton destroyButton = new GameButton(Assets.sidebarBuildInfoDestroy);
+    private GameButton destroyButton = new GameButton(Assets.getTexture("sidebarBuildInfoDestroy"));
     private static final float DESTROY_WIDTH = 0.3f;
     private static final float DESTROY_HEIGHT = 0.135f;
     private static final float DESTROY_POSITION_X = (1f - (DESTROY_WIDTH * 2f + 0.05f)) / 2f;
     private static final float DESTROY_POSITION_Y = IMAGE_POSITION_Y - DESTROY_HEIGHT - 0.05f;
 
     // REPAIR
-    private GameButton repairButton = new GameButton(Assets.sidebarBuildInfoRepair);
+    private GameButton repairButton = new GameButton(Assets.getTexture("sidebarBuildInfoRepair"));
     private static final float REPAIR_WIDTH = DESTROY_WIDTH;
     private static final float REPAIR_HEIGHT = DESTROY_HEIGHT;
     private static final float REPAIR_POSITION_X = DESTROY_POSITION_X + DESTROY_WIDTH + 0.05f;
@@ -139,7 +139,7 @@ public class SidebarBuildingInfo extends Table implements Display {
         // GENERAL
         this.entity = null;
         this.building = null;
-        Assets.setBackground(this, Assets.sidebarBuildInfoBg2);
+        Assets.setBackground(this, Assets.getTexture("sidebarBuildInfoBg2"));
 
         addActor(cancel);
         cancel.addListener(new InputListener() {
@@ -397,7 +397,7 @@ public class SidebarBuildingInfo extends Table implements Display {
 
     public void updateMenu(Menu menu) {
         if (menu == Menu.NONE || entity == null) {
-            Assets.setBackground(this, Assets.sidebarBuildInfoBg2);
+            Assets.setBackground(this, Assets.getTexture("sidebarBuildInfoBg2"));
             this.menu2.setVisible(false);
             this.menu3.setVisible(false);
             tableInfo.setVisible(false);
@@ -408,7 +408,7 @@ public class SidebarBuildingInfo extends Table implements Display {
             showInfluenceArea(null);
         }
         else if (building != null) {
-            Assets.setBackground(this, Assets.sidebarBuildInfoBg);
+            Assets.setBackground(this, Assets.getTexture("sidebarBuildInfoBg"));
             showInfluenceArea(building);
             if (menu == Menu.INFO) {
                 tableInfo.setVisible(true);
@@ -457,7 +457,7 @@ public class SidebarBuildingInfo extends Table implements Display {
             repairButton.setVisible(!preview);
         }
         else if (resource != null) {
-            Assets.setBackground(this, Assets.sidebarBuildInfoBg);
+            Assets.setBackground(this, Assets.getTexture("sidebarBuildInfoBg"));
             showInfluenceArea(null);
             tableInfo.setVisible(true);
             tableCost.setVisible(false);

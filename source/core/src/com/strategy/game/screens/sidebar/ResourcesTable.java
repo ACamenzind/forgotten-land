@@ -24,18 +24,18 @@ public class ResourcesTable extends Table {
         table = new Actor[RESOURCES_NUMBER + 1][columnsNumber + 1];
 
         if (black) {
-            table[1][0] = Assets.makeImage(Assets.resourcesFoodBk);
-            table[2][0] = Assets.makeImage(Assets.resourcesWoodBk);
-            table[3][0] = Assets.makeImage(Assets.resourcesRockBk);
-            table[4][0] = Assets.makeImage(Assets.resourcesGoldBk);
-            table[5][0] = Assets.makeImage(Assets.resourcesPeopleBk);
+            table[1][0] = Assets.makeImage(Assets.getTexture("resourcesFoodBk"));
+            table[2][0] = Assets.makeImage(Assets.getTexture("resourcesWoodBk"));
+            table[3][0] = Assets.makeImage(Assets.getTexture("resourcesRockBk"));
+            table[4][0] = Assets.makeImage(Assets.getTexture("resourcesGoldBk"));
+            table[5][0] = Assets.makeImage(Assets.getTexture("resourcesPeopleBk"));
         }
         else {
-            table[1][0] = Assets.makeImage(Assets.resourcesFood);
-            table[2][0] = Assets.makeImage(Assets.resourcesWood);
-            table[3][0] = Assets.makeImage(Assets.resourcesRock);
-            table[4][0] = Assets.makeImage(Assets.resourcesGold);
-            table[5][0] = Assets.makeImage(Assets.resourcesPeople);
+            table[1][0] = Assets.makeImage(Assets.getTexture("resourcesFood"));
+            table[2][0] = Assets.makeImage(Assets.getTexture("resourcesWood"));
+            table[3][0] = Assets.makeImage(Assets.getTexture("resourcesRock"));
+            table[4][0] = Assets.makeImage(Assets.getTexture("resourcesGold"));
+            table[5][0] = Assets.makeImage(Assets.getTexture("resourcesPeople"));
         }
 
         // This looks weird, but I need it to get the height of a Cell

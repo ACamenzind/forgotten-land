@@ -16,9 +16,9 @@ public class SidebarBuildSelection extends Table implements Display {
 
     protected Label title;
     protected GameButton[][] buttons;
-    protected GameButton rotate = new GameButton(Assets.sidebarBuildRotate);
-    protected GameButton cancel = new GameButton(Assets.sidebarBuildCancel);
-    protected GameButton back = new GameButton(Assets.sidebarBuildBack);
+    protected GameButton rotate = new GameButton(Assets.getTexture("sidebarBuildRotate"));
+    protected GameButton cancel = new GameButton(Assets.getTexture("sidebarBuildCancel"));
+    protected GameButton back = new GameButton(Assets.getTexture("sidebarBuildBack"));
 
     private static final int BUTTONS_PER_COLUMN = 6;
     private static final int BUTTONS_PER_ROW = 3;
@@ -31,7 +31,7 @@ public class SidebarBuildSelection extends Table implements Display {
     private static final float BUTTON_BOTTOM_HEIGHT = 0.069f;
 
     public SidebarBuildSelection() {
-        Assets.setBackground(this, Assets.sidebarBg);
+        Assets.setBackground(this, Assets.getTexture("sidebarBg"));
 
         buttons = new GameButton[BUTTONS_PER_COLUMN][BUTTONS_PER_ROW];
 

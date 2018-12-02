@@ -25,52 +25,13 @@ public final class Assets {
     private Assets(){}
 
     public static TiledMap map;
-//    // MAIN MENU
-//    public static Texture mainMenuNewGame, mainMenuCredits, mainMenuSettings, mainMenuInstructions;
-//    // BUILDINGS
-//    public static Texture house1, castle, leftwall, middlewall, rightwall, road, emptyTile, influenceTile, cows, warehouse, wheat, lumberjack, mine, market;
-//    // SIDEBAR BACKGROUNDS
-//    public static Texture sidebarBg, sidebarBgInfo, sidebarBgBuild, sidebarBgMenu, sidebarBuildInfoBg;
-//    // SIDEBAR MENU
-//    public static Texture sidebarMenuInfo, sidebarMenuBuild, sidebarMenuMenu, sidebarMenuInfoClicked,
-//            sidebarMenuBuildClicked, sidebarMenuMenuClicked;
-//    // SIDEBAR BUILD
-//    public static Texture sidebarBuildManufacturers, sidebarBuildWarehouses, sidebarBuildDecorations, sidebarBuildOther,
-//            sidebarBuildRotate, sidebarBuildBack, sidebarBuildCancel;
-//    // SIDEBAR GAME MENU
-//    public static Texture sidebarMenuNew, sidebarMenuLoad, sidebarMenuSave, sidebarMenuQuit, sidebarMenuCredits,
-//            sidebarMenuSettings, sidebarMenuInstructions;
-//    // SIDEBAR BUILDING INFO
-//    public static Texture sidebarBuildInfoInfo, sidebarBuildInfoBg2, sidebarBuildInfoInfoLong, sidebarBuildInfoCost,
-//            sidebarBuildInfoCostLong, sidebarBuildInfoProfit, sidebarBuildInfoCapacity, sidebarBuildInfoPlus,
-//            sidebarBuildInfoMinus, sidebarBuildInfoDestroy, sidebarBuildInfoRepair, sidebarBuildInfoCancel;
-//    // RESOURCES_BAR
-//    public static Texture resourcesBarBg, resourcesBarPause, resourcesBarResume, resourcesBarSpeedNormal,
-//            resourcesBarSpeedFast;
-//    // OVERLAYS
-//    public static Texture pausedOverlay, bottomBarBg;
-//    // RESOURCES
-//    public static Texture resourcesFood, resourcesWood, resourcesRock, resourcesGold, resourcesPeople, resourcesFoodBk,
-//            resourcesWoodBk, resourcesRockBk, resourcesGoldBk, resourcesPeopleBk;
-//    // FULLSCREEN
-//    public static Texture screenCredits, screenInstructions;
-//    // MESSAGES
-//    public static Texture messageOk, messageCancel;
-//    // RESOURCES IMAGES
-//    public static Texture tree, stone;
-//    // SETTINGS
-//    public static Texture settingsSliderBg, settingsSliderKnob, settingsRes720p,
-//            settingsRes1080p, settingsResFull, goBack;
-//    // INSTRUCTIONS
-//    public static Texture screenInstructions1, screenInstructions2, screenInstructions3, screenInstructions4,
-//            screenInstructions5, screenInstructionsBack, screenInstructionsNext;
     // SOUNDS
     public static Sound bgSound, hit, demolition;
     private static final String DEFAULT_FONT_PATH = "core/assets/fonts/san_francisco_regular.ttf";
     // new Font
     private static final String ULTRALIGHT_FONT_PATH = "core/assets/fonts/san_francisco_ultralight.ttf";
 
-    private static HashMap<String, Texture> textures;
+    private static HashMap<String, Texture> textures = new HashMap<>();
 
     public static Texture getTexture(String name) {
         return textures.get(name);

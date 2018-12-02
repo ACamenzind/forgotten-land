@@ -25,7 +25,7 @@ public class Settings extends Table {
 
     public Settings(final GameScreen screen) {
 
-        Assets.setBackground(this, Assets.resourcesBarBg);
+        Assets.setBackground(this, Assets.getTexture("resourcesBarBg"));
         Stage stage = screen.getStage();
         setSize(stage.getWidth(), stage.getHeight());
 
@@ -40,7 +40,7 @@ public class Settings extends Table {
         Assets.setPositionRelative(title, 0.5f, 0.7f, true, true);
 
         // BUTTON BACK
-        GameButton back = new GameButton(Assets.goBack);
+        GameButton back = new GameButton(Assets.getTexture("goBack"));
         addActor(back);
         Assets.setSizeRelative(back, 0.02f, 0.02f * getWidth() / getHeight());
         back.addListener(new InputListener() {
@@ -66,8 +66,8 @@ public class Settings extends Table {
         container.add(volumeLabel).expand().uniform().right();
 
         final Slider volumeSlider = new Slider(0f, 1f, 0.1f, false, new Slider.SliderStyle(
-                new SpriteDrawable(new Sprite(Assets.settingsSliderBg)),
-                new SpriteDrawable(new Sprite(Assets.settingsSliderKnob))));
+                new SpriteDrawable(new Sprite(Assets.getTexture("settingsSliderBg"))),
+                new SpriteDrawable(new Sprite(Assets.getTexture("settingsSliderKnob")))));
         volumeSlider.setValue(0.5f);
 
         volumeSlider.getStyle().knob.setMinHeight(container.getHeight() / 8f);
@@ -88,21 +88,21 @@ public class Settings extends Table {
         container.add(resolutionLabel).expand().right();
 
         Table resolutionButtons = new Table();
-        GameButton res720p = new GameButton(Assets.settingsRes720p);
+        GameButton res720p = new GameButton(Assets.getTexture("settingsRes720p"));
         res720p.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 Gdx.graphics.setWindowedMode(1280, 720);
                 return false;
             }
         });
-        GameButton res1080p = new GameButton(Assets.settingsRes1080p);
+        GameButton res1080p = new GameButton(Assets.getTexture("settingsRes1080p"));
         res1080p.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 Gdx.graphics.setWindowedMode(1920, 1080);
                 return false;
             }
         });
-        GameButton resFull = new GameButton(Assets.settingsResFull);
+        GameButton resFull = new GameButton(Assets.getTexture("settingsResFull"));
         resFull.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 Gdx.graphics.setWindowedMode((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
@@ -127,7 +127,7 @@ public class Settings extends Table {
     public Settings(final StrategyGame game) {
         final MainMenuScreen screen = (MainMenuScreen) game.getScreen();
 
-        Assets.setBackground(this, Assets.resourcesBarBg);
+        Assets.setBackground(this, Assets.getTexture("resourcesBarBg"));
 
         Stage stage = screen.getStage();
         setSize(stage.getWidth(), stage.getHeight());
@@ -142,7 +142,7 @@ public class Settings extends Table {
         Assets.setPositionRelative(title, 0.5f, 0.7f, true, true);
 
         // BUTTON BACK
-        GameButton back = new GameButton(Assets.goBack);
+        GameButton back = new GameButton(Assets.getTexture("goBack"));
         addActor(back);
         Assets.setSizeRelative(back, 0.02f, 0.02f * getWidth() / getHeight());
         back.addListener(new InputListener() {
@@ -167,8 +167,8 @@ public class Settings extends Table {
         container.add(volumeLabel).expand().uniform().right();
 
         final Slider volumeSlider = new Slider(0f, 1f, 0.1f, false, new Slider.SliderStyle(
-                new SpriteDrawable(new Sprite(Assets.settingsSliderBg)),
-                new SpriteDrawable(new Sprite(Assets.settingsSliderKnob))));
+                new SpriteDrawable(new Sprite(Assets.getTexture("settingsSliderBg"))),
+                new SpriteDrawable(new Sprite(Assets.getTexture("settingsSliderKnob")))));
         volumeSlider.setValue(0.5f);
 
         volumeSlider.getStyle().knob.setMinHeight(container.getHeight() / 8f);
@@ -189,21 +189,21 @@ public class Settings extends Table {
         container.add(resolutionLabel).expand().right();
 
         Table resolutionButtons = new Table();
-        GameButton res720p = new GameButton(Assets.settingsRes720p);
+        GameButton res720p = new GameButton(Assets.getTexture("settingsRes720p"));
         res720p.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 Gdx.graphics.setWindowedMode(1280, 720);
                 return false;
             }
         });
-        GameButton res1080p = new GameButton(Assets.settingsRes1080p);
+        GameButton res1080p = new GameButton(Assets.getTexture("settingsRes1080p"));
         res1080p.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 Gdx.graphics.setWindowedMode(1920, 1080);
                 return false;
             }
         });
-        GameButton resFull = new GameButton(Assets.settingsResFull);
+        GameButton resFull = new GameButton(Assets.getTexture("settingsResFull"));
         resFull.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 Gdx.graphics.setWindowedMode((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
