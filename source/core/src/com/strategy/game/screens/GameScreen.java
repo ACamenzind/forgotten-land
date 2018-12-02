@@ -18,8 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.strategy.game.*;
 import com.strategy.game.buildings.Castle;
-import com.strategy.game.buildings.House;
-import com.strategy.game.buildings.StaticEntityBuilder;
+import com.strategy.game.buildings.TileMapManager;
 import com.strategy.game.screens.sidebar.Sidebar;
 import com.strategy.game.world.World;
 
@@ -42,7 +41,7 @@ public class GameScreen implements Screen, EventListener {
     private InputMultiplexer gameInputMultiplexer;
     private GameInputProcessor gameInputProcessor;
     private World world;
-    private StaticEntityBuilder builder;
+    private TileMapManager builder;
 
     private Sidebar sidebar;
     private ResourcesBar resourcesBar;
@@ -81,7 +80,7 @@ public class GameScreen implements Screen, EventListener {
 
         this.gameInputProcessor = new GameInputProcessor(this);
         this.world = new World(this);
-        this.builder = new StaticEntityBuilder(this);
+        this.builder = new TileMapManager(this);
         world.setBuilder(builder);
         world.readResources();
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
@@ -221,7 +220,7 @@ public class GameScreen implements Screen, EventListener {
         return map;
     }
 
-    public StaticEntityBuilder getBuilder() {
+    public TileMapManager getBuilder() {
         return builder;
     }
 

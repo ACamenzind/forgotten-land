@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Disposable;
 import com.strategy.game.ResourceContainer;
 import com.strategy.game.buildings.Structure;
-import com.strategy.game.buildings.StaticEntityBuilder;
+import com.strategy.game.buildings.TileMapManager;
 import com.strategy.game.screens.GameScreen;
 //import com.sun.javafx.scene.control.skin.VirtualFlow;
 
@@ -24,7 +24,7 @@ public class World implements Disposable {
     private ArrayList<Structure> buildings; // Resources and Buildings
     private ArrayList<Resource> resources;
     private TiledMap map;
-    private StaticEntityBuilder builder;
+    private TileMapManager builder;
     private ResourceHandler resourceHandler;
     private int updateCounter;
     private int eventsCounter;
@@ -60,7 +60,7 @@ public class World implements Disposable {
         return worldEventsHandler;
     }
 
-    public void setBuilder(StaticEntityBuilder builder) {
+    public void setBuilder(TileMapManager builder) {
         this.builder = builder;
     }
 
@@ -76,7 +76,7 @@ public class World implements Disposable {
         return buildings;
     }
 
-    public StaticEntityBuilder getBuilder() {
+    public TileMapManager getBuilder() {
         return builder;
     }
 

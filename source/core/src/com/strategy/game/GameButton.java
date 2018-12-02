@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.strategy.game.buildings.Structure;
-import com.strategy.game.buildings.StaticEntityBuilder;
+import com.strategy.game.buildings.TileMapManager;
 import com.strategy.game.screens.sidebar.Sidebar;
 
 /**
@@ -145,7 +145,7 @@ public class GameButton extends Button {
                         Structure newBuilding = building.getClass().newInstance();
                         if (hasParent() && getParent().hasParent()) {
                             Sidebar sidebar = (Sidebar) getParent().getParent();
-                            StaticEntityBuilder builder = sidebar.getScreen().getBuilder();
+                            TileMapManager builder = sidebar.getScreen().getBuilder();
                             builder.setSelectedEntity(newBuilding);
                             sidebar.setEntity(newBuilding, true);
                         }

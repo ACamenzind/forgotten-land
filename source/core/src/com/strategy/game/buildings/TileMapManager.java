@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.strategy.game.*;
 import com.strategy.game.screens.GameScreen;
 import com.strategy.game.world.Resource;
+import com.strategy.game.world.ResourceContainerBuilder;
 import com.strategy.game.world.World;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
  * Handles the creation, placement and destruction of static entities (e.g. buildings)
  *
  */
-public class StaticEntityBuilder implements Observable {
+public class TileMapManager implements Observable {
     private GameScreen gameScreen;
     private TiledMapTileLayer buildingsLayer; // the buildings layer
     private TiledMapTileLayer selectionLayer; // contains the selected building
@@ -32,7 +33,7 @@ public class StaticEntityBuilder implements Observable {
     private ArrayList<EventListener> listeners;
     private MapEntity lastDestroyed;
 
-    public StaticEntityBuilder(GameScreen gameScreen) {
+    public TileMapManager(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
         this.world = gameScreen.getWorld();
         this.buildingsLayer = (TiledMapTileLayer) gameScreen.getMap().getLayers().get("Buildings");
@@ -116,6 +117,46 @@ public class StaticEntityBuilder implements Observable {
             }
         }
         return resources;
+    }
+
+    public ResourceContainer getNearbyResources(Structure building, int startX, int endX, int startY, int endY) {
+        boolean foundAResource = false;
+        ResourceContainer resourcesAmount = new ResourceContainerBuilder().build();
+        for (int i = startX; i < endX; i++) {
+            for (int j = startY; j < endY; j++) {
+                TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i,j);
+
+                if (cell != null && cell.getTile() != null) {
+                    ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
+                    MapEntity object = tile.getObject();
+                    String property = tile.getProperties().get("type", String.class);
+                    String resourceType = ((Collector) building).getResourceCollected();
+
+                    if (property != null && property.equals(resourceType) && object != null && !foundAResource) {
+                        ResourceContainer resourceProduction = building.getProductionsPerTurn();
+                        int available = object.getLife();
+                        int amount = 0;
+                        if (resourceType.equals("wood")) {
+                            amount = resourceProduction.getWood();
+                        } else if (resourceType.equals("rock")) {
+                            amount = resourceProduction.getRock();
+                        }
+
+                        if (available - amount > 0) {
+                            object.removeLife(amount);
+                        } else {
+                            world.getBuilder().destroy(object);
+                        }
+                        foundAResource = true;
+                        resourcesAmount.add(resourceProduction);
+                    }
+                }
+            }
+        }
+        if (!foundAResource) {
+            return null;
+        }
+        return resourcesAmount;
     }
 
     /**

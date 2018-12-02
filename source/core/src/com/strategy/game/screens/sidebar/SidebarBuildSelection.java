@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.strategy.game.Assets;
 import com.strategy.game.GameButton;
-import com.strategy.game.buildings.StaticEntityBuilder;
+import com.strategy.game.buildings.TileMapManager;
 import com.strategy.game.screens.Display;
 
 /**
@@ -39,7 +39,7 @@ public class SidebarBuildSelection extends Table implements Display {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             if (hasParent()) {
                 Sidebar sidebar = (Sidebar) getParent();
-                StaticEntityBuilder builder = sidebar.getScreen().getBuilder();
+                TileMapManager builder = sidebar.getScreen().getBuilder();
                 builder.rotate();
             }
             return true;
@@ -52,7 +52,7 @@ public class SidebarBuildSelection extends Table implements Display {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             if (hasParent()) {
                 Sidebar sidebar = (Sidebar) getParent();
-                StaticEntityBuilder builder = sidebar.getScreen().getBuilder();
+                TileMapManager builder = sidebar.getScreen().getBuilder();
                 builder.setSelectedEntity(null);
                 sidebar.setEntity(null, true);
             }
@@ -68,7 +68,7 @@ public class SidebarBuildSelection extends Table implements Display {
     @Override
     public void update() {
         if (hasParent()) {
-            StaticEntityBuilder builder = ((Sidebar) getParent()).getScreen().getBuilder();
+            TileMapManager builder = ((Sidebar) getParent()).getScreen().getBuilder();
             rotate.setVisible(builder.hasSelectedEntity() && builder.getSelectedEntity().canRotate());
             cancel.setVisible(builder.hasSelectedEntity());
         }

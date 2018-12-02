@@ -1,12 +1,9 @@
 package com.strategy.game.world;
 
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
-import com.strategy.game.ExtendedStaticTiledMapTile;
 import com.strategy.game.ResourceContainer;
 import com.strategy.game.buildings.Structure;
 import com.strategy.game.buildings.Collector;
-import com.strategy.game.buildings.MapEntity;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -243,8 +240,6 @@ public class ResourceHandler {
 
             // Resource collectors: lumberjack and mine
             if (building instanceof Collector) {
-
-                TiledMapTileLayer buildingsLayer = (TiledMapTileLayer) world.getGameScreen().getMap().getLayers().get("Buildings");
                 Vector2 coords = building.getCoords();
 
                 int startX = (int)coords.x - building.getInfluenceRadius();
@@ -255,41 +250,9 @@ public class ResourceHandler {
 
                 // Goes through the tiles inside the building's influence area and removes resources from the first
                 // resource (either rock or wood) it finds.
-                // TODO: 18/05/16 Refactor
-                boolean foundAResource = false;
-                for (int i = startX; i < endX; i++) {
-                    for (int j = startY; j < endY; j++) {
-                        TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i,j);
-
-                        if (cell != null && cell.getTile() != null) {
-                            ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
-                            MapEntity object = tile.getObject();
-                            String property = tile.getProperties().get("type", String.class);
-                            String resourceType = ((Collector) building).getResourceCollected();
-
-                            if (property != null && property.equals(resourceType) && object != null && !foundAResource) {
-                                ResourceContainer resourceProduction = building.getProductionsPerTurn();
-                                int available = object.getLife();
-                                int amount = 0;
-                                if (resourceType.equals("wood")) {
-                                    amount = resourceProduction.getWood();
-                                } else if (resourceType.equals("rock")) {
-                                    amount = resourceProduction.getRock();
-                                }
-
-                                if (available - amount > 0) {
-                                    object.removeLife(amount);
-                                } else {
-//                                    System.out.println("Resource empty");
-                                    world.getBuilder().destroy(object);
-                                }
-                                foundAResource = true;
-                                totalResources = totalResources.add(resourceProduction);
-                            }
-                        }
-                    }
-                }
-                if (!foundAResource) world.getGameScreen().setConsoleMessage("One of your buildings has no resources around it. Destroy it!");
+                ResourceContainer foundResources = world.getBuilder().getNearbyResources(building, startX, endX, startY, endY);
+                if (foundResources == null)
+                    world.getGameScreen().setConsoleMessage("One of your buildings has no resources around it. Destroy it!");
             } else { // normal buildings
                 ResourceContainer production = building.getProductionsPerTurn();
                 totalResources = totalResources.add(production);
@@ -315,7 +278,7 @@ public class ResourceHandler {
      */
     public boolean isResourceInBounds(ResourceType type){
         int value = totalResources.get(type);
-        return 0<= value && value < getMaximumResources().get(type);
+        return 0 <= value && value < getMaximumResources().get(type);
     }
 
     /**
