@@ -94,7 +94,6 @@ public class StaticEntityBuilder implements Observable {
     /**
      * Searches the map file for tiles that are of type resource, and adds them to the resource list
      * to keep track of them.
-     * TODO: refactor
      */
     public ArrayList<Resource> readResources() {
         TiledMapTileLayer layer = buildingsLayer;
@@ -217,17 +216,7 @@ public class StaticEntityBuilder implements Observable {
             Vector2 coords = entity.getCoords();
 
             // Remove the building tiles
-            for (int i = (int) coords.x; i < (int) coords.x + entity.collisionSize.x; i++) {
-                for (int j = (int) coords.y; j < (int) coords.y + entity.collisionSize.y; j++) {
-                    TiledMapTileLayer.Cell buildingsCell = buildingsLayer.getCell(i, j);
-                    ExtendedStaticTiledMapTile buildingTile = (ExtendedStaticTiledMapTile) buildingsCell.getTile();
-                    buildingTile.setTextureRegion(new TextureRegion(Assets.emptyTile));
-                    buildingTile.setObject(null);
-                    buildingTile.setObstacle(false);
-                    buildingsCell.setTile(buildingTile);
-                    buildingsLayer.setCell(i, j, buildingsCell);
-                }
-            }
+            removeEntityTiles(entity, coords);
 
             int startX = (int) coords.x - entity.getInfluenceRadius();
             int startY = (int) coords.y - entity.getInfluenceRadius();
@@ -241,21 +230,39 @@ public class StaticEntityBuilder implements Observable {
 
             // Resets the influence area
             if (entity instanceof Building) {
-                for (int j = startY; j < endY; j++) {
-                    for (int i = startX; i < endX; i++) {
-                        TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
-                        if (cell != null) {
-                            ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
-                            int buildingsNearby = tile.getBuildingsNearby();
-                            if (buildingsNearby > 0)
-                                tile.decBuildingsNearby();
-                            cell.setTile(tile);
-                            buildingsLayer.setCell(i, j, cell);
-                        }
-                    }
-                }
+                resetInfluenceArea(startX, startY, endX, endY);
             }
             refreshInfluence(); // Redraws the influence area with the new data
+        }
+    }
+
+    private void removeEntityTiles(MapEntity entity, Vector2 coords) {
+        for (int i = (int) coords.x; i < (int) coords.x + entity.collisionSize.x; i++) {
+            for (int j = (int) coords.y; j < (int) coords.y + entity.collisionSize.y; j++) {
+                TiledMapTileLayer.Cell buildingsCell = buildingsLayer.getCell(i, j);
+                ExtendedStaticTiledMapTile buildingTile = (ExtendedStaticTiledMapTile) buildingsCell.getTile();
+                buildingTile.setTextureRegion(new TextureRegion(Assets.emptyTile));
+                buildingTile.setObject(null);
+                buildingTile.setObstacle(false);
+                buildingsCell.setTile(buildingTile);
+                buildingsLayer.setCell(i, j, buildingsCell);
+            }
+        }
+    }
+
+    private void resetInfluenceArea(int startX, int startY, int endX, int endY) {
+        for (int j = startY; j < endY; j++) {
+            for (int i = startX; i < endX; i++) {
+                TiledMapTileLayer.Cell cell = buildingsLayer.getCell(i, j);
+                if (cell != null) {
+                    ExtendedStaticTiledMapTile tile = (ExtendedStaticTiledMapTile) cell.getTile();
+                    int buildingsNearby = tile.getBuildingsNearby();
+                    if (buildingsNearby > 0)
+                        tile.decBuildingsNearby();
+                    cell.setTile(tile);
+                    buildingsLayer.setCell(i, j, cell);
+                }
+            }
         }
     }
 
@@ -318,9 +325,7 @@ public class StaticEntityBuilder implements Observable {
                     selectedEntity = selectedEntity.getClass().newInstance();
                     selectedEntity.setMainTexture(currentTex);
 
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
+                } catch (InstantiationException | IllegalAccessException e) {
                     e.printStackTrace();
                 }
             }
