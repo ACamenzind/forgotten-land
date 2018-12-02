@@ -62,6 +62,10 @@ public class World implements Disposable, EventListener {
                 resourceHandler.addToTotal(refund);
                 resourceHandler.removeAllWorkers(selected);
                 break;
+            case RESOURCE_DEPLETED:
+                Resource depleted = (Resource)builder.getLastDestroyed();
+                resources.remove(depleted);
+                break;
         }
     }
 

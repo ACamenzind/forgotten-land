@@ -179,12 +179,11 @@ public class StaticEntityBuilder implements Observable {
         if (entity != null && world.getBuildings().size() > 1) {
             lastDestroyed = entity;
             if (entity instanceof Resource) {
-                world.getResources().remove(entity);
+                updateListeners(Events.RESOURCE_DEPLETED);
             } else {
                 // When destroying a building, you get half its costs back
                 updateListeners(Events.BUILDING_DESTROYED);
             }
-
 
             Vector2 coords = entity.getCoords();
 
