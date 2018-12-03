@@ -33,23 +33,11 @@ public final class Assets {
 
     private static HashMap<String, Texture> textures = new HashMap<>();
 
-    public static Texture getTexture(String name) {
-        return textures.get(name);
-    }
-
-    private static void addTexture(String name, String path) {
-        textures.put(name, createTexture(path));
-    }
-
     public static void loadMap() {
         map = new TmxMapLoader().load("core/assets/maps/default.tmx");
     }
 
     public static void load() {
-//        map = new TmxMapLoader().load("core/assets/maps/big_map.tmx");
-        //TODO: add credit for CC3.0 sprites
-//        map = new TmxMapLoader().load("core/assets/maps/default.tmx");
-
         // MAIN MENU
         addTexture("mainMenuNewGame", "core/assets/textures/mainMenuScreen/newgame.png");
         addTexture("mainMenuCredits", "core/assets/textures/mainMenuScreen/credits.png");
@@ -169,6 +157,14 @@ public final class Assets {
         Texture texture = new Texture(Gdx.files.internal(path));
         texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         return texture;
+    }
+
+    public static Texture getTexture(String name) {
+        return textures.get(name);
+    }
+
+    private static void addTexture(String name, String path) {
+        textures.put(name, createTexture(path));
     }
 
     public static void loadSounds() {

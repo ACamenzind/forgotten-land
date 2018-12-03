@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
@@ -41,7 +40,7 @@ public class GameScreen implements Screen, EventListener {
     private InputMultiplexer gameInputMultiplexer;
     private GameInputProcessor gameInputProcessor;
     private World world;
-    private TileMapManager builder;
+    private TileMapManager tileMapManager;
 
     private Sidebar sidebar;
     private ResourcesBar resourcesBar;
@@ -56,7 +55,6 @@ public class GameScreen implements Screen, EventListener {
     private Vector2 touchDownCoords;
     private Vector2 touchUpCoords;
 
-    private ShapeRenderer shapeRenderer;
     private boolean isSelecting;
 
 
@@ -65,29 +63,28 @@ public class GameScreen implements Screen, EventListener {
 
         this.batch = game.getBatch();
         this.font = game.getFont();
-        this.shapeRenderer = new ShapeRenderer();
 
         Assets.loadMap();
         Assets.loadSounds();
         this.map = Assets.map;
         this.convertMap(map);
 
-
-//        this.renderer = new IsometricTiledMapRenderer(map);
         this.renderer = new BetterRenderer(map);
         this.camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         this.gameInputMultiplexer = new InputMultiplexer();
 
         this.gameInputProcessor = new GameInputProcessor(this);
         this.world = new World(this);
-        this.builder = new TileMapManager(this);
-        world.setBuilder(builder);
+        this.tileMapManager = new TileMapManager(this);
+        world.setBuilder(tileMapManager);
         world.readResources();
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         this.sidebar = new Sidebar(stage, this);
         this.resourcesBar = new ResourcesBar(stage, world);
-        this.builder.addListener(this.resourcesBar);
-        setMessages();
+        this.tileMapManager.addListener(this.resourcesBar);
+        this.tileMapManager.addListener(this);
+        this.tileMapManager.addListener(game.getSoundManager());
+        initializeUIMessages();
 
         // Looping background sound
         game.getSoundManager().playSound(SoundManager.SoundType.BACKGROUND);
@@ -97,18 +94,18 @@ public class GameScreen implements Screen, EventListener {
         Gdx.input.setInputProcessor(gameInputMultiplexer);
 
         this.isSelecting = false;
-
-
-        // Starting building
-        // TODO: remove magic numbers (make it random?)
-        builder.setSelectedEntity(new Castle());
-        builder.placeSelectedEntity(25, 20, true);
-        builder.removeSelectedEntity();
-        camera.translate(25*128, 0);
+        initializeGameStart();
 
     }
 
-    public void setMessages() {
+    private void initializeGameStart() {
+        tileMapManager.setSelectedEntity(new Castle());
+        tileMapManager.placeSelectedEntity(25, 20, true);
+        tileMapManager.removeSelectedEntity();
+        camera.translate(25*128, 0);
+    }
+
+    public void initializeUIMessages() {
         this.messages = new Table();
         messages.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         stage.addActor(messages);
@@ -220,8 +217,8 @@ public class GameScreen implements Screen, EventListener {
         return map;
     }
 
-    public TileMapManager getBuilder() {
-        return builder;
+    public TileMapManager getTileMapManager() {
+        return tileMapManager;
     }
 
     public Sidebar getSidebar() {
@@ -253,14 +250,14 @@ public class GameScreen implements Screen, EventListener {
 
         world.update(delta);
 
-        builder.renderSelection(camera);
+        tileMapManager.renderSelection(camera);
 
         camera.update();
 
         renderer.setView(camera);
         renderer.render();
 
-        builder.clear();
+        tileMapManager.clear();
 
         // Draw FPS counter on the top left
         batch.begin();
@@ -279,12 +276,9 @@ public class GameScreen implements Screen, EventListener {
 
     @Override
     public void resize(int width, int height) {
-        // Updates the screen when the window is resized
         camera.viewportWidth = width;
         camera.viewportHeight = height;
         camera.update();
-//        sidebar.update(); //Apparently not necessary
-//        resourcesBar.update(); //Apparently not necessary
         stage.getViewport().update(width, height);
     }
 

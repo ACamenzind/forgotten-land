@@ -46,7 +46,7 @@ public class Sidebar extends Table implements Display {
         if (middle != null) {
             middle.remove();
         }
-        screen.getBuilder().removeSelectedEntity();
+        screen.getTileMapManager().removeSelectedEntity();
 
         if (display == DisplayType.GAME_INFO) {
             middle = new SidebarGameInfo(screen.getWorld());

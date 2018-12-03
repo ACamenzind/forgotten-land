@@ -39,7 +39,7 @@ public class SidebarBuildSelection extends Table implements Display {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             if (hasParent()) {
                 Sidebar sidebar = (Sidebar) getParent();
-                TileMapManager builder = sidebar.getScreen().getBuilder();
+                TileMapManager builder = sidebar.getScreen().getTileMapManager();
                 builder.rotate();
             }
             return true;
@@ -52,7 +52,7 @@ public class SidebarBuildSelection extends Table implements Display {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             if (hasParent()) {
                 Sidebar sidebar = (Sidebar) getParent();
-                TileMapManager builder = sidebar.getScreen().getBuilder();
+                TileMapManager builder = sidebar.getScreen().getTileMapManager();
                 builder.setSelectedEntity(null);
                 sidebar.setEntity(null, true);
             }
@@ -68,7 +68,7 @@ public class SidebarBuildSelection extends Table implements Display {
     @Override
     public void update() {
         if (hasParent()) {
-            TileMapManager builder = ((Sidebar) getParent()).getScreen().getBuilder();
+            TileMapManager builder = ((Sidebar) getParent()).getScreen().getTileMapManager();
             rotate.setVisible(builder.hasSelectedEntity() && builder.getSelectedEntity().canRotate());
             cancel.setVisible(builder.hasSelectedEntity());
         }

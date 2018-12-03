@@ -145,7 +145,7 @@ public class GameButton extends Button {
                         Structure newBuilding = building.getClass().newInstance();
                         if (hasParent() && getParent().hasParent()) {
                             Sidebar sidebar = (Sidebar) getParent().getParent();
-                            TileMapManager builder = sidebar.getScreen().getBuilder();
+                            TileMapManager builder = sidebar.getScreen().getTileMapManager();
                             builder.setSelectedEntity(newBuilding);
                             sidebar.setEntity(newBuilding, true);
                         }

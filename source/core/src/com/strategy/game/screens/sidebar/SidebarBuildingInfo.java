@@ -145,7 +145,7 @@ public class SidebarBuildingInfo extends Table implements Display {
         cancel.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 updateMenu(Menu.NONE);
-//                ((Sidebar) getParent()).getScreen().getBuilder().showInfluenceArea(null);
+//                ((Sidebar) getParent()).getScreen().getTileMapManager().showInfluenceArea(null);
                 return false;
             }
         });
@@ -235,7 +235,7 @@ public class SidebarBuildingInfo extends Table implements Display {
                 //TODO: Fix clicked problem
                 if (building != null && hasParent()) {
                     Sidebar sidebar = (Sidebar) getParent();
-                    sidebar.getScreen().getBuilder().destroy(building);
+                    sidebar.getScreen().getTileMapManager().destroy(building);
                     updateMenu(Menu.NONE);
                 }
                 return false;
@@ -247,7 +247,7 @@ public class SidebarBuildingInfo extends Table implements Display {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (building != null && hasParent()) {
                     Sidebar sidebar = (Sidebar) getParent();
-                    sidebar.getScreen().getBuilder().repairBuilding(building);
+                    sidebar.getScreen().getTileMapManager().repairBuilding(building);
                     updateMenu(Menu.INFO);
                 }
                 return false;
@@ -481,8 +481,8 @@ public class SidebarBuildingInfo extends Table implements Display {
     private void showInfluenceArea(Structure building) {
         if (hasParent() &&
                 ((Sidebar) getParent()).getScreen() != null &&
-                ((Sidebar) getParent()).getScreen().getBuilder() != null) {
-            ((Sidebar) getParent()).getScreen().getBuilder().showInfluenceArea(null);
+                ((Sidebar) getParent()).getScreen().getTileMapManager() != null) {
+            ((Sidebar) getParent()).getScreen().getTileMapManager().showInfluenceArea(null);
         }
     }
 

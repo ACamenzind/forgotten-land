@@ -61,7 +61,7 @@ public class GameInputProcessor implements InputProcessor{
         Vector2 deltaMouse = new Vector2(currentMouseCoords.x - prevMouseCoords.x, currentMouseCoords.y - prevMouseCoords.y);
 
         // Only works when not placing a building
-        if (isPressingMouse && screen.getBuilder().getSelectedEntity() == null) {
+        if (isPressingMouse && screen.getTileMapManager().getSelectedEntity() == null) {
             camera.translate(-deltaMouse.x * camera.zoom, deltaMouse.y * camera.zoom);
         }
         prevMouseCoords = new Vector2(currentMouseCoords);
@@ -71,37 +71,37 @@ public class GameInputProcessor implements InputProcessor{
     public boolean keyDown(int keycode) {
         switch (keycode) {
             case Input.Keys.NUM_1:
-                screen.getBuilder().setSelectedEntity(new House());
+                screen.getTileMapManager().setSelectedEntity(new House());
                 break;
             case Input.Keys.NUM_2:
-                screen.getBuilder().setSelectedEntity(new Castle());
+                screen.getTileMapManager().setSelectedEntity(new Castle());
                 break;
             case Input.Keys.NUM_3:
-                screen.getBuilder().setSelectedEntity(new Wall());
+                screen.getTileMapManager().setSelectedEntity(new Wall());
                 break;
             case Input.Keys.NUM_4:
-                screen.getBuilder().setSelectedEntity(new CollectorWood());
+                screen.getTileMapManager().setSelectedEntity(new CollectorWood());
                 break;
             case Input.Keys.NUM_5:
-                screen.getBuilder().setSelectedEntity(new CollectorFood());
+                screen.getTileMapManager().setSelectedEntity(new CollectorFood());
                 break;
             case Input.Keys.NUM_6:
-                screen.getBuilder().setSelectedEntity(new Warehouse());
+                screen.getTileMapManager().setSelectedEntity(new Warehouse());
                 break;
             case Input.Keys.NUM_7:
-                screen.getBuilder().setSelectedEntity(new CollectorRock());
+                screen.getTileMapManager().setSelectedEntity(new CollectorRock());
                 break;
             case Input.Keys.NUM_8:
-                screen.getBuilder().setSelectedEntity(new CollectorGold());
+                screen.getTileMapManager().setSelectedEntity(new CollectorGold());
                 break;
             case Input.Keys.NUM_9:
-                screen.getBuilder().setSelectedEntity(new Road());
+                screen.getTileMapManager().setSelectedEntity(new Road());
                 break;
             case Input.Keys.ESCAPE:
-                screen.getBuilder().removeSelectedEntity();
+                screen.getTileMapManager().removeSelectedEntity();
                 break;
             case Input.Keys.R:
-                screen.getBuilder().rotate();
+                screen.getTileMapManager().rotate();
                 break;
             case Input.Keys.P:
                 screen.getWorld().toggleRunning();
@@ -144,28 +144,28 @@ public class GameInputProcessor implements InputProcessor{
 
         Vector3 pickedTile = Utils.cartesianToIso(touch, camera);
 
-        MapEntity clickedEntity = screen.getBuilder().getEntityAt((int)pickedTile.x, (int)pickedTile.y);
+        MapEntity clickedEntity = screen.getTileMapManager().getEntityAt((int)pickedTile.x, (int)pickedTile.y);
 
-        if (screen.getBuilder().getSelectedEntity() != null && button == Input.Buttons.LEFT) {
-            screen.getBuilder().placeSelectedEntity((int) pickedTile.x, (int) pickedTile.y, false);
+        if (screen.getTileMapManager().getSelectedEntity() != null && button == Input.Buttons.LEFT) {
+            screen.getTileMapManager().placeSelectedEntity((int) pickedTile.x, (int) pickedTile.y, false);
         }
-        else if (screen.getBuilder().getSelectedEntity() == null && button == Input.Buttons.LEFT)  {
+        else if (screen.getTileMapManager().getSelectedEntity() == null && button == Input.Buttons.LEFT)  {
             // TODO: show building info from here
 
             if (clickedEntity instanceof Structure) {
                 screen.getSidebar().setEntity(clickedEntity, false);
-                screen.getBuilder().showInfluenceArea((Structure) clickedEntity);
+                screen.getTileMapManager().showInfluenceArea((Structure) clickedEntity);
             }
             else if (clickedEntity instanceof Resource) {
                 screen.getSidebar().setEntity(clickedEntity, false);
             }
             else {
-                screen.getBuilder().showInfluenceArea(null);
+                screen.getTileMapManager().showInfluenceArea(null);
                 screen.getSidebar().setEntity(null, false);
             }
         } else {
 //            if (clickedEntity instanceof Structure) {
-//                screen.getBuilder().repairBuilding((Structure) clickedEntity);
+//                screen.getTileMapManager().repairBuilding((Structure) clickedEntity);
 //            }
         }
         return true;

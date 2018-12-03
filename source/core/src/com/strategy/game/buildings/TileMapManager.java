@@ -46,8 +46,6 @@ public class TileMapManager implements Observable {
         this.gridLayer.setOpacity(0.2f);
         this.soundManager = gameScreen.getGame().getSoundManager();
         this.listeners = new ArrayList<>();
-        this.addListener(this.gameScreen);
-        this.addListener(this.soundManager);
 //        this.addListener(this.gameScreen.getResourcesBar());
     }
 

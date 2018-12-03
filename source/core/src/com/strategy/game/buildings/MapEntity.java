@@ -21,7 +21,7 @@ public abstract class MapEntity implements Disposable{
     protected Texture mainTexture;
     private boolean isClicked;
     protected int clickX, clickY;
-    protected Vector2 imgOffset; //TODO: useless?
+    protected Vector2 imgOffset;
     private TiledMapTileLayer layer;
     protected ArrayList<Texture> textures;
     private int counter;
@@ -159,6 +159,22 @@ public abstract class MapEntity implements Disposable{
         this.clickY = clickY;
 
         // Set collision on cells and influence on those tiles
+        createCollisionArea(layer, clickX, clickY);
+
+        // Set influence radius
+//        influenceRadius = 0;
+        int startY = clickY - influenceRadius;
+        int startX = clickX - influenceRadius;
+        int endY = clickY + influenceRadius + (int) collisionSize.y;
+        int endX = clickX + influenceRadius + (int) collisionSize.x;
+
+        if (startX < 0) startX = 0;
+        if (startY < 0) startY = 0;
+
+        createInfluenceArea(layer, startY, startX, endY, endX);
+    }
+
+    private void createCollisionArea(TiledMapTileLayer layer, int clickX, int clickY) {
         for (int y = 0; y < collisionSize.y; y++) {
             for (int x = 0; x < collisionSize.x; x++) {
                 TiledMapTileLayer.Cell cell = layer.getCell(clickX + x, clickY + y);
@@ -180,19 +196,9 @@ public abstract class MapEntity implements Disposable{
                 layer.setCell(clickX + x, clickY + y, cell);
             }
         }
+    }
 
-        // Set influence radius
-//        influenceRadius = 0;
-        int startY = clickY - influenceRadius;
-        int startX = clickX - influenceRadius;
-        int endY = clickY + influenceRadius + (int) collisionSize.y;
-        int endX = clickX + influenceRadius + (int) collisionSize.x;
-
-        // TODO: 12/05/2016 Add also for upper limits
-        if (startX < 0) startX = 0;
-        if (startY < 0) startY = 0;
-
-        // Creates the influence area
+    private void createInfluenceArea(TiledMapTileLayer layer, int startY, int startX, int endY, int endX) {
         for (int y = startY; y < endY; y++) {
             for (int x = startX; x < endX; x++) {
                 TiledMapTileLayer.Cell cell = layer.getCell(x, y);
@@ -216,8 +222,6 @@ public abstract class MapEntity implements Disposable{
                     texture = new TextureRegion(Assets.getTexture("emptyTile"));
                 }
 
-
-
                 // Creates a new tile if needed
                 if (!(tile instanceof ExtendedStaticTiledMapTile)) {
                     if (tile == null) {
@@ -239,7 +243,7 @@ public abstract class MapEntity implements Disposable{
     }
 
     /**
-     * Resets the tiles to their previous state
+     * Resets the tiles to their previous state, used for hovering
      */
     public void resetTiles() {
         int startY = clickY - influenceRadius;
